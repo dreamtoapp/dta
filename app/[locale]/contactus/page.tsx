@@ -1,0 +1,133 @@
+import { getTranslations, getLocale } from "next-intl/server";
+import { Metadata } from 'next';
+import ContactForm from "./components/ContactForm";
+import { Rocket } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations('contact');
+
+  return {
+    title: {
+      default: t('pageTitle'),
+      template: '%s | DreamToApp - Contact Us',
+    },
+    description: t('pageDescription'),
+    openGraph: {
+      title: t('pageTitle'),
+      description: t('pageDescription'),
+      url: 'https://www.dreamto.app/contactus',
+      images: ['/og-image.png'],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@dreamtoapp',
+      title: t('pageTitle'),
+      description: t('pageDescription'),
+      images: ['/og-image.png'],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: 'https://www.dreamto.app/contactus',
+      languages: {
+        'en': '/en/contactus',
+        'ar': '/ar/contactus',
+      },
+    },
+  };
+}
+
+export default async function ContactUs({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
+  const t = await getTranslations("contact");
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Enhanced Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'ContactPage',
+              name: 'Contact Us - DreamToApp',
+              description: 'Get in touch with DreamToApp. Contact us for web development, mobile apps, and digital solutions. We\'re here to help bring your ideas to life.',
+              url: 'https://www.dreamto.app/contactus',
+              publisher: {
+                '@type': 'LocalBusiness',
+                name: 'DreamToApp',
+                url: 'https://www.dreamto.app',
+                address: {
+                  '@type': 'PostalAddress',
+                  addressLocality: 'Jeddah',
+                  addressCountry: 'SA'
+                },
+                telephone: '+966554113107',
+                email: 'info@dreamto.app'
+              }
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://www.dreamto.app'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Contact Us',
+                  item: 'https://www.dreamto.app/contactus'
+                }
+              ]
+            }
+          ])
+        }}
+      />
+
+      {/* Hero Section */}
+      <div className="bg-background border-b border-border">
+        <div className="container mx-auto px-6 py-16">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="flex justify-center mb-6">
+              <div className="p-4 bg-primary/10 rounded-full">
+                <Rocket className="w-12 h-12 text-primary" />
+              </div>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+              {t("heroTitle")}
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
+              {t("heroSubtitle")}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-6 py-16">
+        <div className="max-w-2xl mx-auto">
+          <Card className="border shadow-lg bg-card">
+            <CardContent className="p-8">
+              <ContactForm locale={locale} />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+} 

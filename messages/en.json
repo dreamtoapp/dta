@@ -1,0 +1,1247 @@
+{
+  "app": {
+    "name": "Dream to App",
+    "slogan": "Turning your ideas into tangible reality",
+    "localSEO": {
+      "title": "Web Development Agency in Jeddah, Saudi Arabia",
+      "description": "Professional web development, mobile apps, and digital solutions in Jeddah. Leading IT company in Saudi Arabia.",
+      "keywords": "web development Jeddah, mobile app development Saudi Arabia, software company Jeddah, website design Saudi Arabia, digital agency Jeddah, IT services Saudi Arabia, تطوير مواقع جدة, شركة برمجة جدة"
+    }
+  },
+  "navigation": {
+    "switchLanguage": "Switch to {language}",
+    "toggleTheme": "Toggle theme",
+    "services": {
+      "title": "Our Services",
+      "subMenu": {
+        "webApp": "Web Development",
+        "mobileApp": "Mobile Applications",
+        "ecommerce": "E-commerce Solutions",
+        "uiUx": "Attractive UI Design",
+        "visualIdentity": "Building a Unique Visual Identity",
+        "digitalMarketing": "Effective Marketing Strategies"
+      }
+    },
+    "technologies": {
+      "title": "Technologies",
+      "subMenu": {
+        "nextjs": {
+          "title": "Next.js",
+          "description": "An advanced framework for quickly creating high-performance React websites."
+        },
+        "nodejs": {
+          "title": "Node.js",
+          "description": "A powerful platform for developing scalable backend services."
+        },
+        "react": {
+          "title": "React",
+          "description": "The best library for building interactive and easy user interfaces."
+        },
+        "reactNative": {
+          "title": "React Native",
+          "description": "Create native mobile applications for iOS and Android using a single technology."
+        },
+        "mongoDB": {
+          "title": "MongoDB",
+          "description": "A flexible database for storing your data efficiently and securely."
+        },
+        "firebase": {
+          "title": "Firebase",
+          "description": "Integrated tools for app development including real-time databases and authentication."
+        },
+        "aws": {
+          "title": "AWS",
+          "description": "Reliable cloud services for easily and securely hosting your applications."
+        },
+        "prisma": {
+          "title": "Prisma",
+          "description": "A modern tool for managing databases in an easy and efficient way."
+        },
+        "sanity": {
+          "title": "Sanity",
+          "description": "Make your website's content a unique competitive advantage."
+        }
+      }
+    },
+    "workSamples": {
+      "title": "Our Work",
+      "subMenu": {
+        "webApp": "Web Applications",
+        "mobileApp": "Mobile Applications",
+        "uiUx": "User Interface Designs",
+        "visualIdentity": "Visual Identity Designs",
+        "digitalMarketing": "Digital Marketing Campaigns",
+        "more": "Other Dreams"
+      }
+    },
+    "prices": {
+      "title": "Pricing Plans",
+      "basic": "Basic Plan",
+      "pro": "Professional Plan",
+      "enterprise": "Enterprise Plan",
+      "custom": "Custom Offer"
+    },
+    "contactus": {
+      "title": "Contact Us",
+      "whatsapp": "Message us on WhatsApp",
+      "email": "Send an Email",
+      "phone": "Call Us Directly",
+      "form": "Fill out the Contact Form",
+      "phoneHint": "Saudi Arabia (Jeddah) | International: include country code"
+    },
+    "otherMenu": {
+      "title": "Useful Links",
+      "usedTecno": "Technologies Used",
+      "workSample": "Samples of Our Work",
+      "price": "Competitive Prices",
+      "team": "Our Team",
+      "quickAccess": "Quick Access",
+      "contactUsCTA": "Contact Us Now"
+    },
+    "plugin": {
+      "title": "Plugins",
+      "crombo": "Crombo",
+      "latestnews": "Conan"
+    }
+  },
+  "buttons": {
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "showGallery": "Browse Gallery",
+    "details": "View Details",
+    "sending": "Sending now...",
+    "more": "Read More"
+  },
+  "login": {
+    "login": "Login",
+    "register": "Create Account",
+    "loginHint": "Please log in to benefit from our services",
+    "mustLogin": "Please log in to ask your question"
+  },
+  "contactUsPage": {
+    "pageTitle": "Contact Us",
+    "hint": "Please provide accurate information to enable us to serve you quickly and efficiently.",
+    "mobile": "Mobile Number",
+    "mobilePlaceholder": "Enter a 10-digit number",
+    "mobileValidationError": "The number must be at least 10 digits",
+    "email": "Email",
+    "emailPlaceholder": "example@example.com",
+    "emailValidationError": "Please enter a valid email address",
+    "message": "Message",
+    "messagePlaceholder": "How can we assist you?",
+    "messageValidationError": "The message must contain at least 10 characters",
+    "name": "Name"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Sorry, the page does not exist",
+    "description": "The page you are looking for is currently unavailable.",
+    "button": "Back to Home"
+  },
+  "homepage": {
+    "home": "Home",
+    "services": "Our Services",
+    "portfolio": "Our Portfolio",
+    "contact": "Contact Us",
+    "title": "DreamToApp – Shaping Your Digital Future",
+    "description": "A leading tech agency crafting web, mobile, and cloud solutions for your ambitions. Discover our services and start your journey to digital excellence.",
+    "organization": {
+      "name": "DreamToApp for Digital Solutions"
+    },
+    "breadcrumb": {
+      "home": "Home"
+    },
+    "sections": {
+      "hero": "Hero Section",
+      "cromboDetails": "Crombo Details",
+      "homepageBody": "Homepage Body"
+    },
+    "logo": {
+      "alt": "DreamToApp Logo"
+    },
+    "tagline": "DREAM. DESIGN. DELIVER.",
+    "dreamTagline": "DREAM. DESIGN. ACHIEVE.",
+    "cta": {
+      "primary": "Start Your Dream",
+      "secondary": "Explore Our Services"
+    },
+    "fromIdeaTitle": "From Idea to Digital Success",
+    "fromIdeaContent": "We turn your bold ideas into unique digital products that attract customers and drive your business forward. By combining creativity and technology, we deliver innovative products that achieve tangible results.",
+    "fromIdeaButton": "Start Your Journey with Us Today!",
+    "discoverTitle": "Start Small",
+    "discoverTitle1": "Don't wait for perfection. Taking action is the most important step",
+    "discoverTitle2": "Even if your start is humble, experience will teach you a lot",
+    "discoverTitle3": "Don't let fear hold you back! Start your journey today and get a free guide for the first steps.",
+    "discoverContent": "Example: If you want to write a book,\ndon't wait for perfect inspiration,\nstart by writing one page a day.",
+    "discoverButton": "Start Your Success Journey for Free",
+    "slogon": "Where Dreams Begin",
+    "subHeader": "Transform Your Ideas into Reality with the Latest Technologies",
+    "subHeader2": "Bring your dream to life in the digital world. We build a website and application that reflect your ambition clearly. Attract your audience and achieve your goals - that's our mission.",
+    "discoverDilog": "You may face challenges, but resilience is the key to overcoming them.",
+    "discoverDilog1": "Keep trying and learn from every failure.",
+    "discoverDilogTitle": "The Journey to Success",
+    "webDilogTitle": "The Journey to Success",
+    "mobileDilogTitle": "The Journey to Success",
+    "crmDilogTitle": "The Journey to Success",
+    "ecommDilogTitle": "The Journey to Success",
+    "uiDilogTitle": "The Journey to Success",
+    "ctaButton": "Start Your Success Journey Today",
+    "chatWithUs": "Chat with Us Now",
+    "whyChooseUs": "Why Choose Us",
+    "ourTeam": "Our Team",
+    "joinOurTeam": "Join Our Team"
+  },
+  "mobileAppPhases": {
+    "discoveryPlanningTitle": "Planning and Discovery",
+    "discoveryPlanningDescription": "We understand your needs and create a clear plan for your dream.",
+    "uiUxDesignTitle": "Attractive and Easy Design",
+    "uiUxDesignDescription": "We design beautiful and user-friendly interfaces.",
+    "developmentTitle": "Development",
+    "developmentDescription": "We build an advanced application with the latest technologies to ensure high performance.",
+    "testingQATitle": "Testing and Quality Assurance",
+    "testingQADescription": "We ensure the application is error-free and meets all standards.",
+    "deploymentTitle": "Deployment",
+    "deploymentDescription": "A smooth launch of your application on app stores.",
+    "maintenanceUpdatesTitle": "Support and Updates",
+    "maintenanceUpdatesDescription": "Ongoing support to enhance your application and keep it outstanding.",
+    "userFeedbackIterationTitle": "Improvement Based on User Feedback",
+    "userFeedbackIterationDescription": "We listen to user feedback to continuously improve your application."
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy | DreamToApp IT Solutions",
+      "description": "Learn how DreamToApp collects, uses, and protects your personal information. Our comprehensive privacy policy ensures your data security and privacy rights."
+    },
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated",
+    "lastUpdatedDate": "August 15, 2025",
+    "introduction": {
+      "title": "Introduction",
+      "paragraph1": "DreamToApp ('we', 'our', or 'us') is committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, use our services, or interact with us.",
+      "paragraph2": "By using our services, you agree to the collection and use of information in accordance with this policy. We are committed to transparency and will always inform you about how we handle your data."
+    },
+    "informationWeCollect": {
+      "title": "Information We Collect",
+      "personalData": {
+        "title": "Personal Information",
+        "description": "We may collect personal information that you voluntarily provide to us when you:",
+        "items": {
+          "name": "Full name and contact information",
+          "email": "Email address",
+          "phone": "Phone number",
+          "company": "Company name and details",
+          "position": "Job title and position"
+        }
+      },
+      "technicalData": {
+        "title": "Technical Information",
+        "description": "We automatically collect certain technical information when you visit our website:",
+        "items": {
+          "ip": "IP address and location data",
+          "browser": "Browser type and version",
+          "device": "Device information and operating system",
+          "cookies": "Cookies and similar tracking technologies"
+        }
+      },
+      "usageData": {
+        "title": "Usage Information",
+        "description": "We collect information about how you interact with our website:",
+        "items": {
+          "pages": "Pages visited and time spent",
+          "time": "Time and date of visits",
+          "actions": "Actions taken on the website"
+        }
+      }
+    },
+    "howWeUse": {
+      "title": "How We Use Your Information",
+      "description": "We use the collected information for the following purposes:",
+      "purposes": {
+        "communication": "To communicate with you about our services and respond to your inquiries",
+        "services": "To provide and improve our services",
+        "improvement": "To analyze website usage and improve user experience",
+        "security": "To ensure the security and integrity of our services",
+        "legal": "To comply with legal obligations and protect our rights",
+        "marketing": "To send you relevant marketing communications (with your consent)"
+      }
+    },
+    "informationSharing": {
+      "title": "Information Sharing and Disclosure",
+      "description": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:",
+      "thirdParties": {
+        "title": "Service Providers",
+        "description": "We may share information with trusted third-party service providers who assist us in:",
+        "items": {
+          "service": "Providing our services and maintaining our website",
+          "analytics": "Analyzing website usage and performance",
+          "payment": "Processing payments and financial transactions"
+        }
+      },
+      "legal": {
+        "title": "Legal Requirements",
+        "description": "We may disclose your information if required by law or to protect our rights, property, or safety."
+      }
+    },
+    "dataSecurity": {
+      "title": "Data Security",
+      "description": "We implement appropriate technical and organizational measures to protect your personal information:",
+      "measures": {
+        "encryption": "Encryption of data in transit and at rest",
+        "access": "Restricted access to personal information",
+        "monitoring": "Regular security monitoring and updates",
+        "training": "Employee training on data protection practices"
+      }
+    },
+    "yourRights": {
+      "title": "Your Rights",
+      "description": "You have the following rights regarding your personal information:",
+      "rights": {
+        "access": "Right of Access",
+        "accessDesc": "Request a copy of the personal information we hold about you",
+        "correction": "Right of Correction",
+        "correctionDesc": "Request correction of inaccurate or incomplete information",
+        "deletion": "Right of Deletion",
+        "deletionDesc": "Request deletion of your personal information",
+        "portability": "Right of Portability",
+        "portabilityDesc": "Request transfer of your data to another service provider",
+        "objection": "Right of Objection",
+        "objectionDesc": "Object to processing of your personal information",
+        "withdrawal": "Right of Withdrawal",
+        "withdrawalDesc": "Withdraw consent for marketing communications"
+      }
+    },
+    "cookies": {
+      "title": "Cookies and Tracking Technologies",
+      "description": "We use cookies and similar technologies to enhance your browsing experience:",
+      "types": {
+        "essential": {
+          "title": "Essential Cookies",
+          "description": "These cookies are necessary for the website to function properly and cannot be disabled."
+        },
+        "analytics": {
+          "title": "Analytics Cookies",
+          "description": "These cookies help us understand how visitors interact with our website."
+        },
+        "marketing": {
+          "title": "Marketing Cookies",
+          "description": "These cookies are used to deliver relevant advertisements and track marketing campaigns."
+        }
+      },
+      "management": "You can manage your cookie preferences through your browser settings or our cookie consent tool."
+    },
+    "childrenPrivacy": {
+      "title": "Children's Privacy",
+      "description": "Our services are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13."
+    },
+    "internationalTransfers": {
+      "title": "International Data Transfers",
+      "description": "Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place to protect your data."
+    },
+    "changesToPolicy": {
+      "title": "Changes to This Privacy Policy",
+      "description": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the 'Last Updated' date."
+    },
+    "contactInformation": {
+      "title": "Contact Information",
+      "description": "If you have any questions about this Privacy Policy or our data practices, please contact us:",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "dataProtectionOfficer": {
+      "title": "Data Protection Officer",
+      "description": "For privacy-related inquiries, you may also contact our Data Protection Officer:",
+      "email": "Email"
+    },
+    "footer": "This Privacy Policy is effective as of the date stated above and applies to all users of our services."
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms of Service | DreamToApp IT Solutions",
+      "description": "Read our comprehensive Terms of Service for DreamToApp. Understand your rights, obligations, and our service terms for web development and digital solutions."
+    },
+    "title": "Terms of Service",
+    "lastUpdated": "Last Updated",
+    "lastUpdatedDate": "August 15, 2025",
+    "introduction": {
+      "title": "Introduction",
+      "paragraph1": "Welcome to DreamToApp. These Terms of Service ('Terms') govern your use of our website and services. By accessing or using our services, you agree to be bound by these Terms.",
+      "paragraph2": "DreamToApp ('we', 'our', or 'us') provides web development, mobile application development, and digital solutions services. These Terms apply to all users, clients, and visitors of our website and services.",
+      "paragraph3": "Please read these Terms carefully before using our services. If you do not agree with any part of these Terms, you should not use our services."
+    },
+    "definitions": {
+      "title": "Definitions",
+      "terms": {
+        "company": "DreamToApp",
+        "companyDesc": "Refers to DreamToApp, its employees, agents, and representatives.",
+        "client": "Client",
+        "clientDesc": "Any individual or entity that uses our services or enters into a service agreement with us.",
+        "services": "Services",
+        "servicesDesc": "All services provided by DreamToApp, including but not limited to web development, mobile app development, and consulting services.",
+        "website": "Website",
+        "websiteDesc": "The DreamToApp website located at dreamto.app and all associated pages and content.",
+        "content": "Content",
+        "contentDesc": "All text, images, graphics, software, and other materials available on our website or provided through our services."
+      }
+    },
+    "services": {
+      "title": "Services",
+      "description": "DreamToApp provides the following services:",
+      "types": {
+        "web": "Web development and website design",
+        "mobile": "Mobile application development for iOS and Android",
+        "crm": "Customer Relationship Management (CRM) systems",
+        "ecommerce": "E-commerce solutions and online stores",
+        "consulting": "IT consulting and digital strategy",
+        "maintenance": "Website and application maintenance and support"
+      }
+    },
+    "acceptance": {
+      "title": "Acceptance of Terms",
+      "description": "By using our services, you acknowledge and agree that:",
+      "conditions": {
+        "use": "You have read, understood, and agree to be bound by these Terms",
+        "legal": "You have the legal capacity to enter into these Terms",
+        "age": "You are at least 18 years old or have parental consent",
+        "capacity": "You have the authority to bind your organization to these Terms"
+      }
+    },
+    "userResponsibilities": {
+      "title": "User Responsibilities",
+      "description": "As a user of our services, you agree to:",
+      "obligations": {
+        "accuracy": "Provide accurate and complete information",
+        "compliance": "Comply with all applicable laws and regulations",
+        "security": "Maintain the security of your account and information",
+        "legal": "Use our services only for lawful purposes",
+        "cooperation": "Cooperate with us in providing services",
+        "payment": "Pay all fees and charges in a timely manner"
+      }
+    },
+    "intellectualProperty": {
+      "title": "Intellectual Property Rights",
+      "ourRights": {
+        "title": "Our Intellectual Property",
+        "description": "All content, trademarks, logos, and intellectual property on our website and in our services are owned by DreamToApp or our licensors."
+      },
+      "yourRights": {
+        "title": "Your Intellectual Property",
+        "description": "You retain ownership of any content or materials you provide to us. You grant us a license to use such content for the purpose of providing our services."
+      },
+      "licensing": {
+        "title": "License to Use",
+        "description": "We grant you a limited, non-exclusive, non-transferable license to access and use our website and services for their intended purpose."
+      }
+    },
+    "paymentTerms": {
+      "title": "Payment Terms",
+      "description": "Payment terms and conditions for our services:",
+      "pricing": {
+        "title": "Pricing",
+        "description": "All prices are quoted in Saudi Riyals (SAR) unless otherwise specified. Prices are subject to change with prior notice."
+      },
+      "payment": {
+        "title": "Payment Methods",
+        "description": "We accept various payment methods including bank transfers, credit cards, and digital payments. Payment terms will be specified in individual service agreements."
+      },
+      "latePayment": {
+        "title": "Late Payment",
+        "description": "Late payments may result in suspension of services and additional charges. Interest may be charged on overdue amounts."
+      },
+      "refunds": {
+        "title": "Refunds",
+        "description": "Refund policies vary by service and will be specified in individual service agreements. Generally, refunds are not provided for completed work."
+      }
+    },
+    "projectTerms": {
+      "title": "Project Terms",
+      "timeline": {
+        "title": "Project Timeline",
+        "description": "Project timelines will be agreed upon in writing before work begins. Delays may occur due to client feedback, changes in requirements, or unforeseen circumstances."
+      },
+      "changes": {
+        "title": "Change Requests",
+        "description": "Changes to project scope may result in additional costs and timeline adjustments. All changes must be approved in writing."
+      },
+      "approval": {
+        "title": "Client Approval",
+        "description": "Client approval is required at key project milestones. Delays in approval may affect project timeline and delivery."
+      },
+      "deliverables": {
+        "title": "Deliverables",
+        "description": "Project deliverables will be specified in individual service agreements. We will provide all agreed-upon deliverables upon project completion."
+      }
+    },
+    "confidentiality": {
+      "title": "Confidentiality",
+      "description": "We are committed to maintaining the confidentiality of your information:",
+      "obligations": {
+        "nonDisclosure": "We will not disclose your confidential information to third parties without your consent",
+        "security": "We implement appropriate security measures to protect your information",
+        "limitedAccess": "Access to your information is limited to authorized personnel only",
+        "return": "We will return or destroy confidential information upon request"
+      }
+    },
+    "limitationOfLiability": {
+      "title": "Limitation of Liability",
+      "description": "To the maximum extent permitted by law, DreamToApp shall not be liable for:",
+      "exclusions": {
+        "damages": "Indirect, incidental, special, or consequential damages",
+        "thirdParty": "Damages caused by third-party services or products",
+        "forceMajeure": "Damages caused by events beyond our reasonable control",
+        "unauthorized": "Damages caused by unauthorized use or modification of our services"
+      }
+    },
+    "termination": {
+      "title": "Termination",
+      "byClient": {
+        "title": "Termination by Client",
+        "description": "You may terminate our services at any time with written notice. Early termination may result in additional charges."
+      },
+      "byCompany": {
+        "title": "Termination by Company",
+        "description": "We may terminate services for breach of these Terms, non-payment, or other valid reasons with written notice."
+      },
+      "effects": {
+        "title": "Effects of Termination",
+        "description": "Upon termination, you will lose access to our services, and we may delete your data in accordance with our data retention policies."
+      }
+    },
+    "disputeResolution": {
+      "title": "Dispute Resolution",
+      "description": "We are committed to resolving disputes amicably:",
+      "negotiation": {
+        "title": "Negotiation",
+        "description": "Parties agree to attempt to resolve disputes through good faith negotiation before pursuing other remedies."
+      },
+      "mediation": {
+        "title": "Mediation",
+        "description": "If negotiation fails, parties may agree to mediation with a neutral third party."
+      },
+      "arbitration": {
+        "title": "Arbitration",
+        "description": "Any disputes not resolved through negotiation or mediation shall be resolved through binding arbitration in Saudi Arabia."
+      }
+    },
+    "governingLaw": {
+      "title": "Governing Law",
+      "description": "These Terms shall be governed by and construed in accordance with the laws of the Kingdom of Saudi Arabia."
+    },
+    "severability": {
+      "title": "Severability",
+      "description": "If any provision of these Terms is found to be unenforceable, the remaining provisions shall continue in full force and effect."
+    },
+    "entireAgreement": {
+      "title": "Entire Agreement",
+      "description": "These Terms constitute the entire agreement between you and DreamToApp regarding the use of our services."
+    },
+    "contactInformation": {
+      "title": "Contact Information",
+      "description": "If you have any questions about these Terms, please contact us:",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "footer": "These Terms of Service are effective as of the date stated above and apply to all users of our services."
+  },
+  "footer": {
+    "readyToTransform": "Are you ready to turn your idea into reality?",
+    "buildSomethingGreat": "Let's build something amazing together",
+    "getInTouch": "Contact us today",
+    "callUsNow": "Call us now for a free consultation",
+    "footerIllustrationAlt": "Illustration reflecting our collaboration",
+    "chatWithUs": "Chat with us now for support",
+    "phoneNumber": "966554113107",
+    "emailAddress": "info@dreamto.app",
+    "copyright": "All rights reserved",
+    "socialMedia": "Social Media",
+    "quickLinks": "Quick Links",
+    "agencyDescription": "We build digital experiences that drive success for ambitious brands.",
+    "newsletterTitle": "Subscribe to our newsletter",
+    "newsletterPlaceholder": "Enter your email",
+    "newsletterButton": "Subscribe",
+    "newsletterDescription": "Get the latest updates and insights delivered to your inbox.",
+    "newsletterLoading": "Sending...",
+    "newsletterError": "An error occurred during subscription. Please try again.",
+    "newsletterEmailRequired": "Please enter an email address",
+    "newsletterSuccess": "Successfully subscribed to our newsletter",
+    "newsletterAlreadySubscribed": "You are already subscribed to our newsletter",
+    "newsletterReactivated": "Your newsletter subscription has been reactivated successfully",
+    "backToTop": "Back to top",
+    "team": "Team"
+  },
+  "services": {
+    "tecnoUsed": "Innovative technologies that meet your needs",
+    "buildingTomorrow": "We innovate the future",
+    "solutions": "Smart solutions",
+    "today": "For today's success",
+    "blendingCreativity": "We combine creativity and technology to provide customized solutions for your business.",
+    "heroBadge": "Innovative Technologies That Meet Your Needs",
+    "heroTitle1": "Innovative Solutions",
+    "heroTitle2": "For Today's Achievements",
+    "heroDescription": "We combine creativity and technology to provide customized solutions for your business. Building tomorrow's solutions with innovative technologies that meet your needs.",
+    "websiteDevelopmentTitle": "Website Development",
+    "websiteDevelopmentDescription": "We turn your ideas into exceptional websites that impress visitors and engage them with your brand. Our websites are not only visually appealing but also designed to be fast and responsive, ensuring a pleasant and comfortable user experience that converts visitors into loyal customers.",
+    "mobileAppDevelopmentTitle": "Mobile Applications",
+    "mobileAppDevelopmentDescription": "We create innovative and user-friendly applications that allow your clients to access your services easily anytime and anywhere. Whether you need business or entertainment applications, we ensure a distinctive design filled with features that increase customer engagement with your brand.",
+    "crmDevelopmentTitle": "CRM Systems",
+    "crmDevelopmentDescription": "We provide advanced systems for managing customer relationships, helping you organize their data, track their needs, and deliver personalized services that enhance their loyalty. With our smart tools, you can provide an ideal customer experience and increase their loyalty in the long run.",
+    "ecommerceDevelopmentTitle": "E-commerce Stores",
+    "ecommerceDevelopmentDescription": "We build a complete online store that reflects your brand identity and facilitates the buying and selling process. We offer modern designs, secure payment gateways, and a unique shopping experience that helps you increase your sales and reach a wider audience.",
+    "uiUxDesignTitle": "User Interface Designs",
+    "uiUxDesignDescription": "We provide innovative modern designs that focus on user experience, making every interaction with your website or application enjoyable and seamless. We study customer behavior to deliver designs that meet their needs and enhance their connection with your services.",
+    "digitalMarketingTitle": "Digital Marketing",
+    "digitalMarketingDescription": "We position your brand at the forefront of competition through integrated marketing strategies. We use the latest methods such as paid advertising and search engine optimization to ensure your brand reaches the right audience and achieves tangible results.",
+    "visualIdentityTitle": "Visual Identity",
+    "visualIdentityDescription": "We create a unique visual identity that reflects your brand's personality and makes it memorable to your audience. From choosing colors and logos to designing promotional materials, we ensure that your identity is unique and strong, enhancing your distinctiveness.",
+    "getQuote": "High discounts, don't hesitate...",
+    "responsiveDesign": "Responsive Design",
+    "fastLoading": "Fast Loading",
+    "seoOptimized": "SEO Optimized",
+    "userFriendly": "User-Friendly",
+    "crossPlatform": "Cross-Platform",
+    "nativePerformance": "Native Performance",
+    "pushNotifications": "Push Notifications",
+    "offlineSupport": "Offline Support",
+    "customerAnalytics": "Customer Analytics",
+    "automatedWorkflows": "Automated Workflows",
+    "integrationReady": "Integration Ready",
+    "realTimeReports": "Real-time Reports",
+    "securePayments": "Secure Payments",
+    "inventoryManagement": "Inventory Management",
+    "multiCurrency": "Multi-Currency",
+    "analyticsDashboard": "Analytics Dashboard",
+    "userResearch": "User Research",
+    "prototyping": "Prototyping",
+    "designSystems": "Design Systems",
+    "usabilityTesting": "Usability Testing",
+    "seoOptimization": "SEO Optimization",
+    "socialMedia": "Social Media",
+    "ppcCampaigns": "PPC Campaigns",
+    "contentStrategy": "Content Strategy",
+    "logoDesign": "Logo Design",
+    "brandGuidelines": "Brand Guidelines",
+    "marketingMaterials": "Marketing Materials",
+    "brandStrategy": "Brand Strategy",
+    "professionalServices": "Our Professional Services",
+    "keyFeatures": "Key Features:",
+    "learnMoreAbout": "Learn More About {service}",
+    "clientTestimonials": "Client Testimonials",
+    "whatOurClientsSay": "What Our Clients Say",
+    "testimonialsIntro": "Don't just take our word for it. Here's what our satisfied clients have to say about our services.",
+    "limitedTimeOffer": "Limited Time Offer",
+    "ctaGetQuote": "Get Your Quote Now",
+    "ctaViewPortfolio": "View Our Portfolio",
+    "ctaGetQuoteNow": "Get Your Quote Now",
+
+    "rating": "4.9/5 Rating",
+    "whyChooseUs": "Why Choose Us",
+    "innovateFutureSolutions": "We Innovate Future Solutions",
+    "whyChooseUsDesc": "Building tomorrow's technology solutions today with innovative approaches that blend creativity and cutting-edge technology.",
+    "fastDelivery": "Fast Delivery",
+    "fastDeliveryDesc": "Quick turnaround times without compromising quality",
+    "secureSolutions": "Secure Solutions",
+    "secureSolutionsDesc": "Enterprise-grade security in all our implementations",
+    "support247": "24/7 Support",
+    "support247Desc": "Round-the-clock technical support and maintenance",
+    "highDiscounts": "High Discounts, Don't Hesitate...",
+    "ctaReady": "Ready to transform your business with innovative technology solutions? Get started today with our special pricing and expert consultation.",
+    "ctaFreeQuote": "Get Your Free Quote Now",
+    "ctaScheduleConsultation": "Schedule Free Consultation",
+    "ctaStartYourDream": "Start Your Dream",
+    "ctaContactUs": "Let's Talk! 💬",
+
+    "clientSatisfaction": "Client Satisfaction",
+    "supportAvailable": "Support Available",
+    "yearsExperience": "Years Experience",
+    "atLeastOneMessage": "Please provide either a text message or a voice message.",
+    "messageType": "Message Type",
+    "text": "Text",
+    "voice": "Voice",
+    "testimonial1Name": "Ahmed Al-Rashid",
+    "testimonial1Role": "CEO",
+    "testimonial1Company": "TechVision Saudi",
+    "testimonial1Content": "DreamToApp transformed our digital presence completely. Their mobile app development exceeded our expectations and increased our customer engagement by 300%. The team's professionalism and attention to detail is outstanding.",
+    "testimonial2Name": "Fatima Al-Zahra",
+    "testimonial2Role": "Marketing Director",
+    "testimonial2Company": "E-Commerce Plus",
+    "testimonial2Content": "Our e-commerce store built by DreamToApp generated 250% more sales in the first quarter. The platform is fast, secure, and incredibly user-friendly. Their digital marketing strategies helped us reach new markets effectively.",
+    "testimonial3Name": "Omar Al-Mansouri",
+    "testimonial3Role": "Founder",
+    "testimonial3Company": "Innovation Hub",
+    "testimonial3Content": "The UI/UX design work by DreamToApp revolutionized our user experience. Their visual identity design perfectly captured our brand essence. The team's creativity and technical expertise are unmatched in the region."
+  },
+  "whyChooseUs": {
+    "sectionTitle": "Why Choose Us?",
+    "whatMakesUsDifferent": "What makes us different:",
+    "costEfficiencyTitle": "Cost Efficiency",
+    "costEfficiencyDescription": "We deliver high-quality solutions at competitive prices, maximizing your ROI.",
+    "onDemandTitle": "On-Demand Customization",
+    "onDemandDescription": "Our services are tailored to your unique business needs, ensuring flexibility and scalability.",
+    "itExpertsTitle": "IT Experts",
+    "itExpertsDescription": "Our team consists of experienced professionals with deep technical expertise.",
+    "timeFlexibilityTitle": "Time Flexibility",
+    "timeFlexibilityDescription": "We adapt to your schedule and deliver your dreams on time, every time.",
+    "securePrivacyTitle": "Security & Privacy",
+    "securePrivacyDescription": "We prioritize your data security and privacy in every solution we build."
+  },
+  "contactus": {
+    "projectType": "Dream Type",
+    "projectDetails": "Dream Details",
+    "budget": "Budget",
+    "timeline": "Timeline",
+    "attachment": "Attachment",
+    "mobileApp": "Mobile App",
+    "webApp": "Web App",
+    "both": "Both",
+    "title": "Contact Us",
+    "whatsapp": "Message us on WhatsApp",
+    "phone": "Call Us Directly",
+    "form": "Fill out the Contact Form",
+    "phoneHint": "Saudi Arabia (Jeddah) | International: include country code",
+    "pagetitle": "Contact Us",
+    "hint": "Correct information is required to help us respond as quickly as possible, providing the best possible service.",
+    "mobile": "Mobile Number",
+    "mobilePlaceHolder": "10-digit mobile number",
+    "mobileValidationError": "Must be at least 10 digits",
+    "email": "Email",
+    "emailPlaceHolder": "example@example.com",
+    "emailValidationError": "Invalid email",
+    "msg": "Message",
+    "message": "Message",
+    "msgplaceHolder": "How can we help you?",
+    "msgValidationError": "The minimum is 10 characters",
+    "sendBtn": "Send .. We are waiting for you",
+    "name": "Name",
+    "Done": "Done",
+    "doneMsg": "Thank you for your message. We will get back to you soon.",
+    "whatsappHint": "Or contact us directly on WhatsApp for a faster response!",
+    "whatsappButton": "Chat on WhatsApp",
+    "contactFormTitle": "Send us a message",
+    "sendButton": "Send Message",
+    "getInTouch": "Get in Touch",
+    "getInTouchSubtitle": "Ready to transform your ideas into reality? Let's discuss your dream",
+    "phone": "Phone",
+    "email": "Email",
+    "businessHours": "Business Hours",
+    "location": "Location",
+    "needImmediateHelp": "Need Immediate Help?",
+    "getInstantSupport": "Get instant support via WhatsApp",
+    "chatOnWhatsApp": "Chat on WhatsApp",
+    "sendUsMessage": "Send us a Message",
+    "wellGetBackToYou": "We'll get back to you within 24 hours",
+    "selectRequiredServices": "Select Required Services",
+    "selectServicesSubtitle": "You can choose one or more services according to your dream needs",
+    "selectedServices": "Selected Services",
+    "showAllServices": "Show all services",
+    "showLess": "Show less",
+    "projectDetailsPlaceholder": "Tell us about your dream requirements and goals...",
+    "budgetPlaceholder": "Example: 5,000 - 10,000 SAR or flexible",
+    "messagePlaceholder": "Any additional information or questions...",
+    "privacyNotice": "We respect your privacy. Your information will never be shared.",
+    "mondayFriday": "Monday - Friday: 9:00 AM - 6:00 PM",
+    "saturday": "Saturday: 10:00 AM - 4:00 PM",
+    "sunday": "Sunday: Closed",
+    "jeddahSaudiArabia": "Jeddah, Saudi Arabia",
+    "servingClientsWorldwide": "Serving clients worldwide",
+    "weRespondWithin2Hours": "We respond within 2 hours"
+  },
+  "LaunchPage": {
+    "offerEndsIn": "Offer ends in",
+    "title": "🚀 Elevate Customer Service with Crombo!",
+    "description": "An intelligent platform that makes communicating with your customers easier and more professional.",
+    "companyLabel": "Company Name",
+    "companyPlaceholder": "Enter your company name",
+    "companyError": "Company name must be more than two characters",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "nameError": "Name must be more than two characters",
+    "mobileLabel": "Phone Number",
+    "mobilePlaceholder": "Enter your phone number",
+    "mobileError": "Phone number must be at least 10 digits",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "emailError": "Please enter a valid email address",
+    "noteLabel": "Notes (optional)",
+    "notePlaceholder": "Any additional notes?",
+    "submitButton": "🚀 Get Your Free Version Now",
+    "submitting": "Submitting...",
+    "successMessage": "✅ Your data has been successfully submitted!",
+    "errorMessage": "❌ An error occurred, please try again!",
+    "submitErrorMessage": "❌ An error occurred during submission!",
+    "validationErrorMessage": "❌ Validation error: {errors}",
+    "privacyNotice": "By registering, you agree to our Terms of Service and Privacy Policy.",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "loading": "Loading...",
+    "bookNow": "Book Now",
+    "bookNowFree": "Book for free now and don't miss the chance!"
+  },
+  "crombo": {
+    "name": "Crombo",
+    "title": "Effortless and Comprehensive Customer Service",
+    "description": "Transform your customer experience with Crombo! Seamlessly manage inquiries, resolve complaints, and embrace feedback with a smart platform designed to bring your business closer to your customers.",
+    "action": "Get started",
+    "free": "🚀 Try for Free Now!"
+  },
+  "page": {
+    "welcomeTitle": "🚀 Elevate Your Business!",
+    "welcomeMessage": "We're here to deliver exceptional value at unbeatable prices. Share your last quote, and we'll beat it by 20%! Let's build something amazing together.",
+    "contactInfoTitle": "Provide Your Contact Information",
+    "namePlaceholder": "Your Name",
+    "emailPlaceholder": "Your Email",
+    "phonePlaceholder": "Your Phone Number",
+    "selectServiceTitle": "Select a Service",
+    "selectServicePlaceholder": "Choose a service",
+    "servicesLabel": "Services",
+    "webDesign": "Web Design",
+    "seo": "SEO",
+    "graphicDesign": "Graphic Design",
+    "contentWriting": "Content Writing",
+    "digitalMarketing": "Digital Marketing",
+    "projectDetailsTitle": "Tell Us About Your Dream",
+    "projectDetailsPlaceholder": "Briefly describe your dream requirements...",
+    "projectPricingTitle": "Get Your Custom Dream Pricing",
+    "lastPriceLabel": "Enter Last Price",
+    "lastPricePlaceholder": "Enter Previous Price",
+    "newPriceLabel": "New Price",
+    "discountedPricePlaceholder": "Your discounted price will appear here.",
+    "agreementOptionsTitle": "What Would You Like to Do?",
+    "agreedOption": "I confirm and agree to the final price with your discount.",
+    "negotiationOption": "I'd like to negotiate further. Please book a call with me.",
+    "noPriceOption": "I don't have a previous price. Please book a call with me.",
+    "submitButton": "Submit",
+    "submittingButton": "Sending...",
+    "thankYouTitle": "Thank You",
+    "thankYouMessage": "Thank you, we will contact you within 48 hours"
+  },
+  "team": {
+    "ourTeam": "Our Team",
+    "meetProfessionals": "Meet the professionals behind our success. We are passionate, experienced, and always looking for new talent to join us!",
+    "joinOurTeam": "Join Our Team",
+    "viewProfile": "View profile of {name}",
+    "viewProfileBtn": "View Profile",
+    "yearsOfExperience": "{years} years of experience",
+    "Mangement": "Management",
+    "Full Stack Developer": "Full Stack Developer",
+    "Backend Development": "Backend Development"
+  },
+  "dashboard": {
+    "adminDashboard": "Admin Dashboard",
+    "cromboTab": "Crombo",
+    "pricesReqTab": "Prices Req",
+    "contactUsTab": "Contact Us",
+    "expressQueriesTab": "Express Queries",
+    "visitorsTab": "Visitors",
+    "contactsTab": "{count, plural, =0 {No contacts} =1 {One contact} other {# contacts}}",
+    "expressQueriesTabCount": "{count, plural, =0 {No queries} =1 {One query} other {# queries}}",
+    "visitorsTabCount": "{count, plural, =0 {No visitors} =1 {One visitor} other {# visitors}}",
+    "contactUsSubmissions": "Contact Us Submissions",
+    "email": "Email",
+    "mobile": "Mobile",
+    "message": "Message",
+    "date": "Date",
+    "viewMore": "View More",
+    "expressQueries": "Express Queries",
+    "brief": "Brief",
+    "visitors": "Visitors",
+    "unknownIP": "Unknown IP",
+    "visitCount": "{count, plural, =0 {No visits} =1 {One visit} other {# visits}}",
+    "ip": "IP",
+    "country": "Country",
+    "city": "City",
+    "na": "N/A",
+    "visitTime": "Visit Time"
+  },
+  "worksample": {
+    "noFolders": "No folders found.",
+    "noFoldersDescription": "We're currently preparing our portfolio. Check back soon for amazing projects!",
+    "noImage": "No Image Available",
+    "taskCount": "{count, plural, =0 {No tasks} =1 {One task} other {# tasks}}",
+    "viewGallery": "View Gallery",
+    "featuredWebsites": "Featured Websites",
+    "coverImage": "Cover for {folderName}",
+    "portfolio": "Portfolio",
+    "heroTitle": "Our Creative Portfolio",
+    "heroDescription": "Explore our diverse collection of projects showcasing innovation, creativity, and technical excellence",
+    "items": "items",
+    "projectDescription": "Discover the {projectName} project - a showcase of our expertise and creativity in action.",
+    "websites": {
+      "happyMoments": {
+        "title": "Happy Moments",
+        "description": "Gallery For Any Collection"
+      },
+      "alkhuramiEst": {
+        "title": "Al-khurami Est",
+        "description": "JAC Forkleft."
+      },
+      "dreamToApp": {
+        "title": "Dream To App",
+        "description": "Where Dream Begin"
+      },
+      "onProgress": {
+        "title": "On Progress",
+        "description": "Still under development"
+      },
+      "mixyBlog": {
+        "title": "mixyBlog",
+        "description": "Learn more about our third website."
+      },
+      "doIt": {
+        "title": "DoIt",
+        "description": "SaaS App To track you tasks"
+      },
+      "carDotNet": {
+        "title": "CarDotNet",
+        "description": "Learn more about our third website."
+      }
+    }
+  },
+  "thankyou": {
+    "title": "Thank You!",
+    "subtitle": "We appreciate your interest.",
+    "messageMain": "Your message has been successfully submitted. We appreciate you reaching out and will get back to you as soon as possible.",
+    "messageSecondary": "Feel free to browse our site or contact us for more information.",
+    "returnHome": "Back to Home"
+  },
+  "offline": {
+    "title": "You are offline",
+    "description": "Please check your internet connection and try again",
+    "tryAgain": "Try Again",
+    "goHome": "Go to Homepage",
+    "availableOffline": "Available offline:",
+    "homepage": "Homepage",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact Us"
+  },
+  "pwa": {
+    "installAvailable": "Install Available",
+    "enableNotifications": "Enable Notifications",
+    "notificationsBlocked": "Notifications Blocked",
+    "installPromptNotAvailable": "Install prompt not available",
+    "installing": "DreamToApp is being installed...",
+    "installationCancelled": "Installation was cancelled",
+    "installationFailed": "Installation failed. Please try again."
+  },
+  "consultationCTA": {
+    "cta": "Free Consultation",
+    "title": "Request a Free Consultation",
+    "description": "Fill out the form and our team will contact you soon.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "message": "How can we help you?",
+    "submit": "Send Request",
+    "sending": "Sending...",
+    "success": "Thank you! Your request has been received.",
+    "error": "Something went wrong. Please try again.",
+    "close": "Close",
+    "voiceLabel": "Voice Message (optional)",
+    "record": "Record",
+    "stop": "Stop",
+    "fileTypeError": "Invalid audio file type.",
+    "recordError": "Unable to access microphone. Please check your browser settings."
+  },
+  "voiceRecorder": {
+    "record": "Record",
+    "startRecording": "Start Recording",
+    "stop": "Stop",
+    "clear": "Clear",
+    "confirm": "Confirm",
+    "close": "Close",
+    "title": "Voice Recorder",
+    "recordingTooShort": "Recording is too short. Please record a longer message.",
+    "microphoneError": "Unable to access microphone. Please check your browser settings."
+  },
+  "teamApply": {
+    "title": "Apply to Join Our Team",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "areaOfExpertise": "Area of Expertise",
+    "selectExpertise": "Select your expertise",
+    "yearsOfExperience": "Years of Experience",
+    "age": "Age",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "preferNotToSay": "Prefer not to say",
+    "aboutYou": "About You",
+    "aboutYouPlaceholder": "Tell us about your experience, skills, and why you'd like to join our team...",
+    "attachment": "Attachment (CV / Portfolio)",
+    "agreeToTerms": "I agree to the",
+    "jobRolesAndTerms": "job roles and terms",
+    "submitApplication": "Submit Application",
+    "submitting": "Submitting...",
+    "backToTeamPage": "Back to Team",
+    "termsAlert": "Please agree to the terms and conditions before submitting.",
+    "expertise": {
+      "web-development": "Web Development",
+      "mobile-development": "Mobile Development",
+      "ui-ux-design": "UI/UX Design",
+      "marketing": "Marketing",
+      "project-management": "Dream Management",
+      "quality-assurance": "Quality Assurance",
+      "devops": "DevOps",
+      "data-science": "Data Science"
+    }
+  },
+  "jobRoles": {
+    "title": "General Job Roles and Terms",
+    "subtitle": "Learn about our expectations, what we offer, and the terms for joining our dynamic team.",
+    "ourExpectations": "Our Expectations",
+    "whatWeOffer": "What We Offer",
+    "applicationTerms": "Application Terms",
+    "backToTeamPage": "Back to Team",
+    "expectations": {
+      "collaborate": "Collaborate effectively with cross-functional teams",
+      "stayUpdated": "Stay updated with the latest industry trends and technologies",
+      "positiveEnvironment": "Contribute to a positive and inclusive work environment",
+      "highQuality": "Deliver high-quality work within agreed timelines",
+      "codeReviews": "Participate in code reviews and knowledge sharing sessions"
+    },
+    "benefits": {
+      "competitiveSalary": "Competitive salary and benefits package",
+      "professionalGrowth": "Opportunities for professional growth and skill development",
+      "flexibleWork": "Flexible work arrangements",
+      "collaborativeCulture": "Collaborative and innovative work culture",
+      "excitingProjects": "Exciting projects with cutting-edge technologies"
+    },
+    "terms": {
+      "accurateInfo": "All information provided is accurate and complete",
+      "contactReferences": "We may contact your references and previous employers",
+      "keepOnFile": "Your application will be kept on file for future opportunities",
+      "privacyPolicy": "We will handle your personal information in accordance with our privacy policy",
+      "agreementText": "By submitting an application, you agree to the following:"
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "errorLoading": "Error loading gallery",
+    "reloadImage": "Reload Image",
+    "enlargedView": "Enlarged View",
+    "enlargedDescription": "This is an enlarged preview of the selected image. Press ESC or click outside to close.",
+    "fallbackImage": "Fallback Image",
+    "backToPortfolio": "Back to Portfolio",
+    "images": "images",
+    "galleryDescription": "Explore the {projectName} gallery - a visual journey through our creative process and final results.",
+    "openInNewTab": "Open in New Tab",
+    "download": "Download",
+    "noImages": "No Images Found",
+    "noImagesDescription": "This folder doesn't contain any images yet.",
+    "galleryCollection": "Gallery Collection",
+    "exploreCollection": "Explore our curated collection of {category} designs and projects",
+    "imageCount": "{count} {count, plural, one {Image} other {Images}}",
+    "gridView": "Grid View",
+    "filter": "Filter",
+    "view": "View",
+    "share": "Share",
+    "like": "Like",
+    "rotate": "Rotate",
+    "reset": "Reset",
+    "zoomIn": "Zoom In",
+    "zoomOut": "Zoom Out",
+    "imageUnavailable": "Image Unavailable",
+    "useMouseWheel": "Use mouse wheel to zoom",
+    "dragToPan": "Drag to pan when zoomed"
+  },
+  "navbar": {
+    "settings": "Settings",
+    "readyToStart": "Ready to start your dream?",
+    "getInTouch": "Get in touch",
+    "getStarted": "Get Started",
+    "startProject": "Start Dream",
+    "openMenu": "Open menu",
+    "mainNavigation": "Main navigation",
+    "dreamToAppHome": "DreamToApp Home",
+    "dreamToAppLogo": "DreamToApp Logo"
+  },
+  "contact": {
+    "pageTitle": "Contact Us",
+    "pageDescription": "Get in touch with DreamToApp. Contact us for web development, mobile apps, and digital solutions. We're here to help bring your ideas to life.",
+    "heroTitle": "Get In Touch",
+    "heroSubtitle": "Ready to start your digital journey? Let's discuss your project and bring your vision to life.",
+    "badge1": "Custom Solutions",
+    "badge2": "Expert Team",
+    "badge3": "Fast Delivery",
+    "formTitle": "Contact Us",
+    "formSubtitle": "Tell us about your project and we'll get back to you soon",
+    "whyChooseUs": "Why Choose Us",
+    "whyChooseUsSubtitle": "Building tomorrow's technology solutions today with innovative approaches that blend creativity and cutting-edge technology.",
+    "benefit1Title": "Expert Team",
+    "benefit1Description": "Experienced developers and designers dedicated to your success",
+    "benefit2Title": "Custom Solutions",
+    "benefit2Description": "Tailored approaches that fit your unique business needs",
+    "benefit3Title": "Quality Assurance",
+    "benefit3Description": "Rigorous testing and quality control for flawless delivery",
+    "benefit4Title": "Fast Delivery",
+    "benefit4Description": "Quick turnaround times without compromising on quality",
+    "needImmediateHelp": "Need Immediate Help?",
+    "getInstantSupport": "Get instant support via WhatsApp",
+    "chatOnWhatsApp": "Chat on WhatsApp",
+    "contactTitle": "Contact Us",
+    "contactSubtitle": "Let's discuss your project",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "mobile": "Mobile Number",
+    "mobilePlaceholder": "Enter your mobile number",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "serviceType": "Service Type",
+    "selectService": "Select a service",
+    "serviceWebDevelopment": "Web Development",
+    "serviceMobileApp": "Mobile App Development",
+    "serviceEcommerce": "E-commerce Solution",
+    "serviceCRM": "CRM Development",
+    "serviceUIUX": "UI/UX Design",
+    "serviceDigitalMarketing": "Digital Marketing",
+    "serviceVisualIdentity": "Visual Identity",
+    "serviceOther": "Other",
+    "projectDescription": "Project Description",
+    "projectDescriptionPlaceholder": "Tell us about your project idea, goals, and requirements...",
+    "budget": "Budget",
+    "selectBudget": "Select your budget range",
+    "under5k": "Under $5,000",
+    "5kTo10k": "$5,000 - $10,000",
+    "10kTo25k": "$10,000 - $25,000",
+    "25kTo50k": "$25,000 - $50,000",
+    "50kTo100k": "$50,000 - $100,000",
+    "over100k": "Over $100,000",
+    "notSure": "Not sure yet",
+    "timeline": "Project Timeline",
+    "selectTimeline": "Select your timeline",
+    "asap": "As soon as possible",
+    "1To2Weeks": "1-2 weeks",
+    "1Month": "1 month",
+    "2To3Months": "2-3 months",
+    "3To6Months": "3-6 months",
+    "flexible": "Flexible",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your inquiry or project...",
+    "additionalMessage": "Additional Message",
+    "additionalMessagePlaceholder": "Any additional details, questions, or special requirements...",
+    "sendMessage": "Send Message",
+    "sending": "Sending...",
+    "contactWhatsApp": "Contact on WhatsApp",
+    "formSuccess": "Message sent successfully! We'll get back to you soon.",
+    "formError": "Failed to send message. Please try again.",
+    "successTitle": "Message Sent!",
+    "successMessage": "Thank you for contacting us! We'll get back to you within 24 hours.",
+    "sendAnotherMessage": "Send Another Message"
+  },
+  "startDream": {
+    "pageTitle": "Start Your Dream Project",
+    "pageDescription": "Begin your digital journey with DreamToApp. Transform your ideas into reality with our professional web development and digital solutions.",
+    "heroTitle": "Start Your Dream",
+    "heroSubtitle": "Transform your vision into a powerful digital reality. Let's build something extraordinary together.",
+    "badge1": "Custom Solutions",
+    "badge2": "Expert Team",
+    "badge3": "Fast Delivery",
+    "formTitle": "Tell Us About Your Dream",
+    "formSubtitle": "Share your vision and we'll help you bring it to life",
+    "whyChooseUs": "Why Choose Us",
+    "whyChooseUsSubtitle": "Building tomorrow's technology solutions today with innovative approaches that blend creativity and cutting-edge technology.",
+    "benefit1Title": "Expert Team",
+    "benefit1Description": "Experienced developers and designers dedicated to your success",
+    "benefit2Title": "Custom Solutions",
+    "benefit2Description": "Tailored approaches that fit your unique business needs",
+    "benefit3Title": "Quality Assurance",
+    "benefit3Description": "Rigorous testing and quality control for flawless delivery",
+    "benefit4Title": "Fast Delivery",
+    "benefit4Description": "Quick turnaround times without compromising on quality",
+    "needImmediateHelp": "Need Immediate Help?",
+    "getInstantSupport": "Get instant support via WhatsApp",
+    "chatOnWhatsApp": "Chat Now",
+    "selectMultipleServices": "Select multiple services",
+    "selectedServices": "Selected services",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "mobileLabel": "Mobile Number",
+    "mobilePlaceholder": "Enter your mobile number",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "serviceTypeLabel": "Service Type",
+    "serviceTypePlaceholder": "Select a service",
+    "serviceWebDevelopment": "Web Development",
+    "serviceMobileApp": "Mobile App Development",
+    "serviceEcommerce": "E-commerce Solution",
+    "serviceUIUX": "UI/UX Design",
+    "serviceDigitalMarketing": "Digital Marketing",
+    "serviceConsultation": "Consultation",
+    "serviceOther": "Other",
+    "projectDescriptionLabel": "Project Description",
+    "projectDescriptionPlaceholder": "Tell us about your project idea, goals, and requirements...",
+    "budgetLabel": "Budget Range",
+    "budgetPlaceholder": "Select your budget range",
+    "budgetUnder5k": "Under $5,000",
+    "budget5k10k": "$5,000 - $10,000",
+    "budget10k25k": "$10,000 - $25,000",
+    "budget25k50k": "$25,000 - $50,000",
+    "budget50k100k": "$50,000 - $100,000",
+    "budgetOver100k": "Over $100,000",
+    "budgetNotSure": "Not sure yet",
+    "timelineLabel": "Project Timeline",
+    "timelinePlaceholder": "Select your timeline",
+    "timelineASAP": "As soon as possible",
+    "timeline1To2Weeks": "1-2 weeks",
+    "timeline1Month": "1 month",
+    "timeline2To3Months": "2-3 months",
+    "timeline3To6Months": "3-6 months",
+    "timelineFlexible": "Flexible",
+    "additionalMessageLabel": "Additional Message",
+    "additionalMessagePlaceholder": "Any additional details, questions, or special requirements...",
+    "startMyDream": "Start My Dream",
+    "submitting": "Submitting...",
+    "successMessage": "Your dream project request has been sent! We'll get back to you within 24 hours to discuss your vision.",
+    "formDisclaimer": "By submitting this form, you agree to our privacy policy and terms of service.",
+    "successTitle": "Successfully Sent!",
+
+    "redirectingMessage": "Redirecting to thank you page...",
+    "name": "Full Name",
+    "mobile": "Mobile Number",
+    "email": "Email Address",
+    "serviceType": "Service Type",
+    "selectService": "Select a service",
+    "serviceWebsiteDevelopment": "Website Development",
+    "serviceMobileAppDevelopment": "Mobile App Development",
+    "serviceEcommerceDevelopment": "E-commerce Development",
+    "serviceCrmDevelopment": "CRM Development",
+    "serviceUiUxDesign": "UI/UX Design",
+    "serviceDigitalMarketing": "Digital Marketing",
+    "serviceVisualIdentity": "Visual Identity",
+    "serviceOther": "Other",
+    "projectDescription": "Project Description",
+    "selectBudget": "Select your budget range",
+    "under5k": "Under $5,000",
+    "5kTo10k": "$5,000 - $10,000",
+    "10kTo25k": "$10,000 - $25,000",
+    "25kTo50k": "$25,000 - $50,000",
+    "50kTo100k": "$50,000 - $100,000",
+    "over100k": "Over $100,000",
+    "notSure": "Not sure yet",
+    "timeline": "Project Timeline",
+    "selectTimeline": "Select your timeline",
+    "asap": "As soon as possible",
+    "1To2Weeks": "1-2 weeks",
+    "1Month": "1 month",
+    "2To3Months": "2-3 months",
+    "3To6Months": "3-6 months",
+    "flexible": "Flexible",
+    "additionalMessage": "Additional Message",
+    "sending": "Sending...",
+    "privacyNotice": "By submitting this form, you agree to our privacy policy and terms of service.",
+    "heroBadge": "Transform Your Ideas",
+    "getStartedNow": "Get Started Now",
+    "benefitsSubtitle": "Discover why leading businesses choose DreamToApp for their digital transformation",
+    "startYourJourney": "Start Your Journey",
+    "formSubtitle": "Share your vision and let's create something amazing together",
+
+    "clientSatisfaction": "Client Satisfaction",
+    "supportAvailable": "Support Available",
+    "yearsExperience": "Years Experience",
+    "trustedBy": "Trusted by leading organizations"
+  }
+}

@@ -1,0 +1,165 @@
+generator client {
+  provider        = "prisma-client-js"
+  // previewFeatures = ["prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model contactus {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  mobile    String
+  projectType String
+  projectDetails String
+  budget    String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model expressQuery {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  brief     String
+  mobile    String
+  createdAt DateTime @default(now())
+}
+
+
+model Visitor {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  ip         String   @unique
+  country    String?  
+  city       String?  
+  region     String?  
+  org        String?  
+  timezone   String?  
+  visitCount Int      @default(1)  // Track the number of visits
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Crombo {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  company      String
+  name      String
+  mobile    String
+  email     String
+  note String
+  createdAt DateTime @default(now())
+}
+
+model Price {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  mobile    String
+  email     String
+  packageTtype  String
+  createdAt DateTime @default(now())
+}
+
+ 
+
+ 
+
+model ProjectRequest {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String
+  mobile        String
+  projectType   String
+  projectDetails String
+  budget        String
+  message       String
+  createdAt     DateTime @default(now())
+}
+
+// Unified model to hold all form data
+model FormData {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String   // User's name
+  email           String   // User's email
+  phone           String   // User's phone number
+  serviceType     String   // Selected service (e.g., Web Design, SEO, etc.)
+  brief           String?  // Optional project description
+  lastPrice       Float?   // Previous price entered by the user
+  discountedPrice Float?   // Calculated discounted price
+  discount        Float?   // Discount percentage used (e.g., 20 for 20%)
+  agreed          Boolean? // Whether the user agreed to the price
+  negotiation     Boolean? // Whether the user requested negotiation
+  noPrice         Boolean? // Whether the user doesn't have a previous price
+  createdAt       DateTime @default(now()) // Timestamp of submission
+}
+
+// Model for storing free consultation requests from the floating CTA
+model ConsultationRequest {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String   // Full name of the visitor
+  email     String   // Visitor's email address
+  phone     String?  // Optional phone number
+  message   String   // Consultation message
+  voiceUrl  String?  // Optional Cloudinary URL for the voice message
+  createdAt DateTime @default(now()) // Timestamp of submission
+}
+
+model NewsletterSubscription {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique // Email address (unique to prevent duplicates)
+  isActive  Boolean  @default(true) // Whether the subscription is active
+  createdAt DateTime @default(now()) // Timestamp of subscription
+  updatedAt DateTime @updatedAt // Timestamp of last update
+}
+
+model JobApplication {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  applicationNumber String   @unique @default(cuid())
+  fullName          String
+  email             String
+  phone             String
+  age               Int
+  gender            String
+  areaOfExpertise   String
+  yearsOfExperience Int
+  aboutYou          String
+  attachmentUrl     String?
+  attachmentName    String?
+  status            ApplicationStatus @default(DRAFT)
+  submittedAt       DateTime?
+  locale            String @default("en")
+  ipAddress         String?
+  userAgent         String?
+  source            String?
+  adminNotes        String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Relation to status history
+  statusHistory     ApplicationStatusHistory[]
+}
+
+model ApplicationStatusHistory {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  applicationId     String   @db.ObjectId
+  status            ApplicationStatus
+  notes             String?
+  changedBy         String?  // Admin who made the change
+  changedAt         DateTime @default(now())
+  
+  // Relation to application
+  application       JobApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+enum ApplicationStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  INTERVIEW_SCHEDULED
+  INTERVIEWED
+  OFFER_EXTENDED
+  HIRED
+  REJECTED
+  WITHDRAWN
+}
