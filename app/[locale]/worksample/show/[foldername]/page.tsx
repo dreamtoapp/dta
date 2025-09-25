@@ -81,12 +81,19 @@ export async function generateMetadata({
 // Enhanced gallery content component
 async function GalleryContent({ foldername }: { foldername: string }) {
   const t = await getTranslations("gallery");
-  const baseFolder = `dreamToApp/workSample/${foldername}`;
+  const baseFolder = `website/workSample/${foldername}`;
 
   let images;
   let hasCloudinaryError = false;
 
   try {
+    // Debug: Log base folder and env presence without exposing secrets
+    console.log("[Cloudinary][Gallery] Fetching images", {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      hasApiKey: Boolean(process.env.CLOUDINARY_API_KEY),
+      hasApiSecret: Boolean(process.env.CLOUDINARY_API_SECRET),
+      baseFolder,
+    });
     images = await getImagesFromFolder(baseFolder);
 
     // If no images returned, it might be a configuration issue
@@ -96,6 +103,13 @@ async function GalleryContent({ foldername }: { foldername: string }) {
     }
   } catch (error) {
     hasCloudinaryError = true;
+    console.error("[Cloudinary][Gallery] Error fetching images", {
+      error: (error as Error).message,
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      hasApiKey: Boolean(process.env.CLOUDINARY_API_KEY),
+      hasApiSecret: Boolean(process.env.CLOUDINARY_API_SECRET),
+      baseFolder,
+    });
     images = getFallbackImages(foldername);
   }
 
@@ -199,7 +213,7 @@ export default async function Page({
   const t = await getTranslations("gallery");
 
   // Get all valid folders dynamically
-  const validFolders = await getAllFolders("dreamToApp/workSample");
+  const validFolders = await getAllFolders("website/workSample");
 
   // Validate folder name and return 404 if invalid
   if (!validFolders.includes(foldername)) {

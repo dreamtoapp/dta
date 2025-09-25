@@ -60,18 +60,18 @@ const Footer: React.FC = async () => {
 
   // Social/contact icons with proper accessibility
   const contact = [
-    {
-      title: "Snapchat",
-      icon: contactUs.snapchat.icon,
-      link: "https://snapchat.com/add/dreamtoapp",
-      ariaLabel: "Follow us on Snapchat"
-    },
-    {
-      title: "TikTok",
-      icon: contactUs.tiktok.icon,
-      link: "https://tiktok.com/@dreamtoapp",
-      ariaLabel: "Follow us on TikTok"
-    },
+    // {
+    //   title: "Snapchat",
+    //   icon: contactUs.snapchat.icon,
+    //   link: "https://snapchat.com/add/dreamtoapp",
+    //   ariaLabel: "Follow us on Snapchat"
+    // },
+    // {
+    //   title: "TikTok",
+    //   icon: contactUs.tiktok.icon,
+    //   link: "https://tiktok.com/@dreamtoapp",
+    //   ariaLabel: "Follow us on TikTok"
+    // },
     {
       title: "Instagram",
       icon: contactUs.instgram.icon,
@@ -81,7 +81,7 @@ const Footer: React.FC = async () => {
     {
       title: "Facebook",
       icon: contactUs.facebook.icon,
-      link: "https://facebook.com/dreamtoapp",
+      link: "https://www.facebook.com/profile.php?id=61574983475823",
       ariaLabel: "Follow us on Facebook"
     },
     {
@@ -274,7 +274,7 @@ const Footer: React.FC = async () => {
           {/* Social Media */}
           <div className="flex flex-col items-center lg:items-start">
             <h3 className="font-semibold text-base lg:text-lg mb-2 text-center lg:text-left">{footer("socialMedia")}</h3>
-            <div className="grid grid-cols-3 gap-2 lg:gap-3 w-full max-w-xs lg:max-w-none">
+            <div className="grid grid-cols-4 gap-2 lg:gap-3 w-full max-w-xs lg:max-w-none">
               {contact.map((item, index) => (
                 <Link
                   key={index}

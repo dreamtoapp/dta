@@ -4,6 +4,8 @@ type CardData = {
   description: string;
   icon: React.ElementType;
   tags: { text: string; icon: React.ElementType }[];
+  // Optional Cloudinary public id for a header image (test only; you can update manually)
+  imagePublicId?: string;
 };
 
 export const cardData: CardData[] = [
@@ -11,6 +13,8 @@ export const cardData: CardData[] = [
     title: "websiteDevelopmentTitle",
     description: "websiteDevelopmentDescription",
     icon: serviceIcon.website.icon,
+    // Test image public id (you can replace/update manually)
+    imagePublicId: "v1758728821/website_wbnje1.png",
     tags: [
       { text: technology.js.name, icon: technology.js.icon },
       { text: technology.html.name, icon: technology.html.icon },
@@ -31,6 +35,7 @@ export const cardData: CardData[] = [
     title: "mobileAppDevelopmentTitle",
     description: "mobileAppDevelopmentDescription",
     icon: serviceIcon.mobileApp.icon,
+    imagePublicId: "v1758728821/mobile_application_fvymvs.png",
     tags: [
       { text: technology.react.name, icon: technology.react.icon },
       { text: technology.reactNative.name, icon: technology.reactNative.icon },
@@ -40,7 +45,7 @@ export const cardData: CardData[] = [
       { text: technology.mysql.name, icon: technology.mysql.icon },
       { text: technology.figma.name, icon: technology.figma.icon },
       { text: technology.prisma.name, icon: technology.prisma.icon },
-      
+
     ],
   },
   // {
@@ -60,6 +65,7 @@ export const cardData: CardData[] = [
     title: "ecommerceDevelopmentTitle",
     description: "ecommerceDevelopmentDescription",
     icon: serviceIcon.ecomm.icon,
+    imagePublicId: "v1758728821/ecommer_face_dbzpnb.png",
     tags: [
       { text: technology.react.name, icon: technology.react.icon },
       { text: technology.nextjs.name, icon: technology.nextjs.icon },
@@ -77,6 +83,7 @@ export const cardData: CardData[] = [
     title: "uiUxDesignTitle",
     description: "uiUxDesignDescription",
     icon: serviceIcon.uiux.icon,
+    imagePublicId: "v1758728821/visual_identity_rqjjre.png",
     tags: [
       { text: technology.figma.name, icon: technology.figma.icon },
       { text: technology.xd.name, icon: technology.xd.icon },
@@ -88,6 +95,7 @@ export const cardData: CardData[] = [
     title: "digitalMarketingTitle",
     description: "digitalMarketingDescription",
     icon: serviceIcon.dm.icon,
+    imagePublicId: "v1758728821/DIGITAL_MARKETING_tfqsgj.png",
     tags: [
       { text: technology.photoshop.name, icon: technology.photoshop.icon },
       { text: technology.illustrator.name, icon: technology.illustrator.icon },
@@ -103,6 +111,7 @@ export const cardData: CardData[] = [
     title: "visualIdentityTitle",
     description: "visualIdentityDescription",
     icon: serviceIcon.vd.icon,
+    imagePublicId: "v1758728821/visual_identity_rqjjre.png",
     tags: [
       { text: technology.photoshop.name, icon: technology.photoshop.icon },
       { text: technology.illustrator.name, icon: technology.illustrator.icon },

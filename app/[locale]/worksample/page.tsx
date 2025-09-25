@@ -22,25 +22,25 @@ function getLastNode(folderName: string) {
 // Fallback data for when Cloudinary is not configured
 const fallbackFolders = [
   {
-    folderName: "dreamToApp/workSample/flyer",
+    folderName: "website/workSample/flyer",
     coverImage: null,
     itemCount: 56,
     items: []
   },
   {
-    folderName: "dreamToApp/workSample/coverage",
+    folderName: "website/workSample/coverage",
     coverImage: null,
     itemCount: 2,
     items: []
   },
   {
-    folderName: "dreamToApp/workSample/cnc",
+    folderName: "website/workSample/cnc",
     coverImage: null,
     itemCount: 6,
     items: []
   },
   {
-    folderName: "dreamToApp/workSample/character",
+    folderName: "website/workSample/character",
     coverImage: null,
     itemCount: 10,
     items: []
@@ -48,7 +48,7 @@ const fallbackFolders = [
 ];
 
 export default async function Page() {
-  const baseFolder = "dreamToApp/workSample";
+  const baseFolder = "website/workSample";
   const locale = await getLocale();
   const t = await getTranslations("worksample");
   const t2 = await getTranslations("buttons");
@@ -57,7 +57,24 @@ export default async function Page() {
   let hasCloudinaryError = false;
 
   try {
+    // Debug: Log base folder and env presence without exposing secrets
+    console.log("[Cloudinary][WorkSample] Fetching folders", {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      hasApiKey: Boolean(process.env.CLOUDINARY_API_KEY),
+      hasApiSecret: Boolean(process.env.CLOUDINARY_API_SECRET),
+      baseFolder,
+    });
     folders = await getFoldersWithCoverImages(baseFolder);
+    // Debug: Summarize folders returned
+    try {
+      const debugSummary = (folders || []).map((f: any) => ({
+        folderName: f.folderName,
+        lastSegment: getLastNode(f.folderName),
+        itemCount: f.itemCount,
+        hasCover: Boolean(f.coverImage && f.coverImage.secure_url),
+      }));
+      console.log("[Cloudinary][WorkSample] Folders summary", debugSummary);
+    } catch { }
 
     // If no folders returned, it might be a configuration issue
     if (!folders || folders.length === 0) {
@@ -66,6 +83,12 @@ export default async function Page() {
     }
   } catch (error) {
     console.error("Failed to load folders from Cloudinary:", error);
+    console.error("[Cloudinary][WorkSample] Env check", {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      hasApiKey: Boolean(process.env.CLOUDINARY_API_KEY),
+      hasApiSecret: Boolean(process.env.CLOUDINARY_API_SECRET),
+      baseFolder,
+    });
     hasCloudinaryError = true;
     folders = fallbackFolders;
   }

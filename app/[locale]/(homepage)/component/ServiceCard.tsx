@@ -21,6 +21,7 @@ interface CardData {
   description: string;
   icon: React.ElementType;
   tags: CardTag[];
+  imagePublicId?: string;
 }
 
 interface CardComponentProps {
@@ -44,6 +45,15 @@ const CardComponent: React.FC<CardComponentProps> = ({ card, t, locale }) => {
       <article className="h-full flex flex-col" aria-labelledby={`service-card-title-${t(card.title)}`}>
         {/* Header Section */}
         <CardHeader className="flex flex-col items-center text-center space-y-3 pt-6 pb-2">
+          {card.imagePublicId && (
+            <img
+              src={`https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_640,h_640,c_fill,g_auto/${card.imagePublicId}`}
+              alt={t(card.title)}
+              className="w-full object-cover rounded-xl mb-3"
+              style={{ aspectRatio: '1 / 1' }}
+              loading="lazy"
+            />
+          )}
           {/* Icon with animated ring on hover */}
           <div className="relative flex items-center justify-center mb-2">
             <span className="absolute inset-0 rounded-full bg-[#d7a50d]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />

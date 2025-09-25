@@ -90,25 +90,114 @@ export async function getFoldersWithCoverImages(
         max_results: 500, // We want to get up to 500 images (but not more)
       });
 
+      // Debug: basic stats (no secrets)
+      const total = Array.isArray(response.resources) ? response.resources.length : 0;
+      console.log("[Cloudinary][Folders] Admin resources fetched", {
+        baseFolder,
+        total,
+        samplePublicId:
+          total > 0 ? (response.resources[0] as any).public_id : undefined,
+      });
+
+      // Debug: List immediate subfolders to verify path
+      try {
+        const sub = await (cloudinary.api as any).sub_folders(baseFolder);
+        const subCount = Array.isArray(sub.folders) ? sub.folders.length : 0;
+        console.log("[Cloudinary][Folders] Subfolders", {
+          baseFolder,
+          subCount,
+          sampleSub: subCount > 0 ? sub.folders[0]?.path : undefined,
+        });
+      } catch (e) {
+        console.warn("[Cloudinary][Folders] sub_folders debug failed", {
+          baseFolder,
+          error: (e as Error).message,
+        });
+      }
+
       // Step 2: Put the images into groups based on their folder names
-      const folders: Record<string, Folder> = {}; // An empty box to store folders
-      (response.resources as CloudinaryResource[]).forEach(
-        (item: CloudinaryResource) => {
-          const folderName = item.public_id.split("/").slice(0, -1).join("/"); // Find out which folder this image belongs to
-          if (!folders[folderName]) {
-            // If this is the first image for this folder, create a new folder group
-            folders[folderName] = { folderName, items: [] };
+      let folders: Record<string, Folder> = {}; // An empty box to store folders
+
+      if (total > 0) {
+        (response.resources as CloudinaryResource[]).forEach(
+          (item: CloudinaryResource) => {
+            const folderName = item.public_id.split("/").slice(0, -1).join("/");
+            if (!folders[folderName]) {
+              folders[folderName] = { folderName, items: [] };
+            }
+            folders[folderName].items.push(item);
           }
-          folders[folderName].items.push(item); // Add the image to the folder group
+        );
+      } else {
+        // Fallback path: enumerate subfolders and fetch first-page resources for each subfolder
+        try {
+          const sub = await (cloudinary.api as any).sub_folders(baseFolder);
+          const subfolders: Array<{ name: string; path: string }> = sub.folders || [];
+          console.log("[Cloudinary][Folders] Enumerating subfolders fallback", {
+            baseFolder,
+            subCount: subfolders.length,
+          });
+
+          for (const sf of subfolders) {
+            try {
+              const res = await cloudinary.api.resources({
+                type: "upload",
+                prefix: sf.path,
+                max_results: 50,
+              });
+              const items = (res.resources as CloudinaryResource[]) || [];
+              if (items.length > 0) {
+                folders[sf.path] = { folderName: sf.path, items };
+              } else {
+                // Search API fallback: some accounts keep folder path separate from public_id
+                try {
+                  const search = await (cloudinary as any).search
+                    .expression(`asset_folder="${sf.path}" AND resource_type:image`)
+                    .sort_by("created_at", "desc")
+                    .max_results(50)
+                    .execute();
+                  const sItems = (search.resources as CloudinaryResource[]) || [];
+                  if (sItems.length > 0) {
+                    folders[sf.path] = { folderName: sf.path, items: sItems };
+                  } else {
+                    folders[sf.path] = { folderName: sf.path, items: [] };
+                  }
+                } catch (se) {
+                  console.warn("[Cloudinary][Search] Fallback search failed", {
+                    path: sf.path,
+                    error: (se as Error).message,
+                  });
+                  folders[sf.path] = { folderName: sf.path, items: [] };
+                }
+              }
+            } catch (e) {
+              console.warn("[Cloudinary][Folders] Failed to list resources for subfolder", {
+                path: sf.path,
+                error: (e as Error).message,
+              });
+              folders[sf.path] = { folderName: sf.path, items: [] };
+            }
+          }
+        } catch (e) {
+          console.warn("[Cloudinary][Folders] sub_folders fallback failed", {
+            baseFolder,
+            error: (e as Error).message,
+          });
         }
-      );
+      }
 
       // Step 3: Get all the images that are tagged as "cover"
       const taggedImagesResponse = await cloudinary.api.resources_by_tag("cover");
       const taggedImages = taggedImagesResponse.resources as CloudinaryResource[];
 
+      // Debug: number of cover-tagged assets
+      console.log("[Cloudinary][Folders] Cover-tagged assets", {
+        baseFolder,
+        count: Array.isArray(taggedImages) ? taggedImages.length : 0,
+      });
+
       // Step 4: For each folder, find its cover image or use the first image as a backup
-      return Object.values(folders).map((folder) => {
+      const result = Object.values(folders).map((folder) => {
         const coverImage =
           taggedImages.find(
             (taggedItem) => taggedItem.public_id.startsWith(folder.folderName) // Look for a tagged "cover" image for this folder
@@ -122,6 +211,15 @@ export async function getFoldersWithCoverImages(
           items: folder.items, // The list of images in the folder
         };
       });
+
+      // Debug: summarize computed folders
+      console.log("[Cloudinary][Folders] Computed folders", result.map((f) => ({
+        folderName: f.folderName,
+        itemCount: f.itemCount,
+        hasCover: Boolean(f.coverImage),
+      })));
+
+      return result;
     });
   } catch (error) {
     // If something goes wrong, tell us in the logs and return an empty list
@@ -140,27 +238,49 @@ export async function getAllFolders(baseFolder: string): Promise<string[]> {
     const cacheKey = `all_folders_${baseFolder}`;
 
     return await getCachedOrFetch(cacheKey, async () => {
-      // Get all resources in the base folder
-      const response = await cloudinary.api.resources({
-        type: "upload",
-        prefix: baseFolder,
-        max_results: 1000, // Get more results to ensure we capture all folders
-      });
-
-      // Extract unique folder names from the resources
-      const folders = new Set<string>();
-      (response.resources as CloudinaryResource[]).forEach((item: CloudinaryResource) => {
-        const folderPath = item.public_id.split("/").slice(0, -1).join("/");
-        if (folderPath.startsWith(baseFolder)) {
-          // Extract just the folder name (last part after baseFolder)
-          const folderName = folderPath.replace(`${baseFolder}/`, "");
-          if (folderName && !folderName.includes("/")) {
-            folders.add(folderName);
-          }
+      // 1) Prefer sub_folders to list immediate children reliably
+      try {
+        const sub = await (cloudinary.api as any).sub_folders(baseFolder);
+        const subfolders: Array<{ name: string; path: string }> = sub.folders || [];
+        const names = subfolders
+          .map((sf) => sf.path.replace(`${baseFolder}/`, ""))
+          .filter((n) => n && !n.includes("/"));
+        if (names.length > 0) {
+          console.log("[Cloudinary][AllFolders] sub_folders", { baseFolder, count: names.length });
+          return Array.from(new Set(names)).sort();
         }
-      });
+      } catch (e) {
+        console.warn("[Cloudinary][AllFolders] sub_folders failed, falling back to resources", {
+          baseFolder,
+          error: (e as Error).message,
+        });
+      }
 
-      return Array.from(folders).sort();
+      // 2) Fallback: derive folders from resources prefix (works when public_id includes folder path)
+      try {
+        const response = await cloudinary.api.resources({
+          type: "upload",
+          prefix: baseFolder,
+          max_results: 1000,
+        });
+        const folders = new Set<string>();
+        (response.resources as CloudinaryResource[]).forEach((item: CloudinaryResource) => {
+          const folderPath = item.public_id.split("/").slice(0, -1).join("/");
+          if (folderPath.startsWith(baseFolder)) {
+            const folderName = folderPath.replace(`${baseFolder}/`, "");
+            if (folderName && !folderName.includes("/")) {
+              folders.add(folderName);
+            }
+          }
+        });
+        return Array.from(folders).sort();
+      } catch (e) {
+        console.warn("[Cloudinary][AllFolders] resources fallback failed", {
+          baseFolder,
+          error: (e as Error).message,
+        });
+        return [];
+      }
     });
   } catch (error) {
     console.error("Error fetching folders from Cloudinary:", error);
@@ -187,20 +307,39 @@ export async function getImagesFromFolder(
     const cacheKey = `images_${folderPath}`;
 
     return await getCachedOrFetch(cacheKey, async () => {
-      const response = await cloudinary.api.resources({
-        type: "upload",
-        prefix: folderPath,
-        max_results: 100, // Reduced from 500 to improve performance
-        resource_type: "image",
-      });
+      // First try Admin API by prefix
+      let validResources: CloudinaryResource[] = [];
+      try {
+        const response = await cloudinary.api.resources({
+          type: "upload",
+          prefix: folderPath,
+          max_results: 100,
+          resource_type: "image",
+        });
+        validResources = (response.resources as CloudinaryResource[]).filter(
+          (resource) =>
+            resource.public_id.startsWith(`${folderPath}/`) &&
+            (resource.format === "jpg" || resource.format === "png" || resource.format === "jpeg" || resource.format === "webp") &&
+            !resource.public_id.replace(`${folderPath}/`, "").includes("/")
+        );
+      } catch { }
 
-      // Strict filtering for direct folder contents
-      const validResources = (response.resources as CloudinaryResource[]).filter(
-        (resource) =>
-          resource.public_id.startsWith(`${folderPath}/`) &&
-          (resource.format === "jpg" || resource.format === "png" || resource.format === "jpeg" || resource.format === "webp") &&
-          !resource.public_id.replace(`${folderPath}/`, "").includes("/")
-      );
+      // If none, fall back to Search API by asset_folder
+      if (validResources.length === 0) {
+        try {
+          const search = await (cloudinary as any).search
+            .expression(`asset_folder="${folderPath}" AND resource_type:image`)
+            .sort_by("created_at", "desc")
+            .max_results(100)
+            .execute();
+          validResources = (search.resources as CloudinaryResource[]) || [];
+        } catch (se) {
+          console.warn("[Cloudinary][Search] getImagesFromFolder failed", {
+            folderPath,
+            error: (se as Error).message,
+          });
+        }
+      }
 
       return validResources.map((resource) => ({
         public_id: resource.public_id,
