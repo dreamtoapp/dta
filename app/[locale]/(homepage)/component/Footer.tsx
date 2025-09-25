@@ -75,7 +75,7 @@ const Footer: React.FC = async () => {
     {
       title: "Instagram",
       icon: contactUs.instgram.icon,
-      link: "https://instagram.com/dreamtoapp",
+      link: "https://www.instagram.com/dreamto.app?igsh=eDIwb3M4NTN5eW5p",
       ariaLabel: "Follow us on Instagram"
     },
     {
@@ -90,12 +90,12 @@ const Footer: React.FC = async () => {
       link: "https://twitter.com/dreamtoapp",
       ariaLabel: "Follow us on X (Twitter)"
     },
-    {
-      title: "LinkedIn",
-      icon: technology.linkedin.icon,
-      link: "https://linkedin.com/company/dreamtoapp",
-      ariaLabel: "Follow us on LinkedIn"
-    },
+    // {
+    //   title: "LinkedIn",
+    //   icon: technology.linkedin.icon,
+    //   link: "https://linkedin.com/company/dreamtoapp",
+    //   ariaLabel: "Follow us on LinkedIn"
+    // },
   ];
 
   const quickLinks = [

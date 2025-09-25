@@ -11,7 +11,7 @@ import Link from "@/components/link";
 import Navbar from '@/components/naviqation/navbar';
 import Footer from './(homepage)/component/Footer';
 import FloatingConsultationCTA from '@/components/ui/FloatingConsultationCTA';
-import PWAStatus from '@/components/PWAStatus';
+// import PWAStatus from '@/components/PWAStatus';
 
 type Locale = typeof locales[number];
 
@@ -57,9 +57,7 @@ export default async function LocaleLayout({
         <Suspense fallback={<div className="h-20 bg-muted animate-pulse">Loading navbar...</div>}>
           <Navbar locale={locale} />
         </Suspense>
-        <Suspense fallback={<div className="h-4 bg-muted animate-pulse">Loading...</div>}>
-          <PWAStatus />
-        </Suspense>
+        {/* PWAStatus removed per request */}
         <main className="flex-1 layout-stable prevent-layout-shift">
           <Suspense fallback={<div className="min-h-screen bg-muted animate-pulse">Loading...</div>}>
             {children}
