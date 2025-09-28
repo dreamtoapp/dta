@@ -594,6 +594,8 @@
     "digitalMarketingDescription": "We position your brand at the forefront of competition through integrated marketing strategies. We use the latest methods such as paid advertising and search engine optimization to ensure your brand reaches the right audience and achieves tangible results.",
     "visualIdentityTitle": "Visual Identity",
     "visualIdentityDescription": "We create a unique visual identity that reflects your brand's personality and makes it memorable to your audience. From choosing colors and logos to designing promotional materials, we ensure that your identity is unique and strong, enhancing your distinctiveness.",
+    "influencerMarketingTitle": "Influencer Marketing",
+    "influencerMarketingDescription": "Connect with verified influencers to amplify your brand reach and engagement. Our curated network of influencers helps you reach your target audience through authentic content and strategic partnerships.",
     "getQuote": "High discounts, don't hesitate...",
     "responsiveDesign": "Responsive Design",
     "fastLoading": "Fast Loading",
@@ -623,6 +625,10 @@
     "brandGuidelines": "Brand Guidelines",
     "marketingMaterials": "Marketing Materials",
     "brandStrategy": "Brand Strategy",
+    "verifiedInfluencerNetwork": "Verified Influencer Network",
+    "detailedAnalytics": "Detailed Analytics & Insights",
+    "campaignManagement": "Campaign Management Tools",
+    "directBooking": "Direct Booking System",
     "professionalServices": "Our Professional Services",
     "keyFeatures": "Key Features:",
     "learnMoreAbout": "Learn More About {service}",
@@ -633,7 +639,6 @@
     "ctaGetQuote": "Get Your Quote Now",
     "ctaViewPortfolio": "View Our Portfolio",
     "ctaGetQuoteNow": "Get Your Quote Now",
-
     "rating": "4.9/5 Rating",
     "whyChooseUs": "Why Choose Us",
     "innovateFutureSolutions": "We Innovate Future Solutions",
@@ -650,7 +655,6 @@
     "ctaScheduleConsultation": "Schedule Free Consultation",
     "ctaStartYourDream": "Start Your Dream",
     "ctaContactUs": "Let's Talk! 💬",
-
     "clientSatisfaction": "Client Satisfaction",
     "supportAvailable": "Support Available",
     "yearsExperience": "Years Experience",
@@ -670,6 +674,50 @@
     "testimonial3Role": "Founder",
     "testimonial3Company": "Innovation Hub",
     "testimonial3Content": "The UI/UX design work by DreamToApp revolutionized our user experience. Their visual identity design perfectly captured our brand essence. The team's creativity and technical expertise are unmatched in the region."
+  },
+  "influencers": {
+    "pageTitle": "Influencer Network",
+    "pageDescription": "Browse our curated network of verified influencers",
+    "searchPlaceholder": "Search influencers...",
+    "filterByCategory": "Filter by Category",
+    "filterByPlatform": "Filter by Platform",
+    "filterByFollowers": "Follower Count",
+    "sortBy": "Sort by",
+    "viewProfile": "View Profile",
+    "contactInfluencer": "Contact Influencer",
+    "followers": "Followers",
+    "engagement": "Engagement Rate",
+    "startingRate": "Starting Rate",
+    "verified": "Verified",
+    "featured": "Featured",
+    "platforms": {
+      "INSTAGRAM": "Instagram",
+      "TIKTOK": "TikTok",
+      "YOUTUBE": "YouTube",
+      "SNAPCHAT": "Snapchat",
+      "FACEBOOK": "Facebook",
+      "TWITTER": "Twitter",
+      "LINKEDIN": "LinkedIn",
+      "WHATSAPP": "WhatsApp",
+      "TELEGRAM": "Telegram"
+    },
+    "categories": {
+      "LIFESTYLE": "Lifestyle",
+      "TECH": "Technology",
+      "FASHION": "Fashion",
+      "FOOD": "Food",
+      "TRAVEL": "Travel",
+      "FITNESS": "Fitness",
+      "BEAUTY": "Beauty",
+      "GAMING": "Gaming",
+      "EDUCATION": "Education",
+      "BUSINESS": "Business",
+      "ENTERTAINMENT": "Entertainment",
+      "SPORTS": "Sports",
+      "AUTOMOTIVE": "Automotive",
+      "REAL_ESTATE": "Real Estate",
+      "HEALTH": "Health"
+    }
   },
   "whyChooseUs": {
     "sectionTitle": "Why Choose Us?",
@@ -926,6 +974,48 @@
     "installationCancelled": "Installation was cancelled",
     "installationFailed": "Installation failed. Please try again."
   },
+  "homepage": {
+    "title": "DreamToApp - Transform Your Ideas into Digital Reality",
+    "description": "Professional IT solutions, web development, mobile apps, and digital transformation services. From concept to deployment, we bring your ideas to life.",
+    "freeServicesTitle": "Free Services",
+    "freeServicesDescription": "New project consultation, technical and business evaluation, and competitor analysis.",
+    "professionalApproachTitle": "Professional Approach",
+    "professionalApproachDescription": "Actionable recommendations with clear priorities for quick implementation.",
+    "compatibleWithBusinessTitle": "Compatible with your business",
+    "compatibleWithBusinessDescription": "Tailor solutions to fit your company size and target market.",
+    "detailedPlanCta": "Get a detailed business plan for free - do not hesitate to inquire about any technical project",
+    "sections": {
+      "cromboDetails": "Crombo Details",
+      "hero": "Hero Section"
+    },
+    "organization": {
+      "name": "DreamToApp IT Solutions"
+    },
+    "breadcrumb": {
+      "home": "Home"
+    },
+    "logo": {
+      "alt": "DreamToApp Logo"
+    },
+    "tagline": "Transform Your Ideas into Digital Reality",
+    "cta": {
+      "primary": "Get Started",
+      "secondary": "Learn More"
+    },
+    "slogon": "From Concept to Deployment",
+    "contact": "Contact Us",
+    "call": "Call",
+    "services": "Our Services",
+    "whyChooseUs": "Why Choose Us",
+    "fromIdeaTitle": "From Idea to Reality",
+    "fromIdeaContent": "Transform your innovative ideas into powerful digital solutions with our comprehensive development services.",
+    "discoverTitle": "Discover & Design",
+    "discoverContent": "Explore new possibilities and design exceptional user experiences that drive business growth.",
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "ourTeam": "Our Team",
+    "joinOurTeam": "Join Our Team"
+  },
   "consultationCTA": {
     "cta": "Free Consultation",
     "title": "Request a Free Consultation",
@@ -942,6 +1032,19 @@
     "voiceLabel": "Voice Message (optional)",
     "record": "Record",
     "stop": "Stop",
+    "serviceNewProjects": "New Project Consultation",
+    "serviceCurrentProjects": "Current Project Evaluation",
+    "serviceDigitalMarketing": "Digital Marketing Strategy",
+    "serviceCompetitorAnalysis": "Competitor Analysis",
+    "validationName": "Name must be at least 2 characters",
+    "validationEmail": "Invalid email address",
+    "validationPhone": "Phone number must be at least 10 digits",
+    "validationService": "Please select a service",
+    "validationMessage": "Message must be at least 10 characters",
+    "service": "Service",
+    "selectService": "Select a service",
+    "privacy": "We maintain confidentiality and do not share information without your consent.",
+    "responseTime": "You will receive a response within 48 business hours with a brief plan.",
     "fileTypeError": "Invalid audio file type.",
     "recordError": "Unable to access microphone. Please check your browser settings."
   },

@@ -33,6 +33,7 @@ import {
   Phone,
   Mail,
   MapPin,
+  Megaphone,
 } from "lucide-react"
 import Image from "next/image"
 import React from "react"
@@ -764,6 +765,16 @@ export default async function ServicesPage() {
       textColor: "text-primary",
       bgColor: "bg-primary/10",
       gradient: "bg-gradient-to-br from-primary/20 to-primary/5"
+    },
+    {
+      icon: Megaphone,
+      title: t("influencerMarketingTitle"),
+      description: t("influencerMarketingDescription"),
+      features: [t("verifiedInfluencerNetwork"), t("detailedAnalytics"), t("campaignManagement"), t("directBooking")],
+      color: "bg-purple-600",
+      textColor: "text-purple-600",
+      bgColor: "bg-purple-600/10",
+      gradient: "bg-gradient-to-br from-purple-600/20 to-purple-600/5"
     },
   ]
 

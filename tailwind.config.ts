@@ -93,6 +93,13 @@ export default {
         "gradient-brand-warm": "linear-gradient(135deg, #d7a50d 0%, #e6c25a 100%)", // Warm golden
         "gradient-brand-cool": "linear-gradient(135deg, #0d3ad7 0%, #0a2eb3 100%)", // Cool dark blue
 
+        // Radial gradients for creative effects
+        "gradient-radial": "radial-gradient(circle at center, var(--tw-gradient-stops))",
+        "gradient-radial-at-t": "radial-gradient(circle at top, var(--tw-gradient-stops))",
+        "gradient-radial-at-b": "radial-gradient(circle at bottom, var(--tw-gradient-stops))",
+        "gradient-radial-at-l": "radial-gradient(circle at left, var(--tw-gradient-stops))",
+        "gradient-radial-at-r": "radial-gradient(circle at right, var(--tw-gradient-stops))",
+
         // Legacy Gradients (keeping for compatibility)
         "gradient-custom": "linear-gradient(to bottom, #0f172a, #1f2937, #374151, rgba(55, 65, 81, 0))",
         "gradient-sunset": "linear-gradient(to bottom, #ff7e5f, #feb47b)",

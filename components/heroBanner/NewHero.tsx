@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import HeroContent from './HeroContent';
 import WaveBackground from './WaveBackground';
-import HeroStyles from './HeroStyles';
+// import HeroStyles from './HeroStyles';
 
 interface HeroProps {
   className?: string;
@@ -47,7 +47,7 @@ const HeroSection: React.FC<HeroProps> = ({
 
   return (
     <div className={`w-full min-h-screen bg-gradient-to-br from-blue-950 via-amber-900 to-cyan-900 dom-optimized ${className}`}>
-      <HeroStyles />
+      {/* <HeroStyles /> */}
 
       <div className="e-card card-optimized">
         <div className="image"></div>

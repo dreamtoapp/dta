@@ -9,8 +9,10 @@ import { getMessages } from 'next-intl/server';
 import { Directions } from '@/constant/enums';
 import Link from "@/components/link";
 import Navbar from '@/components/naviqation/navbar';
+import MobileBottomNav from '@/components/naviqation/MobileBottomNav';
 import Footer from './(homepage)/component/Footer';
 import FloatingConsultationCTA from '@/components/ui/FloatingConsultationCTA';
+import DreamToAppCSS from '@/components/heroBanner/DreamToAppCSS';
 // import PWAStatus from '@/components/PWAStatus';
 
 type Locale = typeof locales[number];
@@ -58,14 +60,17 @@ export default async function LocaleLayout({
           <Navbar locale={locale} />
         </Suspense>
         {/* PWAStatus removed per request */}
-        <main className="flex-1 layout-stable prevent-layout-shift">
-          <Suspense fallback={<div className="min-h-screen bg-muted animate-pulse">Loading...</div>}>
+        <main className="flex-1 layout-stable prevent-layout-shift pb-20 md:pb-0">
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/10"><div className="text-center space-y-4"><DreamToAppCSS size={96} animated /><p className="text-sm text-muted-foreground">جارٍ التحميل...</p></div></div>}>
             {children}
           </Suspense>
         </main>
         <Footer />
-        <Suspense fallback={<div className="h-16 bg-muted animate-pulse">Loading...</div>}>
+        {/* <Suspense fallback={<div className="h-16 bg-muted animate-pulse">Loading...</div>}>
           <FloatingConsultationCTA />
+        </Suspense> */}
+        <Suspense fallback={null}>
+          <MobileBottomNav locale={locale} />
         </Suspense>
       </div>
     </NextIntlClientProvider>

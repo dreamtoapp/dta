@@ -5,7 +5,58 @@ import Services from './component/Services';
 import FromIdea from './component/FromIdea';
 import WhyChooseUs from './component/WhyChooseUs';
 import DesinAndDiscover from './component/DesinAndDiscover';
-import HeroSection from '@/components/heroBanner/NewHero';
+import ImageHero from '@/components/heroBanner/ImageHero';
+import HomepageHeroSlider from '@/components/slider/HomepageHeroSlider';
+import ConsultationForm from '@/components/forms/ConsultationForm';
+
+type HeroSlide = {
+  id: string;
+  imageUrl: string;
+  ctaText: string;
+  ctaLink: string;
+  header?: string;
+  subheader?: string;
+  discountPercentage?: number;
+  isActive: boolean;
+};
+
+async function fetchCloudinaryClientSlides(): Promise<HeroSlide[]> {
+  try {
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const apiKey = process.env.CLOUDINARY_API_KEY;
+    const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+    if (!cloudName || !apiKey || !apiSecret) return [];
+
+    const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/search`;
+    const folder = process.env.CLOUDINARY_CLIENTS_FOLDER || 'website/clients';
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${auth}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        expression: `folder="${folder}" AND resource_type:image`,
+        max_results: 12,
+      }),
+      cache: 'no-store',
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    const items = (data.resources || []) as any[];
+    return items.map((r, idx) => ({
+      id: r.public_id as string,
+      imageUrl: r.secure_url as string,
+      ctaText: 'استكشف الآن',
+      ctaLink: '/clients',
+      isActive: true,
+    }));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -56,6 +107,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations('homepage');
+  const cloudinarySlides = await fetchCloudinaryClientSlides();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-[#99e4ff]/5 dom-optimized">
@@ -127,7 +179,28 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       >
         <div className="absolute inset-0 bg-gradient-to-br from-[#d7a50d]/10 via-transparent to-[#0d3ad7]/10" />
         <div className="relative z-10 w-full">
-          <HeroSection />
+          <ImageHero publicIdOrUrl="https://res.cloudinary.com/dhjy2k0fu/image/upload/f_auto,q_auto,w_1600,c_fill,g_auto/v1758786887/cover_wvhiz7.png" alt={t('sections.hero')} />
+          {/* <div className="mt-8">
+            <HeroSection />
+          </div> */}
+        </div>
+      </section>
+
+      {/* Homepage Hero Slider - directly after hero */}
+      <section className="py-10 px-4 sm:px-6 lg:px-8 bg-background/0">
+        <div className="max-w-7xl mx-auto">
+          <HomepageHeroSlider slides={cloudinarySlides} />
+        </div>
+      </section>
+
+      {/* Free Consultation Form */}
+      <section
+        id="consultation"
+        data-consultation
+        className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background to-[#d7a50d]/5"
+      >
+        <div className="w-full">
+          <ConsultationForm />
         </div>
       </section>
 

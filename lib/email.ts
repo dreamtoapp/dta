@@ -1,8 +1,15 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-// TEMPORARILY DISABLED: Email sending is disabled due to missing API key
-// To re-enable: Set RESEND_API_KEY environment variable and uncomment the email sending code
-const resend = null; // process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+// Email configuration using nodemailer with Gmail SMTP
+const createTransporter = () => {
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+};
 
 export interface EmailTemplate {
   to: string;
@@ -12,46 +19,31 @@ export interface EmailTemplate {
 }
 
 export async function sendEmail(template: EmailTemplate): Promise<boolean> {
-  // TEMPORARILY DISABLED: Email sending is disabled due to missing RESEND_API_KEY
-  // To re-enable email sending:
-  // 1. Set RESEND_API_KEY environment variable
-  // 2. Uncomment the resend initialization above
-  // 3. Replace this function with the original implementation below
-
-  console.log('📧 Email sending temporarily disabled');
-  console.log('📬 Would send email to:', template.to);
-  console.log('📋 Subject:', template.subject);
-  console.log('📝 Content preview:', template.html.substring(0, 100) + '...');
-
-  return true; // Return true to not break the application flow
-
-  // ORIGINAL IMPLEMENTATION (commented out for easy restoration):
-  /*
   try {
-    if (!resend) {
-      console.log('Email service not configured, skipping email send');
-      return true; // Return true to not break the flow
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.log('📧 Email sending disabled: EMAIL_USER or EMAIL_PASS not configured');
+      console.log('📬 Would send email to:', template.to);
+      console.log('📋 Subject:', template.subject);
+      console.log('📝 Content preview:', template.html.substring(0, 100) + '...');
+      return true; // Return true to not break the application flow
     }
 
-    const { data, error } = await resend.emails.send({
-      from: template.from || 'DreamToApp <noreply@dreamtoapp.com>',
+    const transporter = createTransporter();
+
+    const mailOptions = {
+      from: template.from || process.env.EMAIL_USER,
       to: template.to,
       subject: template.subject,
       html: template.html,
-    });
+    };
 
-    if (error) {
-      console.error('Email sending failed:', error);
-      return false;
-    }
-
-    console.log('Email sent successfully:', data);
+    await transporter.sendMail(mailOptions);
+    console.log('📧 Email sent successfully to:', template.to);
     return true;
   } catch (error) {
-    console.error('Email sending error:', error);
+    console.error('📧 Email sending error:', error);
     return false;
   }
-  */
 }
 
 // Email templates for job applications

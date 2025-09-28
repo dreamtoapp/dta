@@ -2,21 +2,22 @@
 
 ## Overview
 
-The job application feature now includes comprehensive email notifications using Resend. This system sends emails to both applicants and administrators at key points in the application process.
+The job application feature now includes comprehensive email notifications using Nodemailer with Gmail SMTP. This system sends emails to both applicants and administrators at key points in the application process.
 
 ## 🔧 Setup Requirements
 
-### 1. Resend Account Setup
-1. Sign up at [resend.com](https://resend.com)
-2. Verify your domain or use the sandbox domain for testing
-3. Get your API key from the dashboard
+### 1. Gmail Account Setup
+1. Use your Gmail account for sending emails
+2. Enable 2-factor authentication on your Gmail account
+3. Generate an App Password for the application
 
 ### 2. Environment Variables
 Add these to your `.env.local` file:
 
 ```env
-# Resend Email Service
-RESEND_API_KEY=re_your_api_key_here
+# Nodemailer Email Service (Gmail SMTP)
+EMAIL_USER=your_gmail@gmail.com
+EMAIL_PASS=your_app_password
 
 # Admin Email (for notifications)
 ADMIN_EMAIL=admin@yourdomain.com
@@ -67,7 +68,8 @@ SUBMITTED → UNDER_REVIEW → INTERVIEW_SCHEDULED → INTERVIEWED → OFFER_EXT
 - `app/[locale]/apply-job/actions/updateApplicationStatus.ts` - Added status update emails
 
 ### Dependencies Added:
-- `resend` - Modern email API for Node.js
+- `nodemailer` - Email sending library for Node.js
+- `@types/nodemailer` - TypeScript types for nodemailer
 
 ## 🧪 Testing
 
@@ -88,56 +90,55 @@ console.log('Email sent:', success);
 ```
 
 ### Environment Testing:
-1. Set up test domain in Resend
+1. Set up Gmail App Password
 2. Use test email addresses
 3. Check email delivery and formatting
 4. Test both English and Arabic templates
 
 ## 🚀 Production Deployment
 
-### 1. Domain Verification
-- Verify your domain in Resend dashboard
-- Update DNS records as required
+### 1. Gmail Configuration
+- Use production Gmail account
+- Ensure App Password is properly configured
 - Test email delivery
 
 ### 2. Environment Setup
-- Set production `RESEND_API_KEY`
+- Set production `EMAIL_USER` and `EMAIL_PASS`
 - Configure production `ADMIN_EMAIL`
 - Test all email flows
 
 ### 3. Monitoring
 - Monitor email delivery rates
 - Check for failed emails
-- Review email analytics in Resend dashboard
+- Review Gmail sending limits
 
 ## 📊 Email Analytics
 
-Resend provides analytics for:
+Gmail provides basic analytics for:
 - Delivery rates
-- Open rates
-- Click rates
 - Bounce rates
 - Spam reports
 
 ## 🔒 Security Considerations
 
-- API keys are stored in environment variables
+- Email credentials are stored in environment variables
 - Emails are sent server-side only
 - No sensitive data in email content
-- Rate limiting handled by Resend
+- Gmail handles rate limiting and security
 
 ## 🆘 Troubleshooting
 
 ### Common Issues:
-1. **Email not sending**: Check API key and domain verification
+1. **Email not sending**: Check Gmail credentials and App Password
 2. **Template not rendering**: Verify HTML syntax and CSS
 3. **RTL issues**: Check Arabic template direction
-4. **Delivery failures**: Check spam filters and domain reputation
+4. **Delivery failures**: Check spam filters and Gmail limits
 
 ### Debug Commands:
 ```bash
 # Check environment variables
-echo $RESEND_API_KEY
+echo $EMAIL_USER
+echo $EMAIL_PASS
 
 # Test email sending
 npm run test:email
@@ -149,7 +150,7 @@ tail -f logs/email.log
 ## 📞 Support
 
 For email-related issues:
-1. Check Resend documentation
+1. Check Gmail App Password setup
 2. Review application logs
 3. Test with different email clients
 4. Contact support if needed

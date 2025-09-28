@@ -11,6 +11,8 @@ export async function getDashboardStats() {
       activeJobApplications,
       totalVisitors,
       recentSubmissions,
+      totalProjects,
+      totalConsultations,
       jobApplications,
       contacts,
       visitors,
@@ -37,6 +39,12 @@ export async function getDashboardStats() {
           }
         }
       }),
+
+      // Total Projects
+      db.projectRequest.count(),
+
+      // Total Consultations
+      db.consultationRequest.count(),
 
       // Recent Job Applications
       db.jobApplication.findMany({
@@ -76,7 +84,9 @@ export async function getDashboardStats() {
         totalJobApplications,
         activeJobApplications,
         totalVisitors,
-        recentSubmissions
+        recentSubmissions,
+        totalProjects,
+        totalConsultations
       },
       jobApplications,
       contacts,
