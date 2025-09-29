@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
   experimental: {
     // Disable React compiler to prevent conflicts
     reactCompiler: false,
-    
+
     // Optimize package imports for smaller bundles
     optimizePackageImports: [
       "@radix-ui/react-icons",

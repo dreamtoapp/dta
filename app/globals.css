@@ -235,6 +235,15 @@
     will-change: auto;
   }
   
+  /* Enhanced dark mode visibility for service icons */
+  .dark .service-icon-enhance {
+    filter: brightness(1.6) saturate(1.8) contrast(1.3) drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+  }
+  
+  .dark .service-icon-enhance path {
+    fill: #60a5fa !important;
+  }
+  
   /* Prevent cumulative layout shift */
   .prevent-layout-shift {
     contain: layout;

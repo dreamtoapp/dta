@@ -295,4 +295,261 @@ export function createAdminNotificationEmail(
       </html>
     `
   };
+}
+
+// ============================================================================
+// INFLUENCER EMAIL TEMPLATES
+// ============================================================================
+
+export function createInfluencerContactNotificationEmail(
+  influencerEmail: string,
+  influencerName: string,
+  clientName: string,
+  clientEmail: string,
+  clientCompany: string,
+  message: string,
+  budget: string,
+  campaignType: string,
+  timeline: string,
+  locale: string = 'en'
+): EmailTemplate {
+  const isArabic = locale === 'ar';
+
+  return {
+    to: influencerEmail,
+    subject: isArabic
+      ? `طلب تعاون جديد من ${clientName}`
+      : `New Collaboration Request from ${clientName}`,
+    html: `
+      <!DOCTYPE html>
+      <html dir="${isArabic ? 'rtl' : 'ltr'}" lang="${locale}">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${isArabic ? 'طلب تعاون جديد' : 'New Collaboration Request'}</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #d7a50d, #0d3ad7); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+          .highlight { background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #d7a50d; }
+          .message-box { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #dee2e6; }
+          .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+          .btn { display: inline-block; background: #d7a50d; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>${isArabic ? 'DreamToApp' : 'DreamToApp'}</h1>
+            <p>${isArabic ? 'طلب تعاون جديد' : 'New Collaboration Request'}</p>
+          </div>
+          <div class="content">
+            <h2>${isArabic ? `مرحباً ${influencerName}` : `Hello ${influencerName}`}</h2>
+            <p>${isArabic
+        ? 'لديك طلب تعاون جديد من عميل محتمل.'
+        : 'You have a new collaboration request from a potential client.'
+      }</p>
+            
+            <div class="highlight">
+              <strong>${isArabic ? 'اسم العميل:' : 'Client Name:'}</strong> ${clientName}<br>
+              <strong>${isArabic ? 'البريد الإلكتروني:' : 'Email:'}</strong> ${clientEmail}<br>
+              ${clientCompany ? `<strong>${isArabic ? 'الشركة:' : 'Company:'}</strong> ${clientCompany}<br>` : ''}
+              ${budget ? `<strong>${isArabic ? 'الميزانية:' : 'Budget:'}</strong> ${budget}<br>` : ''}
+              ${campaignType ? `<strong>${isArabic ? 'نوع الحملة:' : 'Campaign Type:'}</strong> ${campaignType}<br>` : ''}
+              ${timeline ? `<strong>${isArabic ? 'الجدول الزمني:' : 'Timeline:'}</strong> ${timeline}<br>` : ''}
+              <strong>${isArabic ? 'تاريخ الطلب:' : 'Request Date:'}</strong> ${new Date().toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}
+            </div>
+            
+            <div class="message-box">
+              <h3>${isArabic ? 'رسالة العميل:' : 'Client Message:'}</h3>
+              <p>${message}</p>
+            </div>
+            
+            <p>${isArabic
+        ? 'يرجى الرد على هذا الطلب في أقرب وقت ممكن لضمان أفضل تجربة للعميل.'
+        : 'Please respond to this request as soon as possible to ensure the best client experience.'
+      }</p>
+            
+            <div style="text-align: center;">
+              <a href="mailto:${clientEmail}" class="btn">
+                ${isArabic ? 'الرد على العميل' : 'Reply to Client'}
+              </a>
+            </div>
+          </div>
+          <div class="footer">
+            <p>${isArabic
+        ? 'هذا البريد الإلكتروني تم إرساله تلقائياً. يرجى عدم الرد عليه.'
+        : 'This email was sent automatically. Please do not reply to this email.'
+      }</p>
+            <p>&copy; 2024 DreamToApp. ${isArabic ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `
+  };
+}
+
+export function createClientContactConfirmationEmail(
+  clientEmail: string,
+  clientName: string,
+  influencerName: string,
+  influencerUsername: string,
+  locale: string = 'en'
+): EmailTemplate {
+  const isArabic = locale === 'ar';
+
+  return {
+    to: clientEmail,
+    subject: isArabic
+      ? `تأكيد إرسال طلب التعاون إلى ${influencerName}`
+      : `Collaboration Request Sent to ${influencerName}`,
+    html: `
+      <!DOCTYPE html>
+      <html dir="${isArabic ? 'rtl' : 'ltr'}" lang="${locale}">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${isArabic ? 'تأكيد إرسال طلب التعاون' : 'Collaboration Request Confirmation'}</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #d7a50d, #0d3ad7); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+          .highlight { background: #d4edda; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #28a745; }
+          .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+          .btn { display: inline-block; background: #28a745; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>${isArabic ? 'DreamToApp' : 'DreamToApp'}</h1>
+            <p>${isArabic ? 'تأكيد إرسال طلب التعاون' : 'Collaboration Request Confirmation'}</p>
+          </div>
+          <div class="content">
+            <h2>${isArabic ? `مرحباً ${clientName}` : `Hello ${clientName}`}</h2>
+            <p>${isArabic
+        ? 'شكراً لك على إرسال طلب التعاون. لقد تم إرسال طلبك بنجاح إلى المؤثر المطلوب.'
+        : 'Thank you for submitting your collaboration request. Your request has been successfully sent to the requested influencer.'
+      }</p>
+            
+            <div class="highlight">
+              <strong>${isArabic ? 'اسم المؤثر:' : 'Influencer Name:'}</strong> ${influencerName}<br>
+              <strong>${isArabic ? 'اسم المستخدم:' : 'Username:'}</strong> @${influencerUsername}<br>
+              <strong>${isArabic ? 'تاريخ الإرسال:' : 'Sent Date:'}</strong> ${new Date().toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}
+            </div>
+            
+            <p>${isArabic
+        ? 'سيتم إشعار المؤثر بطلبك وسيقوم بالرد عليك في أقرب وقت ممكن. عادةً ما يستغرق الرد من 24-48 ساعة.'
+        : 'The influencer will be notified of your request and will respond to you as soon as possible. Typically, responses take 24-48 hours.'
+      }</p>
+            
+            <p>${isArabic
+        ? 'إذا لم تتلق رداً خلال 48 ساعة، يمكنك التواصل معنا للمتابعة.'
+        : 'If you don\'t receive a response within 48 hours, you can contact us for follow-up.'
+      }</p>
+            
+            <div style="text-align: center;">
+              <a href="https://dreamtoapp.com/${locale}/influencers" class="btn">
+                ${isArabic ? 'استكشف المزيد من المؤثرين' : 'Explore More Influencers'}
+              </a>
+            </div>
+          </div>
+          <div class="footer">
+            <p>${isArabic
+        ? 'هذا البريد الإلكتروني تم إرساله تلقائياً. يرجى عدم الرد عليه.'
+        : 'This email was sent automatically. Please do not reply to this email.'
+      }</p>
+            <p>&copy; 2024 DreamToApp. ${isArabic ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `
+  };
+}
+
+export function createAdminInfluencerNotificationEmail(
+  adminEmail: string,
+  influencerName: string,
+  influencerUsername: string,
+  clientName: string,
+  clientEmail: string,
+  clientCompany: string,
+  message: string,
+  budget: string,
+  campaignType: string,
+  locale: string = 'en'
+): EmailTemplate {
+  const isArabic = locale === 'ar';
+
+  return {
+    to: adminEmail,
+    subject: isArabic
+      ? `طلب تعاون جديد - ${influencerName}`
+      : `New Collaboration Request - ${influencerName}`,
+    html: `
+      <!DOCTYPE html>
+      <html dir="${isArabic ? 'rtl' : 'ltr'}" lang="${locale}">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${isArabic ? 'طلب تعاون جديد' : 'New Collaboration Request'}</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #d7a50d, #0d3ad7); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+          .highlight { background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #0d3ad7; }
+          .message-box { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #dee2e6; }
+          .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+          .btn { display: inline-block; background: #0d3ad7; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>${isArabic ? 'DreamToApp' : 'DreamToApp'}</h1>
+            <p>${isArabic ? 'طلب تعاون جديد' : 'New Collaboration Request'}</p>
+          </div>
+          <div class="content">
+            <h2>${isArabic ? 'طلب تعاون جديد تم استلامه' : 'New Collaboration Request Received'}</h2>
+            
+            <div class="highlight">
+              <strong>${isArabic ? 'اسم المؤثر:' : 'Influencer Name:'}</strong> ${influencerName}<br>
+              <strong>${isArabic ? 'اسم المستخدم:' : 'Username:'}</strong> @${influencerUsername}<br>
+              <strong>${isArabic ? 'اسم العميل:' : 'Client Name:'}</strong> ${clientName}<br>
+              <strong>${isArabic ? 'البريد الإلكتروني:' : 'Email:'}</strong> ${clientEmail}<br>
+              ${clientCompany ? `<strong>${isArabic ? 'الشركة:' : 'Company:'}</strong> ${clientCompany}<br>` : ''}
+              ${budget ? `<strong>${isArabic ? 'الميزانية:' : 'Budget:'}</strong> ${budget}<br>` : ''}
+              ${campaignType ? `<strong>${isArabic ? 'نوع الحملة:' : 'Campaign Type:'}</strong> ${campaignType}<br>` : ''}
+              <strong>${isArabic ? 'تاريخ الطلب:' : 'Request Date:'}</strong> ${new Date().toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}
+            </div>
+            
+            <div class="message-box">
+              <h3>${isArabic ? 'رسالة العميل:' : 'Client Message:'}</h3>
+              <p>${message}</p>
+            </div>
+            
+            <p>${isArabic
+        ? 'يرجى متابعة هذا الطلب والتأكد من أن المؤثر يرد على العميل في الوقت المناسب.'
+        : 'Please follow up on this request and ensure the influencer responds to the client in a timely manner.'
+      }</p>
+            
+            <div style="text-align: center;">
+              <a href="https://dreamtoapp.com/${locale}/dashboard/influencers" class="btn">
+                ${isArabic ? 'عرض لوحة التحكم' : 'View Dashboard'}
+              </a>
+            </div>
+          </div>
+          <div class="footer">
+            <p>&copy; 2024 DreamToApp. ${isArabic ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `
+  };
 } 

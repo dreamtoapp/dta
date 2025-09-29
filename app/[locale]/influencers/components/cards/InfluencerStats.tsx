@@ -23,23 +23,14 @@ const InfluencerStats: React.FC<InfluencerStatsProps> = ({
   className = ''
 }) => {
   return (
-    <div className={`grid grid-cols-2 gap-4 mb-4 ${className}`}>
+    <div className={`mb-4 ${className}`}>
       <div className="text-center p-3 bg-muted/30 rounded-lg">
         <div className="flex items-center justify-center gap-1 mb-1">
           <IconComponent name="users" className="w-4 h-4 text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">Total</span>
+          <span className="text-sm text-muted-foreground">Total Followers</span>
         </div>
         <div className="font-bold text-lg">
           {formatNumber(influencer.totalFollowers)}
-        </div>
-      </div>
-      <div className="text-center p-3 bg-muted/30 rounded-lg">
-        <div className="flex items-center justify-center gap-1 mb-1">
-          <IconComponent name="trending-up" className="w-4 h-4 text-green-500" />
-          <span className="text-sm text-muted-foreground">Engagement</span>
-        </div>
-        <div className="font-bold text-lg text-green-600">
-          {influencer.avgEngagement}%
         </div>
       </div>
     </div>

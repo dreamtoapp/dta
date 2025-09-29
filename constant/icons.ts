@@ -1,6 +1,7 @@
 import { FaJs, FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaShopify, FaBuffer, FaWhatsapp, FaTiktok, FaSnapchatGhost, FaYoutube, FaInstagram, FaTwitter, FaLinkedin, FaStackOverflow, FaUserSecret, FaCode, FaFacebook } from 'react-icons/fa';
 import { SiNextdotjs, SiMongodb, SiFirebase, SiMysql, SiSqlite, SiTypescript, SiAdobe, SiFigma, SiSentry, SiTwilio, SiAdobephotoshop, SiAdobeillustrator, SiPrisma, SiVuedotjs } from 'react-icons/si';
-import { Rocket, Users, Paintbrush, Globe, Smartphone, Award, Shield, Smile, Mail, Phone, FileText, Home as LucideHome, CalendarClock, Youtube as LucideYoutube, Instagram as LucideInstagram, Twitter as LucideTwitter, ShoppingCart, Megaphone, Palette, Briefcase, Tag, Link, Terminal } from 'lucide-react';
+import { Rocket, Users, Paintbrush, Globe, Smartphone, Award, Shield, Smile, Mail, Phone, FileText, Home as LucideHome, CalendarClock, Youtube as LucideYoutube, Instagram as LucideInstagram, Twitter as LucideTwitter, ShoppingCart, Megaphone, Palette, Briefcase, Tag, Link, Terminal, Star, Heart, TrendingUp, FolderOpen, Image, Monitor, Grid, Layout, Hash, Square } from 'lucide-react';
+import ServiceIcon from '@/components/naviqation/ServiceIcon';
 
 // If a logo is missing in react-icons, fallback to a similar or generic icon.
 
@@ -68,6 +69,14 @@ export const misc = {
   phoneIcon: Phone,
   formIcon: FileText,
   home: LucideHome,
+  influencer: Megaphone, // Influencer - megaphone for broadcasting messages
+  influencerAlt: Star, // Alternative influencer icon - stars/followers
+  influencerCommunity: Users, // Alternative influencer icon - people/community
+  portfolio: Hash, // Ultra-modern portfolio - hash/grid pattern (Currently Used)
+  portfolioAlt: Grid, // Modern portfolio - grid layout display
+  portfolioLayout: Layout, // Portfolio alternative - layout design
+  portfolioMonitor: Monitor, // Modern portfolio - digital showcase
+  portfolioSingle: Square, // Minimal portfolio - single item
 };
 
 // export const whyChooseUs = {
@@ -81,6 +90,7 @@ export const misc = {
 
 
 export const serviceIcon = {
+  serviceMenu: { name: "Service Menu", icon: ServiceIcon }, // SVG-based service menu icon
   website: { name: "Website", icon: Globe },
   mobileApp: { name: "Mobile App", icon: Smartphone },
   crm: { name: "CRM", icon: Users },

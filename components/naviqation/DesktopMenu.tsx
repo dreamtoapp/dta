@@ -14,11 +14,11 @@ const DesktopMenu: React.FC<{ locale: string }> = ({ locale }) => {
 
   // Memoize menuItems to prevent recreation on every render
   const menuItems = useMemo(() => [
-    { href: '/', label: t('home'), icon: misc.home, color: '#d7a50d', rippleColor: '#d7a50d', bgColor: '#d7a50d' }, // Gold
-    { href: '/services', label: t('services'), icon: serviceIcon.website.icon, color: '#0d3ad7', rippleColor: '#0d3ad7', bgColor: '#0d3ad7' }, // Blue
-    { href: '/influencers', label: 'Influencers', icon: serviceIcon.website.icon, color: '#8B5CF6', rippleColor: '#8B5CF6', bgColor: '#8B5CF6' }, // Purple
-    { href: '/worksample', label: t('portfolio'), icon: technology.workSample.icon, color: '#99e4ff', rippleColor: '#99e4ff', bgColor: '#99e4ff' }, // Light Blue
-    { href: '/contactus', label: t('contact'), icon: misc.emailIcon, color: '#d7a50d', rippleColor: '#d7a50d', bgColor: '#d7a50d' }, // Gold (reusing for contact)
+    { href: '/', label: t('home'), icon: misc.home, color: '#d7a50d', colorDark: '#f59e0b', rippleColor: '#d7a50d', bgColor: '#d7a50d' }, // Gold
+    { href: '/services', label: t('services'), icon: serviceIcon.serviceMenu.icon, color: '#0d3ad7', colorDark: '#ffffff', rippleColor: '#0d3ad7', bgColor: '#0d3ad7' }, // Blue
+    { href: '/influencers', label: 'Influencers', icon: misc.influencer, color: '#8B5CF6', colorDark: '#a78bfa', rippleColor: '#8B5CF6', bgColor: '#8B5CF6' }, // Purple
+    { href: '/worksample', label: t('portfolio'), icon: misc.portfolio, color: '#99e4ff', colorDark: '#06b6d4', rippleColor: '#99e4ff', bgColor: '#99e4ff' }, // Light Blue
+    { href: '/contactus', label: t('contact'), icon: misc.emailIcon, color: '#d7a50d', colorDark: '#f59e0b', rippleColor: '#d7a50d', bgColor: '#d7a50d' }, // Gold (reusing for contact)
   ], [t]);
 
   // Initialize ripple states only once when menuItems change
@@ -79,7 +79,7 @@ const DesktopMenu: React.FC<{ locale: string }> = ({ locale }) => {
 
   // Use consistent rendering structure to prevent hydration mismatch
   return (
-    <nav className="hidden md:flex items-center gap-4 layout-stable prevent-layout-shift" style={{ minHeight: '3rem', contain: 'layout' }}>
+    <nav className="hidden md:flex items-center gap-2 lg:gap-4 layout-stable prevent-layout-shift" style={{ minHeight: '3rem', contain: 'layout' }}>
       {menuItems.map((item) => {
         const IconComponent = item.icon;
         const isActive = isMounted ? activeItem === item.href : false;
@@ -89,12 +89,12 @@ const DesktopMenu: React.FC<{ locale: string }> = ({ locale }) => {
           <Link
             key={item.href}
             href={item.href}
-            className="relative flex items-center gap-3 group p-2 rounded-lg transition-all duration-300 hover:bg-muted/20 layout-stable"
+            className="relative flex items-center gap-2 lg:gap-3 group p-1.5 lg:p-2 rounded-lg transition-all duration-300 hover:bg-muted/20 layout-stable"
             onClick={isMounted ? () => handleItemClick(item.href) : undefined}
             style={{ minHeight: '3rem', contain: 'layout' }}
           >
             {/* Menu Item Button */}
-            <div className="relative flex h-[50px] w-[50px] items-center justify-center">
+            <div className="relative flex h-[45px] w-[45px] lg:h-[50px] lg:w-[50px] items-center justify-center">
               <div
                 className={`absolute h-full w-full rounded-full p-4 light-mode-depth duration-300 group-hover:scale-110 group-hover:ring-2 light-mode-depth-hover ${isActive ? 'ring-2 scale-110' : ''
                   }`}
@@ -108,22 +108,26 @@ const DesktopMenu: React.FC<{ locale: string }> = ({ locale }) => {
               {/* Ripple Effect */}
               <div
                 className={`absolute -z-10 h-full w-full rounded-full transition-all duration-300 ease-out pointer-events-none ${rippleState.isActive
-                  ? 'scale-[6] opacity-40'
+                  ? 'scale-[3] opacity-20'
                   : 'scale-0 opacity-0'
                   }`}
-                style={{ backgroundColor: `${item.rippleColor}90` }}
+                style={{ backgroundColor: `${item.rippleColor}60` }}
               />
 
-              <div style={{ color: item.color }}>
+              <div
+                className={`relative z-10 dark:filter dark:brightness-140 dark:contrast-110 ${item.href === '/services' ? 'dark:brightness-[1.8] dark:saturate-[1.8]' : ''}`}
+                style={{ color: item.color }}
+              >
                 <IconComponent
-                  className="w-6 h-6 transition-colors duration-300 relative z-10"
+                  className="w-5 h-5 lg:w-6 lg:h-6 transition-colors duration-300"
+                  color={item.href === '/services' ? '#0d3ad7' : item.color}
                 />
               </div>
             </div>
 
             {/* Title/Label - Directly beside icon */}
             <span
-              className={`text-sm font-medium transition-all duration-300 whitespace-nowrap ${isActive ? 'opacity-100' : 'text-muted-foreground opacity-70 group-hover:opacity-100'
+              className={`text-xs lg:text-sm font-medium transition-all duration-300 whitespace-nowrap ${isActive ? 'opacity-100' : 'text-muted-foreground opacity-70 group-hover:opacity-100'
                 }`}
               style={{ color: isActive ? item.color : undefined }}
             >

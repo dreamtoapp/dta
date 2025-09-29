@@ -26,9 +26,9 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
   // Memoize menuItems to prevent recreation on every render
   const menuItems = useMemo(() => [
     { href: '/', label: t('home'), icon: misc.home, color: '#d7a50d', rippleColor: '#d7a50d', bgColor: '#d7a50d' },
-    { href: '/services', label: t('services'), icon: serviceIcon.website.icon, color: '#0d3ad7', rippleColor: '#0d3ad7', bgColor: '#0d3ad7' },
-    { href: '/influencers', label: 'Influencers', icon: serviceIcon.website.icon, color: '#8B5CF6', rippleColor: '#8B5CF6', bgColor: '#8B5CF6' },
-    { href: '/worksample', label: t('portfolio'), icon: technology.workSample.icon, color: '#99e4ff', rippleColor: '#99e4ff', bgColor: '#99e4ff' },
+    { href: '/services', label: t('services'), icon: serviceIcon.serviceMenu.icon, color: '#0d3ad7', rippleColor: '#0d3ad7', bgColor: '#0d3ad7' },
+    { href: '/influencers', label: 'Influencers', icon: misc.influencer, color: '#8B5CF6', rippleColor: '#8B5CF6', bgColor: '#8B5CF6' },
+    { href: '/worksample', label: t('portfolio'), icon: misc.portfolio, color: '#99e4ff', rippleColor: '#99e4ff', bgColor: '#99e4ff' },
     { href: '/contactus', label: t('contact'), icon: misc.emailIcon, color: '#d7a50d', rippleColor: '#d7a50d', bgColor: '#d7a50d' },
   ], [t]);
 
@@ -241,7 +241,7 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
                     }}
                   >
                     {/* Icon Container */}
-                    <div className="relative flex items-center justify-center w-10 h-10 mr-8 rounded-lg transition-all duration-300 group-hover:scale-110"
+                    <div className="relative flex items-center justify-center w-10 h-10 mr-8 rounded-lg transition-all duration-300 group-hover:scale-110 dark:filter dark:brightness-140 dark:contrast-110"
                       style={{ backgroundColor: `${item.bgColor}15` }}>
                       <IconComponent
                         className="w-5 h-5 transition-colors duration-300"

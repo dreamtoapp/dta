@@ -50,7 +50,7 @@ type FolderWithCoverImage = {
   folderName: string; // The name of the folder
   coverImage: CloudinaryResource | null; // The special "cover" image for this folder or nothing (null) if there isn't one
   itemCount: number; // How many images are in the folder
-  items: CloudinaryResource[]; // The list of images in this folder
+  items: CloudinaryResource[]; // The list of images in the folder
 };
 
 // Helper function to get cached data or fetch from API
@@ -419,6 +419,117 @@ export async function uploadJobAttachment(fileBuffer: Buffer, filename: string, 
           reject(new Error("File upload failed"));
         } else if (result && result.secure_url) {
           console.log("✅ Job attachment uploaded successfully:", result.secure_url);
+          resolve(result.secure_url);
+        } else {
+          reject(new Error("No result from Cloudinary upload"));
+        }
+      }
+    );
+    stream.end(fileBuffer);
+  });
+}
+
+// Uploads an influencer avatar image to Cloudinary and returns the secure URL
+export async function uploadInfluencerAvatar(fileBuffer: Buffer, filename: string, influencerName: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    // Create a sanitized filename with timestamp
+    const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    const sanitizedName = influencerName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    const fileExtension = filename.split('.').pop();
+    const publicId = `influencers/avatars/${sanitizedName}_${timestamp}.${fileExtension}`;
+
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        resource_type: "image",
+        folder: "dreamToApp/influencers/avatars",
+        public_id: publicId,
+        overwrite: false, // Don't overwrite existing files
+        tags: ["influencer", "avatar", sanitizedName],
+        transformation: [
+          { width: 400, height: 400, crop: "fill", gravity: "face" },
+          { quality: "auto", fetch_format: "auto" }
+        ]
+      },
+      (error, result) => {
+        if (error) {
+          console.error("Cloudinary influencer avatar upload error:", error);
+          reject(new Error("Avatar upload failed"));
+        } else if (result && result.secure_url) {
+          console.log("✅ Influencer avatar uploaded successfully:", result.secure_url);
+          resolve(result.secure_url);
+        } else {
+          reject(new Error("No result from Cloudinary upload"));
+        }
+      }
+    );
+    stream.end(fileBuffer);
+  });
+}
+
+// Uploads an influencer cover image to Cloudinary and returns the secure URL
+export async function uploadInfluencerCoverImage(fileBuffer: Buffer, filename: string, influencerName: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    // Create a sanitized filename with timestamp
+    const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    const sanitizedName = influencerName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    const fileExtension = filename.split('.').pop();
+    const publicId = `influencers/covers/${sanitizedName}_${timestamp}.${fileExtension}`;
+
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        resource_type: "image",
+        folder: "dreamToApp/influencers/covers",
+        public_id: publicId,
+        overwrite: false, // Don't overwrite existing files
+        tags: ["influencer", "cover", sanitizedName],
+        transformation: [
+          { width: 1200, height: 600, crop: "fill" },
+          { quality: "auto", fetch_format: "auto" }
+        ]
+      },
+      (error, result) => {
+        if (error) {
+          console.error("Cloudinary influencer cover upload error:", error);
+          reject(new Error("Cover image upload failed"));
+        } else if (result && result.secure_url) {
+          console.log("✅ Influencer cover image uploaded successfully:", result.secure_url);
+          resolve(result.secure_url);
+        } else {
+          reject(new Error("No result from Cloudinary upload"));
+        }
+      }
+    );
+    stream.end(fileBuffer);
+  });
+}
+
+// Uploads a team member image to Cloudinary and returns the secure URL
+export async function uploadTeamMemberImage(fileBuffer: Buffer, filename: string, teamMemberName: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    // Create a sanitized filename with timestamp
+    const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    const sanitizedName = teamMemberName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    const fileExtension = filename.split('.').pop();
+    const publicId = `team-members/${sanitizedName}_${timestamp}.${fileExtension}`;
+
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        resource_type: "image",
+        folder: "dreamToApp/team-members",
+        public_id: publicId,
+        overwrite: false, // Don't overwrite existing files
+        tags: ["team-member", "employee", sanitizedName],
+        transformation: [
+          { width: 400, height: 400, crop: "fill", gravity: "face" },
+          { quality: "auto", fetch_format: "auto" }
+        ]
+      },
+      (error, result) => {
+        if (error) {
+          console.error("Cloudinary team member image upload error:", error);
+          reject(new Error("Team member image upload failed"));
+        } else if (result && result.secure_url) {
+          console.log("✅ Team member image uploaded successfully:", result.secure_url);
           resolve(result.secure_url);
         } else {
           reject(new Error("No result from Cloudinary upload"));

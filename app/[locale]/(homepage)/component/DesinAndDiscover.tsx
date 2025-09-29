@@ -17,14 +17,12 @@ export const DesinAndDiscover = async () => {
     <Card className="flex flex-col justify-between border border-[#0d3ad7]/30 rounded-xl shadow-lg overflow-hidden hover:border-[#0d3ad7]/50 hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-[#0d3ad7]/5 to-[#99e4ff]/5">
       {/* Header Section with Image */}
       <CardHeader className="relative p-0">
-        <div className="relative h-40 sm:h-48 lg:h-64 w-full">
+        <div className="relative h-48 sm:h-56 lg:h-72 w-full">
           <Image
-            src="/assets/homepage/images/img7.avif"
+            src="https://res.cloudinary.com/dhjy2k0fu/image/upload/f_auto,q_auto,w_auto,dpr_auto/v1759092841/freepik__assistant__12597_draipi.png"
             fill
             alt="Discover Canon Project - DreamToApp"
             priority
-            placeholder="blur"
-            blurDataURL="data:image/avif;base64,AAAAHGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZgAAANZtZXRhAAAAAAAAACFoZGxyAAAAAAAAAABwaWN0AAAAAAAAAAAAAAAAAAAAAA5waXRtAAAAAAABAAAAImlsb2MAAAAAREAAAQABAAAAAAD6AAEAAAAAAAAASgAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAAVmlwcnAAAAA4aXBjbwAAAAxhdjFDgSACAAAAABRpc3BlAAAAAAAAAAoAAAAGAAAAEHBpeGkAAAAAAwgICAAAABZpcG1hAAAAAAAAAAEAAQOBAgMAAABSbWRhdBIACgg4DKawgIaDSDI8GAAAAED+axfA8Qx3RtZwLFBQEGxt2Xg/qLd6wiwZ7X1gT2W/W8PoWu/h1ekq3ffDy1mgqEJUSNwxWZmw"
             className="object-cover rounded-t-xl transition-transform duration-300 hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />

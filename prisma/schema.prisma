@@ -163,3 +163,197 @@ enum ApplicationStatus {
   REJECTED
   WITHDRAWN
 }
+
+// ============================================================================
+// INFLUENCER SCHEMA
+// ============================================================================
+
+enum SocialPlatformType {
+  INSTAGRAM
+  TIKTOK
+  YOUTUBE
+  SNAPCHAT
+  FACEBOOK
+  TWITTER
+  LINKEDIN
+  WHATSAPP
+  TELEGRAM
+}
+
+enum InfluencerCategory {
+  LIFESTYLE
+  FASHION
+  BEAUTY
+  TECH
+  GAMING
+  FOOD
+  TRAVEL
+  FITNESS
+  BUSINESS
+  EDUCATION
+  ENTERTAINMENT
+  SPORTS
+  ART
+  MUSIC
+  PHOTOGRAPHY
+}
+
+enum InfluencerStatus {
+  ACTIVE
+  INACTIVE
+  PENDING_VERIFICATION
+  SUSPENDED
+}
+
+model Influencer {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  referenceId String   @unique // INF-001, INF-002, etc.
+  name        String
+  username    String   @unique
+  email       String   @unique
+  phone       String?
+  bio         String
+  avatar      String?  // Profile image URL
+  coverImage  String?  // Cover image URL
+  testimonialImage String? // Testimonial image URL
+  
+  // Social Media Stats
+  socialPlatforms SocialPlatform[]
+  
+  // Business Info
+  category    InfluencerCategory
+  location    String
+  languages   String[] // ["Arabic", "English"]
+  influencerRate Int     // Influencer rate in USD
+  agencyRate  Int       // Agency rate in USD
+  totalFollowers Int    // Calculated from all platforms
+  
+  // Portfolio
+  portfolio   PortfolioItem[]
+  
+  // Reviews & Testimonials
+  reviews     Review[]
+  
+  // Contact Requests
+  contactRequests ContactRequest[]
+  
+  // Status
+  status      InfluencerStatus @default(PENDING_VERIFICATION)
+  isActive    Boolean  @default(true)
+  isVerified  Boolean  @default(false)
+  isFeatured  Boolean  @default(false)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("influencers")
+}
+
+model SocialPlatform {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  platform     SocialPlatformType
+  username     String
+  followers    Int
+  lastUpdated  DateTime @default(now())
+  isVerified   Boolean @default(false)
+  isActive     Boolean @default(true)
+  
+  // Platform-specific fields
+  platformData Json? // Store platform-specific metrics
+  
+  influencerId String @db.ObjectId
+  influencer   Influencer @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+  
+  @@unique([influencerId, platform])
+  @@map("social_platforms")
+}
+
+model PortfolioItem {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  image        String
+  platform     SocialPlatformType
+  views        Int?
+  likes        Int?
+  date         DateTime
+  
+  influencerId String @db.ObjectId
+  influencer   Influencer @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+  
+  @@map("portfolio_items")
+}
+
+model Review {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  clientName   String
+  clientTitle  String
+  clientCompany String?
+  rating       Int     // 1-5 stars
+  comment      String
+  campaignType String?
+  campaignName String?
+  isVerified   Boolean @default(false)
+  
+  influencerId String @db.ObjectId
+  influencer   Influencer @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("reviews")
+}
+
+model ContactRequest {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String
+  phone        String?
+  company      String?
+  message      String
+  budget       String?
+  campaignType String?
+  timeline     String?
+  status       ContactRequestStatus @default(PENDING)
+  
+  influencerId String @db.ObjectId
+  influencer   Influencer @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("contact_requests")
+}
+
+enum ContactRequestStatus {
+  PENDING
+  RESPONDED
+  COMPLETED
+  CANCELLED
+}
+
+// ============================================================================
+// TEAM MEMBER SCHEMA
+// ============================================================================
+
+enum TeamMemberRole {
+  DEVELOPER
+  DESIGNER
+  MARKETING
+  MANAGER
+}
+
+model TeamMember {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  role        TeamMemberRole
+  employeeImage String?  // Employee image URL
+  experience  String?  // Experience description
+  isActive    Boolean  @default(true)
+  displayOrder Int     @default(0) // For ordering on frontend
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("team_members")
+}

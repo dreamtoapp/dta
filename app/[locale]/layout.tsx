@@ -1,40 +1,64 @@
-import Image from "next/image";
 import { isRTL } from "@/i18n/routing";
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import { Suspense } from 'react';
 import { locales } from '@/i18n/routing';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Directions } from '@/constant/enums';
-import Link from "@/components/link";
+import { getDefaultMetadata } from '@/app/seo/metadata';
 import Navbar from '@/components/naviqation/navbar';
 import MobileBottomNav from '@/components/naviqation/MobileBottomNav';
 import Footer from './(homepage)/component/Footer';
-import FloatingConsultationCTA from '@/components/ui/FloatingConsultationCTA';
-import DreamToAppCSS from '@/components/heroBanner/DreamToAppCSS';
-// import PWAStatus from '@/components/PWAStatus';
 
 type Locale = typeof locales[number];
 
-// Generate metadata for SEO
+// Optimized SEO metadata configuration
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: {
-      template: '%s | DreamToApp',
-      default: 'DreamTo - Your Dream Platform',
+    ...getDefaultMetadata(locale),
+    applicationName: 'DreamToApp',
+    appleWebApp: {
+      title: 'DreamToApp',
+      statusBarStyle: 'default',
+      capable: true,
     },
-    description: 'DreamTo - Your platform for dreams and aspirations',
-    metadataBase: new URL('https://dreamto.app'),
-    alternates: {
-      languages: {
-        'en': '/en',
-        'ar': '/ar',
-      },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+    },
+    icons: {
+      icon: [
+        { url: '/favicon.ico', type: 'image/x-icon' },
+        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+        { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      ],
+      shortcut: [{ url: '/favicon.ico', type: 'image/x-icon' }],
+      apple: [
+        { url: '/apple-icon-180x180.png', sizes: '180x180', type: 'image/png' },
+        { url: '/apple-icon-152x152.png', sizes: '152x152', type: 'image/png' },
+        { url: '/apple-icon-144x144.png', sizes: '144x144', type: 'image/png' },
+      ],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
     },
   };
 }
+
+// Viewport configuration for Next.js 15
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#0d3ad7',
+  colorScheme: 'light dark',
+};
 
 export default async function LocaleLayout({
   children,
@@ -53,25 +77,54 @@ export default async function LocaleLayout({
   // Get messages for the current locale
   const messages = await getMessages();
 
+  // JSON-LD Schema for SEO optimization
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: locale === 'ar' ? 'دريم تو آب' : 'DreamToApp',
+    description: locale === 'ar'
+      ? 'شركة تطوير مواقع وتطبيقات في جدة، المملكة العربية السعودية'
+      : 'Leading web & mobile development agency in Jeddah, Saudi Arabia',
+    url: 'https://www.dreamto.app',
+    logo: 'https://www.dreamto.app/og-image.png',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Jeddah',
+      addressRegion: 'Makkah',
+      addressCountry: 'SA'
+    },
+    sameAs: [
+      'https://twitter.com/dreamtoapp',
+      'https://instagram.com/dreamtoapp'
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Service',
+      areaServed: ['SA', 'AE']
+    }
+  };
+
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <div className="flex flex-col min-h-screen layout-stable" dir={isRTL(locale) ? 'rtl' : 'ltr'}>
-        <Suspense fallback={<div className="h-20 bg-muted animate-pulse">Loading navbar...</div>}>
-          <Navbar locale={locale} />
-        </Suspense>
-        {/* PWAStatus removed per request */}
+        {/* JSON-LD Schema for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* Optimized navbar - removed unnecessary Suspense for navbar */}
+        <Navbar locale={locale} />
+
+        {/* Main content - optimized for Next.js 15 streaming */}
         <main className="flex-1 layout-stable prevent-layout-shift pb-20 md:pb-0">
-          <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/10"><div className="text-center space-y-4"><DreamToAppCSS size={96} animated /><p className="text-sm text-muted-foreground">جارٍ التحميل...</p></div></div>}>
-            {children}
-          </Suspense>
+          {children}
         </main>
+
         <Footer />
-        {/* <Suspense fallback={<div className="h-16 bg-muted animate-pulse">Loading...</div>}>
-          <FloatingConsultationCTA />
-        </Suspense> */}
-        <Suspense fallback={null}>
-          <MobileBottomNav locale={locale} />
-        </Suspense>
+
+        {/* Mobile bottom nav - synchronous client component */}
+        <MobileBottomNav locale={locale} />
       </div>
     </NextIntlClientProvider>
   );

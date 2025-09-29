@@ -37,6 +37,8 @@ const InfluencerCard: React.FC<InfluencerCardProps> = ({
 
           <PlatformStats
             platforms={influencer.socialPlatforms}
+            showTotal={false}
+            showEngagement={false}
             className="mb-4"
           />
 

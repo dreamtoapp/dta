@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
 import CromboDetail from './component/CromboDetail';
 import Services from './component/Services';
@@ -8,6 +9,8 @@ import DesinAndDiscover from './component/DesinAndDiscover';
 import ImageHero from '@/components/heroBanner/ImageHero';
 import HomepageHeroSlider from '@/components/slider/HomepageHeroSlider';
 import ConsultationForm from '@/components/forms/ConsultationForm';
+import { PageSkeletonLoader } from '@/components/ui/SkeletonLoader';
+import { getLocale } from 'next-intl/server';
 
 type HeroSlide = {
   id: string;
@@ -104,10 +107,24 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+// Async data-fetching component for streaming
+async function HeroSliderWrapper() {
+  const cloudinarySlides = await fetchCloudinaryClientSlides();
+  return <HomepageHeroSlider slides={cloudinarySlides} />;
+}
+
+// Async translation component  
+async function ServicesWrapper() {
+  return <Services />;
+}
+
+async function CromboWrapper() {
+  return <CromboDetail />;
+}
+
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations('homepage');
-  const cloudinarySlides = await fetchCloudinaryClientSlides();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-[#99e4ff]/5 dom-optimized">
@@ -173,6 +190,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       />
 
       {/* Hero Section - Full Viewport Height */}
+
       <section
         aria-label={t('sections.hero')}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
@@ -186,10 +204,18 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      {/* Homepage Hero Slider - directly after hero */}
+      {/* Homepage Hero Slider - streaming with proper Suspense */}
       <section className="py-10 px-4 sm:px-6 lg:px-8 bg-background/0">
         <div className="max-w-7xl mx-auto">
-          <HomepageHeroSlider slides={cloudinarySlides} />
+          <Suspense fallback={
+            <div className="h-96 bg-muted/20 rounded-lg animate-pulse flex items-center justify-center">
+              <div className="text-muted-foreground">
+                {locale === 'ar' ? 'جارٍ تحميل المعرض...' : 'Loading gallery...'}
+              </div>
+            </div>
+          }>
+            <HeroSliderWrapper />
+          </Suspense>
         </div>
       </section>
 
@@ -204,23 +230,33 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      {/* Crombo Section - Prominent Placement */}
+      {/* Crombo Section - streaming with Suspense */}
       <section
         aria-label={t('sections.cromboDetails')}
         className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#d7a50d]/10 to-[#0d3ad7]/10"
       >
         <div className="max-w-6xl mx-auto">
-          <CromboDetail />
+          <Suspense fallback={
+            <div className="animate-pulse space-y-4">
+              <div className="h-8 bg-muted/20 rounded w-3/4" />
+              <div className="h-4 bg-muted/20 rounded w-full" />
+              <div className="h-4 bg-muted/20 rounded w-5/6" />
+            </div>
+          }>
+            <CromboWrapper />
+          </Suspense>
         </div>
       </section>
 
-      {/* Services Section - Core Offering */}
+      {/* Services Section - streaming with Suspense */}
       <section
         aria-label={t('services')}
         className="py-20 px-4 sm:px-6 lg:px-8 bg-background"
       >
         <div className="max-w-7xl mx-auto">
-          <Services />
+          <Suspense fallback={<PageSkeletonLoader locale={locale} />}>
+            <ServicesWrapper />
+          </Suspense>
         </div>
       </section>
 

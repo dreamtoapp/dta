@@ -21,7 +21,7 @@ const Navbar: React.FC<{ locale: string }> = ({ locale }) => {
       <div className="container mx-auto px-4 h-20">
         <div className="flex items-center justify-between h-full">
           {/* Left Section - Brand */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
             <NavbarBrand locale={locale} />
             <CTAButton locale={locale} />
           </div>
@@ -30,7 +30,7 @@ const Navbar: React.FC<{ locale: string }> = ({ locale }) => {
           <DesktopMenu locale={locale} />
 
           {/* Right Section - Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             <NavbarActions locale={locale} />
             <MobileMenu locale={locale} />
           </div>

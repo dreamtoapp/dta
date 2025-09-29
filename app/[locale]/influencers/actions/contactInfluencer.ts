@@ -3,7 +3,10 @@
 // ============================================================================
 
 import { z } from 'zod'
+import { PrismaClient } from '@prisma/client'
 import type { Influencer } from '../helpers/types'
+
+const prisma = new PrismaClient()
 
 // Validation schema for contact form
 const ContactInfluencerSchema = z.object({
@@ -34,21 +37,91 @@ export async function contactInfluencer(input: ContactInfluencerInput): Promise<
     // Validate input
     const validatedInput = ContactInfluencerSchema.parse(input)
 
-    // TODO: In production, this would:
-    // 1. Save to database
-    // 2. Send email notification to influencer
-    // 3. Send confirmation email to client
-    // 4. Create follow-up task
+    // Check if influencer exists
+    const influencer = await prisma.influencer.findUnique({
+      where: { id: validatedInput.influencerId },
+      select: { id: true, name: true, email: true, username: true }
+    })
 
-    console.log('Contact request received:', validatedInput)
+    if (!influencer) {
+      return {
+        success: false,
+        message: 'Influencer not found'
+      }
+    }
 
-    // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    // Save contact request to database
+    const contactRequest = await prisma.contactRequest.create({
+      data: {
+        name: validatedInput.name,
+        email: validatedInput.email,
+        phone: validatedInput.phone,
+        company: validatedInput.company,
+        message: validatedInput.message,
+        budget: validatedInput.budget,
+        campaignType: validatedInput.campaignType,
+        timeline: validatedInput.timeline,
+        status: 'PENDING',
+        influencerId: validatedInput.influencerId
+      }
+    })
+
+    // Send email notifications
+    try {
+      const { sendEmail, createInfluencerContactNotificationEmail, createClientContactConfirmationEmail, createAdminInfluencerNotificationEmail } = await import('@/lib/email')
+
+      // Send notification to influencer
+      const influencerEmail = createInfluencerContactNotificationEmail(
+        influencer.email,
+        influencer.name,
+        validatedInput.name,
+        validatedInput.email,
+        validatedInput.company || '',
+        validatedInput.message,
+        validatedInput.budget || '',
+        validatedInput.campaignType || '',
+        validatedInput.timeline || '',
+        'en' // TODO: Get locale from request
+      )
+      await sendEmail(influencerEmail)
+
+      // Send confirmation to client
+      const clientEmail = createClientContactConfirmationEmail(
+        validatedInput.email,
+        validatedInput.name,
+        influencer.name,
+        influencer.username,
+        'en' // TODO: Get locale from request
+      )
+      await sendEmail(clientEmail)
+
+      // Send notification to admin
+      const adminEmail = createAdminInfluencerNotificationEmail(
+        process.env.ADMIN_EMAIL || 'admin@dreamtoapp.com',
+        influencer.name,
+        influencer.username,
+        validatedInput.name,
+        validatedInput.email,
+        validatedInput.company || '',
+        validatedInput.message,
+        validatedInput.budget || '',
+        validatedInput.campaignType || '',
+        'en' // TODO: Get locale from request
+      )
+      await sendEmail(adminEmail)
+
+      console.log('Email notifications sent successfully')
+    } catch (emailError) {
+      console.error('Error sending email notifications:', emailError)
+      // Don't fail the request if email fails
+    }
+
+    console.log('Contact request saved:', contactRequest.id)
 
     return {
       success: true,
       message: 'Your contact request has been sent successfully!',
-      requestId: `req_${Date.now()}`
+      requestId: contactRequest.id
     }
   } catch (error) {
     if (error instanceof z.ZodError) {

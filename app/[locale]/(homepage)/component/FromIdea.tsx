@@ -13,9 +13,9 @@ import {
 // Client Component for Image
 const ImageWithErrorHandling = () => {
   return (
-    <figure className="relative h-40 sm:h-48 lg:h-64 w-full image-container" style={{ aspectRatio: '16/9' }}>
+    <figure className="relative h-56 sm:h-64 lg:h-72 w-full image-container" style={{ aspectRatio: '16/9' }}>
       <Image
-        src="/assets/homepage/images/website.avif"
+        src="https://res.cloudinary.com/dhjy2k0fu/image/upload/f_auto,q_auto,w_auto,dpr_auto/v1759083375/freepik__assistant__4830_jgvuty.png"
         fill
         alt="Website project showcase image for DreamToApp"
         priority
