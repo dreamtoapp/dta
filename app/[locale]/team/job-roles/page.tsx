@@ -120,7 +120,7 @@ export default async function JobRolesPage() {
               {/* Back Button */}
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <Link
-                  href={`/${locale}/apply-job`}
+                  href={`/${locale}/team/apply`}
                   className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

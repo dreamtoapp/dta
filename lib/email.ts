@@ -552,4 +552,172 @@ export function createAdminInfluencerNotificationEmail(
       </html>
     `
   };
+}
+
+// ============================================================================
+// INFLUENCER REGISTRATION EMAILS
+// ============================================================================
+
+export function createInfluencerRegistrationEmail(
+  email: string,
+  name: string,
+  referenceId: string,
+  category: string,
+  locale: string = 'en'
+): EmailTemplate {
+  const isArabic = locale === 'ar'
+
+  return {
+    to: email,
+    subject: isArabic
+      ? `مرحباً بك في شبكة المؤثرين - ${referenceId}`
+      : `Welcome to Our Influencer Network - ${referenceId}`,
+    html: `
+      <!DOCTYPE html>
+      <html dir="${isArabic ? 'rtl' : 'ltr'}" lang="${locale}">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #a855f7, #ec4899); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+          .highlight { background: #f3e8ff; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #a855f7; }
+          .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>✨ DreamToApp</h1>
+            <p>${isArabic ? 'شبكة المؤثرين' : 'Influencer Network'}</p>
+          </div>
+          <div class="content">
+            <h2>${isArabic ? `مرحباً ${name}!` : `Hello ${name}!`}</h2>
+            <p>${isArabic
+        ? 'شكراً لتسجيلك في شبكة المؤثرين لدينا! نحن متحمسون للتعاون معك.'
+        : 'Thank you for registering in our influencer network! We are excited to collaborate with you.'
+      }</p>
+            
+            <div class="highlight">
+              <strong>${isArabic ? 'رقم المرجع:' : 'Reference ID:'}</strong> ${referenceId}<br>
+              <strong>${isArabic ? 'المجال:' : 'Category:'}</strong> ${category}<br>
+              <strong>${isArabic ? 'تاريخ التسجيل:' : 'Registration Date:'}</strong> ${new Date().toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}
+            </div>
+            
+            <h3>${isArabic ? 'الخطوات التالية:' : 'Next Steps:'}</h3>
+            <ol>
+              <li>${isArabic
+        ? 'سيقوم فريقنا بمراجعة ملفك الشخصي خلال 48 ساعة'
+        : 'Our team will review your profile within 48 hours'
+      }</li>
+              <li>${isArabic
+        ? 'سنتواصل معك للتحقق من حساباتك على وسائل التواصل'
+        : 'We will contact you to verify your social media accounts'
+      }</li>
+              <li>${isArabic
+        ? 'بعد الموافقة، ستحصل على فرص تعاون حصرية'
+        : 'After approval, you will receive exclusive collaboration opportunities'
+      }</li>
+            </ol>
+
+            <p>${isArabic
+        ? 'إذا كان لديك أي أسئلة، تواصل معنا على info@dreamto.app'
+        : 'If you have any questions, contact us at info@dreamto.app'
+      }</p>
+          </div>
+          <div class="footer">
+            <p>&copy; ${new Date().getFullYear()} DreamToApp. ${isArabic ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `
+  }
+}
+
+export function createAdminInfluencerRegistrationNotification(
+  adminEmail: string,
+  influencerName: string,
+  influencerEmail: string,
+  influencerPhone: string,
+  referenceId: string,
+  category: string,
+  location: string,
+  totalFollowers: number,
+  locale: string = 'en'
+): EmailTemplate {
+  const isArabic = locale === 'ar'
+
+  return {
+    to: adminEmail,
+    subject: isArabic
+      ? `🚨 مؤثر جديد - ${referenceId} - ${influencerName}`
+      : `🚨 New Influencer Registration - ${referenceId} - ${influencerName}`,
+    html: `
+      <!DOCTYPE html>
+      <html dir="${isArabic ? 'rtl' : 'ltr'}" lang="${locale}">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #a855f7, #ec4899); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+          .info-box { background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border: 1px solid #ddd; }
+          .info-row { padding: 10px 0; border-bottom: 1px solid #eee; }
+          .info-row:last-child { border-bottom: none; }
+          .label { font-weight: bold; color: #666; }
+          .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>🚨 ${isArabic ? 'مؤثر جديد' : 'New Influencer'}</h1>
+          </div>
+          <div class="content">
+            <h2>${isArabic ? 'تفاصيل المؤثر:' : 'Influencer Details:'}</h2>
+            
+            <div class="info-box">
+              <div class="info-row">
+                <span class="label">${isArabic ? 'رقم المرجع:' : 'Reference ID:'}</span> <strong>${referenceId}</strong>
+              </div>
+              <div class="info-row">
+                <span class="label">${isArabic ? 'الاسم:' : 'Name:'}</span> ${influencerName}
+              </div>
+              <div class="info-row">
+                <span class="label">${isArabic ? 'البريد الإلكتروني:' : 'Email:'}</span> ${influencerEmail}
+              </div>
+              <div class="info-row">
+                <span class="label">${isArabic ? 'الهاتف:' : 'Phone:'}</span> ${influencerPhone}
+              </div>
+              <div class="info-row">
+                <span class="label">${isArabic ? 'المجال:' : 'Category:'}</span> ${category}
+              </div>
+              <div class="info-row">
+                <span class="label">${isArabic ? 'الموقع:' : 'Location:'}</span> ${location}
+              </div>
+              <div class="info-row">
+                <span class="label">${isArabic ? 'إجمالي المتابعين:' : 'Total Followers:'}</span> <strong>${totalFollowers.toLocaleString()}</strong>
+              </div>
+            </div>
+
+            <p><strong>${isArabic ? 'الإجراء المطلوب:' : 'Action Required:'}</strong></p>
+            <ul>
+              <li>${isArabic ? 'مراجعة الملف الشخصي' : 'Review profile'}</li>
+              <li>${isArabic ? 'التحقق من حسابات التواصل الاجتماعي' : 'Verify social media accounts'}</li>
+              <li>${isArabic ? 'الموافقة أو الرفض في لوحة التحكم' : 'Approve or reject in dashboard'}</li>
+            </ul>
+          </div>
+          <div class="footer">
+            <p>${isArabic ? 'تاريخ التسجيل:' : 'Registration Date:'} ${new Date().toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US')}</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `
+  }
 } 

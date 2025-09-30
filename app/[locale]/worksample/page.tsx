@@ -1,7 +1,7 @@
 import React from 'react';
-import { getAllFolders } from '@/lib/cloudinary';
+import { getAllWorksampleFolders } from './actions/worksampleActions';
 import { AlertCircle } from 'lucide-react';
-import GalleryClient from '@/components/worksample/GalleryClient';
+import GalleryClient from './component/GalleryClient';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,7 +12,7 @@ export default async function Page() {
   let folders: string[] = [];
   let debugArray: any[] = [];
   try {
-    folders = await getAllFolders(baseFolder);
+    folders = await getAllWorksampleFolders(baseFolder);
     // Debug: call our all-images API and log simplified array { folder, url }
     try {
       const protocol = process.env.VERCEL ? 'https' : 'http';

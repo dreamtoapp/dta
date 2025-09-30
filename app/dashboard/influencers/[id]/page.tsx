@@ -31,7 +31,7 @@ import { PLATFORM_DISPLAY_NAMES, PLATFORM_OPTIONS, CATEGORIES, LOCATIONS } from 
 import IconComponent from "@/app/[locale]/influencers/components/icons/IconComponent";
 import { getInfluencerById } from "../actions/getInfluencerById";
 import { updateInfluencer } from "../actions/updateInfluencer";
-import AddImage from "@/components/ui/AddImage";
+import AddImage from "../../component/AddImage";
 import { uploadAvatarImage, uploadCoverImage } from "../actions/uploadImage";
 
 export default function InfluencerDetailPage() {

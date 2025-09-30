@@ -156,6 +156,22 @@
       "cromboDetails": "Crombo Details",
       "homepageBody": "Homepage Body"
     },
+    "hero": {
+      "tagline": "DREAM. DESIGN. DELIVER.",
+      "title": "DreamToApp – Shaping Your Digital Future",
+      "description": "A leading tech agency crafting web, mobile, and cloud solutions for your ambitions. Discover our services and start your journey to digital excellence.",
+      "ctaPrimary": "Start Your Dream",
+      "ctaSecondary": "Explore Our Services",
+      "slogan": "Where Dreams Begin"
+    },
+    "freeServicesTitle": "Free Services",
+    "freeServicesDescription": "New project consultation, technical and business evaluation, and competitor analysis.",
+    "professionalApproachTitle": "Professional Approach",
+    "professionalApproachDescription": "Actionable recommendations with clear priorities for quick implementation.",
+    "compatibleWithBusinessTitle": "Compatible with your business",
+    "compatibleWithBusinessDescription": "Tailor solutions to fit your company size and target market.",
+    "detailedPlanCta": "Get a detailed business plan for free - do not hesitate to inquire about any technical project",
+    "call": "Call",
     "logo": {
       "alt": "DreamToApp Logo"
     },
@@ -973,48 +989,6 @@
     "installing": "DreamToApp is being installed...",
     "installationCancelled": "Installation was cancelled",
     "installationFailed": "Installation failed. Please try again."
-  },
-  "homepage": {
-    "title": "DreamToApp - Transform Your Ideas into Digital Reality",
-    "description": "Professional IT solutions, web development, mobile apps, and digital transformation services. From concept to deployment, we bring your ideas to life.",
-    "freeServicesTitle": "Free Services",
-    "freeServicesDescription": "New project consultation, technical and business evaluation, and competitor analysis.",
-    "professionalApproachTitle": "Professional Approach",
-    "professionalApproachDescription": "Actionable recommendations with clear priorities for quick implementation.",
-    "compatibleWithBusinessTitle": "Compatible with your business",
-    "compatibleWithBusinessDescription": "Tailor solutions to fit your company size and target market.",
-    "detailedPlanCta": "Get a detailed business plan for free - do not hesitate to inquire about any technical project",
-    "sections": {
-      "cromboDetails": "Crombo Details",
-      "hero": "Hero Section"
-    },
-    "organization": {
-      "name": "DreamToApp IT Solutions"
-    },
-    "breadcrumb": {
-      "home": "Home"
-    },
-    "logo": {
-      "alt": "DreamToApp Logo"
-    },
-    "tagline": "Transform Your Ideas into Digital Reality",
-    "cta": {
-      "primary": "Get Started",
-      "secondary": "Learn More"
-    },
-    "slogon": "From Concept to Deployment",
-    "contact": "Contact Us",
-    "call": "Call",
-    "services": "Our Services",
-    "whyChooseUs": "Why Choose Us",
-    "fromIdeaTitle": "From Idea to Reality",
-    "fromIdeaContent": "Transform your innovative ideas into powerful digital solutions with our comprehensive development services.",
-    "discoverTitle": "Discover & Design",
-    "discoverContent": "Explore new possibilities and design exceptional user experiences that drive business growth.",
-    "home": "Home",
-    "portfolio": "Portfolio",
-    "ourTeam": "Our Team",
-    "joinOurTeam": "Join Our Team"
   },
   "consultationCTA": {
     "cta": "Free Consultation",

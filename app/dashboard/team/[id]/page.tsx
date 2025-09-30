@@ -15,7 +15,7 @@ import { updateTeamMember } from '../actions/updateTeamMember';
 import { uploadTeamMemberImageAction } from '../actions/uploadTeamMemberImage';
 import { toast } from "sonner";
 import { useRouter } from 'next/navigation';
-import AddImage from '@/components/ui/AddImage';
+import AddImage from '../../component/AddImage';
 
 const UpdateTeamMemberSchema = z.object({
   id: z.string(),

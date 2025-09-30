@@ -21,7 +21,7 @@ import { toast } from "sonner";
 import { CATEGORIES, LOCATIONS, PLATFORM_OPTIONS, PLATFORM_DISPLAY_NAMES, LANGUAGES } from "@/lib/enums/influencerEnums";
 import IconComponent from "@/app/[locale]/influencers/components/icons/IconComponent";
 import { createInfluencer } from '../actions/createInfluencer';
-import AddImage from "@/components/ui/AddImage";
+import AddImage from "../../component/AddImage";
 import { uploadAvatarImage, uploadCoverImage } from '../actions/uploadImage';
 
 // Zod schema matching server action

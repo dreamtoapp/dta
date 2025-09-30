@@ -13,7 +13,7 @@ import { createTeamMember } from '../actions/createTeamMember';
 import { uploadTeamMemberImageAction } from '../actions/uploadTeamMemberImage';
 import { toast } from "sonner";
 import { useRouter } from 'next/navigation';
-import AddImage from '@/components/ui/AddImage';
+import AddImage from '../../component/AddImage';
 
 const CreateTeamMemberSchema = z.object({
   name: z.string().min(1, 'Name is required'),

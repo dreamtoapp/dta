@@ -102,6 +102,7 @@ export default function InfluencersPage() {
   const filteredInfluencers = influencers.filter((influencer) => {
     const matchesSearch = influencer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       influencer.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      influencer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       influencer.category.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = categoryFilter === 'all' || influencer.category === categoryFilter;
     const matchesStatus = statusFilter === 'all' || influencer.status === statusFilter;
@@ -306,6 +307,7 @@ export default function InfluencersPage() {
                       )}
                     </h3>
                     <p className="text-sm text-muted-foreground">@{influencer.username}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{influencer.email}</p>
                   </div>
                 </div>
               </div>

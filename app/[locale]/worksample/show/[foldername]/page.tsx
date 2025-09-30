@@ -22,7 +22,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "@/components/link";
 import MotionDiv from "@/components/MotionDiv";
-import GalleryClient from "@/components/worksample/GalleryClient";
+import GalleryClient from "../../component/GalleryClient";
 
 // Dynamic folder validation
 type ValidFolder = string;
@@ -114,7 +114,14 @@ async function GalleryContent({ foldername }: { foldername: string }) {
       {/* Client gallery with infinite scroll & dropdown */}
       <GalleryClient
         baseFolder={baseFolder}
-        initialItems={images}
+        initialItems={images.map(img => ({
+          public_id: img.public_id,
+          secure_url: img.optimized_url,
+          width: 400,
+          height: 400,
+          folder: (img as any).folder,
+          context: { alt: img.public_id }
+        }))}
         folders={[]}
         currentFolderName={foldername}
       />

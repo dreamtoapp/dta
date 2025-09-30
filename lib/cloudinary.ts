@@ -781,7 +781,7 @@ export async function getImagesByPrefixPaginated(
     // 1) Prefer Search API for stable, inclusive prefix pagination across subfolders
     try {
       let builder = (cloudinary as any).search
-        .expression(`(folder:"${prefixPath}" OR asset_folder:"${prefixPath}/*") AND resource_type:image`)
+        .expression(`(folder:"${prefixPath}" OR folder:"${prefixPath}/*" OR asset_folder:"${prefixPath}" OR asset_folder:"${prefixPath}/*") AND resource_type:image`)
         .sort_by('created_at', 'desc')
         .max_results(Math.min(Math.max(max, 1), 500));
       if (cursor) builder = builder.next_cursor(cursor);
