@@ -290,10 +290,11 @@ export async function getAllFolders(baseFolder: string): Promise<string[]> {
 }
 
 // Define the type for the optimized image data you want to return
-interface OptimizedImage {
+export interface OptimizedImage {
   public_id: string;
   optimized_url: string;
   tags: string[];
+  folder?: string;
 }
 
 // Optimized function to get images from a folder with better performance
@@ -350,6 +351,7 @@ export async function getImagesFromFolder(
           fetch_format: "auto",
         }),
         tags: resource.tags || [],
+        folder: (resource as any).asset_folder || resource.public_id.split("/").slice(0, -1).join("/"),
       }));
     });
   } catch (error) {
@@ -538,4 +540,318 @@ export async function uploadTeamMemberImage(fileBuffer: Buffer, filename: string
     );
     stream.end(fileBuffer);
   });
+}
+
+export interface PaginatedResult<T> {
+  items: T[];
+  nextCursor: string | null;
+}
+
+// (Unified above) OptimizedImage
+
+/**
+ * Paginated images loader using Cloudinary Admin/Search APIs with next_cursor.
+ * Returns optimized URLs and pagination cursor.
+ */
+export async function getImagesFromFolderPaginated(
+  folderPath: string,
+  cursor?: string,
+  max: number = 24
+): Promise<PaginatedResult<OptimizedImage>> {
+  validateCloudinaryConfig();
+
+  // Try Admin API first (fastest for prefix-based queries)
+  try {
+    const adminRes: any = await cloudinary.api.resources({
+      type: "upload",
+      prefix: folderPath,
+      max_results: Math.min(Math.max(max, 1), 500),
+      resource_type: "image",
+      next_cursor: cursor,
+    });
+
+    const resources = (adminRes.resources as CloudinaryResource[]) || [];
+    const filtered = resources.filter(
+      (resource) =>
+        resource.public_id.startsWith(`${folderPath}/`) &&
+        (resource.format === "jpg" ||
+          resource.format === "png" ||
+          resource.format === "jpeg" ||
+          resource.format === "webp") &&
+        !resource.public_id.replace(`${folderPath}/`, "").includes("/")
+    );
+
+    const items: OptimizedImage[] = filtered.map((r) => ({
+      public_id: r.public_id,
+      optimized_url: cloudinary.url(r.public_id, {
+        width: 400,
+        crop: "fill",
+        quality: "auto",
+        fetch_format: "auto",
+      }),
+      tags: r.tags || [],
+      folder: (r as any).asset_folder || r.public_id.split('/').slice(0, -1).join('/'),
+    }));
+
+    return { items, nextCursor: adminRes.next_cursor || null };
+  } catch (e) {
+    // Fallback: Search API with asset_folder expression supports next_cursor
+    try {
+      const search: any = await (cloudinary as any).search
+        .expression(`asset_folder="${folderPath}" AND resource_type:image`)
+        .sort_by("created_at", "desc")
+        .max_results(Math.min(Math.max(max, 1), 500))
+        .next_cursor(cursor)
+        .execute();
+
+      const resources: CloudinaryResource[] = search.resources || [];
+      const items: OptimizedImage[] = resources.map((r) => ({
+        public_id: r.public_id,
+        optimized_url: cloudinary.url(r.public_id, {
+          width: 400,
+          crop: "fill",
+          quality: "auto",
+          fetch_format: "auto",
+        }),
+        tags: r.tags || [],
+        folder: (r as any).asset_folder || r.public_id.split('/').slice(0, -1).join('/'),
+      }));
+
+      return { items, nextCursor: search.next_cursor || null };
+    } catch (se) {
+      console.error("[Cloudinary][PaginatedImages] failed", {
+        folderPath,
+        error: (se as Error).message,
+      });
+      return { items: [], nextCursor: null };
+    }
+  }
+}
+
+/**
+ * Paginated folders listing. Prefers sub_folders API (if available) else derives from resources.
+ */
+export async function getFoldersWithCoverImagesPaginated(
+  baseFolder: string,
+  cursor?: string,
+  max: number = 24
+): Promise<PaginatedResult<FolderWithCoverImage>> {
+  validateCloudinaryConfig();
+
+  // Attempt to use Admin API resources to compute folders with pagination
+  try {
+    const res: any = await cloudinary.api.resources({
+      type: "upload",
+      prefix: baseFolder,
+      max_results: Math.min(Math.max(max, 1), 500),
+      next_cursor: cursor,
+    });
+
+    const resources = (res.resources as CloudinaryResource[]) || [];
+    const folders: Record<string, Folder> = {};
+    for (const item of resources) {
+      const folderName = item.public_id.split("/").slice(0, -1).join("/");
+      if (folderName && folderName.startsWith(baseFolder)) {
+        if (!folders[folderName]) folders[folderName] = { folderName, items: [] };
+        folders[folderName].items.push(item);
+      }
+    }
+
+    // Cover images via tag (best-effort, non-blocking)
+    let tagged: CloudinaryResource[] = [];
+    try {
+      const taggedImagesResponse = await cloudinary.api.resources_by_tag("cover");
+      tagged = (taggedImagesResponse.resources as CloudinaryResource[]) || [];
+    } catch { }
+
+    const items: FolderWithCoverImage[] = Object.values(folders).map((folder) => {
+      const coverImage =
+        tagged.find((t) => t.public_id.startsWith(folder.folderName)) || folder.items[0] || null;
+      return {
+        folderName: folder.folderName,
+        coverImage,
+        itemCount: folder.items.length,
+        items: folder.items,
+      };
+    });
+
+    return { items, nextCursor: res.next_cursor || null };
+  } catch (e) {
+    console.warn("[Cloudinary][PaginatedFolders] fallback to search", {
+      baseFolder,
+      error: (e as Error).message,
+    });
+
+    try {
+      const search: any = await (cloudinary as any).search
+        .expression(`asset_folder:"${baseFolder}" AND resource_type:image`)
+        .sort_by("created_at", "desc")
+        .max_results(Math.min(Math.max(max, 1), 500))
+        .next_cursor(cursor)
+        .execute();
+
+      const resources: CloudinaryResource[] = search.resources || [];
+      const folders: Record<string, Folder> = {};
+      for (const item of resources) {
+        const folderName = (item as any).asset_folder || item.public_id.split("/").slice(0, -1).join("/");
+        if (folderName && folderName.startsWith(baseFolder)) {
+          if (!folders[folderName]) folders[folderName] = { folderName, items: [] };
+          folders[folderName].items.push(item);
+        }
+      }
+
+      const items: FolderWithCoverImage[] = Object.values(folders).map((folder) => ({
+        folderName: folder.folderName,
+        coverImage: folder.items[0] || null,
+        itemCount: folder.items.length,
+        items: folder.items,
+      }));
+
+      return { items, nextCursor: search.next_cursor || null };
+    } catch (se) {
+      console.error("[Cloudinary][PaginatedFolders] failed", {
+        baseFolder,
+        error: (se as Error).message,
+      });
+      return { items: [], nextCursor: null };
+    }
+  }
+}
+
+/** Fetch images by prefix including subfolders (first page only, Admin API → Search fallback). */
+export async function getImagesByPrefix(
+  prefixPath: string,
+  max: number = 100
+): Promise<OptimizedImage[]> {
+  validateCloudinaryConfig();
+  try {
+    const res: any = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: prefixPath,
+      max_results: Math.min(Math.max(max, 1), 500),
+      resource_type: 'image',
+    });
+    let resources: CloudinaryResource[] = res.resources || [];
+
+    if (!resources.length) {
+      // First try folder:"prefix" which includes subfolders
+      try {
+        const search1: any = await (cloudinary as any).search
+          .expression(`folder:"${prefixPath}" AND resource_type:image`)
+          .sort_by('created_at', 'desc')
+          .max_results(Math.min(Math.max(max, 1), 500))
+          .execute();
+        resources = search1.resources || [];
+      } catch { }
+
+      // If still empty, try wildcard asset_folder:"prefix/*"
+      if (!resources.length) {
+        try {
+          const search2: any = await (cloudinary as any).search
+            .expression(`asset_folder:"${prefixPath}/*" AND resource_type:image`)
+            .sort_by('created_at', 'desc')
+            .max_results(Math.min(Math.max(max, 1), 500))
+            .execute();
+          resources = search2.resources || [];
+        } catch (se) {
+          console.error('[Cloudinary][ByPrefix][Search] failed', { prefixPath, error: (se as Error).message });
+        }
+      }
+    }
+
+    return resources.map((r) => ({
+      public_id: r.public_id,
+      optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
+      tags: r.tags || [],
+    }));
+  } catch (e) {
+    console.error('[Cloudinary][ByPrefix] failed', { prefixPath, error: (e as Error).message });
+    return [];
+  }
+}
+
+/** Paginated images by prefix including subfolders (Admin API → Search fallback). */
+export async function getImagesByPrefixPaginated(
+  prefixPath: string,
+  cursor?: string,
+  max: number = 24
+): Promise<PaginatedResult<OptimizedImage>> {
+  validateCloudinaryConfig();
+  try {
+    // 1) Prefer Search API for stable, inclusive prefix pagination across subfolders
+    try {
+      let builder = (cloudinary as any).search
+        .expression(`(folder:"${prefixPath}" OR asset_folder:"${prefixPath}/*") AND resource_type:image`)
+        .sort_by('created_at', 'desc')
+        .max_results(Math.min(Math.max(max, 1), 500));
+      if (cursor) builder = builder.next_cursor(cursor);
+      const search: any = await builder.execute();
+      const resources: CloudinaryResource[] = search.resources || [];
+      const items: OptimizedImage[] = resources.map((r) => ({
+        public_id: r.public_id,
+        optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
+        tags: r.tags || [],
+        folder: (r as any).asset_folder || r.public_id.split('/').slice(0, -1).join('/'),
+      }));
+      return { items, nextCursor: search.next_cursor || null };
+    } catch { }
+
+    // 2) Fallback to Admin API
+    const res: any = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: prefixPath,
+      max_results: Math.min(Math.max(max, 1), 500),
+      resource_type: 'image',
+      next_cursor: cursor,
+    });
+    const adminResources: CloudinaryResource[] = res.resources || [];
+    const items: OptimizedImage[] = adminResources.map((r) => ({
+      public_id: r.public_id,
+      optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
+      tags: r.tags || [],
+      folder: (r as any).asset_folder || r.public_id.split('/').slice(0, -1).join('/'),
+    }));
+    return { items, nextCursor: res.next_cursor || null };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : undefined;
+    if (msg) console.debug('[Cloudinary][ByPrefixPaginated] failed', { prefixPath, error: msg });
+    return { items: [], nextCursor: null };
+  }
+}
+
+/** Load and flatten all images under a prefix into a single array (uses pagination under the hood). */
+export async function getAllImagesFlat(
+  prefixPath: string,
+  cap: number = 600
+): Promise<OptimizedImage[]> {
+  validateCloudinaryConfig();
+  const aggregated: OptimizedImage[] = [];
+  let cursor: string | undefined = undefined;
+
+  while (aggregated.length < cap) {
+    const { items, nextCursor } = await getImagesByPrefixPaginated(
+      prefixPath,
+      cursor,
+      Math.min(100, cap - aggregated.length)
+    );
+    if (items.length === 0) {
+      // If this page is empty but a nextCursor exists, advance and continue
+      if (nextCursor) {
+        cursor = nextCursor;
+        continue;
+      }
+      break;
+    }
+    // Deduplicate by public_id in case Cloudinary returns overlaps between pages
+    const seen = new Set(aggregated.map((i) => i.public_id));
+    for (const it of items) {
+      if (!seen.has(it.public_id)) {
+        aggregated.push(it);
+      }
+    }
+    if (!nextCursor) break;
+    cursor = nextCursor;
+  }
+
+  return aggregated;
 }

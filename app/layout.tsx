@@ -38,6 +38,7 @@ export default async function RootLayout({
       lang={locale}
       dir={locale === "en" ? Directions.LTR : Directions.RTL}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <head suppressHydrationWarning>
         {/* GTM DataLayer Initialization */}

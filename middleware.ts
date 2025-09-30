@@ -4,17 +4,11 @@ import { routing } from './i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-  // Match only internationalized pathnames
+  // Match only internationalized pathnames (exclude API)
   matcher: [
-    // Enable a redirect to a matching locale at the root
     '/',
-
-    // Set a cookie to remember the previous locale for
-    // all requests that have a locale prefix
     '/(ar|en)/:path*',
-
-    // Enable redirects that add missing locales
-    // (e.g. `/pathnames` -> `/en/pathnames`)
-    '/((?!_next|_vercel|.*\\..*).*)'
+    // Exclude /api, /_next, /_vercel and static assets
+    '/((?!api|_next|_vercel|.*\..*).*)'
   ]
 };

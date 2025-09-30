@@ -11,6 +11,7 @@ import HomepageHeroSlider from '@/components/slider/HomepageHeroSlider';
 import ConsultationForm from '@/components/forms/ConsultationForm';
 import { PageSkeletonLoader } from '@/components/ui/SkeletonLoader';
 import { getLocale } from 'next-intl/server';
+import ClientMarquee from '@/components/home/ClientMarquee';
 
 type HeroSlide = {
   id: string;
@@ -201,6 +202,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           {/* <div className="mt-8">
             <HeroSection />
           </div> */}
+        </div>
+      </section>
+
+      {/* Clients Marquee (moved just under hero) */}
+      <section className="py-6 px-4 sm:px-6 lg:px-8 bg-background/0">
+        <div className="max-w-7xl mx-auto">
+          <ClientMarquee />
         </div>
       </section>
 

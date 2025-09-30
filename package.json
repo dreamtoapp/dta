@@ -1,6 +1,6 @@
 {
   "name": "dreamtoapp",
-  "version": "3.3.4",
+  "version": "3.3.5",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -49,6 +49,7 @@
     "nodemailer": "^7.0.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.58.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
