@@ -4,6 +4,7 @@ import React from 'react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { FolderOpen } from 'lucide-react';
 
 interface FiltersProps {
@@ -27,21 +28,16 @@ export default function Filters({ folders, value, onChange }: FiltersProps) {
         <ScrollArea className="w-full whitespace-nowrap">
           <div className="flex gap-2 pb-2">
             {folders.map((folder) => (
-              <button
+              <Button
                 key={folder}
                 onClick={() => onChange(folder)}
-                className={`
-                  inline-flex items-center justify-center px-4 py-2 rounded-lg 
-                  text-sm font-medium transition-all duration-200
-                  border whitespace-nowrap
-                  ${value === folder
-                    ? 'bg-primary text-primary-foreground border-primary shadow-md scale-105'
-                    : 'bg-background/60 text-foreground border-border hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-sm'
-                  }
-                `}
+                variant={value === folder ? "default" : "outline"}
+                size="sm"
+                className={`whitespace-nowrap transition-all duration-200 ${value === folder ? 'shadow-md scale-105' : 'hover:shadow-sm'
+                  }`}
               >
                 {folder}
-              </button>
+              </Button>
             ))}
           </div>
           <ScrollBar orientation="horizontal" className="h-2" />

@@ -1,39 +1,39 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { FolderOpen } from "lucide-react";
+import { WorkCardSkeleton } from "./component/WorkCard";
 
 export default function Loading() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       <div className="container mx-auto px-4 py-12">
-        {/* Hero Section Skeleton */}
-        <div className="text-center space-y-6 mb-12">
-          <Skeleton className="w-32 h-8 mx-auto rounded-full" />
-          <Skeleton className="w-96 h-12 mx-auto" />
-          <Skeleton className="w-2/3 h-6 mx-auto" />
+        {/* Filters Skeleton - Matches actual Filters component */}
+        <div className="mb-6">
+          <Card className="border-0 shadow-sm bg-card/50 backdrop-blur-sm">
+            <div className="p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <FolderOpen className="w-4 h-4 text-muted-foreground" />
+                <h3 className="text-sm font-semibold text-foreground">Categories</h3>
+                <Badge variant="secondary" className="ml-auto text-xs">
+                  <Skeleton className="h-3 w-4" />
+                </Badge>
+              </div>
+
+              {/* Filter buttons skeleton */}
+              <div className="flex gap-2 pb-2">
+                {Array.from({ length: 4 }).map((_, index) => (
+                  <Skeleton key={index} className="h-9 w-24 rounded-lg" />
+                ))}
+              </div>
+            </div>
+          </Card>
         </div>
 
-        {/* Portfolio Grid Skeleton */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <Card key={index} className="relative overflow-hidden rounded-xl border-0 shadow-lg bg-card/50 backdrop-blur-sm">
-              {/* Image Container Skeleton */}
-              <div className="relative h-48 overflow-hidden">
-                <Skeleton className="absolute inset-0" />
-
-                {/* Badge Skeleton */}
-                <div className="absolute top-3 left-3">
-                  <Skeleton className="w-16 h-6 rounded-full" />
-                </div>
-              </div>
-
-              {/* Content Skeleton */}
-              <div className="p-4 space-y-4">
-                <Skeleton className="w-3/4 h-6" />
-                <Skeleton className="w-full h-4" />
-                <Skeleton className="w-full h-4" />
-                <Skeleton className="w-full h-10 rounded-lg" />
-              </div>
-            </Card>
+        {/* Masonry Grid Skeleton - Matches actual masonry layout */}
+        <div className="masonry-grid">
+          {Array.from({ length: 12 }).map((_, index) => (
+            <WorkCardSkeleton key={index} />
           ))}
         </div>
       </div>
