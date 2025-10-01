@@ -13,11 +13,12 @@ export default async function Page() {
   let debugArray: any[] = [];
   try {
     folders = await getAllWorksampleFolders(baseFolder);
-    // Debug: call our all-images API and log simplified array { folder, url }
+    // Call all-images API
     try {
-      const protocol = process.env.VERCEL ? 'https' : 'http';
-      const host = process.env.VERCEL_URL || 'localhost:3000';
-      const apiUrl = `${protocol}://${host}/api/cloudinary/all-images?folder=${encodeURIComponent(baseFolder)}&cap=1500`;
+      const baseUrl = process.env.NODE_ENV === 'production'
+        ? 'https://www.dreamto.app'
+        : 'http://localhost:3000';
+      const apiUrl = `${baseUrl}/api/cloudinary/all-images?folder=${encodeURIComponent(baseFolder)}&cap=1500`;
       const res = await fetch(apiUrl, { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
