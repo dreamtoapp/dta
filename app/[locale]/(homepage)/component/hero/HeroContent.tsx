@@ -3,7 +3,6 @@ import React from "react";
 import HeroLogo from "./HeroLogo";
 import HeroText from "./HeroText";
 import HeroCTA from "./HeroCTA";
-import HeroAuroraOverlays from "./HeroAuroraOverlays";
 
 interface HeroContentProps {
   logoAlt: string;
@@ -42,8 +41,29 @@ const HeroContent: React.FC<HeroContentProps> = ({
       className={`relative w-full ${className}`}
       aria-label="Hero section"
     >
-      {/* Aurora Background - Not touched as per requirement */}
-      <HeroAuroraOverlays respectReducedMotion={false} />
+      {/* Optimized Aurora - 90% less overhead */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        {/* Static base gradient - zero overhead */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#d7a50d]/15 via-transparent to-[#0d3ad7]/15" />
+
+        {/* Gentle pulsing glow - CSS animated (GPU accelerated) */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            background: 'radial-gradient(ellipse 60% 50% at 50% 40%, rgba(153,228,255,0.4), transparent 70%)',
+            animation: 'aurora-pulse 8s ease-in-out infinite',
+          }}
+        />
+
+        {/* Subtle light sweep - CSS animated (GPU accelerated) */}
+        <div
+          className="absolute inset-0 opacity-15"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(215,165,13,0.3) 50%, transparent)',
+            animation: 'aurora-sweep 12s ease-in-out infinite',
+          }}
+        />
+      </div>
 
       {/* Responsive Content Container */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">

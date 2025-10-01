@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import HeroContent from "./HeroContent";
-import HeroAuroraOverlays from "./HeroAuroraOverlays";
 import HeroCTA from "./HeroCTA";
 
 type ImageHeroProps = {

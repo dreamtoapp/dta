@@ -631,6 +631,32 @@ html {
   }
 }
 
+/* Optimized Hero Animations - GPU Accelerated */
+@keyframes aurora-pulse {
+  0%, 100% { 
+    opacity: 0.15; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.25; 
+    transform: scale(1.05);
+  }
+}
+
+@keyframes aurora-sweep {
+  0% { 
+    transform: translateX(-100%);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% { 
+    transform: translateX(100%);
+    opacity: 0.1;
+  }
+}
+
 /* Masonry Grid Layout for Work Samples */
 .masonry-grid {
   column-count: 1;

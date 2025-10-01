@@ -24,5 +24,5 @@ export default async function ClientMarquee() {
   const logos = await loadLogos();
   if (!logos.length) return null;
 
-  return <ClientMarqueeClient logos={logos} durationSec={90} />;
+  return <ClientMarqueeClient logos={logos} />;
 }

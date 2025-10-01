@@ -2,46 +2,47 @@
 
 import { memo } from "react";
 import Image from "next/image";
-import Marquee from "react-fast-marquee";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Card } from "@/components/ui/card";
 
 type Props = {
   logos: { id: string; url: string }[];
-  durationSec?: number;
 };
 
-const ClientMarqueeClient = memo(function ClientMarqueeClient({ logos, durationSec = 20 }: Props) {
+const ClientMarqueeClient = memo(function ClientMarqueeClient({ logos }: Props) {
   if (!Array.isArray(logos) || logos.length === 0) return null;
 
-  // Calculate speed: react-fast-marquee default is 50, adjust based on duration
-  const speed = Math.max(20, Math.min(80, 1000 / durationSec));
-
-  // Duplicate logos for seamless infinite scroll (5 times to fill viewport)
-  const duplicatedLogos = Array(5).fill(logos).flat();
-
   return (
-    <div className="py-8">
-      <Marquee
-        speed={speed}
-        gradient={false}
-        pauseOnHover={true}
-        play={true}
-        direction="left"
-        loop={0}
-      >
-        {duplicatedLogos.map((logo, index) => (
-          <div key={`${logo.id}-${index}`} className="relative w-48 h-20 mx-4">
-            <Image
-              src={logo.url}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 160px, 192px"
-              className="object-contain"
-              loading="lazy"
-              quality={75}
-            />
-          </div>
-        ))}
-      </Marquee>
+    <div className="w-full">
+      <Card className="border-0 shadow-sm bg-card/30 backdrop-blur-sm">
+        <div className="p-6">
+          <h2 className="text-center text-sm font-semibold text-muted-foreground mb-6 uppercase tracking-wider">
+            Trusted by Leading Brands
+          </h2>
+
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex gap-8 pb-4">
+              {logos.map((logo) => (
+                <div
+                  key={logo.id}
+                  className="relative w-32 h-16 flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+                >
+                  <Image
+                    src={logo.url}
+                    alt="Client logo"
+                    fill
+                    sizes="128px"
+                    className="object-contain"
+                    loading="lazy"
+                    quality={75}
+                  />
+                </div>
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" className="h-2" />
+          </ScrollArea>
+        </div>
+      </Card>
     </div>
   );
 });
