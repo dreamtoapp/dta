@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import MasonryGrid from './MasonryGrid';
 import Filters from './Filters';
 import type { WorkItem } from './WorkCard';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 interface GalleryClientProps {
   baseFolder: string;
@@ -16,7 +16,6 @@ interface GalleryClientProps {
 }
 
 export default function GalleryClient({ baseFolder, initialItems, folders, pageSize = 24, allItems = [] }: GalleryClientProps) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -68,14 +67,16 @@ export default function GalleryClient({ baseFolder, initialItems, folders, pageS
   const onChangeFolder = useCallback((next: string) => {
     if (next === selected) return;
 
+    // Optimistic update - instant UI response
     setSelected(next);
     setPageIndex(0);
 
-    // Update URL
+    // Update URL without navigation (instant, no page reload)
     const newSearchParams = new URLSearchParams(searchParams.toString());
     newSearchParams.set('folder', next);
-    router.push(`${pathname}?${newSearchParams.toString()}`, { scroll: false });
-  }, [selected, searchParams, pathname, router]);
+    const newUrl = `${pathname}?${newSearchParams.toString()}`;
+    window.history.replaceState(null, '', newUrl);
+  }, [selected, searchParams, pathname]);
 
   // Debug logging
   React.useEffect(() => {
