@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 async function searchAll(prefix: string, cap: number) {
-  const results: { public_id: string; optimized_url: string; folder?: string; tags?: string[] }[] = [];
+  const results: { public_id: string; optimized_url: string; folder?: string; tags?: string[]; width?: number; height?: number }[] = [];
   let cursor: string | undefined = undefined;
   while (results.length < cap) {
     let builder = (cloudinary as any).search
@@ -29,6 +29,8 @@ async function searchAll(prefix: string, cap: number) {
         optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
         folder: r.asset_folder || (r.public_id?.split('/').slice(0, -1).join('/') || ''),
         tags: r.tags || [],
+        width: r.width || 400,
+        height: r.height || 300,
       });
     }
     cursor = page.next_cursor || undefined;
@@ -46,12 +48,14 @@ export async function GET(request: Request) {
 
   try {
     // First try existing helper (Admin/Search mix with dedupe)
-    let items: Array<{ public_id: string; optimized_url: string; folder?: string; tags: string[] }>
+    let items: Array<{ public_id: string; optimized_url: string; folder?: string; tags: string[]; width?: number; height?: number }>
       = (await getAllImagesFlat(folder, cap) as any).map((it: any) => ({
         public_id: it.public_id,
         optimized_url: it.optimized_url,
         folder: it.folder,
         tags: Array.isArray(it.tags) ? it.tags : [],
+        width: it.width || 400,
+        height: it.height || 300,
       }));
     if (!items || items.length === 0) {
       // Fallback to raw Search API loop
@@ -61,13 +65,17 @@ export async function GET(request: Request) {
         optimized_url: it.optimized_url,
         folder: it.folder,
         tags: Array.isArray(it.tags) ? it.tags : [],
+        width: it.width || 400,
+        height: it.height || 300,
       }));
     }
-    const simplified: Array<{ folder: string; url: string; public_id: string; tags: string[] }> = items.map((it) => ({
+    const simplified: Array<{ folder: string; url: string; public_id: string; tags: string[]; width?: number; height?: number }> = items.map((it) => ({
       folder: it.folder || (it.public_id?.split('/').slice(0, -1).join('/') || ''),
       url: it.optimized_url,
       public_id: it.public_id,
       tags: Array.isArray(it.tags) ? it.tags : [],
+      width: (it as any).width || 400,
+      height: (it as any).height || 300,
     }));
     return NextResponse.json({ count: simplified.length, items: simplified });
   } catch (e) {

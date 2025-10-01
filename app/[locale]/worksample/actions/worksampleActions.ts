@@ -1,7 +1,14 @@
 'use server';
 
-import cloudinary from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import { OptimizedImage, PaginatedResult } from '@/lib/cloudinary';
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // Local type definition for Cloudinary resource
 type CloudinaryResource = {
@@ -23,7 +30,7 @@ export async function getAllWorksampleFolders(baseFolder: string = 'website/work
 
     // 1) Prefer sub_folders to list immediate children reliably
     try {
-      const sub = await (cloudinary as any).api.sub_folders(baseFolder);
+      const sub = await cloudinary.api.sub_folders(baseFolder);
       const subfolders: Array<{ name: string; path: string }> = sub.folders || [];
       const names = subfolders
         .map((sf) => sf.path.replace(`${baseFolder}/`, ""))
@@ -41,7 +48,7 @@ export async function getAllWorksampleFolders(baseFolder: string = 'website/work
 
     // 2) Fallback: derive folders from resources prefix (works when public_id includes folder path)
     try {
-      const response = await (cloudinary as any).api.resources({
+      const response = await cloudinary.api.resources({
         type: "upload",
         prefix: baseFolder,
         max_results: 1000,
@@ -81,7 +88,7 @@ export async function getWorksampleImagesByPrefix(
       throw new Error('Cloudinary configuration is missing');
     }
 
-    const res: any = await (cloudinary as any).api.resources({
+    const res: any = await cloudinary.api.resources({
       type: 'upload',
       prefix: prefixPath,
       max_results: Math.min(Math.max(max, 1), 500),
@@ -92,7 +99,7 @@ export async function getWorksampleImagesByPrefix(
     if (!resources.length) {
       // First try folder:"prefix" which includes subfolders
       try {
-        const search1: any = await (cloudinary as any).search
+        const search1: any = await cloudinary.search
           .expression(`folder:"${prefixPath}" AND resource_type:image`)
           .sort_by('created_at', 'desc')
           .max_results(Math.min(Math.max(max, 1), 500))
@@ -103,7 +110,7 @@ export async function getWorksampleImagesByPrefix(
       // If still empty, try wildcard asset_folder:"prefix/*"
       if (!resources.length) {
         try {
-          const search2: any = await (cloudinary as any).search
+          const search2: any = await cloudinary.search
             .expression(`asset_folder:"${prefixPath}/*" AND resource_type:image`)
             .sort_by('created_at', 'desc')
             .max_results(Math.min(Math.max(max, 1), 500))
@@ -117,7 +124,7 @@ export async function getWorksampleImagesByPrefix(
 
     return resources.map((r) => ({
       public_id: r.public_id,
-      optimized_url: (cloudinary as any).url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
+      optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
       tags: r.tags || [],
     }));
   } catch (e) {
@@ -141,7 +148,7 @@ export async function getWorksampleImagesPaginated(
     let nextCursor: string | null = null;
 
     try {
-      const res: any = await (cloudinary as any).api.resources({
+      const res: any = await cloudinary.api.resources({
         type: 'upload',
         prefix: prefixPath,
         max_results: Math.min(Math.max(max, 1), 500),
@@ -154,7 +161,7 @@ export async function getWorksampleImagesPaginated(
       console.warn('[WorksampleActions][Paginated][Admin] failed, trying search', { prefixPath, error: (e as Error).message });
 
       try {
-        const search: any = await (cloudinary as any).search
+        const search: any = await cloudinary.search
           .expression(`folder:"${prefixPath}" AND resource_type:image`)
           .sort_by('created_at', 'desc')
           .max_results(Math.min(Math.max(max, 1), 500))
@@ -167,7 +174,7 @@ export async function getWorksampleImagesPaginated(
 
     const items: OptimizedImage[] = resources.map((r) => ({
       public_id: r.public_id,
-      optimized_url: (cloudinary as any).url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
+      optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
       tags: r.tags || [],
     }));
 
@@ -194,7 +201,7 @@ export async function getWorksampleImagesFromFolder(
       throw new Error('Cloudinary configuration is missing');
     }
 
-    const response = await (cloudinary as any).api.resources({
+    const response = await cloudinary.api.resources({
       type: 'upload',
       prefix: folderPath,
       max_results: Math.min(Math.max(limit, 1), 500),
@@ -205,7 +212,7 @@ export async function getWorksampleImagesFromFolder(
 
     return resources.map((resource) => ({
       public_id: resource.public_id,
-      optimized_url: (cloudinary as any).url(resource.public_id, {
+      optimized_url: cloudinary.url(resource.public_id, {
         width: 800,
         crop: 'fill',
         quality: 'auto',

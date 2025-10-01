@@ -630,3 +630,38 @@ html {
     transform: rotate(360deg);
   }
 }
+
+/* Masonry Grid Layout for Work Samples */
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1rem;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    column-count: 4;
+  }
+}
+
+.masonry-grid > * {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+}

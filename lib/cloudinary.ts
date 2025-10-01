@@ -295,6 +295,8 @@ export interface OptimizedImage {
   optimized_url: string;
   tags: string[];
   folder?: string;
+  width?: number;
+  height?: number;
 }
 
 // Optimized function to get images from a folder with better performance
@@ -352,6 +354,8 @@ export async function getImagesFromFolder(
         }),
         tags: resource.tags || [],
         folder: (resource as any).asset_folder || resource.public_id.split("/").slice(0, -1).join("/"),
+        width: resource.width || 400,
+        height: resource.height || 300,
       }));
     });
   } catch (error) {
@@ -792,6 +796,8 @@ export async function getImagesByPrefixPaginated(
         optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
         tags: r.tags || [],
         folder: (r as any).asset_folder || r.public_id.split('/').slice(0, -1).join('/'),
+        width: r.width || 400,
+        height: r.height || 300,
       }));
       return { items, nextCursor: search.next_cursor || null };
     } catch { }
@@ -810,6 +816,8 @@ export async function getImagesByPrefixPaginated(
       optimized_url: cloudinary.url(r.public_id, { width: 400, crop: 'fill', quality: 'auto', fetch_format: 'auto' }),
       tags: r.tags || [],
       folder: (r as any).asset_folder || r.public_id.split('/').slice(0, -1).join('/'),
+      width: r.width || 400,
+      height: r.height || 300,
     }));
     return { items, nextCursor: res.next_cursor || null };
   } catch (e) {

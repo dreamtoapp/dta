@@ -33,14 +33,27 @@ export default function GalleryClient({ baseFolder, initialItems, folders, pageS
 
   // Preloaded mode: use allItems if provided
   const isPreloadedMode = allItems.length > 0;
+
+  // Filter items by selected folder
+  const filteredItems = useMemo(() => {
+    if (!isPreloadedMode) return [];
+    if (!selected) return allItems;
+    // Filter by folder - match items where folder ends with the selected folder name
+    return allItems.filter(item => {
+      if (!item.folder) return false;
+      const folderName = item.folder.split('/').pop() || item.folder;
+      return folderName === selected;
+    });
+  }, [allItems, selected, isPreloadedMode]);
+
   const preloadedPages = useMemo(() => {
     if (!isPreloadedMode) return [];
     const pages = [];
-    for (let i = 0; i < allItems.length; i += pageSize) {
-      pages.push(allItems.slice(i, i + pageSize));
+    for (let i = 0; i < filteredItems.length; i += pageSize) {
+      pages.push(filteredItems.slice(i, i + pageSize));
     }
     return pages;
-  }, [allItems, pageSize, isPreloadedMode]);
+  }, [filteredItems, pageSize, isPreloadedMode]);
 
   // Initialize selected folder from URL
   useEffect(() => {
@@ -48,6 +61,7 @@ export default function GalleryClient({ baseFolder, initialItems, folders, pageS
     if (folderFromUrl && folders.includes(folderFromUrl)) {
       setSelected(folderFromUrl);
     } else if (folders.length > 0) {
+      // Default to first folder from backend
       setSelected(folders[0]);
     }
   }, [searchParams, folders]);
@@ -56,31 +70,25 @@ export default function GalleryClient({ baseFolder, initialItems, folders, pageS
   const onChangeFolder = useCallback((next: string) => {
     if (next === selected) return;
 
-    if (isPreloadedMode) {
-      console.log('[GalleryClient] select ALL (preloaded)');
-      setSelected('ALL');
-      setItems(allItems);
-      setPageIndex(0);
-      setHasMore(false);
-      return;
-    }
-
-    console.debug('[GalleryClient] change folder (preloaded)', { next });
     setSelected(next);
-    setItems([]);
     setPageIndex(0);
-    setHasMore(true);
-    setIsLoading(true);
+
+    if (isPreloadedMode) {
+      // In preloaded mode, filtering happens via useMemo
+      console.log('[GalleryClient] folder changed (preloaded)', { next });
+    } else {
+      // In dynamic mode, reset and fetch new data
+      console.debug('[GalleryClient] folder changed (dynamic)', { next });
+      setItems([]);
+      setHasMore(true);
+      setIsLoading(true);
+    }
 
     // Update URL
     const newSearchParams = new URLSearchParams(searchParams.toString());
-    if (next === 'ALL') {
-      newSearchParams.delete('folder');
-    } else {
-      newSearchParams.set('folder', next);
-    }
+    newSearchParams.set('folder', next);
     router.push(`${pathname}?${newSearchParams.toString()}`, { scroll: false });
-  }, [selected, isPreloadedMode, allItems, searchParams, pathname, router]);
+  }, [selected, isPreloadedMode, searchParams, pathname, router]);
 
   // Load more items
   const loadMore = useCallback(async () => {
@@ -130,16 +138,16 @@ export default function GalleryClient({ baseFolder, initialItems, folders, pageS
     };
   }, [hasMore, isLoading, loadMore, isPreloadedMode]);
 
-  // Prepare folders for dropdown (exclude current folder)
-  const dropdownFolders = useMemo(() => {
-    return folders.filter(folder => folder !== selected);
-  }, [folders, selected]);
+  // All folders for filters (no exclusions)
+  const allFolders = useMemo(() => {
+    return folders;
+  }, [folders]);
 
   return (
     <div className="w-full">
       {/* Filters */}
       <div className="mb-6">
-        <Filters folders={dropdownFolders} value={selected} onChange={onChangeFolder} />
+        <Filters folders={allFolders} value={selected} onChange={onChangeFolder} />
       </div>
 
       {/* Gallery Grid */}

@@ -24,11 +24,19 @@ export default async function Page() {
         const items = Array.isArray(data.items) ? data.items : [];
         const cloudName = process.env.CLOUDINARY_CLOUD_NAME || '';
         debugArray = items.map((it: any) => ({
-          ...it,
+          public_id: it.public_id,
+          folder: it.folder,
+          tags: it.tags || [],
+          // Use width/height from API response, with sensible fallbacks
+          width: it.width || 400,
+          height: it.height || 300,
           // Optimized Cloudinary URL: auto format/quality + cover fill + sensible width and DPR
           fullUrl: cloudName
             ? `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:eco,c_fill,w_640,dpr_auto/${encodeURIComponent(it.public_id)}`
             : it.url,
+          // Fallback URLs
+          secure_url: it.secure_url || it.url,
+          url: it.url,
         }));
 
       } else {

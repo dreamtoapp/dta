@@ -5,9 +5,11 @@ import Image from 'next/image';
 
 export interface WorkItem {
   public_id: string;
-  secure_url: string;
-  width: number;
-  height: number;
+  secure_url?: string;
+  fullUrl?: string;
+  url?: string;
+  width?: number;
+  height?: number;
   folder?: string;
   context?: {
     alt?: string;
@@ -24,11 +26,21 @@ export default function WorkCard({ item, priority = false }: WorkCardProps) {
   const alt = item.context?.alt || `Work sample ${item.public_id}`;
   const caption = item.context?.caption || '';
 
+  // Prioritize fullUrl, then secure_url, then url - filter out empty strings
+  const imageSrc = (item.fullUrl && item.fullUrl.trim()) ||
+    (item.secure_url && item.secure_url.trim()) ||
+    (item.url && item.url.trim());
+
+  // Validate required properties - skip if image source or dimensions are missing
+  if (!imageSrc || !item.width || !item.height) {
+    return null;
+  }
+
   return (
     <div className="group mb-4 break-inside-avoid rounded-xl border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
       <div className="relative overflow-hidden rounded-t-xl">
         <Image
-          src={item.secure_url}
+          src={imageSrc}
           alt={alt}
           width={item.width}
           height={item.height}
