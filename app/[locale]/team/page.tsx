@@ -1,7 +1,14 @@
 import { getTranslations, getLocale } from 'next-intl/server';
+import { Metadata } from 'next';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 import { Users, Briefcase, ArrowRight } from 'lucide-react';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDynamicMetadata('/team', locale);
+}
 
 export default async function TeamPage() {
   const t = await getTranslations("team");

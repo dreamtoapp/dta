@@ -1,9 +1,16 @@
 import React from 'react';
+import { Metadata } from 'next';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 import { getAllWorksampleFolders } from './actions/worksampleActions';
 import { AlertCircle } from 'lucide-react';
 import GalleryClient from './component/GalleryClient';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDynamicMetadata('/worksample', locale);
+}
 
 export default async function Page() {
   const baseFolder = 'website/workSample';

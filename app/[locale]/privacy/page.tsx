@@ -1,33 +1,10 @@
 import { getTranslations, getLocale } from 'next-intl/server';
 import { Metadata } from 'next';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'privacy' });
-
-  return {
-    title: t('meta.title'),
-    description: t('meta.description'),
-    openGraph: {
-      title: t('meta.title'),
-      description: t('meta.description'),
-      type: 'website',
-      locale: locale,
-      alternateLocale: locale === 'ar' ? 'en' : 'ar',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: t('meta.title'),
-      description: t('meta.description'),
-    },
-    alternates: {
-      canonical: `https://dreamto.app/${locale}/privacy`,
-      languages: {
-        ar: 'https://dreamto.app/ar/privacy',
-        en: 'https://dreamto.app/en/privacy',
-      },
-    },
-  };
+  return await getDynamicMetadata('/privacy', locale);
 }
 
 export default async function PrivacyPolicyPage() {

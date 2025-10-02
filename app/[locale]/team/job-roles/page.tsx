@@ -1,6 +1,12 @@
 import { getLocale, getTranslations } from 'next-intl/server';
-
+import { Metadata } from 'next';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 import Link from '@/components/link';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDynamicMetadata('/team/job-roles', locale);
+}
 
 export default async function JobRolesPage() {
   const locale = await getLocale();

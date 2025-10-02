@@ -1,5 +1,6 @@
 import { getTranslations, getLocale } from "next-intl/server";
 import { Metadata } from 'next';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 import ContactForm from "./components/ContactForm";
 import { Rocket } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -7,40 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations('contact');
-
-  return {
-    title: {
-      default: t('pageTitle'),
-      template: '%s | DreamToApp - Contact Us',
-    },
-    description: t('pageDescription'),
-    openGraph: {
-      title: t('pageTitle'),
-      description: t('pageDescription'),
-      url: 'https://www.dreamto.app/contactus',
-      images: ['/og-image.png'],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: '@dreamtoapp',
-      title: t('pageTitle'),
-      description: t('pageDescription'),
-      images: ['/og-image.png'],
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-    alternates: {
-      canonical: 'https://www.dreamto.app/contactus',
-      languages: {
-        'en': '/en/contactus',
-        'ar': '/ar/contactus',
-      },
-    },
-  };
+  return await getDynamicMetadata('/contactus', locale);
 }
 
 export default async function ContactUs({

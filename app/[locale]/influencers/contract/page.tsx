@@ -1,11 +1,12 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import db from "@/lib/prisma"
+import { getDynamicMetadata } from '@/app/seo/metadata'
 import InfluencerContractClient from "./components/InfluencerContractClient"
 
-export const metadata: Metadata = {
-  title: "Collaboration Agreement | Dream to App",
-  description: "View your collaboration agreement with Dream to App",
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDynamicMetadata('/influencers/contract', locale);
 }
 
 interface InfluencerContractPageProps {

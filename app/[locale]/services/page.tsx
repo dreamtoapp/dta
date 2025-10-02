@@ -37,6 +37,12 @@ import React from "react"
 import { getTranslations, getLocale } from "next-intl/server"
 import Link from '@/components/link'
 import MotionDiv from '@/components/MotionDiv'
+import { getDynamicMetadata } from '@/app/seo/metadata'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return await getDynamicMetadata('/services', locale);
+}
 
 // ============================================================================
 // TYPES & INTERFACES

@@ -1,43 +1,11 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 import StartDreamForm from './component/StartDreamForm';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations('startDream');
-
-  return {
-    title: {
-      default: t('pageTitle'),
-      template: '%s | DreamToApp - Start Your Dream',
-    },
-    description: t('pageDescription'),
-    openGraph: {
-      title: t('pageTitle'),
-      description: t('pageDescription'),
-      url: 'https://www.dreamto.app/start-your-dream',
-      images: ['/og-image.png'],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: '@dreamtoapp',
-      title: t('pageTitle'),
-      description: t('pageDescription'),
-      images: ['/og-image.png'],
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-    alternates: {
-      canonical: 'https://www.dreamto.app/start-your-dream',
-      languages: {
-        'en': '/en/start-your-dream',
-        'ar': '/ar/start-your-dream',
-      },
-    },
-  };
+  return await getDynamicMetadata('/start-your-dream', locale);
 }
 
 export default async function StartDreamPage({

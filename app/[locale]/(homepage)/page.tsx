@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 import CromboDetail from './component/CromboDetail';
 import Services from './component/Services';
 import FromIdea from './component/FromIdea';
@@ -16,48 +17,7 @@ import { fetchCloudinaryClientSlides } from './actions/cloudinaryActions';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations('homepage');
-
-  return {
-    title: {
-      default: t('title'),
-      template: '%s | DreamToApp IT Solutions',
-    },
-    description: t('description'),
-    openGraph: {
-      title: t('title'),
-      description: t('description'),
-      url: 'https://www.dreamto.app',
-      siteName: 'DreamToApp IT Solutions',
-      images: [
-        {
-          url: '/og-image.png',
-          width: 1200,
-          height: 630,
-          alt: 'DreamToApp IT Solutions',
-        },
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: '@dreamtoapp',
-      title: t('title'),
-      description: t('description'),
-      images: ['/og-image.png'],
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-    alternates: {
-      canonical: 'https://www.dreamto.app',
-      languages: {
-        'en': '/en',
-        'ar': '/ar',
-      },
-    },
-  };
+  return await getDynamicMetadata('/', locale);
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

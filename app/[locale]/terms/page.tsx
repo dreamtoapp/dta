@@ -1,33 +1,10 @@
 import { getTranslations, getLocale } from 'next-intl/server';
 import { Metadata } from 'next';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'terms' });
-
-  return {
-    title: t('meta.title'),
-    description: t('meta.description'),
-    openGraph: {
-      title: t('meta.title'),
-      description: t('meta.description'),
-      type: 'website',
-      locale: locale,
-      alternateLocale: locale === 'ar' ? 'en' : 'ar',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: t('meta.title'),
-      description: t('meta.description'),
-    },
-    alternates: {
-      canonical: `https://dreamto.app/${locale}/terms`,
-      languages: {
-        ar: 'https://dreamto.app/ar/terms',
-        en: 'https://dreamto.app/en/terms',
-      },
-    },
-  };
+  return await getDynamicMetadata('/terms', locale);
 }
 
 export default async function TermsOfServicePage() {

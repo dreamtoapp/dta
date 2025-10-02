@@ -1,6 +1,12 @@
 import { getLocale } from 'next-intl/server';
-
+import { Metadata } from 'next';
+import { getDynamicMetadata } from '@/app/seo/metadata';
 import Link from '@/components/link';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDynamicMetadata('/team/thank-you', locale);
+}
 
 export default async function ThankYouPage() {
   const locale = await getLocale();

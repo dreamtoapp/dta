@@ -1,24 +1,15 @@
 import { getTranslations, getLocale } from "next-intl/server"
 import { Metadata } from "next"
+import { getDynamicMetadata } from '@/app/seo/metadata'
 import InfluencersClientSection from './components/InfluencersClientSection'
 
 // ============================================================================
 // METADATA
 // ============================================================================
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("influencers")
-  const locale = await getLocale()
-
-  return {
-    title: t("pageTitle"),
-    description: t("pageDescription"),
-    openGraph: {
-      title: t("pageTitle"),
-      description: t("pageDescription"),
-      locale: locale,
-    },
-  }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return await getDynamicMetadata('/influencers', locale);
 }
 
 // ============================================================================

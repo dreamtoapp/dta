@@ -25,7 +25,8 @@ import {
   BarChart3,
   Star,
   Sun,
-  Moon
+  Moon,
+  FileCode
 } from 'lucide-react';
 
 interface DashboardSidebarProps {
@@ -96,6 +97,12 @@ export default function DashboardSidebar({ stats, loadStats }: DashboardSidebarP
       icon: Eye,
       current: pathname === '/dashboard/visitors',
       badge: stats?.totalVisitors
+    },
+    {
+      name: 'SEO Metadata',
+      href: '/dashboard/metadata',
+      icon: FileCode,
+      current: pathname === '/dashboard/metadata' || pathname.startsWith('/dashboard/metadata/')
     },
     {
       name: 'Settings',

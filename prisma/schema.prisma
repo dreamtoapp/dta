@@ -357,3 +357,54 @@ model TeamMember {
   
   @@map("team_members")
 }
+
+// ============================================================================
+// PAGE METADATA SCHEMA - Dynamic SEO Management
+// ============================================================================
+
+model PageMetadata {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  
+  // Page Identification
+  pagePath    String   @unique // e.g., "/", "/services", "/influencers"
+  pageName    String   // Human-readable name for admin UI
+  
+  // Standard SEO Fields (Bilingual)
+  titleEn            String
+  titleAr            String
+  descriptionEn      String
+  descriptionAr      String
+  keywordsEn         String?
+  keywordsAr         String?
+  
+  // OpenGraph (Bilingual)
+  ogTitleEn          String?
+  ogTitleAr          String?
+  ogDescriptionEn    String?
+  ogDescriptionAr    String?
+  ogImage            String? // Single image URL works for both locales
+  
+  // Twitter Card (Bilingual)
+  twitterTitleEn     String?
+  twitterTitleAr     String?
+  twitterDescriptionEn String?
+  twitterDescriptionAr String?
+  
+  // Advanced Fields
+  category           String?
+  author             String? @default("DreamToApp Team")
+  canonicalUrl       String?
+  robotsIndex        Boolean @default(true)
+  robotsFollow       Boolean @default(true)
+  
+  // JSON-LD Schema (Bilingual JSON)
+  schemaEn           Json?
+  schemaAr           Json?
+  
+  // Timestamps
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  
+  @@map("page_metadata")
+}
