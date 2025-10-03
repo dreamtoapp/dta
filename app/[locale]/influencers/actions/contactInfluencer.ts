@@ -51,18 +51,16 @@ export async function contactInfluencer(input: ContactInfluencerInput): Promise<
     }
 
     // Save contact request to database
-    const contactRequest = await prisma.contactRequest.create({
+    const contactRequest = await prisma.projectRequest.create({
       data: {
         name: validatedInput.name,
         email: validatedInput.email,
-        phone: validatedInput.phone,
-        company: validatedInput.company,
+        mobile: validatedInput.phone || "",
         message: validatedInput.message,
-        budget: validatedInput.budget,
-        campaignType: validatedInput.campaignType,
-        timeline: validatedInput.timeline,
-        status: 'PENDING',
-        influencerId: validatedInput.influencerId
+        budget: validatedInput.budget || "",
+        projectType: validatedInput.campaignType || "",
+        projectDetails: `Timeline: ${validatedInput.timeline}, Company: ${validatedInput.company}`,
+        createdAt: new Date()
       }
     })
 

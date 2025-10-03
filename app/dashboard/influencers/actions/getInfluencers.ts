@@ -19,7 +19,7 @@ export interface InfluencerListItem {
   isActive: boolean
   status: string
   createdAt: Date
-  socialPlatforms: {
+  socialPlatforms?: {
     platform: string
     username: string
     followers: number
@@ -53,23 +53,23 @@ export async function getInfluencers(): Promise<GetInfluencersResponse> {
         isActive: true,
         status: true,
         createdAt: true,
-        socialPlatforms: {
-          select: {
-            platform: true,
-            username: true,
-            followers: true,
-            isVerified: true
-          }
-        }
       },
       orderBy: {
         createdAt: 'desc'
       }
     })
 
+    // Transform bigint fields to numbers
+    const transformedInfluencers = influencers.map(influencer => ({
+      ...influencer,
+      influencerRate: Number(influencer.influencerRate),
+      agencyRate: Number(influencer.agencyRate),
+      totalFollowers: Number(influencer.totalFollowers)
+    }))
+
     return {
       success: true,
-      data: influencers
+      data: transformedInfluencers
     }
   } catch (error) {
     console.error('Error fetching influencers:', error)

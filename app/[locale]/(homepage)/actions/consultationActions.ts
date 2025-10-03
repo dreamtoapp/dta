@@ -95,6 +95,7 @@ export async function submitConsultationRequest(data: ConsultationData) {
         email: validatedData.email,
         phone: validatedData.phone,
         message: `${validatedData.service}: ${validatedData.message}`,
+        createdAt: new Date(),
       },
     });
 

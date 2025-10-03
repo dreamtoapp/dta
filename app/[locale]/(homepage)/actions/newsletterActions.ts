@@ -56,6 +56,8 @@ export async function subscribeToNewsletter(formData: FormData) {
       data: {
         email,
         isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     });
 

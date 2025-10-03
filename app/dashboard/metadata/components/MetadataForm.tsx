@@ -36,14 +36,36 @@ const metadataSchema = z.object({
   ogTitleAr: z.string().optional(),
   ogDescriptionEn: z.string().optional(),
   ogDescriptionAr: z.string().optional(),
-  ogImage: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  ogImage: z.string().refine(
+    (val) => {
+      if (!val || val === '') return true;
+      try {
+        const url = new URL(val);
+        return url.protocol === 'https:';
+      } catch {
+        return false;
+      }
+    },
+    { message: 'Must be a valid HTTPS URL (required for Twitter cards)' }
+  ),
   twitterTitleEn: z.string().optional(),
   twitterTitleAr: z.string().optional(),
   twitterDescriptionEn: z.string().optional(),
   twitterDescriptionAr: z.string().optional(),
   category: z.string().optional(),
   author: z.string().optional(),
-  canonicalUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  canonicalUrl: z.string().refine(
+    (val) => {
+      if (!val || val === '') return true;
+      try {
+        new URL(val);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    { message: 'Must be a valid URL' }
+  ),
   robotsIndex: z.boolean(),
   robotsFollow: z.boolean(),
   isActive: z.boolean(),
@@ -90,9 +112,12 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
   });
 
   const onSubmit = async (data: MetadataFormValues) => {
+    console.log('✅ Form validation passed!');
+    console.log('📝 Submitting metadata:', data);
     setIsSubmitting(true);
     try {
       const result = await upsertPageMetadata(data);
+      console.log('📥 Server response:', result);
       if (result.success) {
         toast.success(isEditing ? 'Metadata updated successfully' : 'Metadata created successfully');
         router.push('/dashboard/metadata');
@@ -102,15 +127,36 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
       }
     } catch (error) {
       toast.error('An error occurred while saving metadata');
-      console.error(error);
+      console.error('❌ Metadata submission error:', error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('🔍 Form submit triggered');
+    console.log('📊 Current form values:', form.getValues());
+    console.log('📊 Form state:', {
+      isValid: form.formState.isValid,
+      errors: form.formState.errors,
+      isDirty: form.formState.isDirty
+    });
+    form.handleSubmit(onSubmit, (errors) => {
+      console.error('❌ Form validation errors:', errors);
+      console.log('📊 Full form state on error:', form.formState);
+      const errorCount = Object.keys(errors).length;
+      if (errorCount > 0) {
+        toast.error(`Please fix ${errorCount} validation error(s)`);
+      } else {
+        toast.error('Validation failed - check console for details');
+      }
+    })(e);
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={handleFormSubmit} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormField
             control={form.control}

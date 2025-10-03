@@ -26,6 +26,7 @@ export async function saveCromboData(data: CromboData) {
       data: {
         ...validatedData,
         note: validatedData.note ?? "", // Ensure note is always a string
+        createdAt: new Date(),
       },
     });
 

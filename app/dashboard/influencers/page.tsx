@@ -342,7 +342,7 @@ export default function InfluencersPage() {
                 <div className="text-sm text-muted-foreground mb-2">Social Platforms</div>
                 <div className="flex flex-wrap gap-2">
                   {influencer.socialPlatforms
-                    .filter(platform => platform.followers > 0)
+                    ?.filter(platform => platform.followers > 0)
                     .map((platform, index) => (
                       <Badge
                         key={index}

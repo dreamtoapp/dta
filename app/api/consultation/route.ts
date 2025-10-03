@@ -68,13 +68,16 @@ export async function POST(req: NextRequest) {
     const dataToSave = {
       name,
       email,
-      phone: phone || undefined,
+      phone: phone || "",
       message,
       voiceUrl,
     };
     console.log('Saving to DB:', dataToSave);
     await db.consultationRequest.create({
-      data: dataToSave,
+      data: {
+        ...dataToSave,
+        createdAt: new Date(),
+      },
     });
 
     return NextResponse.json({ success: true });

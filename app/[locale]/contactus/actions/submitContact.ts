@@ -31,10 +31,10 @@ export async function submitContact(
         name: validatedData.name,
         email: validatedData.email,
         mobile: validatedData.mobile,
-        projectType: "contact", // Default value for standard contact form
-        projectDetails: validatedData.message,
-        budget: "not-specified", // Default value for standard contact form
         message: validatedData.message,
+        projectType: "contact",
+        projectDetails: "Standard contact form submission",
+        budget: "not-specified",
       },
     });
 

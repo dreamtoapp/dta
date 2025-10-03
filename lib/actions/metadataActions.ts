@@ -59,10 +59,30 @@ export async function getAllPageMetadata() {
 // Create or update metadata
 export async function upsertPageMetadata(data: PageMetadataInput) {
   try {
+    // Convert empty strings to undefined for optional fields
+    const cleanData = {
+      ...data,
+      ogImage: data.ogImage === '' ? undefined : data.ogImage,
+      canonicalUrl: data.canonicalUrl === '' ? undefined : data.canonicalUrl,
+      keywordsEn: data.keywordsEn === '' ? undefined : data.keywordsEn,
+      keywordsAr: data.keywordsAr === '' ? undefined : data.keywordsAr,
+      ogTitleEn: data.ogTitleEn === '' ? undefined : data.ogTitleEn,
+      ogTitleAr: data.ogTitleAr === '' ? undefined : data.ogTitleAr,
+      ogDescriptionEn: data.ogDescriptionEn === '' ? undefined : data.ogDescriptionEn,
+      ogDescriptionAr: data.ogDescriptionAr === '' ? undefined : data.ogDescriptionAr,
+      twitterTitleEn: data.twitterTitleEn === '' ? undefined : data.twitterTitleEn,
+      twitterTitleAr: data.twitterTitleAr === '' ? undefined : data.twitterTitleAr,
+      twitterDescriptionEn: data.twitterDescriptionEn === '' ? undefined : data.twitterDescriptionEn,
+      twitterDescriptionAr: data.twitterDescriptionAr === '' ? undefined : data.twitterDescriptionAr,
+      category: data.category === '' ? undefined : data.category,
+      author: data.author === '' ? undefined : data.author,
+    };
+
+    const { pagePath, ...updateData } = cleanData;
     const result = await db.pageMetadata.upsert({
-      where: { pagePath: data.pagePath },
-      create: data,
-      update: data,
+      where: { pagePath },
+      create: cleanData,
+      update: updateData,
     });
 
     // Revalidate the page

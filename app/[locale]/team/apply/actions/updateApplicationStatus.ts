@@ -35,21 +35,7 @@ export async function updateApplicationStatus(formData: FormData) {
       where: { id: validatedData.applicationId },
       data: {
         status: validatedData.status,
-        adminNotes: validatedData.notes,
         updatedAt: new Date(),
-        // Create status history entry
-        statusHistory: {
-          create: {
-            status: validatedData.status,
-            notes: validatedData.notes,
-            changedBy: validatedData.changedBy,
-          }
-        }
-      },
-      include: {
-        statusHistory: {
-          orderBy: { changedAt: 'desc' }
-        }
       },
     });
 
@@ -106,11 +92,6 @@ export async function getApplicationWithHistory(applicationId: string) {
   try {
     const application = await prisma.jobApplication.findUnique({
       where: { id: applicationId },
-      include: {
-        statusHistory: {
-          orderBy: { changedAt: 'desc' }
-        }
-      },
     });
 
     if (!application) {

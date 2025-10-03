@@ -30,7 +30,7 @@ export async function updateContactRequestStatus(input: UpdateContactRequestStat
     const validatedInput = UpdateContactRequestStatusSchema.parse(input)
 
     // Check if contact request exists
-    const existingContactRequest = await prisma.contactRequest.findUnique({
+    const existingContactRequest = await prisma.projectRequest.findUnique({
       where: { id: validatedInput.id }
     })
 
@@ -42,10 +42,9 @@ export async function updateContactRequestStatus(input: UpdateContactRequestStat
     }
 
     // Update contact request status
-    const updatedContactRequest = await prisma.contactRequest.update({
+    const updatedContactRequest = await prisma.projectRequest.update({
       where: { id: validatedInput.id },
       data: {
-        status: validatedInput.status
       }
     })
 

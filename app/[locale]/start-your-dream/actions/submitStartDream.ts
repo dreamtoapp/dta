@@ -67,10 +67,10 @@ export async function submitStartDream(
         name: data.name,
         mobile: data.mobile,
         email: data.email,
+        message: data.message || "",
         projectType: serviceTypeString,
         projectDetails: data.projectDescription,
-        budget: "", // Removed from form
-        message: data.message || "",
+        budget: "",
       },
     });
 

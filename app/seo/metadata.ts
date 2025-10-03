@@ -34,14 +34,16 @@ export function getDefaultMetadata(locale: string): Metadata {
         : 'Professional web & mobile development services in Jeddah, Saudi Arabia',
       url: localeUrl,
       siteName: isArabic ? 'دريم تو آب' : 'DreamToApp',
-      images: [
-        {
-          url: `${baseUrl}/og-image.png`,
-          width: 1200,
-          height: 630,
-          alt: isArabic ? 'دريم تو آب - شركة تطوير مواقع في جدة' : 'DreamToApp - Web Development Agency in Jeddah',
-        },
-      ],
+        images: [
+          {
+            url: `${baseUrl}/og-image.png`,
+            width: 1200,
+            height: 630,
+            alt: isArabic ? 'دريم تو آب - شركة تطوير مواقع في جدة' : 'DreamToApp - Web Development Agency in Jeddah',
+            type: 'image/png',
+            secureUrl: `${baseUrl}/og-image.png`,
+          },
+        ],
       locale: isArabic ? 'ar_SA' : 'en_US',
       alternateLocale: isArabic ? 'en_US' : 'ar_SA',
       type: 'website',
@@ -54,14 +56,10 @@ export function getDefaultMetadata(locale: string): Metadata {
       description: isArabic
         ? 'شركة تطوير مواقع وتطبيقات في جدة، المملكة العربية السعودية'
         : 'Professional web & mobile development services in Jeddah, Saudi Arabia',
-      images: [
-        {
-          url: `${baseUrl}/og-image.png`,
-          width: 1200,
-          height: 630,
-          alt: isArabic ? 'دريم تو آب' : 'DreamToApp',
-        },
-      ],
+      images: [{
+        url: `${baseUrl}/og-image.png`,
+        alt: isArabic ? 'دريم تو آب - شركة تطوير مواقع في جدة' : 'DreamToApp - Web Development Agency in Jeddah',
+      }],
     },
     robots: {
       index: true,
@@ -146,6 +144,8 @@ export async function getDynamicMetadata(
             width: 1200,
             height: 630,
             alt: (isArabic ? dbMeta.ogTitleAr : dbMeta.ogTitleEn) || (isArabic ? dbMeta.titleAr : dbMeta.titleEn),
+            type: 'image/png',
+            secureUrl: dbMeta.ogImage || `${baseUrl}/og-image.png`,
           },
         ],
         locale: isArabic ? 'ar_SA' : 'en_US',
@@ -158,14 +158,10 @@ export async function getDynamicMetadata(
         creator: '@dreamtoapp',
         title: (isArabic ? dbMeta.twitterTitleAr : dbMeta.twitterTitleEn) || (isArabic ? dbMeta.titleAr : dbMeta.titleEn),
         description: (isArabic ? dbMeta.twitterDescriptionAr : dbMeta.twitterDescriptionEn) || (isArabic ? dbMeta.descriptionAr : dbMeta.descriptionEn),
-        images: [
-          {
-            url: dbMeta.ogImage || `${baseUrl}/og-image.png`,
-            width: 1200,
-            height: 630,
-            alt: (isArabic ? dbMeta.twitterTitleAr : dbMeta.twitterTitleEn) || (isArabic ? dbMeta.titleAr : dbMeta.titleEn),
-          },
-        ],
+        images: [{
+          url: dbMeta.ogImage || `${baseUrl}/og-image.png`,
+          alt: (isArabic ? dbMeta.twitterTitleAr : dbMeta.twitterTitleEn) || (isArabic ? dbMeta.titleAr : dbMeta.titleEn),
+        }],
       },
       robots: {
         index: dbMeta.robotsIndex,

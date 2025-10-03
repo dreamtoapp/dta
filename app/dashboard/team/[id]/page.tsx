@@ -70,9 +70,9 @@ export default function EditTeamMemberPage({ params }: { params: Promise<{ id: s
         form.reset({
           id: result.data.id,
           name: result.data.name,
-          role: result.data.role,
+          role: result.data.role as 'DEVELOPER' | 'DESIGNER' | 'MARKETING' | 'MANAGER',
           experience: result.data.experience || '',
-          displayOrder: result.data.displayOrder,
+          displayOrder: Number(result.data.displayOrder),
           isActive: result.data.isActive,
           employeeImage: result.data.employeeImage || '',
         });

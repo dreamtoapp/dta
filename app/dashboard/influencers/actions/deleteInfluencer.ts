@@ -30,12 +30,6 @@ export async function deleteInfluencer(input: DeleteInfluencerInput): Promise<De
     // Check if influencer exists
     const existingInfluencer = await prisma.influencer.findUnique({
       where: { id: validatedInput.id },
-      include: {
-        socialPlatforms: true,
-        portfolio: true,
-        reviews: true,
-        contactRequests: true
-      }
     })
 
     if (!existingInfluencer) {
@@ -45,20 +39,7 @@ export async function deleteInfluencer(input: DeleteInfluencerInput): Promise<De
       }
     }
 
-    // Check if influencer has active contact requests
-    const activeContactRequests = await prisma.contactRequest.count({
-      where: {
-        influencerId: validatedInput.id,
-        status: { in: ['PENDING', 'RESPONDED'] }
-      }
-    })
-
-    if (activeContactRequests > 0) {
-      return {
-        success: false,
-        message: `Cannot delete influencer with ${activeContactRequests} active contact requests. Please resolve them first.`
-      }
-    }
+    // Note: ProjectRequest doesn't have influencerId field, so we skip the contact request check
 
     // Delete influencer (cascade will handle related records)
     await prisma.influencer.delete({

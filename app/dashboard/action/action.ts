@@ -66,7 +66,7 @@ export async function getDashboardStats() {
       }),
 
       // Recent Contact Requests (last 7 days)
-      db.contactRequest.count({
+      db.projectRequest.count({
         where: {
           createdAt: {
             gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)

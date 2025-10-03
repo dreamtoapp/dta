@@ -17,22 +17,12 @@ export interface ContactRequest {
   id: string
   name: string
   email: string
-  phone?: string | null
-  company?: string | null
+  mobile: string
   message: string
-  budget?: string | null
-  campaignType?: string | null
-  timeline?: string | null
-  status: 'PENDING' | 'RESPONDED' | 'COMPLETED' | 'CANCELLED'
-  influencerId: string
-  influencer: {
-    id: string
-    name: string
-    username: string
-    avatar?: string | null
-  }
+  budget: string
+  projectType: string
+  projectDetails: string
   createdAt: Date
-  updatedAt: Date
 }
 
 export interface GetContactRequestsResponse {
@@ -60,24 +50,14 @@ export async function getContactRequests(params: GetContactRequestsParams = {}):
     }
 
     // Get total count
-    const total = await prisma.contactRequest.count({ where })
+    const total = await prisma.projectRequest.count({ where })
 
     // Get contact requests with pagination
-    const contactRequests = await prisma.contactRequest.findMany({
+    const contactRequests = await prisma.projectRequest.findMany({
       where,
       orderBy: { createdAt: 'desc' },
       skip: offset,
       take: limit,
-      include: {
-        influencer: {
-          select: {
-            id: true,
-            name: true,
-            username: true,
-            avatar: true
-          }
-        }
-      }
     })
 
     const hasMore = offset + limit < total

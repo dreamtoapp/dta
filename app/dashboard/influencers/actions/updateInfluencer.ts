@@ -62,7 +62,7 @@ export async function updateInfluencer(data: any) {
       name: validatedData.name,
       username: validatedData.username,
       email: validatedData.email,
-      phone: validatedData.phone || null,
+      phone: validatedData.phone || "",
       bio: validatedData.bio,
       category: validatedData.category,
       location: validatedData.location,
@@ -102,7 +102,8 @@ export async function updateInfluencer(data: any) {
           username: platformData.username,
           followers: platformData.followers,
           isVerified: platformData.isVerified,
-          isActive: platformData.isActive
+          isActive: platformData.isActive,
+          lastUpdated: new Date()
         },
         create: {
           platform: platformEnum,
@@ -110,7 +111,8 @@ export async function updateInfluencer(data: any) {
           followers: platformData.followers,
           isVerified: platformData.isVerified,
           isActive: platformData.isActive,
-          influencerId: validatedData.id
+          influencerId: validatedData.id,
+          lastUpdated: new Date()
         }
       })
     }

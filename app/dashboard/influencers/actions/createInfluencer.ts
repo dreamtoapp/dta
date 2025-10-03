@@ -96,7 +96,7 @@ export async function createInfluencer(input: CreateInfluencerInput): Promise<Cr
         name: validatedInput.name,
         username: validatedInput.username,
         email: validatedInput.email,
-        phone: validatedInput.phone,
+        phone: validatedInput.phone || "",
         bio: validatedInput.bio,
         avatar: validatedInput.avatar,
         coverImage: validatedInput.coverImage,
@@ -111,20 +111,25 @@ export async function createInfluencer(input: CreateInfluencerInput): Promise<Cr
         isFeatured: validatedInput.isFeatured,
         isActive: validatedInput.isActive,
         status: 'PENDING_VERIFICATION',
-        socialPlatforms: {
-          create: validatedInput.socialPlatforms.map(platform => ({
-            platform: platform.platform,
-            username: platform.username,
-            followers: platform.followers,
-            isVerified: platform.verified,
-            isActive: true
-          }))
-        }
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
-      include: {
-        socialPlatforms: true
-      }
     })
+
+    // Create social platforms separately
+    for (const platform of validatedInput.socialPlatforms) {
+      await db.socialPlatform.create({
+        data: {
+          influencerId: influencer.id,
+          platform: platform.platform,
+          username: platform.username,
+          followers: platform.followers,
+          isVerified: platform.verified,
+          isActive: true,
+          lastUpdated: new Date()
+        }
+      })
+    }
 
     // Revalidate dashboard stats
     revalidatePath('/dashboard')

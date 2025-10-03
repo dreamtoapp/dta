@@ -37,19 +37,21 @@ export interface InfluencerDetail {
 export async function getInfluencerById(id: string): Promise<InfluencerDetail | null> {
   try {
     const influencer = await db.influencer.findUnique({
-      where: { id },
-      include: {
-        socialPlatforms: true
-      }
+      where: { id }
     })
 
     if (!influencer) {
       return null
     }
 
+    // Get social platforms separately since they're not a relation
+    const socialPlatforms = await db.socialPlatform.findMany({
+      where: { influencerId: id }
+    })
+
     // Calculate total followers from social platforms
-    const totalFollowers = influencer.socialPlatforms.reduce(
-      (total, platform) => total + platform.followers,
+    const totalFollowers = socialPlatforms.reduce(
+      (total: number, platform: any) => total + Number(platform.followers),
       0
     )
 
@@ -65,8 +67,8 @@ export async function getInfluencerById(id: string): Promise<InfluencerDetail | 
       location: influencer.location,
       languages: influencer.languages,
       totalFollowers,
-      influencerRate: influencer.influencerRate,
-      agencyRate: influencer.agencyRate,
+      influencerRate: Number(influencer.influencerRate),
+      agencyRate: Number(influencer.agencyRate),
       isVerified: influencer.isVerified,
       isFeatured: influencer.isFeatured,
       isActive: influencer.isActive,
@@ -74,10 +76,10 @@ export async function getInfluencerById(id: string): Promise<InfluencerDetail | 
       avatar: influencer.avatar || undefined,
       coverImage: influencer.coverImage || undefined,
       testimonialImage: influencer.testimonialImage || undefined,
-      socialPlatforms: influencer.socialPlatforms.map(platform => ({
+      socialPlatforms: socialPlatforms.map((platform: any) => ({
         platform: platform.platform,
         username: platform.username,
-        followers: platform.followers,
+        followers: Number(platform.followers),
         isVerified: platform.isVerified,
         isActive: platform.isActive
       })),

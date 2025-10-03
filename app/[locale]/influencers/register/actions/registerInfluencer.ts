@@ -85,7 +85,7 @@ export async function registerInfluencer(input: RegisterInfluencerInput): Promis
         name: validatedInput.name,
         username,
         email: normalizedEmail,
-        phone: validatedInput.phone || null,
+        phone: validatedInput.phone || "",
         bio: validatedInput.bio,
         category: validatedInput.category,
         location: validatedInput.location,
@@ -97,6 +97,8 @@ export async function registerInfluencer(input: RegisterInfluencerInput): Promis
         isActive: true,
         isVerified: false,
         isFeatured: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     })
 

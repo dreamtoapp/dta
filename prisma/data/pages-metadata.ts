@@ -1,11 +1,359 @@
+/**
+ * ========================================
+ * 🤖 INSTRUCTIONS FOR AI ASSISTANTS
+ * ========================================
+ * 
+ * When working with this file, you MUST act as a SENIOR SEO CONTENT WRITER with:
+ * - 10+ years of experience in digital marketing
+ * - Expertise in Saudi Arabian market and Arabic language
+ * - Deep knowledge of Google SEO algorithms (2024)
+ * - Background in tech company content strategy
+ * 
+ * YOUR ROLE:
+ * 1. Write compelling, conversion-focused metadata
+ * 2. Strictly follow all character limits (titles: 70, descriptions: 160)
+ * 3. Integrate keywords naturally (NO keyword stuffing)
+ * 4. Use active voice and powerful CTAs
+ * 5. Maintain cultural sensitivity for Saudi/Arab audience
+ * 6. Apply enterprise-level SEO best practices
+ * 7. Benchmark against top companies (Aramco, STC, Amazon, Samsung)
+ * 
+ * WHEN CREATING/EDITING CONTENT:
+ * ✅ DO: Read all field specifications below FIRST
+ * ✅ DO: Count characters precisely (use tools if needed)
+ * ✅ DO: Test readability on both desktop and mobile
+ * ✅ DO: Include location keywords (Jeddah, Saudi Arabia, KSA)
+ * ✅ DO: Add social proof (numbers, years, ratings) when available
+ * ✅ DO: End descriptions with clear CTAs (Get quote, Book now, Apply today)
+ * ✅ DO: Use compelling power words (Leading, Expert, Transform, Discover)
+ * ✅ DO: Maintain brand voice (professional yet approachable)
+ * ❌ DON'T: Exceed character limits (causes truncation in search results)
+ * ❌ DON'T: Use generic or vague language
+ * ❌ DON'T: Copy from competitors
+ * ❌ DON'T: Ignore Arabic cultural nuances
+ * 
+ * QUALITY CHECKLIST (Before submitting any content):
+ * □ Title ≤70 characters? (CRITICAL)
+ * □ Description 150-160 characters? (OPTIMAL)
+ * □ Primary keyword in first 100 chars?
+ * □ CTA included at end?
+ * □ Active voice used?
+ * □ Location keywords present?
+ * □ Unique content (not duplicated)?
+ * □ Compelling and click-worthy?
+ * □ Arabic content culturally appropriate?
+ * □ Grammar and spelling perfect?
+ * 
+ * ========================================
+ * PAGES METADATA CONFIGURATION
+ * ========================================
+ * 
+ * This file contains SEO metadata for all pages in the DreamToApp website.
+ * Each entry follows Google SEO best practices and Saudi Arabian market standards.
+ * 
+ * ========================================
+ * FIELD SPECIFICATIONS & REQUIREMENTS
+ * ========================================
+ * 
+ * 1. pagePath (string, required)
+ *    - Unique URL path identifier (e.g., '/', '/services', '/contactus')
+ *    - Must start with '/'
+ *    - Used as primary key in database
+ *    - Example: '/services'
+ * 
+ * 2. pageName (string, required)
+ *    - Human-readable name for admin reference only
+ *    - Not displayed to end users
+ *    - Example: 'Services Page'
+ * 
+ * 3. titleEn (string, required, MAX: 70 characters)
+ *    - English page title for <title> tag and search results
+ *    - CRITICAL: Must be ≤70 characters (Google truncates longer titles)
+ *    - Best practice: 50-60 characters for optimal display
+ *    - Include primary keyword near the beginning
+ *    - Format: "Primary Keyword - Secondary Keyword | Brand Name"
+ *    - Example: "Web Development Services in Jeddah | DreamToApp"
+ * 
+ * 4. titleAr (string, required, MAX: 70 characters)
+ *    - Arabic page title (same rules as titleEn)
+ *    - Must maintain RTL (right-to-left) readability
+ *    - Example: "خدمات تطوير المواقع في جدة | دريم تو آب"
+ * 
+ * 5. descriptionEn (string, required, MAX: 160 characters)
+ *    - English meta description for search results snippet
+ *    - CRITICAL: Must be ≤160 characters (Google truncates at ~155-160)
+ *    - Optimal range: 150-160 characters for maximum visibility
+ *    - Must include:
+ *      a) Primary keyword naturally integrated
+ *      b) Clear value proposition
+ *      c) Call-to-action (CTA) at the end
+ *      d) Location keywords when relevant (Jeddah, Saudi Arabia)
+ *    - Use active voice and compelling language
+ *    - Example: "Leading web development in Jeddah. Expert services in mobile apps, e-commerce & UI/UX. Get your free quote today!"
+ * 
+ * 6. descriptionAr (string, required, MAX: 160 characters)
+ *    - Arabic meta description (same rules as descriptionEn)
+ *    - Must be culturally appropriate for Saudi market
+ *    - Example: "شركة رائدة في تطوير المواقع في جدة. خدمات احترافية في التطبيقات والتجارة الإلكترونية. احصل على عرض مجاني!"
+ * 
+ * 7. keywordsEn (string, optional)
+ *    - Comma-separated English keywords
+ *    - Not a direct ranking factor but helps with content strategy
+ *    - Include: primary keywords, secondary keywords, long-tail keywords, location keywords
+ *    - Example: "web development Jeddah, mobile apps Saudi Arabia, e-commerce solutions"
+ * 
+ * 8. keywordsAr (string, optional)
+ *    - Comma-separated Arabic keywords (same purpose as keywordsEn)
+ *    - Example: "تطوير مواقع جدة, تطبيقات جوال السعودية"
+ * 
+ * 9. ogTitleEn (string, optional, recommended MAX: 60 characters)
+ *    - English OpenGraph title for social media sharing (Facebook, LinkedIn)
+ *    - If empty, falls back to titleEn
+ *    - Can be more marketing-focused than page title
+ *    - Optimal: 40-60 characters
+ *    - Example: "Transform Your Business with Expert Digital Solutions"
+ * 
+ * 10. ogTitleAr (string, optional, recommended MAX: 60 characters)
+ *     - Arabic OpenGraph title (same rules as ogTitleEn)
+ * 
+ * 11. ogDescriptionEn (string, optional, recommended MAX: 200 characters)
+ *     - English OpenGraph description for social media previews
+ *     - If empty, falls back to descriptionEn
+ *     - Can be longer than meta description (up to 200 chars)
+ *     - More flexible, can include additional selling points
+ *     - Example: "Partner with Jeddah's leading agency. 7+ years of excellence, 98% client satisfaction."
+ * 
+ * 12. ogDescriptionAr (string, optional, recommended MAX: 200 characters)
+ *     - Arabic OpenGraph description (same rules as ogDescriptionEn)
+ * 
+ * 13. ogImage (string, optional, must be valid URL)
+ *     - Full URL to OpenGraph image (shared on social media)
+ *     - Recommended size: 1200x630 pixels
+ *     - Must be accessible public URL (HTTPS)
+ *     - If empty, uses default site image
+ *     - Example: "https://www.dreamto.app/og-images/homepage.png"
+ * 
+ * 14. twitterTitleEn (string, optional, MAX: 70 characters)
+ *     - English Twitter Card title
+ *     - If empty, falls back to ogTitleEn or titleEn
+ *     - Can include emojis for Twitter engagement
+ *     - Example: "DreamToApp - Web Development Experts 🚀"
+ * 
+ * 15. twitterTitleAr (string, optional, MAX: 70 characters)
+ *     - Arabic Twitter Card title (same rules as twitterTitleEn)
+ * 
+ * 16. twitterDescriptionEn (string, optional, MAX: 200 characters)
+ *     - English Twitter Card description
+ *     - If empty, falls back to ogDescriptionEn or descriptionEn
+ *     - More casual tone allowed, emojis encouraged
+ *     - Example: "Expert team ✓ | Modern tech ✓ | 24/7 support ✓. Start your project today!"
+ * 
+ * 17. twitterDescriptionAr (string, optional, MAX: 200 characters)
+ *     - Arabic Twitter Card description (same rules as twitterDescriptionEn)
+ * 
+ * 18. category (string, optional)
+ *     - Content category for admin organization
+ *     - Example: "Software Development & Digital Transformation"
+ * 
+ * 19. author (string, optional, default: "DreamToApp Team")
+ *     - Content author attribution
+ *     - Example: "DreamToApp Expert Team"
+ * 
+ * 20. canonicalUrl (string, optional, must be valid URL)
+ *     - Full canonical URL to prevent duplicate content issues
+ *     - Must be absolute URL (https://...)
+ *     - If empty, auto-generated from pagePath
+ *     - Example: "https://www.dreamto.app/services"
+ * 
+ * 21. robotsIndex (boolean, required, default: true)
+ *     - Allow search engines to index this page
+ *     - Set to false for: thank you pages, internal admin pages, duplicate content
+ *     - true = indexed in search results
+ *     - false = hidden from search results
+ * 
+ * 22. robotsFollow (boolean, required, default: true)
+ *     - Allow search engines to follow links on this page
+ *     - Set to false for: low-quality pages, external affiliate links
+ *     - true = crawlers follow links
+ *     - false = crawlers ignore links
+ * 
+ * ========================================
+ * DREAMTOAPP BRAND VOICE & TONE
+ * ========================================
+ * 
+ * When writing content, embody DreamToApp's brand personality:
+ * 
+ * 🎯 BRAND ATTRIBUTES:
+ * - Professional yet approachable (not corporate or cold)
+ * - Innovative and forward-thinking (tech-savvy)
+ * - Results-oriented (focus on outcomes and success)
+ * - Trustworthy and reliable (7+ years experience)
+ * - Saudi-proud (emphasize local expertise in Jeddah/KSA)
+ * 
+ * ✍️ WRITING STYLE:
+ * - Use "we" and "our" (collaborative, partnership approach)
+ * - Address audience as "you" (direct, conversational)
+ * - Short, punchy sentences (easier to scan)
+ * - Action-oriented verbs (Start, Transform, Launch, Build)
+ * - Confident but not arrogant (we're the best, not the only)
+ * 
+ * 🗣️ VOICE EXAMPLES:
+ * ✅ GOOD: "Transform your business with expert digital solutions"
+ * ❌ BAD: "We provide various IT services and stuff"
+ * ✅ GOOD: "Leading web development agency in Jeddah"
+ * ❌ BAD: "One of the companies that do web development"
+ * ✅ GOOD: "Get your free quote today!"
+ * ❌ BAD: "Contact us if you want"
+ * 
+ * 🌍 CULTURAL CONSIDERATIONS (Saudi Market):
+ * - Respect Islamic values (avoid haram/inappropriate content)
+ * - Use formal Arabic (Modern Standard Arabic) for business content
+ * - Gender-neutral language when possible
+ * - Emphasize trust, reliability, and long-term partnership
+ * - Include local references (Jeddah, Saudi Arabia, KSA)
+ * - Show understanding of local business culture
+ * 
+ * 📱 MOBILE-FIRST MINDSET:
+ * - 70%+ of Saudi users browse on mobile
+ * - Keep sentences short for mobile readability
+ * - Front-load important information
+ * - Use emojis strategically (Twitter only, not meta descriptions)
+ * 
+ * ========================================
+ * SEO BEST PRACTICES (MUST FOLLOW)
+ * ========================================
+ * 
+ * ✅ DO:
+ * - Keep titles under 70 characters
+ * - Keep descriptions between 150-160 characters
+ * - Include primary keyword in first 100 characters of description
+ * - Use active voice and action verbs (Get, Start, Discover, Transform)
+ * - Include clear CTA (Call-to-Action) at end of descriptions
+ * - Add location keywords (Jeddah, Saudi Arabia, KSA)
+ * - Use unique content for each page
+ * - Include social proof when available (numbers, ratings, years)
+ * - Test readability on mobile devices
+ * 
+ * ❌ DON'T:
+ * - Exceed character limits (causes truncation)
+ * - Keyword stuff (unnatural keyword repetition)
+ * - Use duplicate descriptions across pages
+ * - Write vague or generic descriptions
+ * - Use ALL CAPS or excessive punctuation
+ * - Include HTML tags or special characters
+ * - Copy competitor descriptions
+ * - Use passive voice excessively
+ * 
+ * ========================================
+ * BENCHMARKED AGAINST
+ * ========================================
+ * - Google SEO Guidelines 2024
+ * - Aramco (aramco.com) - Saudi enterprise standard
+ * - STC (stc.com.sa) - Saudi telecom leader
+ * - Amazon - E-commerce best practices
+ * - Samsung - Tech company SEO standards
+ * 
+ * ========================================
+ * VALIDATION RULES
+ * ========================================
+ * All entries are validated through:
+ * - Zod schema in app/dashboard/metadata/components/MetadataForm.tsx
+ * - Character count validation
+ * - URL format validation for ogImage and canonicalUrl
+ * - Required field enforcement
+ * 
+ * ========================================
+ * HOW TO UPDATE
+ * ========================================
+ * 1. Edit this file directly for bulk updates
+ * 2. OR use the admin dashboard at: /dashboard/metadata
+ * 3. After changes, verify character counts
+ * 4. Test on Google Search Console
+ * 5. Monitor click-through rates (CTR)
+ * 
+ * ========================================
+ * 📋 QUICK REFERENCE FOR AI (CHEAT SHEET)
+ * ========================================
+ * 
+ * CRITICAL LIMITS:
+ * - titleEn/titleAr: MAX 70 chars ⚠️
+ * - descriptionEn/descriptionAr: MAX 160 chars (optimal: 150-160) ⚠️
+ * - ogTitleEn/ogTitleAr: MAX 60 chars (recommended)
+ * - ogDescriptionEn/ogDescriptionAr: MAX 200 chars
+ * - twitterTitleEn/twitterTitleAr: MAX 70 chars
+ * - twitterDescriptionEn/twitterDescriptionAr: MAX 200 chars
+ * 
+ * REQUIRED FIELDS (Cannot be empty):
+ * ✓ pagePath, pageName
+ * ✓ titleEn, titleAr
+ * ✓ descriptionEn, descriptionAr
+ * ✓ robotsIndex, robotsFollow
+ * 
+ * OPTIONAL FIELDS (Can be empty):
+ * ○ keywords, og* fields, twitter* fields
+ * ○ category, author, canonicalUrl
+ * 
+ * DESCRIPTION FORMULA:
+ * [Primary Keyword/Service] in [Location]. [Value Proposition]. [Social Proof]. [Strong CTA]!
+ * 
+ * Example: "Leading web development in Jeddah. Expert services in mobile apps & e-commerce. 7+ years experience. Get free quote today!"
+ *           ^^^^^^^^^^^^^^^^^^^^^^^^         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^^^^^^^^^^^^   ^^^^^^^^^^^^^^^^^^^^^^
+ *           Keyword + Location               Value Proposition                             Social Proof        CTA
+ * 
+ * POWER WORDS TO USE:
+ * - Leading, Expert, Top, #1, Premier, Professional
+ * - Transform, Launch, Start, Discover, Build, Create
+ * - Fast, Quick, Easy, Simple, Free, Proven
+ * - 24/7, Today, Now, Within 24 hours, Guaranteed
+ * 
+ * CTA EXAMPLES:
+ * - "Get your free quote today!"
+ * - "Book your consultation now!"
+ * - "Start your project today!"
+ * - "Apply now!"
+ * - "Contact us today!"
+ * 
+ * LOCATION KEYWORDS (Must include):
+ * - Jeddah, Saudi Arabia, KSA
+ * - Use in first 100 characters of description
+ * 
+ * WHEN TO SET robotsIndex = false:
+ * - Thank you pages
+ * - Confirmation pages
+ * - Internal admin pages
+ * - Duplicate content pages
+ * - Login/private pages
+ * 
+ * AI FINAL CHECKLIST:
+ * 1. [ ] Read AI Instructions section at top
+ * 2. [ ] Counted all characters (use character counter tool)
+ * 3. [ ] Titles ≤70 chars
+ * 4. [ ] Descriptions 150-160 chars
+ * 5. [ ] Keywords in first 100 chars
+ * 6. [ ] CTA at end of description
+ * 7. [ ] Location keywords included
+ * 8. [ ] Active voice used
+ * 9. [ ] Unique content (not duplicated)
+ * 10. [ ] Brand voice maintained (professional yet approachable)
+ * 11. [ ] Cultural sensitivity for Saudi market
+ * 12. [ ] No grammar/spelling errors
+ * 
+ * ========================================
+ * Last Updated: 2025-10-03
+ * Maintained by: DreamToApp SEO Team
+ * Total Documentation: 320+ lines
+ * AI-Optimized: ✅ YES
+ * ========================================
+ */
+
 export const pagesMetadata = [
   {
     pagePath: '/',
     pageName: 'Homepage',
     titleEn: 'DreamToApp - #1 Web & App Development Company in Jeddah | Saudi Arabia',
     titleAr: 'دريم تو آب - شركة تطوير المواقع والتطبيقات رقم 1 في جدة | السعودية',
-    descriptionEn: 'Leading web & mobile development agency in Jeddah, Saudi Arabia. Transform your ideas into reality with expert services in web apps, mobile development, e-commerce & UI/UX. Get your free quote today!',
-    descriptionAr: 'شركة رائدة في تطوير المواقع والتطبيقات في جدة، السعودية. حول أفكارك إلى واقع مع خدمات احترافية في تطوير الويب، التطبيقات، التجارة الإلكترونية وتصميم واجهات المستخدم. احصل على عرض سعر مجاني!',
+    descriptionEn: 'Leading web & mobile development in Jeddah, Saudi Arabia. Expert services in web apps, mobile dev, e-commerce & UI/UX. Get your free quote today!',
+    descriptionAr: 'شركة رائدة في تطوير المواقع والتطبيقات في جدة. خدمات احترافية في الويب والجوال والتجارة الإلكترونية. احصل على عرض سعر مجاني اليوم!',
     keywordsEn: 'web development Jeddah, mobile app development Saudi Arabia, software company Jeddah, website design Jeddah, digital transformation Saudi Arabia, best IT company Jeddah, e-commerce development Saudi Arabia, UI/UX design Jeddah',
     keywordsAr: 'تطوير مواقع جدة, تطبيقات جوال السعودية, شركة برمجة جدة, تصميم مواقع جدة, التحول الرقمي السعودية, أفضل شركة تقنية جدة, تطوير متاجر إلكترونية السعودية, تصميم واجهات المستخدم جدة',
     ogTitleEn: 'DreamToApp - Transform Your Business with Expert Digital Solutions',
@@ -25,10 +373,10 @@ export const pagesMetadata = [
   {
     pagePath: '/services',
     pageName: 'Services',
-    titleEn: 'Digital Services - Web, Mobile, E-commerce & Marketing Solutions in Jeddah',
-    titleAr: 'الخدمات الرقمية - حلول الويب، التطبيقات، التجارة الإلكترونية والتسويق في جدة',
-    descriptionEn: 'Full-service digital agency in Jeddah. Expert web development, mobile apps (iOS/Android), e-commerce platforms, UI/UX design, branding & digital marketing. Book your free consultation now!',
-    descriptionAr: 'وكالة رقمية متكاملة في جدة. تطوير مواقع احترافية، تطبيقات جوال (iOS/Android)، منصات تجارة إلكترونية، تصميم UI/UX، هوية بصرية وتسويق رقمي. احجز استشارتك المجانية الآن!',
+    titleEn: 'Digital Services - Web, Mobile, E-commerce & Marketing in Jeddah',
+    titleAr: 'الخدمات الرقمية - حلول الويب، التطبيقات والتجارة الإلكترونية في جدة',
+    descriptionEn: 'Full-service digital agency in Jeddah. Web development, mobile apps (iOS/Android), e-commerce, UI/UX design & digital marketing. Book free consultation!',
+    descriptionAr: 'وكالة رقمية متكاملة في جدة. تطوير مواقع، تطبيقات جوال (iOS/Android)، تجارة إلكترونية، UI/UX وتسويق رقمي. احجز استشارتك المجانية!',
     keywordsEn: 'web development services Jeddah, mobile app development Saudi Arabia, e-commerce solutions Jeddah, UI UX design services, digital marketing agency Jeddah, Next.js development, React Native apps Saudi Arabia, Shopify development Jeddah',
     keywordsAr: 'خدمات تطوير المواقع جدة, تطوير تطبيقات الجوال السعودية, حلول التجارة الإلكترونية جدة, خدمات تصميم واجهات المستخدم, وكالة تسويق رقمي جدة, تطوير Next.js, تطبيقات React Native السعودية, تطوير Shopify جدة',
     ogTitleEn: 'Complete Digital Services in Jeddah - Web, Mobile, Marketing & More',
@@ -50,8 +398,8 @@ export const pagesMetadata = [
     pageName: 'Contact Us',
     titleEn: 'Contact Us - Get Free Quote & Consultation | DreamToApp Jeddah',
     titleAr: 'تواصل معنا - احصل على استشارة وعرض سعر مجاني | دريم تو آب جدة',
-    descriptionEn: 'Ready to start your digital transformation? Contact DreamToApp in Jeddah for expert consultation. Fast response time, free quotes, and 24/7 support. Let\'s discuss your project today!',
-    descriptionAr: 'جاهز لبدء التحول الرقمي؟ تواصل مع دريم تو آب في جدة للحصول على استشارة احترافية. استجابة سريعة، عروض أسعار مجانية، ودعم 24/7. لنناقش مشروعك اليوم!',
+    descriptionEn: 'Contact DreamToApp in Jeddah for expert consultation. Fast response, free quotes & 24/7 support. Start your digital transformation today!',
+    descriptionAr: 'تواصل مع دريم تو آب في جدة للحصول على استشارة احترافية. استجابة سريعة، عروض مجانية ودعم 24/7. ابدأ التحول الرقمي اليوم!',
     keywordsEn: 'contact web development Jeddah, get quote app development Saudi Arabia, free consultation Jeddah, web agency contact, DreamToApp support, project inquiry Jeddah, IT consultation Saudi Arabia',
     keywordsAr: 'تواصل تطوير مواقع جدة, عرض سعر تطوير تطبيقات السعودية, استشارة مجانية جدة, اتصل بوكالة ويب, دعم دريم تو آب, استفسار مشروع جدة, استشارة تقنية السعودية',
     ogTitleEn: 'Get in Touch - Free Consultation & Custom Quote | DreamToApp',
@@ -73,8 +421,8 @@ export const pagesMetadata = [
     pageName: 'Privacy Policy',
     titleEn: 'Privacy Policy - Data Protection & Security | DreamToApp',
     titleAr: 'سياسة الخصوصية - حماية البيانات والأمان | دريم تو آب',
-    descriptionEn: 'DreamToApp Privacy Policy: How we protect your data. Learn about our GDPR-compliant practices for collecting, using, and securing your personal information in Saudi Arabia.',
-    descriptionAr: 'سياسة الخصوصية لدريم تو آب: كيف نحمي بياناتك. تعرف على ممارساتنا المتوافقة مع GDPR لجمع واستخدام وتأمين معلوماتك الشخصية في السعودية.',
+    descriptionEn: 'DreamToApp Privacy Policy: How we protect your data. GDPR-compliant practices for collecting, using & securing your information in Saudi Arabia.',
+    descriptionAr: 'سياسة الخصوصية لدريم تو آب: كيف نحمي بياناتك. ممارسات متوافقة مع GDPR لجمع واستخدام وتأمين معلوماتك في السعودية.',
     keywordsEn: 'privacy policy Saudi Arabia, data protection Jeddah, GDPR compliance, personal data security, privacy statement, information protection, confidentiality policy',
     keywordsAr: 'سياسة الخصوصية السعودية, حماية البيانات جدة, الامتثال لـ GDPR, أمان البيانات الشخصية, بيان الخصوصية, حماية المعلومات, سياسة السرية',
     ogTitleEn: 'Your Data, Your Privacy - Protected with Industry Standards',
@@ -96,8 +444,8 @@ export const pagesMetadata = [
     pageName: 'Terms & Conditions',
     titleEn: 'Terms & Conditions - Service Agreement | DreamToApp',
     titleAr: 'الشروط والأحكام - اتفاقية الخدمة | دريم تو آب',
-    descriptionEn: 'DreamToApp Terms & Conditions. Understand our service agreements, client rights, project delivery terms, and legal framework for web and mobile development services in Saudi Arabia.',
-    descriptionAr: 'الشروط والأحكام لدريم تو آب. افهم اتفاقيات خدماتنا، حقوق العملاء، شروط تسليم المشاريع، والإطار القانوني لخدمات تطوير الويب والتطبيقات في السعودية.',
+    descriptionEn: 'DreamToApp Terms & Conditions. Understand our service agreements, client rights, project delivery terms & legal framework for web and mobile services.',
+    descriptionAr: 'الشروط والأحكام لدريم تو آب. افهم اتفاقيات خدماتنا، حقوق العملاء، شروط تسليم المشاريع والإطار القانوني لخدمات الويب والتطبيقات.',
     keywordsEn: 'terms of service, service agreement, client contract, legal terms, user agreement, service conditions Saudi Arabia, project terms',
     keywordsAr: 'شروط الخدمة, اتفاقية الخدمة, عقد العميل, الشروط القانونية, اتفاقية المستخدم, شروط الخدمة السعودية, شروط المشروع',
     ogTitleEn: 'Service Terms & Client Rights - Clear, Fair, Transparent',
@@ -118,9 +466,9 @@ export const pagesMetadata = [
     pagePath: '/start-your-dream',
     pageName: 'Start Your Dream',
     titleEn: 'Start Your Dream Project - Get Custom Quote in 24 Hours | DreamToApp',
-    titleAr: 'ابدأ مشروع أحلامك - احصل على عرض سعر مخصص خلال 24 ساعة | دريم تو آب',
-    descriptionEn: 'Ready to launch your digital dream? Submit your project details and get a custom quote within 24 hours. Expert guidance, transparent pricing, and proven delivery in Jeddah.',
-    descriptionAr: 'جاهز لإطلاق حلمك الرقمي؟ قدم تفاصيل مشروعك واحصل على عرض سعر مخصص خلال 24 ساعة. إرشاد احترافي، تسعير شفاف، وتسليم مثبت في جدة.',
+    titleAr: 'ابدأ مشروع أحلامك - عرض سعر مخصص خلال 24 ساعة | دريم تو آب',
+    descriptionEn: 'Launch your digital dream! Submit project details and get a custom quote within 24 hours. Expert guidance, transparent pricing & proven delivery in Jeddah.',
+    descriptionAr: 'أطلق حلمك الرقمي! قدم تفاصيل مشروعك واحصل على عرض سعر مخصص خلال 24 ساعة. إرشاد احترافي، تسعير شفاف وتسليم مثبت في جدة.',
     keywordsEn: 'start project online, web development quote, mobile app estimate, project request form, free consultation, custom quote Jeddah, digital project Saudi Arabia',
     keywordsAr: 'بدء مشروع أونلاين, عرض سعر تطوير موقع, تقدير تطبيق جوال, نموذج طلب مشروع, استشارة مجانية, عرض سعر مخصص جدة, مشروع رقمي السعودية',
     ogTitleEn: 'Turn Your Vision Into Digital Reality - Free Project Consultation',
@@ -140,10 +488,10 @@ export const pagesMetadata = [
   {
     pagePath: '/influencers',
     pageName: 'Influencers',
-    titleEn: 'Find Top Influencers in Saudi Arabia | Instagram, TikTok, YouTube Stars',
-    titleAr: 'ابحث عن أفضل المؤثرين في السعودية | نجوم إنستغرام، تيك توك، يوتيوب',
-    descriptionEn: 'Connect with verified Saudi influencers on Instagram, TikTok, YouTube & Snapchat. Browse portfolios, check engagement rates, and book campaigns directly. 500+ influencers available!',
-    descriptionAr: 'تواصل مع المؤثرين السعوديين المعتمدين على إنستغرام، تيك توك، يوتيوب وسناب شات. تصفح المعارض، تحقق من معدلات التفاعل، واحجز الحملات مباشرة. +500 مؤثر متاح!',
+    titleEn: 'Top Influencers in Saudi Arabia | Instagram, TikTok & YouTube Stars',
+    titleAr: 'أفضل المؤثرين في السعودية | نجوم إنستغرام وتيك توك ويوتيوب',
+    descriptionEn: 'Connect with 500+ verified Saudi influencers on Instagram, TikTok, YouTube & Snapchat. Browse portfolios, check engagement rates & book campaigns directly.',
+    descriptionAr: 'تواصل مع +500 مؤثر سعودي معتمد على إنستغرام وتيك توك ويوتيوب وسناب شات. تصفح المعارض، تحقق من التفاعل واحجز حملات مباشرة.',
     keywordsEn: 'Saudi influencers, Instagram influencers Saudi Arabia, TikTok influencers Jeddah, YouTube creators KSA, influencer marketing Saudi Arabia, brand collaborations, social media influencers Jeddah, verified influencers platform',
     keywordsAr: 'المؤثرين السعوديين, مؤثري إنستغرام السعودية, مؤثري تيك توك جدة, صناع محتوى يوتيوب السعودية, التسويق بالمؤثرين السعودية, تعاون العلامات التجارية, مؤثري وسائل التواصل جدة, منصة مؤثرين معتمدين',
     ogTitleEn: 'Saudi Arabia\'s Premier Influencer Marketplace - 500+ Verified Creators',
@@ -163,10 +511,10 @@ export const pagesMetadata = [
   {
     pagePath: '/influencers/register',
     pageName: 'Influencer Registration',
-    titleEn: 'Join as Influencer - Monetize Your Social Media | DreamToApp Platform',
-    titleAr: 'انضم كمؤثر - استثمر حساباتك الاجتماعية | منصة دريم تو آب',
-    descriptionEn: 'Are you an influencer with 5K+ followers? Join Saudi Arabia\'s top influencer platform. Get brand collaborations, fair compensation, and professional support. Sign up free today!',
-    descriptionAr: 'هل أنت مؤثر لديك +5 آلاف متابع؟ انضم لمنصة المؤثرين الأولى بالسعودية. احصل على تعاون مع العلامات، تعويض عادل، ودعم احترافي. سجل مجانًا اليوم!',
+    titleEn: 'Join as Influencer - Monetize Your Social Media | DreamToApp',
+    titleAr: 'انضم كمؤثر - استثمر حساباتك الاجتماعية | دريم تو آب',
+    descriptionEn: 'Influencer with 5K+ followers? Join Saudi Arabia\'s top platform. Get brand collaborations, fair compensation & professional support. Sign up free today!',
+    descriptionAr: 'مؤثر لديك +5 آلاف متابع؟ انضم لمنصة المؤثرين الأولى بالسعودية. احصل على تعاون مع العلامات، تعويض عادل ودعم احترافي. سجل مجانًا!',
     keywordsEn: 'become influencer Saudi Arabia, influencer registration, monetize Instagram, join influencer platform, brand partnerships Saudi Arabia, influencer opportunities Jeddah',
     keywordsAr: 'كن مؤثر السعودية, تسجيل مؤثر, استثمار إنستغرام, انضم لمنصة مؤثرين, شراكات العلامات السعودية, فرص المؤثرين جدة',
     ogTitleEn: 'Influencer Registration - Join 500+ Creators Earning with Brands',
@@ -186,10 +534,10 @@ export const pagesMetadata = [
   {
     pagePath: '/influencers/contract',
     pageName: 'Influencer Contract',
-    titleEn: 'Influencer Partnership Agreement - Fair Terms & Protection | DreamToApp',
-    titleAr: 'اتفاقية شراكة المؤثرين - شروط عادلة وحماية | دريم تو آب',
-    descriptionEn: 'Review our influencer partnership agreement. Fair compensation, clear deliverables, IP protection, and transparent terms. Designed to protect both influencers and brands equally.',
-    descriptionAr: 'راجع اتفاقية شراكة المؤثرين لدينا. تعويض عادل، نتائج واضحة، حماية الملكية الفكرية، وشروط شفافة. مصممة لحماية المؤثرين والعلامات بالتساوي.',
+    titleEn: 'Influencer Partnership Agreement - Fair Terms | DreamToApp',
+    titleAr: 'اتفاقية شراكة المؤثرين - شروط عادلة | دريم تو آب',
+    descriptionEn: 'Review our influencer partnership agreement. Fair compensation, clear deliverables, IP protection & transparent terms. Designed to protect influencers & brands.',
+    descriptionAr: 'راجع اتفاقية شراكة المؤثرين. تعويض عادل، نتائج واضحة، حماية الملكية الفكرية وشروط شفافة. مصممة لحماية المؤثرين والعلامات.',
     keywordsEn: 'influencer contract, partnership agreement, influencer terms, brand collaboration agreement, influencer legal protection, fair influencer contract Saudi Arabia',
     keywordsAr: 'عقد المؤثر, اتفاقية شراكة, شروط المؤثر, اتفاقية تعاون العلامة, الحماية القانونية للمؤثر, عقد مؤثر عادل السعودية',
     ogTitleEn: 'Influencer Contract - Transparent Terms That Protect You',
@@ -209,10 +557,10 @@ export const pagesMetadata = [
   {
     pagePath: '/worksample',
     pageName: 'Work Samples',
-    titleEn: 'Portfolio - 100+ Successful Projects | Web & Mobile Apps in Saudi Arabia',
+    titleEn: 'Portfolio - 100+ Successful Projects | Web & Mobile Apps in KSA',
     titleAr: 'معرض الأعمال - +100 مشروع ناجح | مواقع وتطبيقات في السعودية',
-    descriptionEn: 'Explore 100+ successful projects delivered in Saudi Arabia. Real websites, mobile apps, and e-commerce platforms we\'ve built for leading brands. See the quality before you hire!',
-    descriptionAr: 'استكشف +100 مشروع ناجح تم تسليمه في السعودية. مواقع حقيقية، تطبيقات جوال، ومنصات تجارة إلكترونية بنيناها لعلامات رائدة. شاهد الجودة قبل أن توظف!',
+    descriptionEn: 'Explore 100+ successful projects in Saudi Arabia. Real websites, mobile apps & e-commerce platforms built for leading brands. See the quality before you hire!',
+    descriptionAr: 'استكشف +100 مشروع ناجح في السعودية. مواقع حقيقية، تطبيقات جوال ومنصات تجارة إلكترونية بنيناها لعلامات رائدة. شاهد الجودة قبل التوظيف!',
     keywordsEn: 'web development portfolio Jeddah, mobile app portfolio Saudi Arabia, case studies, project showcase, successful websites Saudi Arabia, app development examples, client projects Jeddah, e-commerce portfolio',
     keywordsAr: 'معرض تطوير مواقع جدة, معرض تطبيقات جوال السعودية, دراسات الحالة, عرض المشاريع, مواقع ناجحة السعودية, أمثلة تطوير التطبيقات, مشاريع العملاء جدة, معرض التجارة الإلكترونية',
     ogTitleEn: 'Real Projects, Real Results - See What We\'ve Built',
@@ -233,9 +581,9 @@ export const pagesMetadata = [
     pagePath: '/team',
     pageName: 'Our Team',
     titleEn: 'Our Team - Expert Developers, Designers & Marketers in Jeddah',
-    titleAr: 'فريقنا - مطورون، مصممون ومسوقون خبراء في جدة',
-    descriptionEn: 'Meet the talented professionals behind DreamToApp. Experienced developers, creative designers, and strategic marketers working together to deliver excellence in Jeddah, Saudi Arabia.',
-    descriptionAr: 'تعرف على المحترفين الموهوبين وراء دريم تو آب. مطورون ذوو خبرة، مصممون مبدعون، ومسوقون استراتيجيون يعملون معًا لتقديم التميز في جدة، السعودية.',
+    titleAr: 'فريقنا - مطورون ومصممون ومسوقون خبراء في جدة',
+    descriptionEn: 'Meet the talented professionals behind DreamToApp. Experienced developers, creative designers & strategic marketers delivering excellence in Jeddah, KSA.',
+    descriptionAr: 'تعرف على المحترفين وراء دريم تو آب. مطورون ذوو خبرة، مصممون مبدعون ومسوقون استراتيجيون يقدمون التميز في جدة، السعودية.',
     keywordsEn: 'development team Jeddah, expert developers Saudi Arabia, UI UX designers Jeddah, digital marketing team, tech team Saudi Arabia, about our team',
     keywordsAr: 'فريق التطوير جدة, مطورون خبراء السعودية, مصممي واجهات جدة, فريق التسويق الرقمي, فريق تقني السعودية, عن فريقنا',
     ogTitleEn: 'The Minds Behind DreamToApp - Passion Meets Expertise',
@@ -255,10 +603,10 @@ export const pagesMetadata = [
   {
     pagePath: '/team/apply',
     pageName: 'Join Our Team',
-    titleEn: 'Careers - Join DreamToApp | Developer, Designer & Marketing Jobs in Jeddah',
-    titleAr: 'الوظائف - انضم لدريم تو آب | وظائف مطورين، مصممين ومسوقين في جدة',
-    descriptionEn: 'Join Jeddah\'s fastest-growing tech team! We\'re hiring developers, designers, and marketers. Competitive salary, growth opportunities, and innovative projects. Apply now!',
-    descriptionAr: 'انضم لأسرع فريق تقني نموًا في جدة! نوظف مطورين، مصممين، ومسوقين. راتب تنافسي، فرص نمو، ومشاريع مبتكرة. تقدم الآن!',
+    titleEn: 'Careers - Join DreamToApp | Developer, Designer & Marketing Jobs',
+    titleAr: 'الوظائف - انضم لدريم تو آب | وظائف مطورين ومصممين ومسوقين',
+    descriptionEn: 'Join Jeddah\'s fastest-growing tech team! Hiring developers, designers & marketers. Competitive salary, growth opportunities & innovative projects. Apply now!',
+    descriptionAr: 'انضم لأسرع فريق تقني نموًا في جدة! نوظف مطورين ومصممين ومسوقين. راتب تنافسي، فرص نمو ومشاريع مبتكرة. تقدم الآن!',
     keywordsEn: 'developer jobs Jeddah, web developer careers Saudi Arabia, UI UX designer jobs Jeddah, digital marketing jobs Saudi Arabia, IT jobs Jeddah, tech careers Saudi Arabia, apply developer position',
     keywordsAr: 'وظائف مطورين جدة, وظائف مطور ويب السعودية, وظائف مصمم واجهات جدة, وظائف تسويق رقمي السعودية, وظائف تقنية جدة, وظائف تكنولوجيا السعودية, تقدم لوظيفة مطور',
     ogTitleEn: 'Join DreamToApp - Build Your Career with the Best Team in Jeddah',
@@ -279,9 +627,9 @@ export const pagesMetadata = [
     pagePath: '/team/job-roles',
     pageName: 'Job Roles',
     titleEn: 'Job Roles - Developer, Designer & Marketing Positions | DreamToApp',
-    titleAr: 'الوظائف المتاحة - مطور، مصمم ومناصب تسويق | دريم تو آب',
-    descriptionEn: 'Explore open positions at DreamToApp Jeddah. Full-stack developers, React specialists, UI/UX designers, and digital marketers wanted. See full job descriptions and requirements.',
-    descriptionAr: 'استكشف المناصب المفتوحة في دريم تو آب جدة. مطورون متكاملون، متخصصو React، مصممو UI/UX، ومسوقون رقميون مطلوبون. شاهد الأوصاف الوظيفية الكاملة والمتطلبات.',
+    titleAr: 'الوظائف المتاحة - مطور ومصمم ومناصب تسويق | دريم تو آب',
+    descriptionEn: 'Open positions at DreamToApp Jeddah. Full-stack developers, React specialists, UI/UX designers & digital marketers wanted. See full job descriptions.',
+    descriptionAr: 'المناصب المفتوحة في دريم تو آب جدة. مطورون متكاملون، متخصصو React، مصممو UI/UX ومسوقون رقميون. شاهد الأوصاف الوظيفية الكاملة.',
     keywordsEn: 'job descriptions, open positions, developer roles, designer positions, marketing jobs, job requirements Jeddah, tech job openings Saudi Arabia',
     keywordsAr: 'الأوصاف الوظيفية, المناصب المفتوحة, أدوار المطورين, مناصب المصممين, وظائف التسويق, متطلبات الوظائف جدة, فرص عمل تقنية السعودية',
     ogTitleEn: 'Available Positions - Find Your Role at DreamToApp',
@@ -301,9 +649,9 @@ export const pagesMetadata = [
   {
     pagePath: '/team/thank-you',
     pageName: 'Application Thank You',
-    titleEn: 'Application Received - Thank You for Applying | DreamToApp Careers',
-    titleAr: 'تم استلام الطلب - شكراً على التقديم | وظائف دريم تو آب',
-    descriptionEn: 'Thank you for applying to DreamToApp! Your application has been received successfully. Our HR team will review it and contact you within 7 business days.',
+    titleEn: 'Application Received - Thank You for Applying | DreamToApp',
+    titleAr: 'تم استلام الطلب - شكراً على التقديم | دريم تو آب',
+    descriptionEn: 'Thank you for applying to DreamToApp! Application received successfully. Our HR team will review and contact you within 7 business days.',
     descriptionAr: 'شكراً على التقديم لدريم تو آب! تم استلام طلبك بنجاح. سيراجعه فريق الموارد البشرية ويتواصل معك خلال 7 أيام عمل.',
     keywordsEn: 'application received, job application confirmation, career application thank you',
     keywordsAr: 'تم استلام الطلب, تأكيد طلب الوظيفة, شكر طلب وظيفة',
@@ -326,7 +674,7 @@ export const pagesMetadata = [
     pageName: 'Thank You',
     titleEn: 'Thank You - Message Received | We\'ll Contact You Soon',
     titleAr: 'شكراً لك - تم استلام رسالتك | سنتواصل معك قريبًا',
-    descriptionEn: 'Thank you for contacting DreamToApp! We\'ve received your message and will respond within 24 hours. Our team is excited to discuss your project.',
+    descriptionEn: 'Thank you for contacting DreamToApp! Message received and we\'ll respond within 24 hours. Our team is excited to discuss your project.',
     descriptionAr: 'شكراً على التواصل مع دريم تو آب! لقد استلمنا رسالتك وسنرد خلال 24 ساعة. فريقنا متحمس لمناقشة مشروعك.',
     keywordsEn: 'message received, contact confirmation, inquiry received, thank you page',
     keywordsAr: 'تم استلام الرسالة, تأكيد التواصل, تم استلام الاستفسار, صفحة شكر',
@@ -345,5 +693,3 @@ export const pagesMetadata = [
     robotsFollow: false,
   },
 ];
-
-

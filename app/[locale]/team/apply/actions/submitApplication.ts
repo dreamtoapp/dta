@@ -83,24 +83,13 @@ export async function submitApplication(formData: FormData) {
         aboutYou: validatedData.aboutYou,
         attachmentUrl: validatedData.attachmentUrl,
         attachmentName: validatedData.attachmentName,
+        applicationNumber: `APP-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        createdAt: new Date(),
+        updatedAt: new Date(),
         status: "SUBMITTED",
         submittedAt: new Date(),
         locale: validatedData.locale,
-        // TODO: Add IP address and user agent tracking
-        // ipAddress: getClientIP(),
-        // userAgent: getUserAgent(),
         source: "team-apply-form",
-        // Create initial status history entry
-        statusHistory: {
-          create: {
-            status: "SUBMITTED",
-            notes: "Application submitted successfully",
-            changedBy: "system",
-          }
-        }
-      },
-      include: {
-        statusHistory: true,
       },
     });
 

@@ -125,9 +125,6 @@ export async function getInfluencers(params: GetInfluencersParams = {}): Promise
       orderBy,
       skip: offset,
       take: limit,
-      include: {
-        socialPlatforms: true
-      }
     })
 
     // Transform to frontend format
@@ -170,11 +167,6 @@ export async function getInfluencer(id: string): Promise<Influencer | null> {
   try {
     const dbInfluencer = await prisma.influencer.findUnique({
       where: { id },
-      include: {
-        socialPlatforms: true,
-        portfolio: true,
-        reviews: true
-      }
     })
 
     if (!dbInfluencer) {
