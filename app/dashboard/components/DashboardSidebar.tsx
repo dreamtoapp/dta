@@ -26,7 +26,8 @@ import {
   Star,
   Sun,
   Moon,
-  FileCode
+  FileCode,
+  Twitter
 } from 'lucide-react';
 
 interface DashboardSidebarProps {
@@ -103,6 +104,18 @@ export default function DashboardSidebar({ stats, loadStats }: DashboardSidebarP
       href: '/dashboard/metadata',
       icon: FileCode,
       current: pathname === '/dashboard/metadata' || pathname.startsWith('/dashboard/metadata/')
+    },
+    {
+      name: 'Twitter',
+      href: '/dashboard/twitter',
+      icon: Twitter,
+      current: pathname === '/dashboard/twitter'
+    },
+    {
+      name: 'Twitter Schedule',
+      href: '/dashboard/twitter/schedule',
+      icon: Twitter,
+      current: pathname === '/dashboard/twitter/schedule' || pathname.startsWith('/dashboard/twitter/schedule/')
     },
     {
       name: 'Settings',

@@ -408,3 +408,98 @@ model PageMetadata {
   
   @@map("page_metadata")
 }
+
+// ============================================================================
+// TWITTER CAMPAIGNS & POSTS SCHEMA - Scheduled Twitter Content Management
+// ============================================================================
+
+enum TwitterSlot {
+  AM
+  PM
+}
+
+enum TwitterPostStatus {
+  DRAFT
+  APPROVED
+  POSTED
+  FAILED
+}
+
+enum TwitterCampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+model TwitterCampaign {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  
+  // Campaign Info
+  name            String   @unique
+  description     String?
+  startDate       DateTime // KSA date for Day 1
+  totalDays       Int      @default(45)
+  
+  // Settings
+  amTime          String   @default("13:00") // KSA time for AM slot
+  pmTime          String   @default("20:30") // KSA time for PM slot
+  ogImageUrl      String?  // Custom OG image fallback
+  
+  // Status & Tracking
+  status          TwitterCampaignStatus @default(DRAFT)
+  isActive        Boolean  @default(false) // Only one campaign can be active
+  
+  // Timestamps
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relations
+  posts           TwitterPost[]
+  
+  @@map("twitter_campaigns")
+}
+
+model TwitterPost {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  
+  // Content Fields
+  day             Int      // 1-45
+  slot            TwitterSlot
+  ksaTimeLabel    String   // "1:00 ظهرًا" or "8:30 مساءً"
+  targetAudience  String
+  content         String
+  
+  // Media Fields
+  mediaUrls       String[] // up to 4 images
+  mediaAlt        String?  // alt text for first image
+  useOgFallback   Boolean  @default(true)
+  
+  // Scheduling
+  scheduledAtUtc  DateTime
+  scheduledAtKsa  DateTime
+  
+  // Status & Tracking
+  status          TwitterPostStatus @default(DRAFT)
+  postedAt        DateTime?
+  tweetId         String?
+  error           String?
+  
+  // Metadata
+  source          String   @default("twitter.json")
+  cycle           Int      @default(1) // increments per campaign loop
+  
+  // Campaign Relation
+  campaignId      String   @db.ObjectId
+  campaign        TwitterCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Indexes
+  @@unique([campaignId, day, slot, cycle])
+  @@index([campaignId, scheduledAtUtc, status])
+  @@index([campaignId, status])
+  @@map("twitter_posts")
+}

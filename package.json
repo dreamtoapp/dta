@@ -57,6 +57,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-rtl": "^0.9.0",
+    "twitter-api-v2": "^1.27.0",
     "wavesurfer.js": "^7.9.5",
     "workbox-webpack-plugin": "^7.3.0",
     "zod": "^3.25.64"
