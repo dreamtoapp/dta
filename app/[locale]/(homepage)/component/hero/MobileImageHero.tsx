@@ -1,7 +1,6 @@
-"use client";
 import React from "react";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import HeroContent from "./HeroContent";
 import HeroCTA from "./HeroCTA";
 
@@ -15,7 +14,7 @@ type MobileImageHeroProps = {
   transform?: string; // e.g. "f_auto,q_auto,w_1600,c_fill,g_auto"
 };
 
-const MobileImageHero: React.FC<MobileImageHeroProps> = ({
+const MobileImageHero: React.FC<MobileImageHeroProps> = async ({
   publicIdOrUrl,
   alt,
   className = "",
@@ -23,8 +22,8 @@ const MobileImageHero: React.FC<MobileImageHeroProps> = ({
   priority = true,
   transform = "f_auto,q_auto,w_auto,c_scale",
 }) => {
-  const locale = useLocale();
-  const t = useTranslations("homepage");
+  const locale = await getLocale();
+  const t = await getTranslations("homepage");
 
   // Determine if it's a Cloudinary public_id or full URL
   const isCloudinaryPublicId = !publicIdOrUrl.startsWith("http");
@@ -47,22 +46,20 @@ const MobileImageHero: React.FC<MobileImageHeroProps> = ({
   };
 
   return (
-    <div className={`relative w-screen h-screen flex flex-col items-center justify-center overflow-hidden ${className}`} style={{ width: '100vw', height: '100vh' }}>
-      {/* Mobile-Optimized Background Image - Full Viewport */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={imageUrl}
-          alt={alt}
-          fill
-          priority={priority}
-          sizes={sizes}
-          className="object-cover"
-          quality={100}
-        />
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
+    <div className={`relative w-screen h-screen overflow-hidden ${className}`}>
+      {/* Mobile-Optimized Background Image */}
+      <Image
+        src={imageUrl}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        className="object-cover"
+        quality={100}
+      />
+      <div className="absolute inset-0 bg-black/30" />
 
-      {/* Mobile-Optimized Content - Full Viewport */}
+      {/* Mobile-Optimized Content */}
       <div className="relative z-10 w-full max-w-full mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <HeroContent
           logoAlt={heroProps.logoAlt}

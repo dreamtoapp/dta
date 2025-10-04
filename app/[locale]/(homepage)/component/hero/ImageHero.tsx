@@ -1,7 +1,6 @@
-"use client";
 import React from "react";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import HeroContent from "./HeroContent";
 import HeroCTA from "./HeroCTA";
 
@@ -15,7 +14,7 @@ type ImageHeroProps = {
   transform?: string; // e.g. "f_auto,q_auto,w_1600,c_fill,g_auto"
 };
 
-const ImageHero: React.FC<ImageHeroProps> = ({
+const ImageHero: React.FC<ImageHeroProps> = async ({
   publicIdOrUrl,
   alt,
   className = "",
@@ -23,8 +22,8 @@ const ImageHero: React.FC<ImageHeroProps> = ({
   priority = true,
   transform = "f_auto,q_auto,w_1920,c_fill,g_auto",
 }) => {
-  const locale = useLocale();
-  const t = useTranslations("homepage");
+  const locale = await getLocale();
+  const t = await getTranslations("homepage");
 
   // Determine if it's a Cloudinary public_id or full URL
   const isCloudinaryPublicId = !publicIdOrUrl.startsWith("http");
@@ -47,24 +46,20 @@ const ImageHero: React.FC<ImageHeroProps> = ({
   };
 
   return (
-    <div className={`relative w-full h-screen flex flex-col items-center justify-center overflow-hidden ${className}`}>
-      {/* Background Image - Full Viewport */}
+    <div className={`relative w-full h-screen overflow-hidden ${className}`}>
+      {/* Background Image */}
+      <Image
+        src={imageUrl}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        className="object-cover object-center"
+        quality={85}
+      />
+      <div className="absolute inset-0 bg-black/30" />
 
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={imageUrl}
-          alt={alt}
-          fill
-          priority={priority}
-          sizes={sizes}
-          className="object-cover object-center"
-          quality={85}
-        />
-        <div className="absolute inset-0 bg-black/30" />
-
-      </div>
-
-      {/* Hero Content - Full Viewport */}
+      {/* Hero Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
         <HeroContent
           logoAlt={heroProps.logoAlt}

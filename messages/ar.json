@@ -171,6 +171,20 @@
       "ctaPrimary": "ابدأ حلمك",
       "ctaSecondary": "استكشف الخدمات",
       "slogan": "حيث تبدأ الأحلام",
+      "ctaCards": {
+        "startDream": {
+          "title": "ابدأ حلمك",
+          "description": "ابدأ رحلتك الرقمية معنا اليوم"
+        },
+        "joinTeam": {
+          "title": "انضم لفريقنا",
+          "description": "اكتشف الفرص المتاحة وانضم لفريقنا المبتكر"
+        },
+        "becomeInfluencer": {
+          "title": "سجل كمؤثر",
+          "description": "معنا زود جمهورك وزيادة دخلك المالي"
+        }
+      },
       "serviceHooks": {
         "webApps": {
           "title": "تطبيقات ويب ذكية",

@@ -1,7 +1,7 @@
-"use client";
 import React from "react";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 interface HeroCTAProps {
   ctaPrimary: string;
@@ -9,33 +9,28 @@ interface HeroCTAProps {
   locale: string;
 }
 
-const HeroCTA: React.FC<HeroCTAProps> = ({ ctaPrimary, ctaSecondary, locale }) => {
-  const hiringText = locale === 'ar' ? 'انضم لفريقنا' : 'Join Our Team';
-  const influencerText = locale === 'ar' ? 'سجل كمؤثر' : 'Become an Influencer';
-
-  const hiringDesc = locale === 'ar' ? 'اكتشف الفرص المتاحة وانضم لفريقنا المبتكر' : 'Discover opportunities and join our innovative team';
-  const influencerDesc = locale === 'ar' ? 'معنا زود جمهورك وزيادة دخلك المالي' : 'Grow your audience and boost your income with us';
-  const startDesc = locale === 'ar' ? 'ابدأ رحلتك الرقمية معنا اليوم' : 'Start your digital journey with us today';
+const HeroCTA: React.FC<HeroCTAProps> = async ({ ctaPrimary, ctaSecondary, locale }) => {
+  const t = await getTranslations("homepage.hero.ctaCards");
 
   const ctaCards = [
     {
       href: "/start-your-dream",
-      title: ctaPrimary,
-      description: startDesc,
+      title: t("startDream.title"),
+      description: t("startDream.description"),
       className: "bg-white/80 text-black border-gray-200",
       imageUrl: "https://res.cloudinary.com/dhjy2k0fu/image/upload/f_auto,q_auto,w_160,h_160,c_fill,g_auto/v1759568642/freepik__assistant__10764_melidv.png"
     },
     {
       href: "/team/apply",
-      title: hiringText,
-      description: hiringDesc,
+      title: t("joinTeam.title"),
+      description: t("joinTeam.description"),
       className: "bg-white/80 text-black border-gray-200",
       imageUrl: "https://res.cloudinary.com/dhjy2k0fu/image/upload/f_auto,q_auto,w_160,h_160,c_fill,g_auto/v1759568487/yellow-light-bulb-with-word-team-it_toaife.jpg"
     },
     {
       href: "/influencers/register",
-      title: influencerText,
-      description: influencerDesc,
+      title: t("becomeInfluencer.title"),
+      description: t("becomeInfluencer.description"),
       className: "bg-white/80 text-black border-gray-200",
       imageUrl: "https://res.cloudinary.com/dhjy2k0fu/image/upload/f_auto,q_auto,w_160,h_160,c_fill,g_auto/v1759566493/freepik__assistant__12855_s0hoen.png"
     }

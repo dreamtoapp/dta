@@ -163,6 +163,20 @@
       "ctaPrimary": "Start Your Dream",
       "ctaSecondary": "Explore Our Services",
       "slogan": "Where Dreams Begin",
+      "ctaCards": {
+        "startDream": {
+          "title": "Start Your Dream",
+          "description": "Start your digital journey with us today"
+        },
+        "joinTeam": {
+          "title": "Join Our Team",
+          "description": "Discover opportunities and join our innovative team"
+        },
+        "becomeInfluencer": {
+          "title": "Become an Influencer",
+          "description": "Grow your audience and boost your income with us"
+        }
+      },
       "serviceHooks": {
         "webApps": {
           "title": "Smart Web Apps",
