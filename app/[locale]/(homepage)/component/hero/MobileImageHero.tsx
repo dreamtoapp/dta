@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import HeroContent from "./HeroContent";
 import HeroCTA from "./HeroCTA";
 
-type ImageHeroProps = {
+type MobileImageHeroProps = {
   publicIdOrUrl: string; // Cloudinary public_id (preferred) or full URL
   alt: string;
   className?: string;
@@ -15,13 +15,13 @@ type ImageHeroProps = {
   transform?: string; // e.g. "f_auto,q_auto,w_1600,c_fill,g_auto"
 };
 
-const ImageHero: React.FC<ImageHeroProps> = ({
+const MobileImageHero: React.FC<MobileImageHeroProps> = ({
   publicIdOrUrl,
   alt,
   className = "",
-  sizes = "100vw",
+  sizes = "(max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw",
   priority = true,
-  transform = "f_auto,q_auto,w_1920,c_fill,g_auto",
+  transform = "f_auto,q_auto,w_auto,c_scale",
 }) => {
   const locale = useLocale();
   const t = useTranslations("homepage");
@@ -47,9 +47,8 @@ const ImageHero: React.FC<ImageHeroProps> = ({
   };
 
   return (
-    <div className={`relative w-full h-screen flex flex-col items-center justify-center overflow-hidden ${className}`}>
-      {/* Background Image - Full Viewport */}
-
+    <div className={`relative w-screen h-screen flex flex-col items-center justify-center overflow-hidden ${className}`} style={{ width: '100vw', height: '100vh' }}>
+      {/* Mobile-Optimized Background Image - Full Viewport */}
       <div className="absolute inset-0 z-0">
         <Image
           src={imageUrl}
@@ -57,15 +56,14 @@ const ImageHero: React.FC<ImageHeroProps> = ({
           fill
           priority={priority}
           sizes={sizes}
-          className="object-cover object-center"
-          quality={85}
+          className="object-cover"
+          quality={100}
         />
         <div className="absolute inset-0 bg-black/30" />
-
       </div>
 
-      {/* Hero Content - Full Viewport */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
+      {/* Mobile-Optimized Content - Full Viewport */}
+      <div className="relative z-10 w-full max-w-full mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <HeroContent
           logoAlt={heroProps.logoAlt}
           tagline={heroProps.tagline}
@@ -89,4 +87,4 @@ const ImageHero: React.FC<ImageHeroProps> = ({
   );
 };
 
-export default ImageHero;
+export default MobileImageHero;

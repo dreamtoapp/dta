@@ -162,7 +162,21 @@
       "description": "A leading tech agency crafting web, mobile, and cloud solutions for your ambitions. Discover our services and start your journey to digital excellence.",
       "ctaPrimary": "Start Your Dream",
       "ctaSecondary": "Explore Our Services",
-      "slogan": "Where Dreams Begin"
+      "slogan": "Where Dreams Begin",
+      "serviceHooks": {
+        "webApps": {
+          "title": "Smart Web Apps",
+          "description": "Build advanced, lightning-fast web applications with cutting-edge technology"
+        },
+        "mobileApps": {
+          "title": "Amazing Mobile Apps",
+          "description": "Create interactive and engaging mobile apps for users everywhere"
+        },
+        "digitalMarketing": {
+          "title": "Effective Digital Marketing",
+          "description": "Grow your business through digital marketing and social media platforms"
+        }
+      }
     },
     "freeServicesTitle": "Free Services",
     "freeServicesDescription": "New project consultation, technical and business evaluation, and competitor analysis.",

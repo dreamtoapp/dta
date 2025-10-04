@@ -9,6 +9,7 @@ import WhyChooseUs from './component/WhyChooseUs';
 import DesinAndDiscover from './component/DesinAndDiscover';
 import SchemaMarkup from './component/SchemaMarkup';
 import ImageHero from './component/hero/ImageHero';
+import MobileImageHero from './component/hero/MobileImageHero';
 import HomepageHeroSlider from './component/HomepageHeroSlider';
 import ConsultationForm from './component/ConsultationForm';
 import { PageSkeletonLoader } from './component/SkeletonLoader';
@@ -38,13 +39,30 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       {/* Hero Section */}
       <section
         aria-label={t('sections.hero')}
-        className="relative md:min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20 sm:pt-24 md:pt-20 lg:pt-24 w-full"
       >
         {/* <div className="absolute inset-0 bg-gradient-to-br from-[#d7a50d]/10 via-transparent to-[#0d3ad7]/10" /> */}
-        <ImageHero
-          publicIdOrUrl="https://res.cloudinary.com/dhjy2k0fu/image/upload/f_auto,q_auto,w_1600,c_fill,g_auto/v1758786887/cover_wvhiz7.png"
-          alt={t('sections.hero')}
-        />
+        {/* Desktop Hero - Hidden on mobile */}
+        <div className="hidden md:block w-full h-screen">
+          <ImageHero
+            publicIdOrUrl="v1759560288/Generated_Image_October_04_2025_-_9_43AM_q6hc7g"
+            alt={`${t('organization.name')} - ${t('hero.tagline')} | ${t('hero.title')} - ${t('description')}`}
+            transform="f_auto,q_auto,w_1920,c_fill,g_auto"
+            sizes="100vw"
+            className="w-full h-full"
+          />
+        </div>
+
+        {/* Mobile Hero - Visible only on mobile */}
+        <div className="block md:hidden w-screen h-screen">
+          <MobileImageHero
+            publicIdOrUrl="v1759556765/Generated_Image_October_04_2025_-_8_44AM_a2qlt7"
+            alt={`${t('organization.name')} - ${t('hero.tagline')} | ${t('hero.title')} - ${t('hero.description')}`}
+            transform="f_auto,q_auto,w_auto,c_scale"
+            sizes="100vw"
+            className="w-full h-full"
+          />
+        </div>
       </section>
 
       {/* Client Logos */}
