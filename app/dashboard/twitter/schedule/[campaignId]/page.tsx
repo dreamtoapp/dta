@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
-import { Loader2, Check, X, Send, Eye, EyeOff, ArrowLeft, Trash, Lock } from 'lucide-react';
+import { Loader2, Check, X, Send, Eye, EyeOff, ArrowLeft, Trash, Lock, EyeIcon } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -86,6 +86,11 @@ export default function CampaignPostsPage() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [postToDelete, setPostToDelete] = useState<TwitterPost | null>(null);
   const [postingPost, setPostingPost] = useState<string | null>(null);
+  const [viewingPost, setViewingPost] = useState<TwitterPost | null>(null);
+  const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
+  const [isWarningDialogOpen, setIsWarningDialogOpen] = useState(false);
+  const [pendingPost, setPendingPost] = useState<TwitterPost | null>(null);
+  const [warningMessages, setWarningMessages] = useState<string[]>([]);
 
   // Load campaign details
   const loadCampaign = async () => {
@@ -264,6 +269,12 @@ export default function CampaignPostsPage() {
     setIsDeleteDialogOpen(true);
   };
 
+  // View post details
+  const viewPost = (post: TwitterPost) => {
+    setViewingPost(post);
+    setIsViewDialogOpen(true);
+  };
+
   // Send post now
   const sendPostNow = async (post: TwitterPost) => {
     if (post.status === 'POSTED') {
@@ -271,6 +282,65 @@ export default function CampaignPostsPage() {
       return;
     }
 
+    // Validation checks before sending
+    const warnings = [];
+    const errors = [];
+
+    // Check content
+    if (!post.content || post.content.trim().length === 0) {
+      errors.push('Post content is empty');
+    } else if (post.content.length > 280) {
+      errors.push(`Post content is too long (${post.content.length}/280 characters)`);
+    }
+
+    // Check for images
+    const hasImages = post.mediaUrls && post.mediaUrls.length > 0;
+    const hasOgFallback = post.useOgFallback;
+    const hasCampaignOg = campaign?.ogImageUrl;
+
+    if (!hasImages && !hasOgFallback) {
+      warnings.push('No images attached and OG fallback is disabled');
+    } else if (!hasImages && hasOgFallback && !hasCampaignOg) {
+      warnings.push('No images attached and no campaign OG image available for fallback');
+    }
+
+    // Check media URLs validity
+    if (hasImages) {
+      for (let i = 0; i < post.mediaUrls.length; i++) {
+        const url = post.mediaUrls[i];
+        if (!url || url.trim().length === 0) {
+          warnings.push(`Media URL ${i + 1} is empty`);
+        } else if (!url.startsWith('http://') && !url.startsWith('https://')) {
+          warnings.push(`Media URL ${i + 1} is not a valid URL`);
+        }
+      }
+    }
+
+    // Check target audience
+    if (!post.targetAudience || post.targetAudience.trim().length === 0) {
+      warnings.push('Target audience is not specified');
+    }
+
+    // Show errors (blocking)
+    if (errors.length > 0) {
+      toast.error(`Cannot send post: ${errors.join(', ')}`);
+      return;
+    }
+
+    // Show warnings (non-blocking, but ask for confirmation)
+    if (warnings.length > 0) {
+      setPendingPost(post);
+      setWarningMessages(warnings);
+      setIsWarningDialogOpen(true);
+      return;
+    }
+
+    // Proceed with sending
+    proceedWithSending(post);
+  };
+
+  // Proceed with sending the post (called after warning confirmation or when no warnings)
+  const proceedWithSending = async (post: TwitterPost) => {
     setPostingPost(post.id);
     try {
       // Prepare media URLs if any
@@ -314,6 +384,23 @@ export default function CampaignPostsPage() {
     }
   };
 
+  // Handle warning dialog confirmation
+  const handleWarningConfirm = () => {
+    if (pendingPost) {
+      setIsWarningDialogOpen(false);
+      proceedWithSending(pendingPost);
+      setPendingPost(null);
+      setWarningMessages([]);
+    }
+  };
+
+  // Handle warning dialog cancellation
+  const handleWarningCancel = () => {
+    setIsWarningDialogOpen(false);
+    setPendingPost(null);
+    setWarningMessages([]);
+  };
+
   // Get status badge variant
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -326,6 +413,36 @@ export default function CampaignPostsPage() {
       default:
         return <Badge variant="secondary">Draft</Badge>;
     }
+  };
+
+  // Check if post has warnings
+  const getPostWarnings = (post: TwitterPost) => {
+    const warnings = [];
+
+    // Check content
+    if (!post.content || post.content.trim().length === 0) {
+      warnings.push('Empty content');
+    } else if (post.content.length > 280) {
+      warnings.push('Content too long');
+    }
+
+    // Check for images
+    const hasImages = post.mediaUrls && post.mediaUrls.length > 0;
+    const hasOgFallback = post.useOgFallback;
+    const hasCampaignOg = campaign?.ogImageUrl;
+
+    if (!hasImages && !hasOgFallback) {
+      warnings.push('No images');
+    } else if (!hasImages && hasOgFallback && !hasCampaignOg) {
+      warnings.push('No OG fallback');
+    }
+
+    // Check target audience
+    if (!post.targetAudience || post.targetAudience.trim().length === 0) {
+      warnings.push('No target audience');
+    }
+
+    return warnings;
   };
 
   if (!campaign) {
@@ -552,6 +669,17 @@ export default function CampaignPostsPage() {
                         {post.targetAudience}
                       </div>
                       {getStatusBadge(post.status)}
+                      {(() => {
+                        const warnings = getPostWarnings(post);
+                        if (warnings.length > 0) {
+                          return (
+                            <Badge variant="destructive" className="text-xs">
+                              ⚠️ {warnings.length} warning{warnings.length > 1 ? 's' : ''}
+                            </Badge>
+                          );
+                        }
+                        return null;
+                      })()}
                     </div>
                     <div className="flex items-center gap-2">
                       {editingPost === post.id ? (
@@ -573,26 +701,54 @@ export default function CampaignPostsPage() {
                         </>
                       ) : (
                         <>
+                          {(() => {
+                            const warnings = getPostWarnings(post);
+                            const hasWarnings = warnings.length > 0;
+
+                            return (
+                              <Button
+                                onClick={() => sendPostNow(post)}
+                                size="sm"
+                                variant={post.status === 'POSTED' ? 'default' : 'default'}
+                                disabled={post.status === 'POSTED' || postingPost === post.id}
+                                className={`${post.status === 'POSTED'
+                                  ? 'bg-green-600 hover:bg-green-700 text-white'
+                                  : hasWarnings
+                                    ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                  }`}
+                                title={hasWarnings ? `Warnings: ${warnings.join(', ')}` : ''}
+                              >
+                                {postingPost === post.id ? (
+                                  <Loader2 className="h-4 w-4 animate-spin" />
+                                ) : post.status === 'POSTED' ? (
+                                  <Check className="h-4 w-4" />
+                                ) : hasWarnings ? (
+                                  <X className="h-4 w-4" />
+                                ) : (
+                                  <Send className="h-4 w-4" />
+                                )}
+                                <span className="ml-1">
+                                  {post.status === 'POSTED'
+                                    ? 'Sent'
+                                    : postingPost === post.id
+                                      ? 'Sending...'
+                                      : hasWarnings
+                                        ? 'Send (⚠️)'
+                                        : 'Send Now'
+                                  }
+                                </span>
+                              </Button>
+                            );
+                          })()}
                           <Button
-                            onClick={() => sendPostNow(post)}
+                            onClick={() => viewPost(post)}
                             size="sm"
-                            variant={post.status === 'POSTED' ? 'default' : 'default'}
-                            disabled={post.status === 'POSTED' || postingPost === post.id}
-                            className={`${post.status === 'POSTED'
-                              ? 'bg-green-600 hover:bg-green-700 text-white'
-                              : 'bg-blue-600 hover:bg-blue-700 text-white'
-                              }`}
+                            variant="outline"
+                            className="text-blue-600 hover:text-blue-700"
                           >
-                            {postingPost === post.id ? (
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                            ) : post.status === 'POSTED' ? (
-                              <Check className="h-4 w-4" />
-                            ) : (
-                              <Send className="h-4 w-4" />
-                            )}
-                            <span className="ml-1">
-                              {post.status === 'POSTED' ? 'Sent' : postingPost === post.id ? 'Sending...' : 'Send Now'}
-                            </span>
+                            <EyeIcon className="h-4 w-4 mr-1" />
+                            View
                           </Button>
                           <Button
                             onClick={() => startEdit(post)}
@@ -824,6 +980,200 @@ export default function CampaignPostsPage() {
               onClick={handleDeletePost}
             >
               Delete Post
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* View Post Dialog */}
+      <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
+        <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Post Details</DialogTitle>
+            <DialogDescription>
+              Complete information for this post
+            </DialogDescription>
+          </DialogHeader>
+          {viewingPost && (
+            <div className="space-y-6">
+              {/* Basic Info */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">Day</Label>
+                  <div className="text-sm font-medium">{viewingPost.day}</div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">Time Slot</Label>
+                  <div className="text-sm font-medium">{viewingPost.slot} ({viewingPost.ksaTimeLabel})</div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">Cycle</Label>
+                  <div className="text-sm font-medium">{viewingPost.cycle}</div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">Status</Label>
+                  <div>{getStatusBadge(viewingPost.status)}</div>
+                </div>
+              </div>
+
+              {/* Target Audience */}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-muted-foreground">Target Audience</Label>
+                <div className="text-sm bg-muted p-3 rounded-lg">{viewingPost.targetAudience}</div>
+              </div>
+
+              {/* Content */}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-muted-foreground">Content</Label>
+                <div className="text-sm bg-muted p-3 rounded-lg whitespace-pre-wrap">{viewingPost.content}</div>
+                <div className="text-xs text-muted-foreground">
+                  {viewingPost.content.length}/280 characters
+                </div>
+              </div>
+
+              {/* Media */}
+              {viewingPost.mediaUrls.length > 0 && (
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">
+                    Media ({viewingPost.mediaUrls.length} image{viewingPost.mediaUrls.length > 1 ? 's' : ''})
+                  </Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {viewingPost.mediaUrls.map((url, index) => (
+                      <div key={index} className="space-y-1">
+                        <div className="text-xs text-muted-foreground">Image {index + 1}</div>
+                        <img
+                          src={url}
+                          alt={`Media ${index + 1}`}
+                          className="w-full h-32 object-cover rounded border"
+                          onError={(e) => {
+                            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTAwIDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMzIiIGZpbGw9IiNmM2Y0ZjYiLz48dGV4dCB4PSI1MCIgeT0iMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzZjNzI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2UgRXJyb3I8L3RleHQ+PC9zdmc+';
+                          }}
+                        />
+                        <div className="text-xs text-blue-600 break-all">{url}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* OG Fallback */}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-muted-foreground">Image Settings</Label>
+                <div className="text-sm bg-muted p-3 rounded-lg">
+                  {viewingPost.useOgFallback ? (
+                    <span className="text-blue-600">✓ Will use OG fallback image</span>
+                  ) : (
+                    <span className="text-muted-foreground">No OG fallback</span>
+                  )}
+                </div>
+              </div>
+
+              {/* Media Alt Text */}
+              {viewingPost.mediaAlt && (
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">Alt Text</Label>
+                  <div className="text-sm bg-muted p-3 rounded-lg">{viewingPost.mediaAlt}</div>
+                </div>
+              )}
+
+              {/* Scheduling */}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-muted-foreground">Scheduled Time (KSA)</Label>
+                <div className="text-sm bg-muted p-3 rounded-lg">
+                  {new Date(viewingPost.scheduledAtKsa).toLocaleString('en-US', {
+                    timeZone: 'Asia/Riyadh',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                  })}
+                </div>
+              </div>
+
+              {/* Posting Info */}
+              {viewingPost.status === 'POSTED' && (
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">Posted At</Label>
+                  <div className="text-sm bg-green-50 p-3 rounded-lg border border-green-200">
+                    {viewingPost.postedAt ? new Date(viewingPost.postedAt).toLocaleString('en-US', {
+                      timeZone: 'Asia/Riyadh',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    }) : 'Unknown'}
+                  </div>
+                  {viewingPost.tweetId && (
+                    <>
+                      <Label className="text-sm font-medium text-muted-foreground">Tweet ID</Label>
+                      <div className="text-sm bg-green-50 p-3 rounded-lg border border-green-200 font-mono">
+                        {viewingPost.tweetId}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
+              {/* Error Info */}
+              {viewingPost.error && (
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-muted-foreground">Error Details</Label>
+                  <div className="text-sm bg-red-50 p-3 rounded-lg border border-red-200 text-red-700">
+                    {viewingPost.error}
+                  </div>
+                </div>
+              )}
+
+              {/* Source Info */}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-muted-foreground">Source</Label>
+                <div className="text-sm bg-muted p-3 rounded-lg">{viewingPost.source}</div>
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsViewDialogOpen(false)}>
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Warning Dialog */}
+      <Dialog open={isWarningDialogOpen} onOpenChange={setIsWarningDialogOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <X className="h-5 w-5 text-orange-500" />
+              Warning: Post Issues Detected
+            </DialogTitle>
+            <DialogDescription className="space-y-3">
+              <p>The following issues were found with this post:</p>
+              <ul className="list-disc list-inside space-y-1 text-sm">
+                {warningMessages.map((warning, index) => (
+                  <li key={index} className="text-orange-600 font-medium">
+                    {warning}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm text-muted-foreground mt-4">
+                Do you still want to send this post despite these warnings?
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleWarningCancel}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleWarningConfirm}
+              className="bg-orange-600 hover:bg-orange-700 text-white"
+            >
+              Send Anyway
             </Button>
           </DialogFooter>
         </DialogContent>
