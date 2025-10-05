@@ -32,14 +32,41 @@ model expressQuery {
 model Visitor {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   ip         String   @unique
+  
+  // Geolocation (existing)
   country    String?  
   city       String?  
   region     String?  
   org        String?  
   timezone   String?  
-  visitCount Int      @default(1)  // Track the number of visits
+  
+  // Device Information (NEW)
+  browser    String?
+  browserVersion String?
+  os         String?
+  osVersion  String?
+  deviceType String?  // mobile, tablet, desktop
+  screenWidth Int?
+  screenHeight Int?
+  
+  // Behavior Tracking (NEW)
+  referrer   String?
+  utmSource  String?
+  utmMedium  String?
+  utmCampaign String?
+  landingPage String?
+  lastPage   String?
+  pagesVisited String[] @default([])
+  
+  // Visit Metrics
+  visitCount Int      @default(1)
+  totalDuration Int   @default(0)  // in seconds
+  lastVisitDuration Int? // in seconds
+  
+  // Timestamps
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  lastVisitAt DateTime?
 }
 
 model Crombo {
