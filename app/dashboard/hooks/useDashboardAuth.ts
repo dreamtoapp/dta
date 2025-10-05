@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { toast } from "sonner";
+import { onStatsRefresh } from '../lib/statsRefresh';
 
 interface DashboardStats {
   totalJobApplications: number;
@@ -27,6 +28,14 @@ export function useDashboardAuth() {
       loadStats();
     }
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      return onStatsRefresh(() => {
+        loadStats();
+      });
+    }
+  }, [isAuthenticated]);
 
   const loadStats = async () => {
     try {

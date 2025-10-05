@@ -27,27 +27,27 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Settings</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold">Settings</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">
             Configure your dashboard and system preferences
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
           <Button
             onClick={handleReset}
             variant="outline"
-            size="sm"
-            className="flex items-center gap-2"
+            size="default"
+            className="flex items-center justify-center gap-2 min-h-[44px]"
           >
             <RefreshCw className="h-4 w-4" />
             Reset
           </Button>
           <Button
             onClick={handleSave}
-            size="sm"
-            className="flex items-center gap-2"
+            size="default"
+            className="flex items-center justify-center gap-2 min-h-[44px]"
           >
             <Save className="h-4 w-4" />
             Save Changes
@@ -58,89 +58,94 @@ export default function SettingsPage() {
       {/* General Settings */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
             <Globe className="h-5 w-5" />
             General Settings
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="siteName">Site Name</Label>
+              <Label htmlFor="siteName" className="text-sm sm:text-base">Site Name</Label>
               <Input
                 id="siteName"
                 placeholder="Enter site name"
                 disabled
+                className="min-h-[44px] text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="adminEmail">Admin Email</Label>
+              <Label htmlFor="adminEmail" className="text-sm sm:text-base">Admin Email</Label>
               <Input
                 id="adminEmail"
                 type="email"
                 placeholder="Enter admin email"
                 disabled
+                className="min-h-[44px] text-base"
               />
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="siteDescription">Site Description</Label>
+            <Label htmlFor="siteDescription" className="text-sm sm:text-base">Site Description</Label>
             <Textarea
               id="siteDescription"
               placeholder="Enter site description"
-              rows={3}
+              rows={4}
               disabled
+              className="min-h-[100px] text-base"
             />
           </div>
         </CardContent>
       </Card>
 
-
-
       {/* Email Settings */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
             <Mail className="h-5 w-5" />
             Email Settings
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="smtpHost">SMTP Host</Label>
+              <Label htmlFor="smtpHost" className="text-sm sm:text-base">SMTP Host</Label>
               <Input
                 id="smtpHost"
                 placeholder="smtp.gmail.com"
                 disabled
+                className="min-h-[44px] text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="smtpPort">SMTP Port</Label>
+              <Label htmlFor="smtpPort" className="text-sm sm:text-base">SMTP Port</Label>
               <Input
                 id="smtpPort"
                 type="number"
                 placeholder="587"
                 disabled
+                className="min-h-[44px] text-base"
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="smtpUser">SMTP Username</Label>
+              <Label htmlFor="smtpUser" className="text-sm sm:text-base">SMTP Username</Label>
               <Input
                 id="smtpUser"
                 placeholder="Enter SMTP username"
                 disabled
+                className="min-h-[44px] text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="smtpPassword">SMTP Password</Label>
+              <Label htmlFor="smtpPassword" className="text-sm sm:text-base">SMTP Password</Label>
               <Input
                 id="smtpPassword"
                 type="password"
                 placeholder="Enter SMTP password"
                 disabled
+                className="min-h-[44px] text-base"
               />
             </div>
           </div>

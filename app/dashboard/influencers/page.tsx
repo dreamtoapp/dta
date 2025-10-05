@@ -149,26 +149,27 @@ export default function InfluencersPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Influencer Management</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold">Influencer Management</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">
             Manage and monitor your influencer network ({filteredInfluencers.length} total)
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
           <Button
             onClick={loadData}
             variant="outline"
-            size="sm"
-            className="flex items-center gap-2"
+            size="default"
+            className="flex items-center justify-center gap-2 min-h-[44px]"
           >
             <RefreshCw className="h-4 w-4" />
             Refresh
           </Button>
           <Button
             onClick={() => router.push('/dashboard/influencers/new')}
-            className="flex items-center gap-2"
+            size="default"
+            className="flex items-center justify-center gap-2 min-h-[44px]"
           >
             <Plus className="h-4 w-4" />
             Add Influencer
@@ -177,16 +178,16 @@ export default function InfluencersPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
         <Card className="bg-card/60 backdrop-blur-sm border-0 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Total Influencers</p>
-                <p className="text-3xl font-bold text-foreground">{influencers.length}</p>
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Total Influencers</p>
+                <p className="text-2xl sm:text-3xl font-bold text-foreground">{influencers.length}</p>
                 <p className="text-xs text-muted-foreground mt-1">Active profiles</p>
               </div>
-              <div className="h-12 w-12 bg-[#ff6b6b]/10 rounded-lg flex items-center justify-center">
+              <div className="h-12 w-12 bg-[#ff6b6b]/10 rounded-lg flex items-center justify-center shrink-0">
                 <Users className="h-6 w-6 text-[#ff6b6b]" />
               </div>
             </div>
@@ -194,34 +195,33 @@ export default function InfluencersPage() {
         </Card>
 
         <Card className="bg-card/60 backdrop-blur-sm border-0 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Total Followers</p>
-                <p className="text-3xl font-bold text-foreground">
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Total Followers</p>
+                <p className="text-2xl sm:text-3xl font-bold text-foreground">
                   {influencers.reduce((sum, inf) => sum + inf.totalFollowers, 0).toLocaleString()}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">Combined reach</p>
               </div>
-              <div className="h-12 w-12 bg-[#99e4ff]/10 rounded-lg flex items-center justify-center">
+              <div className="h-12 w-12 bg-[#99e4ff]/10 rounded-lg flex items-center justify-center shrink-0">
                 <TrendingUp className="h-6 w-6 text-[#99e4ff]" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-
         <Card className="bg-card/60 backdrop-blur-sm border-0 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-1">Verified</p>
-                <p className="text-3xl font-bold text-foreground">
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-1">Verified</p>
+                <p className="text-2xl sm:text-3xl font-bold text-foreground">
                   {influencers.filter(inf => inf.isVerified).length}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">Verified profiles</p>
               </div>
-              <div className="h-12 w-12 bg-[#10b981]/10 rounded-lg flex items-center justify-center">
+              <div className="h-12 w-12 bg-[#10b981]/10 rounded-lg flex items-center justify-center shrink-0">
                 <Star className="h-6 w-6 text-[#10b981]" />
               </div>
             </div>
@@ -231,22 +231,22 @@ export default function InfluencersPage() {
 
       {/* Filters */}
       <Card>
-        <CardContent className="p-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1">
+        <CardContent className="p-4 sm:p-6">
+          <div className="flex flex-col gap-3 sm:gap-4">
+            <div className="w-full">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search influencers..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 min-h-[44px] text-base"
                 />
               </div>
             </div>
-            <div className="w-full sm:w-48">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                <SelectTrigger>
+                <SelectTrigger className="min-h-[44px] text-base">
                   <SelectValue placeholder="Filter by category" />
                 </SelectTrigger>
                 <SelectContent>
@@ -258,10 +258,8 @@ export default function InfluencersPage() {
                   ))}
                 </SelectContent>
               </Select>
-            </div>
-            <div className="w-full sm:w-48">
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger>
+                <SelectTrigger className="min-h-[44px] text-base">
                   <SelectValue placeholder="Filter by status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -278,82 +276,80 @@ export default function InfluencersPage() {
       </Card>
 
       {/* Influencers Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
         {filteredInfluencers.map((influencer) => (
           <Card key={influencer.id} className="hover:shadow-md transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="h-12 w-12 rounded-full overflow-hidden bg-gradient-to-br from-[#0d3ad7] to-[#99e4ff] flex items-center justify-center">
-                    {influencer.avatar ? (
-                      <Image
-                        src={influencer.avatar}
-                        alt={influencer.name}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <span className="text-white font-bold text-sm">
-                        {influencer.name.split(' ').map(n => n[0]).join('')}
-                      </span>
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-start gap-3 mb-4">
+                <div className="h-14 w-14 sm:h-12 sm:w-12 rounded-full overflow-hidden bg-gradient-to-br from-[#0d3ad7] to-[#99e4ff] flex items-center justify-center shrink-0">
+                  {influencer.avatar ? (
+                    <Image
+                      src={influencer.avatar}
+                      alt={influencer.name}
+                      width={56}
+                      height={56}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-white font-bold text-sm">
+                      {influencer.name.split(' ').map(n => n[0]).join('')}
+                    </span>
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2 break-words">
+                    {influencer.name}
+                    {influencer.isVerified && (
+                      <Star className="h-3 w-3 text-blue-500 fill-current shrink-0" />
                     )}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold flex items-center gap-2">
-                      {influencer.name}
-                      {influencer.isVerified && (
-                        <Star className="h-3 w-3 text-blue-500 fill-current" />
-                      )}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">@{influencer.username}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{influencer.email}</p>
-                  </div>
+                  </h3>
+                  <p className="text-sm text-muted-foreground truncate">@{influencer.username}</p>
+                  <p className="text-xs text-muted-foreground mt-1 truncate">{influencer.email}</p>
                 </div>
               </div>
 
-              <div className="space-y-3 mb-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Category</span>
-                  <span className="text-sm font-medium">{influencer.category}</span>
+              <div className="space-y-2 mb-4">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Category</span>
+                  <span className="font-medium truncate max-w-[150px] sm:max-w-none">{influencer.category}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Location</span>
-                  <span className="text-sm font-medium">{influencer.location}</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Location</span>
+                  <span className="font-medium truncate max-w-[150px] sm:max-w-none">{influencer.location}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Followers</span>
-                  <span className="text-sm font-medium">{influencer.totalFollowers.toLocaleString()}</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Followers</span>
+                  <span className="font-medium">{influencer.totalFollowers.toLocaleString()}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Starting Rate</span>
-                  <span className="text-sm font-medium">${influencer.influencerRate}</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Starting Rate</span>
+                  <span className="font-medium">${influencer.influencerRate}</span>
                 </div>
               </div>
 
               {influencer.isFeatured && (
-                <div className="mb-4">
+                <div className="mb-3">
                   <Badge variant="secondary" className="text-xs">Featured</Badge>
                 </div>
               )}
 
               {/* Social Platforms */}
               <div className="mb-4">
-                <div className="text-sm text-muted-foreground mb-2">Social Platforms</div>
-                <div className="flex flex-wrap gap-2">
+                <div className="text-xs sm:text-sm text-muted-foreground mb-2">Social Platforms</div>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {influencer.socialPlatforms
                     ?.filter(platform => platform.followers > 0)
                     .map((platform, index) => (
                       <Badge
                         key={index}
                         variant="outline"
-                        className="flex items-center gap-1 text-xs"
+                        className="flex items-center gap-1 text-xs px-2 py-1"
                       >
                         <IconComponent
                           name={platform.platform.toLowerCase() as any}
-                          className="h-3 w-3"
+                          className="h-3 w-3 shrink-0"
                         />
-                        <span>
+                        <span className="hidden sm:inline">
                           {PLATFORM_DISPLAY_NAMES[platform.platform.toLowerCase() as keyof typeof PLATFORM_DISPLAY_NAMES]}
                         </span>
                         <span className="text-muted-foreground">
@@ -364,37 +360,37 @@ export default function InfluencersPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 pt-4 border-t flex-wrap">
+              <div className="grid grid-cols-2 gap-2 pt-4 border-t">
                 <Button
-                  size="sm"
+                  size="default"
                   variant="outline"
-                  className="flex-1"
+                  className="min-h-[44px] text-xs sm:text-sm"
                   onClick={() => router.push(`/dashboard/influencers/${influencer.id}/view`)}
                 >
-                  <Eye className="h-3 w-3 mr-1" />
-                  View
+                  <Eye className="h-4 w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">View</span>
                 </Button>
                 <Button
-                  size="sm"
+                  size="default"
                   variant="outline"
-                  className="flex-1"
+                  className="min-h-[44px] text-xs sm:text-sm"
                   onClick={() => router.push(`/dashboard/influencers/${influencer.id}`)}
                 >
-                  <Settings className="h-3 w-3 mr-1" />
-                  Edit
+                  <Settings className="h-4 w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">Edit</span>
                 </Button>
-                <Button size="sm" variant="outline" className="flex-1">
-                  <MessageSquare className="h-3 w-3 mr-1" />
-                  Contact
+                <Button size="default" variant="outline" className="min-h-[44px] text-xs sm:text-sm">
+                  <MessageSquare className="h-4 w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">Contact</span>
                 </Button>
                 <Button
-                  size="sm"
+                  size="default"
                   variant="outline"
-                  className="flex-1"
+                  className="min-h-[44px] text-xs sm:text-sm"
                   onClick={() => alert('Testimonial feature coming soon!')}
                 >
-                  <Quote className="h-3 w-3 mr-1" />
-                  Testimonial
+                  <Quote className="h-4 w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">Testimonial</span>
                 </Button>
               </div>
 
@@ -404,7 +400,7 @@ export default function InfluencersPage() {
                 <button
                   onClick={() => handleToggleVerification(influencer.id)}
                   disabled={verifying === influencer.id}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium transition-colors ${influencer.isVerified
+                  className={`flex items-center gap-2 px-3 py-2 min-h-[36px] rounded-full text-xs font-medium transition-colors ${influencer.isVerified
                     ? 'bg-blue-100 text-blue-700 hover:bg-blue-200'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     } ${verifying === influencer.id ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}

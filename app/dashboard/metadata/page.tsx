@@ -12,15 +12,15 @@ export default async function MetadataManagementPage() {
   const allMetadata = await getAllPageMetadata();
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="container mx-auto p-4 sm:p-6 space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold">SEO Metadata Management</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold">SEO Metadata Management</h1>
+          <p className="text-muted-foreground text-sm sm:text-base mt-1">
             Manage SEO metadata for all {allMetadata.length} pages
           </p>
         </div>
-        <Button asChild>
+        <Button asChild size="default" className="min-h-[44px] w-full sm:w-auto">
           <Link href="/dashboard/metadata/new">Add New Page</Link>
         </Button>
       </div>

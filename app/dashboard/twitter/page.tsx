@@ -114,21 +114,21 @@ export default function TwitterTestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4 sm:p-6">
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
             🐦 Twitter Test
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
             Test your Twitter API integration
           </p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Verify Credentials</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg sm:text-xl">Verify Credentials</CardTitle>
+            <CardDescription className="text-sm sm:text-base">
               Check if your Twitter API credentials are working
             </CardDescription>
           </CardHeader>
@@ -136,7 +136,7 @@ export default function TwitterTestPage() {
             <Button
               onClick={handleVerifyCredentials}
               disabled={isVerifying}
-              className="w-full"
+              className="w-full min-h-[44px] text-base"
               variant="outline"
             >
               {isVerifying ? "Verifying..." : "Verify Twitter Credentials"}
@@ -146,21 +146,21 @@ export default function TwitterTestPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Post a Tweet</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg sm:text-xl">Post a Tweet</CardTitle>
+            <CardDescription className="text-sm sm:text-base">
               Write and post a test tweet from your app
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handlePostTweet} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="tweet">Tweet Text</Label>
+                <Label htmlFor="tweet" className="text-sm sm:text-base">Tweet Text</Label>
                 <textarea
                   id="tweet"
                   value={tweetText}
                   onChange={(e) => setTweetText(e.target.value)}
                   placeholder="What's happening?"
-                  className={`w-full min-h-[150px] p-3 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white ${isOverLimit ? "border-red-500" : ""
+                  className={`w-full min-h-[150px] p-3 border rounded-md resize-none text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white ${isOverLimit ? "border-red-500" : ""
                     }`}
                 />
                 <div className="flex justify-between items-center text-sm">
@@ -184,7 +184,7 @@ export default function TwitterTestPage() {
 
               {/* Image URL Input */}
               <div className="space-y-2">
-                <Label htmlFor="image-url" className="flex items-center gap-2">
+                <Label htmlFor="image-url" className="flex items-center gap-2 text-sm sm:text-base">
                   <ImageIcon className="h-4 w-4" />
                   Image URL (Optional)
                 </Label>
@@ -195,21 +195,21 @@ export default function TwitterTestPage() {
                     value={imageUrl}
                     onChange={(e) => handleImageUrlChange(e.target.value)}
                     placeholder="https://example.com/image.jpg"
-                    className="pr-10"
+                    className="pr-10 min-h-[44px] text-base"
                   />
                   {imageUrl && (
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="absolute right-1 top-1 h-6 w-6 p-0"
+                      className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0"
                       onClick={() => setImageUrl("")}
                     >
-                      <X className="h-3 w-3" />
+                      <X className="h-4 w-4" />
                     </Button>
                   )}
                   {isValidatingImage && (
-                    <Loader2 className="absolute right-3 top-3 h-4 w-4 animate-spin text-muted-foreground" />
+                    <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-muted-foreground" />
                   )}
                 </div>
                 {imageUrl && (
@@ -223,11 +223,11 @@ export default function TwitterTestPage() {
               {imageUrl && (
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Preview</Label>
-                  <div className="relative inline-block">
+                  <div className="relative">
                     <img
                       src={imageUrl}
                       alt="Tweet preview"
-                      className="max-w-full h-auto max-h-64 rounded-lg border"
+                      className="w-full h-auto max-h-64 rounded-lg border object-cover"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                         toast.error("Failed to load image preview");
@@ -240,7 +240,7 @@ export default function TwitterTestPage() {
               <Button
                 type="submit"
                 disabled={isPosting || !tweetText.trim() || isOverLimit}
-                className="w-full"
+                className="w-full min-h-[44px] text-base"
               >
                 {isPosting ? "Posting..." : "Post Tweet"}
               </Button>

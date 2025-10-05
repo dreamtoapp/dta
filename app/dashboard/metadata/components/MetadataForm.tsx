@@ -156,19 +156,20 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
 
   return (
     <Form {...form}>
-      <form onSubmit={handleFormSubmit} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={handleFormSubmit} className="space-y-6 sm:space-y-8">
+        <div className="grid grid-cols-1 gap-4">
           <FormField
             control={form.control}
             name="pagePath"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Page Path *</FormLabel>
+                <FormLabel className="text-sm sm:text-base">Page Path *</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="/services"
                     {...field}
                     disabled={isEditing}
+                    className="min-h-[44px] text-base"
                   />
                 </FormControl>
                 <FormDescription>
@@ -184,9 +185,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
             name="pageName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Page Name *</FormLabel>
+                <FormLabel className="text-sm sm:text-base">Page Name *</FormLabel>
                 <FormControl>
-                  <Input placeholder="Services Page" {...field} />
+                  <Input placeholder="Services Page" {...field} className="min-h-[44px] text-base" />
                 </FormControl>
                 <FormDescription>
                   Human-readable name for admin reference
@@ -212,9 +213,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="titleEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title (EN) *</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Title (EN) *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your Page Title" {...field} maxLength={70} />
+                    <Input placeholder="Your Page Title" {...field} maxLength={70} className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormDescription>
                     {field.value?.length || 0}/70 characters
@@ -229,11 +230,12 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="descriptionEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description (EN) *</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Description (EN) *</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="A brief description of your page"
                       {...field}
+                      className="min-h-[100px] text-base"
                       maxLength={160}
                       rows={3}
                     />
@@ -251,11 +253,12 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="keywordsEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Keywords (EN)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Keywords (EN)</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="keyword1, keyword2, keyword3"
                       {...field}
+                      className="min-h-[44px] text-base"
                     />
                   </FormControl>
                   <FormDescription>
@@ -272,9 +275,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="titleAr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title (AR) *</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Title (AR) *</FormLabel>
                   <FormControl>
-                    <Input placeholder="عنوان الصفحة" {...field} maxLength={70} dir="rtl" />
+                    <Input placeholder="عنوان الصفحة" {...field} maxLength={70} dir="rtl" className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormDescription>
                     {field.value?.length || 0}/70 characters
@@ -289,11 +292,12 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="descriptionAr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description (AR) *</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Description (AR) *</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="وصف موجز للصفحة"
                       {...field}
+                      className="min-h-[100px] text-base"
                       maxLength={160}
                       rows={3}
                       dir="rtl"
@@ -312,12 +316,13 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="keywordsAr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Keywords (AR)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Keywords (AR)</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="كلمة مفتاحية، كلمة مفتاحية، كلمة مفتاحية"
                       {...field}
                       dir="rtl"
+                      className="min-h-[44px] text-base"
                     />
                   </FormControl>
                   <FormDescription>
@@ -336,9 +341,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="ogTitleEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>OG Title (EN)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">OG Title (EN)</FormLabel>
                   <FormControl>
-                    <Input placeholder="Leave empty to use page title" {...field} />
+                    <Input placeholder="Leave empty to use page title" {...field} className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -350,12 +355,13 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="ogDescriptionEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>OG Description (EN)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">OG Description (EN)</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Leave empty to use page description"
                       {...field}
-                      rows={2}
+                      rows={3}
+                      className="min-h-[80px] text-base"
                     />
                   </FormControl>
                   <FormMessage />
@@ -369,9 +375,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="ogTitleAr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>OG Title (AR)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">OG Title (AR)</FormLabel>
                   <FormControl>
-                    <Input placeholder="اترك فارغاً لاستخدام عنوان الصفحة" {...field} dir="rtl" />
+                    <Input placeholder="اترك فارغاً لاستخدام عنوان الصفحة" {...field} dir="rtl" className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -383,12 +389,13 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="ogDescriptionAr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>OG Description (AR)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">OG Description (AR)</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="اترك فارغاً لاستخدام وصف الصفحة"
                       {...field}
-                      rows={2}
+                      rows={3}
+                      className="min-h-[80px] text-base"
                       dir="rtl"
                     />
                   </FormControl>
@@ -402,11 +409,12 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="ogImage"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>OG Image URL</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">OG Image URL</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="https://www.dreamto.app/og-image.png"
                       {...field}
+                      className="min-h-[44px] text-base"
                     />
                   </FormControl>
                   <FormDescription>
@@ -425,9 +433,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="twitterTitleEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Twitter Title (EN)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Twitter Title (EN)</FormLabel>
                   <FormControl>
-                    <Input placeholder="Leave empty to use page title" {...field} />
+                    <Input placeholder="Leave empty to use page title" {...field} className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -439,12 +447,13 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="twitterDescriptionEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Twitter Description (EN)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Twitter Description (EN)</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Leave empty to use page description"
                       {...field}
-                      rows={2}
+                      rows={3}
+                      className="min-h-[80px] text-base"
                     />
                   </FormControl>
                   <FormMessage />
@@ -458,9 +467,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="twitterTitleAr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Twitter Title (AR)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Twitter Title (AR)</FormLabel>
                   <FormControl>
-                    <Input placeholder="اترك فارغاً لاستخدام عنوان الصفحة" {...field} dir="rtl" />
+                    <Input placeholder="اترك فارغاً لاستخدام عنوان الصفحة" {...field} dir="rtl" className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -472,12 +481,13 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="twitterDescriptionAr"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Twitter Description (AR)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Twitter Description (AR)</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="اترك فارغاً لاستخدام وصف الصفحة"
                       {...field}
-                      rows={2}
+                      rows={3}
+                      className="min-h-[80px] text-base"
                       dir="rtl"
                     />
                   </FormControl>
@@ -493,9 +503,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Category</FormLabel>
                   <FormControl>
-                    <Input placeholder="Software Development Services" {...field} />
+                    <Input placeholder="Software Development Services" {...field} className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -507,9 +517,9 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="author"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Author</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Author</FormLabel>
                   <FormControl>
-                    <Input placeholder="DreamToApp Team" {...field} />
+                    <Input placeholder="DreamToApp Team" {...field} className="min-h-[44px] text-base" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -521,11 +531,12 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               name="canonicalUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Canonical URL</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Canonical URL</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="https://www.dreamto.app/services"
                       {...field}
+                      className="min-h-[44px] text-base"
                     />
                   </FormControl>
                   <FormDescription>
@@ -603,8 +614,8 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
           </TabsContent>
         </Tabs>
 
-        <div className="flex gap-4">
-          <Button type="submit" disabled={isSubmitting}>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <Button type="submit" disabled={isSubmitting} size="default" className="min-h-[44px] text-base">
             {isSubmitting ? 'Saving...' : isEditing ? 'Update Metadata' : 'Create Metadata'}
           </Button>
           <Button
@@ -612,6 +623,8 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
             variant="outline"
             onClick={() => router.push('/dashboard/metadata')}
             disabled={isSubmitting}
+            size="default"
+            className="min-h-[44px] text-base"
           >
             Cancel
           </Button>

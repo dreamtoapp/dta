@@ -138,9 +138,9 @@ export default function DashboardSidebar({ stats, loadStats }: DashboardSidebarP
           variant="outline"
           size="icon"
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="bg-background/80 backdrop-blur-sm"
+          className="bg-background/80 backdrop-blur-sm h-12 w-12"
         >
-          {isCollapsed ? <Menu className="h-4 w-4" /> : <X className="h-4 w-4" />}
+          {isCollapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
         </Button>
       </div>
 
@@ -151,23 +151,23 @@ export default function DashboardSidebar({ stats, loadStats }: DashboardSidebarP
       )}>
         <div className="flex h-full flex-col">
           {/* Header */}
-          <div className="flex h-16 items-center justify-between px-6 border-b border-border">
+          <div className="flex h-16 items-center justify-between px-4 sm:px-6 border-b border-border">
             <div className="flex items-center space-x-2">
               <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
                 <LayoutDashboard className="h-4 w-4 text-primary-foreground" />
               </div>
-              <span className="text-lg font-semibold text-foreground">Dashboard</span>
+              <span className="text-base sm:text-lg font-semibold text-foreground">Dashboard</span>
             </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="h-8 w-8"
+              className="h-10 w-10 sm:h-8 sm:w-8"
             >
               {theme === "light" ? (
-                <Moon className="h-4 w-4" />
+                <Moon className="h-5 w-5 sm:h-4 sm:w-4" />
               ) : (
-                <Sun className="h-4 w-4" />
+                <Sun className="h-5 w-5 sm:h-4 sm:w-4" />
               )}
             </Button>
           </div>
@@ -181,18 +181,18 @@ export default function DashboardSidebar({ stats, loadStats }: DashboardSidebarP
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                    "group flex items-center justify-between px-3 py-3 min-h-[44px] text-sm font-medium rounded-lg transition-colors",
                     item.current
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   )}
                 >
                   <div className="flex items-center space-x-3">
-                    <Icon className="h-4 w-4" />
-                    <span>{item.name}</span>
+                    <Icon className="h-5 w-5" />
+                    <span className="text-sm sm:text-base">{item.name}</span>
                   </div>
                   {item.badge && (
-                    <Badge variant="secondary" className="text-xs">
+                    <Badge variant="secondary" className="text-xs shrink-0">
                       {item.badge}
                     </Badge>
                   )}
@@ -206,10 +206,10 @@ export default function DashboardSidebar({ stats, loadStats }: DashboardSidebarP
             <Button
               variant="ghost"
               onClick={handleLogout}
-              className="w-full justify-start text-muted-foreground hover:text-foreground"
+              className="w-full justify-start text-muted-foreground hover:text-foreground min-h-[44px]"
             >
-              <LogOut className="h-4 w-4 mr-3" />
-              Logout
+              <LogOut className="h-5 w-5 mr-3" />
+              <span className="text-sm sm:text-base">Logout</span>
             </Button>
           </div>
         </div>

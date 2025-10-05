@@ -75,19 +75,20 @@ export function MetadataTable({ data }: MetadataTableProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
         <Input
           placeholder="Search by page name, path, or title..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="max-w-md"
+          className="flex-1 min-h-[44px] text-base"
         />
-        <Badge variant="secondary">
+        <Badge variant="secondary" className="self-start sm:self-auto shrink-0">
           {filteredData.length} of {metadata.length} pages
         </Badge>
       </div>
 
-      <div className="border rounded-lg">
+      {/* Desktop Table View */}
+      <div className="hidden lg:block border rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
@@ -157,6 +158,66 @@ export function MetadataTable({ data }: MetadataTableProps) {
             )}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Mobile Card View */}
+      <div className="lg:hidden space-y-4">
+        {filteredData.length === 0 ? (
+          <div className="text-center py-8 text-muted-foreground">
+            No pages found
+          </div>
+        ) : (
+          filteredData.map((item) => (
+            <div key={item.id} className="border rounded-lg p-4 space-y-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-base break-words">{item.pageName}</h3>
+                  <code className="text-xs bg-muted px-2 py-1 rounded break-all inline-block mt-1">
+                    {item.pagePath}
+                  </code>
+                </div>
+                <Badge variant={item.isActive ? "default" : "secondary"} className="shrink-0">
+                  {item.isActive ? "Active" : "Inactive"}
+                </Badge>
+              </div>
+
+              <div className="space-y-2 text-sm">
+                <div>
+                  <span className="text-muted-foreground">Title (EN):</span>
+                  <p className="font-medium line-clamp-2 mt-1">{item.titleEn}</p>
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Updated: {new Date(item.updatedAt).toLocaleDateString()}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t">
+                <div className="flex items-center gap-2">
+                  <Switch
+                    checked={item.isActive}
+                    onCheckedChange={() => handleToggleStatus(item.pagePath)}
+                  />
+                  <span className="text-xs text-muted-foreground">Toggle</span>
+                </div>
+                <div className="flex gap-2">
+                  <Button asChild variant="outline" size="default" className="min-h-[44px] text-sm">
+                    <Link href={`/dashboard/metadata/${encodeURIComponent(item.pagePath)}`}>
+                      Edit
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    size="default"
+                    className="min-h-[44px] text-sm"
+                    onClick={() => handleDelete(item.pagePath, item.pageName)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

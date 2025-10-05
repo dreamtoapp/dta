@@ -280,58 +280,61 @@ export default function TwitterSchedulePage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Twitter Campaigns</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold">Twitter Campaigns</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Manage your Twitter campaigns and their scheduled posts
           </p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button>
+            <Button size="default" className="min-h-[44px] w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
               New Campaign
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Create New Campaign</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-lg sm:text-xl">Create New Campaign</DialogTitle>
+              <DialogDescription className="text-sm sm:text-base">
                 Create a new Twitter campaign to organize your posts.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="campaign-name">Campaign Name</Label>
+                <Label htmlFor="campaign-name" className="text-sm sm:text-base">Campaign Name</Label>
                 <Input
                   id="campaign-name"
                   placeholder="e.g., DreamToApp Q1 2025"
                   value={newCampaign.name}
                   onChange={(e) => setNewCampaign({ ...newCampaign, name: e.target.value })}
+                  className="min-h-[44px] text-base mt-2"
                 />
               </div>
               <div>
-                <Label htmlFor="campaign-description">Description</Label>
+                <Label htmlFor="campaign-description" className="text-sm sm:text-base">Description</Label>
                 <Textarea
                   id="campaign-description"
                   placeholder="Campaign description..."
                   value={newCampaign.description}
                   onChange={(e) => setNewCampaign({ ...newCampaign, description: e.target.value })}
+                  className="min-h-[80px] text-base mt-2"
                 />
               </div>
               <div>
-                <Label htmlFor="og-image">OG Image URL</Label>
+                <Label htmlFor="og-image" className="text-sm sm:text-base">OG Image URL</Label>
                 <Input
                   id="og-image"
+                  className="min-h-[44px] text-base mt-2"
                   placeholder="https://dreamto.app/og-image.png"
                   value={newCampaign.ogImageUrl}
                   onChange={(e) => setNewCampaign({ ...newCampaign, ogImageUrl: e.target.value })}
                 />
               </div>
             </div>
-            <DialogFooter>
-              <Button onClick={handleCreateCampaign} disabled={!newCampaign.name}>
+            <DialogFooter className="flex flex-col sm:flex-row gap-2">
+              <Button onClick={handleCreateCampaign} disabled={!newCampaign.name} size="default" className="min-h-[44px] text-base w-full sm:w-auto">
                 Create Campaign
               </Button>
             </DialogFooter>
@@ -498,13 +501,15 @@ export default function TwitterSchedulePage() {
               />
             </div>
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} size="default" className="min-h-[44px] text-base w-full sm:w-auto">
               Cancel
             </Button>
             <Button
               onClick={handleUpdateCampaign}
               disabled={!editCampaignData.name || !editCampaignData.startDate}
+              size="default"
+              className="min-h-[44px] text-base w-full sm:w-auto"
             >
               Update Campaign
             </Button>
@@ -522,13 +527,15 @@ export default function TwitterSchedulePage() {
               This action cannot be undone and will also delete all associated posts.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} size="default" className="min-h-[44px] text-base w-full sm:w-auto">
               Cancel
             </Button>
             <Button
               variant="destructive"
               onClick={handleDeleteCampaign}
+              size="default"
+              className="min-h-[44px] text-base w-full sm:w-auto"
             >
               Delete Campaign
             </Button>
