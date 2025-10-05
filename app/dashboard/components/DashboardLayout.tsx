@@ -32,7 +32,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="min-h-screen bg-gradient-to-br from-background to-muted" dir="ltr">
       <DashboardSidebar stats={stats || undefined} loadStats={loadStats} />
       <div className="lg:pl-64 min-h-screen">
-        <main className="p-6 lg:p-8 min-h-screen">
+        <main className="p-4 sm:p-6 lg:p-8 min-h-screen">
           {children}
         </main>
       </div>
