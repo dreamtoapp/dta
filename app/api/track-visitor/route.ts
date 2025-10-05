@@ -5,7 +5,7 @@ import { parseUserAgent, getGeoLocation, cleanReferrer, isValidIP } from '@/lib/
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { ip, userAgent, referer, currentPage, utmSource, utmMedium, utmCampaign } = body;
+    const { ip, userAgent, referer, currentPage, utmSource, utmMedium, utmCampaign, geo } = body;
 
     // Validate IP
     if (!isValidIP(ip)) {
@@ -16,8 +16,24 @@ export async function POST(request: NextRequest) {
     // Parse device info
     const deviceInfo = parseUserAgent(userAgent);
 
-    // Get geolocation
-    const geoData = getGeoLocation(ip);
+    // Get geolocation data (from middleware or fallback)
+    let geoData = null;
+    try {
+      if (geo) {
+        // Use geolocation data from middleware (Vercel's geolocation)
+        geoData = {
+          country: geo.country || null,
+          city: geo.city || null,
+          region: geo.region || null,
+        };
+      } else {
+        // Fallback to IP-based geolocation
+        geoData = getGeoLocation(ip, request);
+      }
+    } catch (geoError) {
+      console.log('Geolocation lookup failed:', geoError);
+      // Continue without geolocation data
+    }
 
     // Clean referrer
     const cleanRef = cleanReferrer(referer);
@@ -25,7 +41,7 @@ export async function POST(request: NextRequest) {
     // Prepare visitor data
     const visitorData = {
       ip,
-      ...geoData,
+      ...(geoData || {}), // Only spread geoData if it exists
       ...deviceInfo,
       referrer: cleanRef,
       utmSource,

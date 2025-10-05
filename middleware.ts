@@ -43,6 +43,9 @@ async function trackVisitor(request: NextRequest) {
       return;
     }
 
+    // Get Vercel geolocation data (Vercel adds geo property to request)
+    const geo = (request as any).geo;
+
     // Call API to track visitor (fire and forget)
     const trackingData = {
       ip,
@@ -52,6 +55,12 @@ async function trackVisitor(request: NextRequest) {
       utmSource: searchParams.get('utm_source'),
       utmMedium: searchParams.get('utm_medium'),
       utmCampaign: searchParams.get('utm_campaign'),
+      // Include Vercel geolocation data
+      geo: geo ? {
+        country: geo.country,
+        city: geo.city,
+        region: geo.region,
+      } : null,
     };
 
     // Use fetch with timeout to prevent hanging

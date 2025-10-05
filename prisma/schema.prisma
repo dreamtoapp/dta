@@ -33,12 +33,10 @@ model Visitor {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   ip         String   @unique
   
-  // Geolocation (existing)
+  // Geolocation (Vercel provides)
   country    String?  
   city       String?  
   region     String?  
-  org        String?  
-  timezone   String?  
   
   // Device Information (NEW)
   browser    String?

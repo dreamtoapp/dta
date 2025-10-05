@@ -1,4 +1,5 @@
-import geoip from 'geoip-lite';
+// Simplified geolocation without geoip-lite to avoid serverless issues
+// In production, we'll skip geolocation to avoid build/deployment issues
 import { headers } from 'next/headers';
 
 export interface DeviceInfo {
@@ -132,27 +133,60 @@ export async function getClientIP(): Promise<string> {
   }
 }
 
-// Get geolocation from IP
-export function getGeoLocation(ip: string) {
+// Get geolocation from Vercel's built-in geolocation headers
+export function getGeoLocationFromVercel(request: any) {
+  try {
+    // Vercel provides geolocation data in request headers
+    const country = request.geo?.country;
+    const city = request.geo?.city;
+    const region = request.geo?.region;
+
+    if (!country) {
+      return null;
+    }
+
+    return {
+      country: country || null,
+      city: city || null,
+      region: region || null,
+    };
+  } catch (error) {
+    console.log('Vercel geolocation not available:', error);
+    return null;
+  }
+}
+
+// Fallback geolocation for development (simple IP-based detection)
+export function getGeoLocationFromIP(ip: string) {
   if (!ip || ip === 'unknown' || ip.startsWith('127.') || ip.startsWith('192.168.') || ip.startsWith('10.')) {
     return null;
   }
 
-  try {
-    const geo = geoip.lookup(ip);
-    if (!geo) return null;
-
-    return {
-      country: geo.country || null,
-      city: geo.city || null,
-      region: geo.region || null,
-      timezone: geo.timezone || null,
-      org: (geo as any).org || null, // org is not in the official types but exists in data
-    };
-  } catch (error) {
-    console.error('GeoIP lookup error:', error);
-    return null;
+  // Simple country detection based on IP ranges (development only)
+  // This is a basic implementation for local testing
+  if (process.env.NODE_ENV === 'development') {
+    // Very basic IP range detection for development
+    if (ip.startsWith('8.8.') || ip.startsWith('1.1.')) {
+      return {
+        country: 'US',
+        city: 'Development',
+        region: 'Test',
+      };
+    }
   }
+
+  return null;
+}
+
+// Main geolocation function
+export function getGeoLocation(ip: string, request?: any) {
+  // Try Vercel's geolocation first (production)
+  if (request?.geo) {
+    return getGeoLocationFromVercel(request);
+  }
+
+  // Fallback for development
+  return getGeoLocationFromIP(ip);
 }
 
 // Validate IP address
