@@ -156,6 +156,36 @@ export function getGeoLocationFromVercel(request: any) {
   }
 }
 
+// Get geolocation from ip-api.com (free, no API key needed)
+export async function getGeoLocationFromIPAPI(ip: string) {
+  if (!ip || ip === 'unknown' || ip.startsWith('127.') || ip.startsWith('192.168.') || ip.startsWith('10.')) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(`http://ip-api.com/json/${ip}?fields=status,country,city,regionName`, {
+      signal: AbortSignal.timeout(3000), // 3 second timeout
+    });
+
+    if (!response.ok) return null;
+
+    const data = await response.json();
+
+    if (data.status === 'success') {
+      return {
+        country: data.country || null,
+        city: data.city || null,
+        region: data.regionName || null,
+      };
+    }
+
+    return null;
+  } catch (error) {
+    console.log('IP-API geolocation failed:', error);
+    return null;
+  }
+}
+
 // Fallback geolocation for development (simple IP-based detection)
 export function getGeoLocationFromIP(ip: string) {
   if (!ip || ip === 'unknown' || ip.startsWith('127.') || ip.startsWith('192.168.') || ip.startsWith('10.')) {

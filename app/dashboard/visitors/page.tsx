@@ -34,6 +34,7 @@ import {
 import { getVisitorAnalytics, getVisitorsList } from './actions/getAnalytics';
 import { deleteVisitor } from './actions/deleteVisitor';
 import { deleteAllVisitors } from './actions/deleteAllVisitors';
+import { updateVisitorsGeolocation } from './actions/updateGeolocation';
 import { triggerStatsRefresh } from '../lib/statsRefresh';
 import { toast } from "sonner";
 import {
@@ -64,6 +65,7 @@ export default function VisitorsPage() {
   const [deleting, setDeleting] = useState(false);
   const [isDeleteAllDialogOpen, setIsDeleteAllDialogOpen] = useState(false);
   const [deletingAll, setDeletingAll] = useState(false);
+  const [updatingGeo, setUpdatingGeo] = useState(false);
 
   useEffect(() => {
     loadAnalyticsData();
@@ -177,6 +179,28 @@ export default function VisitorsPage() {
     setCurrentPage(1);
   };
 
+  const handleUpdateGeolocation = async () => {
+    try {
+      setUpdatingGeo(true);
+      toast.info('Updating geolocation data... This may take a moment.');
+
+      const result = await updateVisitorsGeolocation();
+
+      if (result.success) {
+        toast.success(result.message);
+        loadAnalyticsData();
+        loadVisitorsList();
+      } else {
+        toast.error(result.error || 'Failed to update geolocation data');
+      }
+    } catch (error) {
+      console.error('Error updating geolocation:', error);
+      toast.error('Failed to update geolocation data');
+    } finally {
+      setUpdatingGeo(false);
+    }
+  };
+
   const getDeviceIcon = (deviceType: string) => {
     switch (deviceType) {
       case 'mobile':
@@ -257,6 +281,16 @@ export default function VisitorsPage() {
           >
             <Download className="h-4 w-4" />
             Export
+          </Button>
+          <Button
+            onClick={handleUpdateGeolocation}
+            variant="outline"
+            size="default"
+            className="flex items-center justify-center gap-2 min-h-[44px]"
+            disabled={updatingGeo || loading}
+          >
+            <RefreshCw className={`h-4 w-4 ${updatingGeo ? 'animate-spin' : ''}`} />
+            Update Geo
           </Button>
           <Button
             onClick={() => setIsDeleteAllDialogOpen(true)}

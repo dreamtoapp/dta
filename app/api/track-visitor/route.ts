@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import db from '@/lib/prisma';
-import { parseUserAgent, getGeoLocation, cleanReferrer, isValidIP } from '@/lib/visitor-tracking';
+import { parseUserAgent, getGeoLocation, getGeoLocationFromIPAPI, cleanReferrer, isValidIP } from '@/lib/visitor-tracking';
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,22 +16,49 @@ export async function POST(request: NextRequest) {
     // Parse device info
     const deviceInfo = parseUserAgent(userAgent);
 
-    // Get geolocation data (from middleware or fallback)
+    // Get geolocation data (try multiple sources)
     let geoData = null;
+    let shouldUpdateGeoData = false;
+
     try {
-      if (geo) {
-        // Use geolocation data from middleware (Vercel's geolocation)
+      // 1. Try Vercel's geolocation first (if available from middleware)
+      if (geo && geo.country) {
         geoData = {
-          country: geo.country || null,
-          city: geo.city || null,
-          region: geo.region || null,
+          country: geo.country,
+          city: geo.city,
+          region: geo.region,
         };
+        console.log('Using Vercel geolocation for IP:', ip);
       } else {
-        // Fallback to IP-based geolocation
-        geoData = getGeoLocation(ip, request);
+        // 2. Check database cache for existing visitor WITH valid country data
+        const existingVisitor = await db.visitor.findUnique({
+          where: { ip },
+          select: { country: true, city: true, region: true },
+        });
+
+        // Only use cached data if country exists (not null/undefined)
+        if (existingVisitor?.country) {
+          geoData = {
+            country: existingVisitor.country,
+            city: existingVisitor.city,
+            region: existingVisitor.region,
+          };
+          console.log('Using cached geolocation for IP:', ip);
+        } else {
+          // 3. Call ip-api.com for new visitors OR visitors without geo data
+          console.log('Fetching geolocation from IP-API for IP:', ip);
+          geoData = await getGeoLocationFromIPAPI(ip);
+          shouldUpdateGeoData = true; // Flag to update database with new geo data
+
+          if (geoData) {
+            console.log('Fetched geolocation from IP-API for IP:', ip, geoData);
+          } else {
+            console.log('IP-API returned no data for IP:', ip);
+          }
+        }
       }
     } catch (geoError) {
-      console.log('Geolocation lookup failed:', geoError);
+      console.error('Geolocation lookup error:', geoError);
       // Continue without geolocation data
     }
 
@@ -69,6 +96,12 @@ export async function POST(request: NextRequest) {
         os: deviceInfo.os,
         osVersion: deviceInfo.osVersion,
         deviceType: deviceInfo.deviceType,
+        // Update geolocation data if we fetched new data
+        ...(shouldUpdateGeoData && geoData ? {
+          country: geoData.country,
+          city: geoData.city,
+          region: geoData.region,
+        } : {}),
       },
     });
 
