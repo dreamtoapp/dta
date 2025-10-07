@@ -1,0 +1,78 @@
+[
+  {
+    "pagePath": "/",
+    "pageName": "Homepage",
+    "titleEn": "Web & App Development in Jeddah, Saudi Arabia",
+    "titleAr": "خدمات تطوير المواقع والتطبيقات في جدة، السعودية",
+    "descriptionEn": "Build high-quality websites and mobile apps in Jeddah, Saudi Arabia. Get a free quote and expert plan today.",
+    "descriptionAr": "نطوّر مواقع وتطبيقات عالية الجودة في جدة، السعودية. احصل على عرض سعر مجاني وخطة خبراء اليوم.",
+    "keywordsEn": "web development jeddah, mobile app, Saudi Arabia",
+    "keywordsAr": "تطوير مواقع جدة, تطبيقات جوال, السعودية"
+  },
+  {
+    "pagePath": "/services",
+    "pageName": "Services",
+    "titleEn": "Web, Mobile Apps, eCommerce, UI/UX Services",
+    "titleAr": "خدمات تطوير الويب، تطبيقات الجوال، التجارة الإلكترونية، UI/UX",
+    "descriptionEn": "Web, mobile, eCommerce, and UI/UX services tailored to your goals. Fast delivery, expert team, measurable results.",
+    "descriptionAr": "خدمات الويب وتطبيقات الجوال والتجارة الإلكترونية وواجهات الاستخدام حسب أهدافك. تنفيذ سريع ونتائج قابلة للقياس."
+  },
+  {
+    "pagePath": "/worksample",
+    "pageName": "Portfolio",
+    "titleEn": "Portfolio: Websites & Apps We’ve Built",
+    "titleAr": "معرض الأعمال: مواقع وتطبيقات قمنا بتطويرها",
+    "descriptionEn": "See our recent websites and apps built for Saudi brands. Performance, design, and measurable growth.",
+    "descriptionAr": "تعرّف على أحدث المواقع والتطبيقات التي طورناها لعلامات سعودية. أداء وتصميم ونمو قابل للقياس."
+  },
+  {
+    "pagePath": "/influencers",
+    "pageName": "Influencers",
+    "titleEn": "Influencers in Saudi Arabia: Hire Verified Creators",
+    "titleAr": "المؤثرون في السعودية: توظيف صُنّاع محتوى موثوقين",
+    "descriptionEn": "Hire verified Saudi influencers with real engagement. Filter by niche and platform; request intros today.",
+    "descriptionAr": "وظّف مؤثرين سعوديين موثوقين بمتابعة حقيقية. صفِّ حسب المجال والمنصة؛ اطلب تعريفات اليوم."
+  },
+  {
+    "pagePath": "/influencers/register",
+    "pageName": "Influencer Register",
+    "titleEn": "Become an Influencer Partner – Apply Now",
+    "titleAr": "انضم كمؤثر شريك – قدّم طلبك الآن",
+    "descriptionEn": "Become a DreamToApp influencer partner. Apply now and get brand deals with fair rates and support.",
+    "descriptionAr": "انضم كشريك مؤثر مع دريم تو آب. قدّم الآن واحصل على صفقات مع العلامات بأسعار عادلة ودعم كامل."
+  },
+  {
+    "pagePath": "/start-your-dream",
+    "pageName": "Start Your Dream",
+    "titleEn": "Start Your Project: Free Quote & Expert Plan",
+    "titleAr": "ابدأ مشروعك: عرض سعر مجاني وخطة خبراء",
+    "descriptionEn": "Tell us your idea. Get a fast quote and a step-by-step plan from our expert team in Saudi Arabia.",
+    "descriptionAr": "احكِ لنا فكرتك. احصل على عرض سريع وخطة تنفيذ خطوة بخطوة من خبرائنا في السعودية."
+  },
+  {
+    "pagePath": "/contactus",
+    "pageName": "Contact",
+    "titleEn": "Contact DreamToApp – Talk to Our Experts",
+    "titleAr": "تواصل مع دريم تو آب – تحدث مع خبرائنا",
+    "descriptionEn": "Talk to our experts in Jeddah. Fast replies, clear pricing, and tailored solutions for your project.",
+    "descriptionAr": "تواصل مع خبرائنا في جدة. ردود سريعة وتسعير واضح وحلول مخصصة لمشروعك."
+  },
+  {
+    "pagePath": "/privacy",
+    "pageName": "Privacy",
+    "titleEn": "Privacy Policy – DreamToApp",
+    "titleAr": "سياسة الخصوصية – دريم تو آب",
+    "descriptionEn": "Read how we collect and protect your data.",
+    "descriptionAr": "اطّلع على كيفية جمع بياناتك وحمايتها."
+  },
+  {
+    "pagePath": "/terms",
+    "pageName": "Terms",
+    "titleEn": "Terms of Service – DreamToApp",
+    "titleAr": "شروط الخدمة – دريم تو آب",
+    "descriptionEn": "Read our terms of service and usage policies.",
+    "descriptionAr": "اطّلع على شروط الخدمة وسياسات الاستخدام."
+  }
+]
+
+
