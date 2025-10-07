@@ -1,3 +1,6 @@
+// Enable ISR with 1 hour revalidation
+export const revalidate = 3600;
+
 import { getImagesFromFolder, getAllFolders } from "@/lib/cloudinary";
 import Resize from "./component/Resize";
 import ImageWithFallback from "./component/ImageWithFallback.client";
@@ -23,6 +26,31 @@ import { Metadata } from "next";
 import Link from "@/components/link";
 import MotionDiv from "@/components/MotionDiv";
 import GalleryClient from "../../component/GalleryClient";
+
+// ============================================================================
+// STATIC PARAMS GENERATION
+// ============================================================================
+
+// Pre-render all folder pages at build time
+export async function generateStaticParams() {
+  try {
+    const baseFolder = "worksamples";
+    const folders = await getAllFolders(baseFolder);
+
+    return folders.map((foldername) => ({
+      foldername,
+    }));
+  } catch (error) {
+    console.error("Error generating static params for worksample folders:", error);
+    // Return fallback folders if Cloudinary fails
+    return [
+      { foldername: 'flyer' },
+      { foldername: 'coverage' },
+      { foldername: 'cnc' },
+      { foldername: 'character' },
+    ];
+  }
+}
 
 // Dynamic folder validation
 type ValidFolder = string;

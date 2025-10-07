@@ -1,3 +1,6 @@
+// Enable ISR with 24 hour revalidation (static legal content)
+export const revalidate = 86400;
+
 import { getTranslations, getLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import { getDynamicMetadata } from '@/app/seo/metadata';

@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
+import { unstable_cache } from "next/cache";
 
 // Validate environment variables
 const requiredEnvVars = {
@@ -27,9 +28,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET || "", // Another secret code to keep it extra safe
 });
 
-// Cache for API responses to avoid repeated calls
-const cache = new Map<string, { data: any; timestamp: number }>();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+// Cache duration: 1 hour (3600 seconds) - matches rarely updated content requirement
+const CACHE_REVALIDATE = 3600;
 
 // This is the shape of the images we get from Cloudinary
 type CloudinaryResource = {
@@ -53,16 +53,20 @@ type FolderWithCoverImage = {
   items: CloudinaryResource[]; // The list of images in the folder
 };
 
-// Helper function to get cached data or fetch from API
-async function getCachedOrFetch<T>(key: string, fetchFunction: () => Promise<T>): Promise<T> {
-  const cached = cache.get(key);
-  if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-    return cached.data;
-  }
-
-  const data = await fetchFunction();
-  cache.set(key, { data, timestamp: Date.now() });
-  return data;
+// Helper function to create cached Cloudinary API calls using Next.js unstable_cache
+// This persists across deployments and serverless invocations (unlike Map cache)
+function createCachedCloudinaryCall<T>(
+  cacheKey: string,
+  fetchFunction: () => Promise<T>
+): () => Promise<T> {
+  return unstable_cache(
+    fetchFunction,
+    [cacheKey],
+    {
+      revalidate: CACHE_REVALIDATE,
+      tags: ['cloudinary', cacheKey]
+    }
+  );
 }
 
 // Validate Cloudinary configuration before making API calls
@@ -82,7 +86,8 @@ export async function getFoldersWithCoverImages(
 
     const cacheKey = `folders_${baseFolder}`;
 
-    return await getCachedOrFetch(cacheKey, async () => {
+    // Create a cached version of the fetch function
+    const cachedFetch = createCachedCloudinaryCall(cacheKey, async () => {
       // Step 1: Ask Cloudinary for all the images inside the base folder
       const response = await cloudinary.api.resources({
         type: "upload", // We're asking for uploaded images
@@ -221,6 +226,9 @@ export async function getFoldersWithCoverImages(
 
       return result;
     });
+
+    // Execute the cached function
+    return await cachedFetch();
   } catch (error) {
     // If something goes wrong, tell us in the logs and return an empty list
     console.error("Error fetching folder details:", error);
@@ -237,7 +245,8 @@ export async function getAllFolders(baseFolder: string): Promise<string[]> {
 
     const cacheKey = `all_folders_${baseFolder}`;
 
-    return await getCachedOrFetch(cacheKey, async () => {
+    // Create a cached version of the fetch function
+    const cachedFetch = createCachedCloudinaryCall(cacheKey, async () => {
       // 1) Prefer sub_folders to list immediate children reliably
       try {
         const sub = await (cloudinary.api as any).sub_folders(baseFolder);
@@ -282,6 +291,9 @@ export async function getAllFolders(baseFolder: string): Promise<string[]> {
         return [];
       }
     });
+
+    // Execute the cached function
+    return await cachedFetch();
   } catch (error) {
     console.error("Error fetching folders from Cloudinary:", error);
     // Return fallback folders if Cloudinary fails
@@ -309,7 +321,8 @@ export async function getImagesFromFolder(
 
     const cacheKey = `images_${folderPath}`;
 
-    return await getCachedOrFetch(cacheKey, async () => {
+    // Create a cached version of the fetch function
+    const cachedFetch = createCachedCloudinaryCall(cacheKey, async () => {
       // First try Admin API by prefix
       let validResources: CloudinaryResource[] = [];
       try {
@@ -358,6 +371,9 @@ export async function getImagesFromFolder(
         height: resource.height || 300,
       }));
     });
+
+    // Execute the cached function
+    return await cachedFetch();
   } catch (error) {
     console.error("Cloudinary API Error:", {
       error: (error as Error).message,

@@ -5,7 +5,8 @@ import { getAllWorksampleFolders } from './actions/worksampleActions';
 import { AlertCircle } from 'lucide-react';
 import GalleryClient from './component/GalleryClient';
 
-export const dynamic = 'force-dynamic';
+// Enable ISR with 1 hour revalidation
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -26,7 +27,7 @@ export default async function Page() {
         ? 'https://www.dreamto.app'
         : 'http://localhost:3000';
       const apiUrl = `${baseUrl}/api/cloudinary/all-images?folder=${encodeURIComponent(baseFolder)}&cap=1500`;
-      const res = await fetch(apiUrl, { cache: 'no-store' });
+      const res = await fetch(apiUrl, { next: { revalidate: 3600 } });
       if (res.ok) {
         const data = await res.json();
         const items = Array.isArray(data.items) ? data.items : [];

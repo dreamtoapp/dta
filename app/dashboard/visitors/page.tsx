@@ -332,6 +332,30 @@ export default function VisitorsPage() {
 
         {/* Visitors List Tab */}
         <TabsContent value="visitors" className="space-y-6">
+          {/* Quick analytics removed to avoid duplication with Overview tab */}
+
+          {/* By Country – summary counters */}
+          {Array.isArray(analyticsData?.geoDistribution) && analyticsData.geoDistribution.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Globe className="h-5 w-5" />
+                  By Country
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  {analyticsData.geoDistribution.map((c: any) => (
+                    <Badge key={c.country} variant="secondary" className="text-xs sm:text-sm">
+                      {c.country || 'Unknown'}
+                      <span className="ml-2 font-semibold">{c.visitors}</span>
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Filters */}
           <Card>
             <CardHeader>
@@ -407,17 +431,25 @@ export default function VisitorsPage() {
               </div>
             ) : (
               <>
-                {visitorsList?.visitors?.map((visitor: any) => (
+                {visitorsList?.visitors?.map((visitor: any, index: number) => (
                   <Card key={visitor.id} className="hover:shadow-md transition-shadow">
                     <CardContent className="p-4 sm:p-6">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg sm:text-xl font-semibold break-words">
-                            {visitor.country || 'Unknown Country'}
-                          </h3>
-                          <p className="text-muted-foreground text-sm sm:text-base">
-                            {visitor.city || 'Unknown City'}
-                          </p>
+                        <div className="flex items-start gap-3 flex-1 min-w-0">
+                          {/* Visitor Counter */}
+                          <div className="flex-shrink-0">
+                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-bold text-sm">
+                              #{((currentPage - 1) * 10) + index + 1}
+                            </div>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg sm:text-xl font-semibold break-words">
+                              {visitor.country || 'Unknown Country'}
+                            </h3>
+                            <p className="text-muted-foreground text-sm sm:text-base">
+                              {visitor.city || 'Unknown City'}
+                            </p>
+                          </div>
                         </div>
                         <div className="flex items-center gap-2">
                           <Badge variant="outline" className="flex items-center gap-1">

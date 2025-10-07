@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getAllImagesFlat } from '@/lib/cloudinary';
 
+// Enable caching for 1 hour (3600 seconds)
+export const revalidate = 3600;
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const folder = searchParams.get('folder');

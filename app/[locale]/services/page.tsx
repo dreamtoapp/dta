@@ -1,3 +1,6 @@
+// Enable ISR with 2 hour revalidation (static content)
+export const revalidate = 7200;
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"

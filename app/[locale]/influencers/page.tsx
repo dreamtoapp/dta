@@ -1,3 +1,6 @@
+// Enable ISR with 10 minute revalidation (influencer data changes moderately)
+export const revalidate = 600;
+
 import { getTranslations, getLocale } from "next-intl/server"
 import { Metadata } from "next"
 import { getDynamicMetadata } from '@/app/seo/metadata'

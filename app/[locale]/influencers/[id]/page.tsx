@@ -1,8 +1,22 @@
+// Enable ISR with 1 hour revalidation
+export const revalidate = 3600;
+
 import { getTranslations, getLocale } from "next-intl/server"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import InfluencerDetailClient from './components/InfluencerDetailClient'
 import { mockInfluencers } from '../helpers/mockData'
+
+// ============================================================================
+// STATIC PARAMS GENERATION
+// ============================================================================
+
+// Pre-render all influencer pages at build time
+export async function generateStaticParams() {
+  return mockInfluencers.map((influencer) => ({
+    id: influencer.id,
+  }));
+}
 
 // ============================================================================
 // METADATA

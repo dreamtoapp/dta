@@ -4,9 +4,8 @@ import { v2 as cloudinary } from 'cloudinary';
 
 // Ensure this API runs on Node (needed for Cloudinary Admin/Search SDK)
 export const runtime = 'nodejs';
-// Disable caching for accurate totals while iterating during debug
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// Enable caching for 1 hour (3600 seconds) - production optimization
+export const revalidate = 3600;
 
 async function searchAll(prefix: string, cap: number) {
   const results: { public_id: string; optimized_url: string; folder?: string; tags?: string[]; width?: number; height?: number }[] = [];

@@ -1,3 +1,6 @@
+// Enable ISR with 1 hour revalidation (dynamic data from DB)
+export const revalidate = 3600;
+
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import db from "@/lib/prisma"

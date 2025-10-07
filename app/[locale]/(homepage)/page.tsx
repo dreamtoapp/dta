@@ -1,4 +1,6 @@
-export const dynamic = "force-dynamic";
+// Enable ISR with 1 hour revalidation
+export const revalidate = 3600;
+
 import { Suspense } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { getDynamicMetadata } from '@/app/seo/metadata';

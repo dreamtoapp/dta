@@ -1,3 +1,6 @@
+// Enable ISR with 2 hour revalidation (static shell with dynamic form)
+export const revalidate = 7200;
+
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getDynamicMetadata } from '@/app/seo/metadata';

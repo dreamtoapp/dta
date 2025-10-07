@@ -1,3 +1,6 @@
+// Enable ISR with 2 hour revalidation (static job roles content)
+export const revalidate = 7200;
+
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { getDynamicMetadata } from '@/app/seo/metadata';

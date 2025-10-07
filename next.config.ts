@@ -63,10 +63,10 @@ const nextConfig: NextConfig = {
 
 };
 
-// PWA configuration - minimal
+// PWA configuration - standard approach with aligned cache times
 const pwaConfig = withPWA({
   dest: "public",
-  register: false,
+  register: true, // Enable automatic service worker registration
   skipWaiting: true,
   disable: process.env.NODE_ENV === "development",
   buildExcludes: [/middleware-manifest\.json$/],
@@ -78,7 +78,7 @@ const pwaConfig = withPWA({
         cacheName: "static-images",
         expiration: {
           maxEntries: 64,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxAgeSeconds: 3600, // 1 hour - aligned with Next.js cache
         },
       },
     },
@@ -89,7 +89,7 @@ const pwaConfig = withPWA({
         cacheName: "static-fonts",
         expiration: {
           maxEntries: 10,
-          maxAgeSeconds: 60 * 60 * 24 * 365,
+          maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year for fonts (rarely change)
         },
       },
     },
@@ -101,7 +101,7 @@ const pwaConfig = withPWA({
         cacheName: "api-cache",
         expiration: {
           maxEntries: 16,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxAgeSeconds: 3600, // 1 hour - aligned with Next.js API cache
         },
         networkTimeoutSeconds: 10,
       },
