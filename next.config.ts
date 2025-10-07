@@ -60,6 +60,17 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // Permanent redirect: root to default Arabic locale
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/ar',
+        permanent: true, // 308/301 for SEO signal consolidation
+      },
+    ];
+  },
+
 
 };
 
