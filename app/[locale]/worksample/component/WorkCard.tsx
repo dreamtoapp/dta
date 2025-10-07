@@ -29,12 +29,15 @@ export default function WorkCard({ item, priority = false }: WorkCardProps) {
   const caption = item.context?.caption || '';
 
   // Prioritize fullUrl, then secure_url, then url - filter out empty strings
-  const imageSrc = (item.fullUrl && item.fullUrl.trim()) ||
+  const initialSrc = (item.fullUrl && item.fullUrl.trim()) ||
     (item.secure_url && item.secure_url.trim()) ||
     (item.url && item.url.trim());
 
+  // Current src with fallback
+  const [src, setSrc] = React.useState<string | undefined>(initialSrc);
+
   // Validate required properties - skip if image source or dimensions are missing
-  if (!imageSrc || !item.width || !item.height) {
+  if (!src || !item.width || !item.height) {
     return null;
   }
 
@@ -43,9 +46,12 @@ export default function WorkCard({ item, priority = false }: WorkCardProps) {
   };
 
   const handleError = () => {
-    // Hide skeleton even on error to show broken image or alt text
+    // Swap to local fallback image once if remote image fails
+    if (src !== '/og-image.png') {
+      setSrc('/og-image.png');
+    }
     setIsLoading(false);
-    console.error('[WorkCard] Image failed to load:', imageSrc);
+    console.error('[WorkCard] Image failed to load:', src);
   };
 
   return (
@@ -60,7 +66,7 @@ export default function WorkCard({ item, priority = false }: WorkCardProps) {
 
         {/* Actual image */}
         <Image
-          src={imageSrc}
+          src={src}
           alt={alt}
           width={item.width}
           height={item.height}
