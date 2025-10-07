@@ -68,6 +68,11 @@ const nextConfig: NextConfig = {
         destination: '/ar',
         permanent: true, // 308/301 for SEO signal consolidation
       },
+      {
+        source: '/influencers/register',
+        destination: '/ar/influencers/register',
+        permanent: true,
+      },
     ];
   },
 

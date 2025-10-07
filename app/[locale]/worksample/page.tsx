@@ -61,6 +61,10 @@ export default async function Page() {
   }
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      {/* Primary page heading */}
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground text-center px-4 pt-8">
+        Our Portfolio – معرض أعمالنا
+      </h1>
       {hasCloudinaryError && (
         <div className="container mx-auto px-4 py-4">
           <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">

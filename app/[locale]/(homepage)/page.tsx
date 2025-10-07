@@ -38,16 +38,15 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         breadcrumbHome={t('breadcrumb.home')}
       />
 
-      {/* SEO: Primary page heading (visible, unobtrusive) */}
-      <h1 className="text-xl md:text-2xl font-bold tracking-tight text-foreground px-4 md:px-6 lg:px-8 pt-6">
-        {t('hero.title')} – {t('description')}
-      </h1>
-
       {/* Hero Section */}
       <section
         aria-label={t('sections.hero')}
         className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20 sm:pt-24 md:pt-20 lg:pt-24 w-full"
       >
+        {/* SEO: Primary page heading overlaid on hero to avoid layout shift */}
+        <h1 className="pointer-events-none absolute top-20 md:top-24 lg:top-28 left-1/2 -translate-x-1/2 z-20 text-base md:text-lg lg:text-xl font-bold tracking-tight text-foreground/90 text-center px-4 py-2 rounded-md bg-background/50 backdrop-blur-sm shadow-sm">
+          {t('hero.title')} – {t('description')}
+        </h1>
         {/* <div className="absolute inset-0 bg-gradient-to-br from-[#d7a50d]/10 via-transparent to-[#0d3ad7]/10" /> */}
         {/* Desktop Hero - Hidden on mobile */}
         <div className="hidden md:block w-full h-screen">

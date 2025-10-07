@@ -62,6 +62,10 @@ export default async function InfluencerDetailPage({ params }: { params: Promise
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Primary page heading: influencer name */}
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground text-center px-4 pt-8">
+        {influencer.name}
+      </h1>
       <InfluencerDetailClient influencer={influencer} />
     </div>
   )
