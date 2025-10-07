@@ -4,84 +4,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.dreamto.app';
   const currentDate = new Date().toISOString();
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/en`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/ar`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/en/services`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/ar/services`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/worksample`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/ar/worksample`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/team`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/ar/team`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/en/contactus`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/ar/contactus`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/en/packages`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/ar/packages`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+  // Only final, localized URLs (no root entry that may redirect).
+  // Keep sitemap focused on existing routes to avoid 4xx and redirects.
+  const locales = ['en', 'ar'] as const;
+  const slugs = [
+    '',
+    'services',
+    'worksample',
+    'team',
+    'contactus',
+    'privacy',
+    'terms',
+    'influencers',
+    'influencers/register',
+    'influencers/contract',
+    'start-your-dream',
   ];
+
+  const entries: MetadataRoute.Sitemap = [];
+
+  for (const locale of locales) {
+    for (const slug of slugs) {
+      const path = slug ? `/${locale}/${slug}` : `/${locale}`;
+      entries.push({
+        url: `${baseUrl}${path}`,
+        lastModified: currentDate,
+        changeFrequency: slug ? 'monthly' : 'weekly',
+        priority: slug ? 0.8 : 1,
+      });
+    }
+  }
+
+  return entries;
 }
