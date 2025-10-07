@@ -38,8 +38,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         breadcrumbHome={t('breadcrumb.home')}
       />
 
-      {/* SEO: Primary page heading (hidden visually to avoid layout shift) */}
-      <h1 className="sr-only">
+      {/* SEO: Primary page heading (visible, unobtrusive) */}
+      <h1 className="text-xl md:text-2xl font-bold tracking-tight text-foreground px-4 md:px-6 lg:px-8 pt-6">
         {t('hero.title')} – {t('description')}
       </h1>
 
