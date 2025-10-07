@@ -38,6 +38,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         breadcrumbHome={t('breadcrumb.home')}
       />
 
+      {/* SEO: Primary page heading (hidden visually to avoid layout shift) */}
+      <h1 className="sr-only">
+        {t('hero.title')} – {t('description')}
+      </h1>
+
       {/* Hero Section */}
       <section
         aria-label={t('sections.hero')}
