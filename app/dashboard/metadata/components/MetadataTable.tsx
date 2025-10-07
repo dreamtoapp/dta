@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -34,6 +34,24 @@ type MetadataTableProps = {
 export function MetadataTable({ data }: MetadataTableProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [metadata, setMetadata] = useState(data);
+  const [busy, setBusy] = useState(false);
+
+  const handleSeedFromRepo = async () => {
+    if (!confirm('Apply metadata from data/metadata.seed.json to the database?')) {
+      return;
+    }
+    try {
+      setBusy(true);
+      const res = await fetch('/api/seo/metadata/seed', { method: 'POST' });
+      if (!res.ok) throw new Error('Seed failed');
+      toast.success('Seed applied successfully');
+      location.reload();
+    } catch (err) {
+      toast.error('Failed to apply seed file');
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const filteredData = metadata.filter(
     (item) =>
@@ -75,6 +93,16 @@ export function MetadataTable({ data }: MetadataTableProps) {
 
   return (
     <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="text-sm text-muted-foreground">
+          Apply metadata directly from data/metadata.seed.json.
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" disabled={busy} onClick={handleSeedFromRepo}>
+            {busy ? 'Applying…' : 'Load from repo seed'}
+          </Button>
+        </div>
+      </div>
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
         <Input
           placeholder="Search by page name, path, or title..."

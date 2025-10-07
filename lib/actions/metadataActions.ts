@@ -56,6 +56,19 @@ export async function getAllPageMetadata() {
   }
 }
 
+// Bulk update from JSON payload
+export async function bulkUpsertPageMetadata(items: PageMetadataInput[]) {
+  try {
+    for (const item of items) {
+      await upsertPageMetadata(item);
+    }
+    return { success: true };
+  } catch (error) {
+    console.error('Bulk upsert error:', error);
+    return { success: false, error: 'Failed bulk update' };
+  }
+}
+
 // Create or update metadata
 export async function upsertPageMetadata(data: PageMetadataInput) {
   try {
