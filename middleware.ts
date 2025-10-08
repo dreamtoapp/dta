@@ -19,10 +19,12 @@ export default async function middleware(request: NextRequest) {
     return response;
   }
 
-  // Track visitor asynchronously (non-blocking)
-  trackVisitor(request).catch((error) => {
-    console.error('Visitor tracking error:', error);
-  });
+  // Skip tracking in local dev to avoid noisy errors
+  const host = request.headers.get('host') || '';
+  if (!host.includes('localhost')) {
+    // Track visitor asynchronously (non-blocking)
+    trackVisitor(request).catch(() => { });
+  }
 
   return response;
 }

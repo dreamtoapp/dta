@@ -35,6 +35,7 @@ export default function WorkCard({ item, priority = false }: WorkCardProps) {
 
   // Current src with fallback
   const [src, setSrc] = React.useState<string | undefined>(initialSrc);
+  const isCloudinaryPublicId = false;
 
   // Validate required properties - skip if image source or dimensions are missing
   if (!src || !item.width || !item.height) {
@@ -64,7 +65,6 @@ export default function WorkCard({ item, priority = false }: WorkCardProps) {
           </div>
         )}
 
-        {/* Actual image */}
         <Image
           src={src}
           alt={alt}
@@ -73,8 +73,7 @@ export default function WorkCard({ item, priority = false }: WorkCardProps) {
           priority={priority}
           onLoad={handleLoad}
           onError={handleError}
-          className={`w-full h-auto object-cover transition-all duration-500 group-hover:scale-105 ${isLoading ? 'opacity-0' : 'opacity-100'
-            }`}
+          className={`w-full h-auto object-cover transition-all duration-500 group-hover:scale-105 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />
       </div>

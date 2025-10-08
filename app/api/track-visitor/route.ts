@@ -4,13 +4,18 @@ import { parseUserAgent, getGeoLocation, getGeoLocationFromIPAPI, cleanReferrer,
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    let body: any = null;
+    try {
+      body = await request.json();
+    } catch {
+      // Empty or invalid JSON in dev — return early with 200
+      return NextResponse.json({ success: true, skipped: true });
+    }
     const { ip, userAgent, referer, currentPage, utmSource, utmMedium, utmCampaign, geo } = body;
 
     // Validate IP
     if (!isValidIP(ip)) {
-      console.warn('Invalid IP address:', ip);
-      return NextResponse.json({ success: false, error: 'Invalid IP' }, { status: 400 });
+      return NextResponse.json({ success: true, skipped: true });
     }
 
     // Parse device info
@@ -116,17 +121,7 @@ export async function POST(request: NextRequest) {
       }
     });
   } catch (error) {
-    console.error('Track visitor error:', {
-      error,
-      timestamp: new Date().toISOString(),
-      body: request.body ? 'present' : 'missing'
-    });
-
-    // Return success even if tracking fails to not break the user experience
-    return NextResponse.json({
-      success: false,
-      error: 'Tracking failed but site continues normally'
-    }, { status: 500 });
+    return NextResponse.json({ success: true, skipped: true });
   }
 }
 
