@@ -555,3 +555,91 @@ model FAQ {
   @@index([pagePath, isActive, displayOrder])
   @@map("faqs")
 }
+
+// ============================================================================
+// BLOG SYSTEM SCHEMA - Content Marketing & SEO Enhancement
+// ============================================================================
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model BlogCategory {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  
+  // Bilingual Category Names
+  nameEn        String
+  nameAr        String
+  slugEn        String   @unique
+  slugAr        String   @unique
+  
+  // Description for SEO
+  descriptionEn String?
+  descriptionAr String?
+  
+  // Display Control
+  displayOrder  Int      @default(0)
+  isActive      Boolean  @default(true)
+  
+  // Relations
+  posts         BlogPost[]
+  
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("blog_categories")
+}
+
+model BlogPost {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  
+  // Bilingual Content
+  titleEn         String
+  titleAr         String
+  slugEn          String     @unique
+  slugAr          String     @unique
+  excerptEn       String     // Short description for listings (150-160 chars)
+  excerptAr       String
+  contentEn       String     // Full post content (supports markdown)
+  contentAr       String
+  
+  // SEO Meta Fields
+  metaTitleEn     String?
+  metaTitleAr     String?
+  metaDescriptionEn String?
+  metaDescriptionAr String?
+  
+  // Media
+  featuredImage   String?    // Cloudinary URL
+  imageAlt        String?
+  
+  // Categorization & Tagging
+  categoryId      String     @db.ObjectId
+  category        BlogCategory @relation(fields: [categoryId], references: [id])
+  tags            String[]   // ["web-development", "flutter", "saudi-tech"]
+  
+  // Author & Publishing
+  author          String     @default("DreamToApp Team")
+  authorAvatar    String?
+  status          BlogStatus @default(DRAFT)
+  publishedAt     DateTime?
+  
+  // SEO Metrics
+  views           Int        @default(0)
+  readingTime     Int        @default(5) // minutes
+  
+  // Related Posts (for internal linking)
+  relatedPostIds  String[]   @db.ObjectId
+  
+  // Timestamps
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  
+  // Indexes for performance
+  @@index([status, publishedAt])
+  @@index([categoryId, status])
+  @@map("blog_posts")
+}

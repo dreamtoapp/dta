@@ -28,7 +28,8 @@ import {
   Moon,
   FileCode,
   Twitter,
-  MessageCircleQuestion
+  MessageCircleQuestion,
+  BookOpen
 } from 'lucide-react';
 
 interface DashboardSidebarProps {
@@ -111,6 +112,12 @@ export default function DashboardSidebar({ stats, loadStats }: DashboardSidebarP
       href: '/dashboard/faqs',
       icon: MessageCircleQuestion,
       current: pathname === '/dashboard/faqs' || pathname.startsWith('/dashboard/faqs/')
+    },
+    {
+      name: 'Blog',
+      href: '/dashboard/blog',
+      icon: BookOpen,
+      current: pathname === '/dashboard/blog' || pathname.startsWith('/dashboard/blog/')
     },
     {
       name: 'Twitter',

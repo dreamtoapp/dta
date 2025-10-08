@@ -1354,5 +1354,48 @@
     "supportAvailable": "Support Available",
     "yearsExperience": "Years Experience",
     "trustedBy": "Trusted by leading organizations"
+  },
+  "blog": {
+    "title": "Blog & Insights",
+    "description": "Expert insights on web development, mobile apps, and digital transformation in Saudi Arabia",
+    "readMore": "Read More",
+    "readingTime": "{minutes} min read",
+    "publishedOn": "Published on",
+    "by": "By",
+    "category": "Category",
+    "categories": "Categories",
+    "tags": "Tags",
+    "relatedPosts": "Related Articles",
+    "latestPosts": "Latest Articles",
+    "share": "Share Article",
+    "shareOn": "Share on",
+    "noResults": "No articles found",
+    "noResultsDescription": "Try adjusting your search or filter to find what you're looking for",
+    "searchPlaceholder": "Search articles...",
+    "allCategories": "All Categories",
+    "viewAll": "View All Articles",
+    "backToBlog": "Back to Blog",
+    "loadMore": "Load More",
+    "loading": "Loading...",
+    "breadcrumb": {
+      "home": "Home",
+      "blog": "Blog"
+    },
+    "filter": {
+      "title": "Filter Articles",
+      "reset": "Reset Filters",
+      "apply": "Apply Filters"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page",
+      "of": "of"
+    },
+    "seo": {
+      "title": "Blog - Web Development & Tech Insights | DreamToApp",
+      "description": "Discover expert insights on web development, mobile apps, Flutter, React, and digital transformation in Saudi Arabia",
+      "keywords": "web development blog, mobile app development, Saudi tech blog, Flutter tutorials, React guides"
+    }
   }
 }

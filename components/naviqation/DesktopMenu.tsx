@@ -16,10 +16,11 @@ const DesktopMenu: React.FC<{ locale: string }> = ({ locale }) => {
   const menuItems = useMemo(() => [
     { href: '/', label: t('home'), icon: misc.home, color: '#d7a50d', colorDark: '#f59e0b', rippleColor: '#d7a50d', bgColor: '#d7a50d' }, // Gold
     { href: '/services', label: t('services'), icon: serviceIcon.serviceMenu.icon, color: '#0d3ad7', colorDark: '#ffffff', rippleColor: '#0d3ad7', bgColor: '#0d3ad7' }, // Blue
+    { href: '/blog', label: locale === 'ar' ? 'المدونة' : 'Blog', icon: misc.blog, color: '#10B981', colorDark: '#34d399', rippleColor: '#10B981', bgColor: '#10B981' }, // Green
     { href: '/influencers', label: 'Influencers', icon: misc.influencer, color: '#8B5CF6', colorDark: '#a78bfa', rippleColor: '#8B5CF6', bgColor: '#8B5CF6' }, // Purple
     { href: '/worksample', label: t('portfolio'), icon: misc.portfolio, color: '#99e4ff', colorDark: '#06b6d4', rippleColor: '#99e4ff', bgColor: '#99e4ff' }, // Light Blue
     { href: '/contactus', label: t('contact'), icon: misc.emailIcon, color: '#d7a50d', colorDark: '#f59e0b', rippleColor: '#d7a50d', bgColor: '#d7a50d' }, // Gold (reusing for contact)
-  ], [t]);
+  ], [t, locale]);
 
   // Initialize ripple states only once when menuItems change
   useEffect(() => {
