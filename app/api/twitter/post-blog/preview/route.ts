@@ -34,7 +34,8 @@ export async function GET(req: NextRequest) {
       if (meta?.ogImage) {
         return NextResponse.json({ success: true, imageUrl: meta.ogImage });
       }
-    } catch (_) {
+    } catch (error) {
+      console.error('Metadata fetch error:', error);
       // ignore metadata fetch errors and continue to fallback
     }
 

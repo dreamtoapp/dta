@@ -13,55 +13,74 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 interface TweetButtonProps {
   postId: string;
   titleEn: string;
+  titleAr: string;
   excerptEn?: string | null;
+  excerptAr?: string | null;
   slugEn: string;
+  slugAr: string;
   tags?: string[] | null;
   featuredImage?: string | null;
 }
 
-export function TweetButton({ postId, titleEn, excerptEn, slugEn, tags, featuredImage }: TweetButtonProps) {
+export function TweetButton({ postId, titleEn, titleAr, excerptEn, excerptAr, slugEn, slugAr, tags, featuredImage }: TweetButtonProps) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [selectedLocale, setSelectedLocale] = useState<'en' | 'ar'>('en');
 
   // Prefer public site URL to avoid localhost in previews
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://www.dreamto.app');
-  const permalink = `${siteUrl}/en/blog/${encodeURIComponent(slugEn)}`;
 
-  const { tweetText, totalLength, charCount, hashtags } = useMemo(() => {
-    const max = 280;
+  // Create both encoded (for API) and decoded (for display) URLs
+  const encodedPermalink = selectedLocale === 'en'
+    ? `${siteUrl}/en/blog/${encodeURIComponent(slugEn)}`
+    : `${siteUrl}/ar/blog/${encodeURIComponent(slugAr)}`;
+
+  const displayPermalink = selectedLocale === 'en'
+    ? `${siteUrl}/en/blog/${slugEn}`
+    : `${siteUrl}/ar/blog/${slugAr}`;
+
+  const { tweetText, displayText, totalLength, charCount, hashtags } = useMemo(() => {
+    const max = 200; // Reduced to 200 for safety margin
     const hash = (tags && tags.length > 0) ? tags.slice(0, 3).map(t => {
-      // Remove spaces and convert to lowercase for hashtag format
-      const cleanTag = t.replace(/\s+/g, '').toLowerCase();
+      // Remove spaces AND hyphens, convert to lowercase for hashtag format
+      const cleanTag = t.replace(/[\s-]+/g, '').toLowerCase();
       return `#${cleanTag}`;
     }) : [];
     const hashStr = hash.length ? hash.join(' ') : '';
 
-    let text = titleEn?.trim() || '';
-    const extra = (excerptEn || '').trim();
+    const title = selectedLocale === 'en' ? titleEn : titleAr;
+    const excerpt = selectedLocale === 'en' ? excerptEn : excerptAr;
+
+    let text = title?.trim() || '';
+    const extra = (excerpt || '').trim();
     if (extra) {
       const sep = text ? ' — ' : '';
       text = `${text}${sep}${extra}`;
     }
 
-    // Professional formatting: content + hashtags (URL handled separately by Twitter)
+    // Professional formatting: content + hashtags + URL
     const hashtagLength = hashStr.length;
-    const spacing = hashStr ? 2 : 0; // Newlines for spacing
-    const availableSpace = max - hashtagLength - spacing;
+    const urlLength = encodedPermalink.length; // Use encoded URL for character count
+    const spacing = hashStr ? 4 : 2; // Newlines for spacing (2 for hashtags + 2 for URL)
+    const availableSpace = max - hashtagLength - urlLength - spacing;
 
     const truncatedText = text.slice(0, Math.max(0, availableSpace));
     const finalText = hashStr
-      ? `${truncatedText}\n\n${hashStr}`
-      : truncatedText;
+      ? `${truncatedText}\n\n${hashStr}\n\n${encodedPermalink}` // Use encoded URL for actual tweet
+      : `${truncatedText}\n\n${encodedPermalink}`;
 
     const total = finalText.length;
     return {
       tweetText: finalText,
+      displayText: hashStr // Create display version with readable URL
+        ? `${truncatedText}\n\n${hashStr}\n\n${displayPermalink}`
+        : `${truncatedText}\n\n${displayPermalink}`,
       totalLength: total,
       charCount: `${total}/${max}`,
       hashtags: hash
     };
-  }, [titleEn, excerptEn, tags]);
+  }, [titleEn, titleAr, excerptEn, excerptAr, tags, selectedLocale, encodedPermalink, displayPermalink]);
 
   const [resolvedImage, setResolvedImage] = useState<string | null>(null);
   const [imgLoading, setImgLoading] = useState(false);
@@ -91,13 +110,13 @@ export function TweetButton({ postId, titleEn, excerptEn, slugEn, tags, featured
       const res = await fetch('/api/twitter/post-blog', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ postId, locale: 'en' }),
+        body: JSON.stringify({ postId, locale: selectedLocale }),
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
         throw new Error(data.error || 'Failed to post');
       }
-      toast.success('Tweet posted');
+      toast.success(`Tweet posted in ${selectedLocale === 'en' ? 'English' : 'Arabic'}`);
       setOpen(false);
     } catch (e: any) {
       console.error(e);
@@ -105,7 +124,7 @@ export function TweetButton({ postId, titleEn, excerptEn, slugEn, tags, featured
     } finally {
       setLoading(false);
     }
-  }, [postId]);
+  }, [postId, selectedLocale]);
 
   const copyTweet = useCallback(async () => {
     try {
@@ -132,16 +151,30 @@ export function TweetButton({ postId, titleEn, excerptEn, slugEn, tags, featured
           <TooltipContent>Post to X (Twitter)</TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <DialogContent>
-        <DialogHeader>
+      <DialogContent className="max-h-[80vh] flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <DialogTitle>Post to X (Twitter)</DialogTitle>
         </DialogHeader>
-        <div className="space-y-3">
+        <div className="flex-1 overflow-y-auto space-y-3 pr-2">
+          <div className="flex gap-2 mb-4">
+            <Button
+              variant={selectedLocale === 'en' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedLocale('en')}
+            >
+              English
+            </Button>
+            <Button
+              variant={selectedLocale === 'ar' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedLocale('ar')}
+            >
+              العربية
+            </Button>
+          </div>
           <div className="text-sm text-muted-foreground">Preview</div>
           <div className="rounded-lg border p-4 bg-card">
-            <div className="whitespace-pre-wrap text-sm">{tweetText}</div>
-            <div className="mt-2 text-xs text-muted-foreground">URL will be added automatically:</div>
-            <a className="text-primary text-sm break-all" href={permalink} target="_blank" rel="noopener noreferrer">{permalink}</a>
+            <div className="whitespace-pre-wrap text-sm" dir={selectedLocale === 'ar' ? 'rtl' : 'ltr'}>{displayText}</div>
             <div
               className="mt-2 text-xs"
               style={{
@@ -153,7 +186,7 @@ export function TweetButton({ postId, titleEn, excerptEn, slugEn, tags, featured
                       : 'hsl(var(--muted-foreground))',
               }}
             >
-              {charCount} (URL adds 23 chars)
+              {charCount}
             </div>
           </div>
           <div className="rounded-lg border p-2">
@@ -179,13 +212,13 @@ export function TweetButton({ postId, titleEn, excerptEn, slugEn, tags, featured
           <Separator />
           <div className="text-sm">This will post immediately to the agency account using server credentials.</div>
         </div>
-        <DialogFooter>
+        <DialogFooter className="flex-shrink-0">
           <Button variant="outline" onClick={() => setOpen(false)} disabled={loading}>Cancel</Button>
           <Button variant="ghost" onClick={copyTweet} disabled={loading} aria-label="Copy tweet">
             <Copy className="w-4 h-4 mr-1" /> {copied ? 'Copied' : 'Copy'}
           </Button>
           <Button onClick={confirmPost} disabled={loading}>
-            {loading ? 'Posting…' : 'Confirm & Post'}
+            {loading ? 'Posting…' : `Post ${selectedLocale === 'en' ? 'English' : 'Arabic'}`}
           </Button>
         </DialogFooter>
       </DialogContent>

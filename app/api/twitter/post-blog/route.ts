@@ -39,8 +39,8 @@ export async function POST(req: NextRequest) {
 
     // Professional hashtag formatting - handle hyphens and spaces properly
     const hashtags = (post.tags || []).slice(0, 3).map(t => {
-      // Remove spaces and convert to lowercase for hashtag format
-      const cleanTag = t.replace(/\s+/g, '').toLowerCase();
+      // Remove spaces AND hyphens, convert to lowercase for hashtag format
+      const cleanTag = t.replace(/[\s-]+/g, '').toLowerCase();
       return `#${cleanTag}`;
     }).join(' ');
 
@@ -55,11 +55,11 @@ export async function POST(req: NextRequest) {
       text = `${text}${sep}${extra}`;
     }
 
-    // Calculate available space for content (280 - URL length - hashtags - spacing)
-    const urlLength = 23; // Twitter counts URLs as 23 chars
+    // Calculate available space for content (200 - URL length - hashtags - spacing)
+    const urlLength = url.length; // Use actual URL length, not estimated
     const hashtagLength = hashtags.length;
     const spacing = hashtags ? 4 : 2; // Newlines for spacing
-    const availableSpace = 280 - urlLength - hashtagLength - spacing;
+    const availableSpace = 200 - urlLength - hashtagLength - spacing; // Reduced to 200 for safety
 
     // Truncate content to fit
     const truncatedText = clamp(text, availableSpace);
@@ -69,26 +69,21 @@ export async function POST(req: NextRequest) {
       ? `${truncatedText}\n\n${hashtags}\n\n${url}`
       : `${truncatedText}\n\n${url}`;
 
-    // Try attach media: prefer featuredImage, else DB metadata og/twitter image, else site OG
-    let mediaIds: string[] = [];
-    try {
-      let imageUrl: string | null = post.featuredImage || null;
-      if (!imageUrl) {
-        const previewRes = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/twitter/post-blog/preview?postId=${encodeURIComponent(postId)}&locale=${locale}`);
-        const previewData = await previewRes.json();
-        if (previewData?.success && previewData.imageUrl) imageUrl = previewData.imageUrl;
-      }
-      if (!imageUrl) imageUrl = `${siteUrl}/og-image.png`;
+    console.log('Tweet content length:', tweetContent.length);
+    console.log('Tweet content preview:', tweetContent.substring(0, 100) + '...');
 
-      if (imageUrl) {
-        const upload = await twitterService.uploadMedia(imageUrl);
-        if (upload.success && upload.data?.media_id_string) {
-          mediaIds = [upload.data.media_id_string];
-        }
-      }
-    } catch (e) {
-      console.error('Tweet media resolution/upload failed, posting text-only', e);
+    // Final validation - ensure tweet doesn't exceed 280 characters
+    if (tweetContent.length > 280) {
+      console.error('Tweet content exceeds 280 characters:', tweetContent.length);
+      return NextResponse.json({
+        success: false,
+        error: `Tweet content exceeds 280 character limit (${tweetContent.length} characters)`
+      }, { status: 400 });
     }
+
+    // Skip media for now to test text-only posting
+    let mediaIds: string[] = [];
+    console.log('Skipping media upload for testing - posting text-only');
 
     const result = await twitterService.postTweet(tweetContent, mediaIds);
 

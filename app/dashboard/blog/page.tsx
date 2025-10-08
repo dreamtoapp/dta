@@ -180,8 +180,11 @@ export default async function BlogDashboardPage() {
                     <TweetButton
                       postId={post.id}
                       titleEn={post.titleEn}
+                      titleAr={post.titleAr}
                       excerptEn={post.excerptEn}
+                      excerptAr={post.excerptAr}
                       slugEn={post.slugEn}
+                      slugAr={post.slugAr}
                       tags={post.tags}
                       featuredImage={post.featuredImage}
                     />

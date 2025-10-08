@@ -100,16 +100,32 @@ class TwitterService {
 
   async postTweet(text: string, mediaIds?: string[]): Promise<TweetResponse> {
     try {
+      // Validate tweet text length
+      if (!text || text.trim().length === 0) {
+        return {
+          success: false,
+          error: 'Tweet text cannot be empty',
+        };
+      }
+
+      if (text.length > 280) {
+        return {
+          success: false,
+          error: 'Tweet text exceeds 280 character limit',
+        };
+      }
+
       // Use v2 API to post tweet with OAuth 1.0a User Context
       const tweetOptions: any = { text };
 
       // Add media if provided
       if (mediaIds && mediaIds.length > 0) {
-        tweetOptions.media = {
-          media_ids: mediaIds,
-        };
+        tweetOptions.media_ids = mediaIds;
       }
 
+      console.log('Twitter API Request:', JSON.stringify(tweetOptions, null, 2));
+      console.log('Tweet text length:', text.length);
+      console.log('Tweet text bytes:', Buffer.byteLength(text, 'utf8'));
       const tweet = await this.client.v2.tweet(tweetOptions);
 
       return {
@@ -121,6 +137,7 @@ class TwitterService {
       };
     } catch (error: any) {
       console.error('Twitter API Error:', error);
+      console.error('Error details:', JSON.stringify(error, null, 2));
 
       // Extract detailed error message
       let errorMessage = 'Failed to post tweet';
