@@ -104,6 +104,18 @@ export default async function LocaleLayout({
     }
   };
 
+  // WebSite JSON-LD with Sitelinks Search Box
+  const webSiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    url: 'https://www.dreamto.app',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `https://www.dreamto.app/${locale}/blog?search={search_term_string}`,
+      'query-input': 'required name=search_term_string'
+    }
+  };
+
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <div className="flex flex-col min-h-screen layout-stable" dir={isRTL(locale) ? 'rtl' : 'ltr'}>
@@ -111,6 +123,10 @@ export default async function LocaleLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
         />
 
         {/* Optimized navbar - removed unnecessary Suspense for navbar */}

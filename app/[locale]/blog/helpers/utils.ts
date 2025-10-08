@@ -83,3 +83,4 @@ export function getReadingTimeLabel(minutes: number, locale: 'en' | 'ar'): strin
   return `${minutes} min read`;
 }
 
+

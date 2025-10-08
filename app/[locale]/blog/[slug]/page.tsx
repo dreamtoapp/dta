@@ -35,6 +35,21 @@ export async function generateMetadata({
   const baseUrl = 'https://www.dreamto.app';
   const url = `${baseUrl}/${locale}/blog/${post.slug}`;
 
+  // Build alternates for hreflang using both locale slugs
+  // If current locale is ar, we need the en slug, and vice versa
+  let alternatesLanguages: Record<string, string> | undefined = undefined;
+  try {
+    const counterpartLocale = locale === 'ar' ? 'en' : 'ar';
+    const counterpart = await getBlogPost(slug, counterpartLocale as 'en' | 'ar');
+    const arSlug = locale === 'ar' ? post.slug : counterpart?.slug || post.slug;
+    const enSlug = locale === 'en' ? post.slug : counterpart?.slug || post.slug;
+    alternatesLanguages = {
+      'x-default': `${baseUrl}/ar/blog/${arSlug}`,
+      ar: `${baseUrl}/ar/blog/${arSlug}`,
+      en: `${baseUrl}/en/blog/${enSlug}`,
+    };
+  } catch { }
+
   return {
     title: post.metaTitle || post.title,
     description: post.metaDescription || post.excerpt,
@@ -44,6 +59,8 @@ export async function generateMetadata({
       description: post.metaDescription || post.excerpt,
       type: 'article',
       url,
+      locale: locale === 'ar' ? 'ar_SA' : 'en_US',
+      alternateLocale: locale === 'ar' ? 'en_US' : 'ar_SA',
       images: post.featuredImage ? [{
         url: post.featuredImage,
         width: 1200,
@@ -56,10 +73,14 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.metaTitle || post.title,
       description: post.metaDescription || post.excerpt,
-      images: post.featuredImage ? [post.featuredImage] : [],
+      images: post.featuredImage ? [post.featuredImage] : [`${baseUrl}/og-image.png`],
     },
     alternates: {
       canonical: url,
+      ...(alternatesLanguages ? { languages: alternatesLanguages } : {}),
+      types: {
+        'application/rss+xml': `/${locale}/blog/rss.xml`
+      }
     },
   };
 }
@@ -130,6 +151,7 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      <link rel="alternate" type="application/rss+xml" href={`/${locale}/blog/rss.xml`} />
 
       <article className="container mx-auto px-4 py-12 max-w-4xl">
         {/* Article Header */}
@@ -179,4 +201,5 @@ export default async function BlogPostPage({
     </div>
   );
 }
+
 

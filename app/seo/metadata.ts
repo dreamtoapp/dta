@@ -68,6 +68,7 @@ export function getDefaultMetadata(locale: string): Metadata {
     alternates: {
       canonical: localeUrl,
       languages: {
+        'x-default': 'https://www.dreamto.app/ar',
         ar: 'https://www.dreamto.app/ar',
         en: 'https://www.dreamto.app/en',
       },
@@ -176,6 +177,7 @@ export async function getDynamicMetadata(
       alternates: {
         canonical: dbMeta.canonicalUrl || localeUrl,
         languages: {
+          'x-default': `${baseUrl}/ar${pagePath === '/' ? '' : pagePath}`,
           ar: `${baseUrl}/ar${pagePath === '/' ? '' : pagePath}`,
           en: `${baseUrl}/en${pagePath === '/' ? '' : pagePath}`,
         },

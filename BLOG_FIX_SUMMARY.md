@@ -29,3 +29,4 @@ When you want to add featured images to blog posts:
 
 The blog system gracefully handles posts with or without images!
 
+

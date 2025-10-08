@@ -30,3 +30,4 @@ export default function RelatedPosts({ posts, locale }: RelatedPostsProps) {
   );
 }
 
+

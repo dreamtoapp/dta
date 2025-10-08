@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import db from '@/lib/prisma';
 import { BlogStatus } from '@prisma/client';
+import { getAllWorksampleFolders } from '@/app/[locale]/worksample/actions/worksampleActions';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.dreamto.app';
@@ -76,6 +77,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   } catch (error) {
     console.error('Error fetching blog posts for sitemap:', error);
+  }
+
+  // Add worksample folders (localized)
+  try {
+    const baseFolder = 'website/workSample';
+    const folders = await getAllWorksampleFolders(baseFolder);
+    for (const folder of folders) {
+      // Include both locales
+      entries.push({
+        url: `${baseUrl}/en/worksample/show/${encodeURIComponent(folder)}`,
+        lastModified: currentDate,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      });
+      entries.push({
+        url: `${baseUrl}/ar/worksample/show/${encodeURIComponent(folder)}`,
+        lastModified: currentDate,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      });
+    }
+  } catch (e) {
+    console.error('Error fetching worksample folders for sitemap:', e);
   }
 
   return entries;

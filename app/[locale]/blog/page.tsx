@@ -11,9 +11,23 @@ import BreadcrumbSchema from '@/components/schema/BreadcrumbSchema';
 // ISR with 1 hour revalidation
 export const revalidate = 3600;
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams?: Promise<{ category?: string; search?: string; page?: string }> }) {
   const { locale } = await params;
-  return await getDynamicMetadata('/blog', locale);
+  const sp = searchParams ? await searchParams : {};
+  const baseUrl = 'https://www.dreamto.app';
+  const query = new URLSearchParams();
+  if (sp?.category) query.set('category', sp.category);
+  if (sp?.search) query.set('search', sp.search);
+  if (sp?.page) query.set('page', sp.page);
+  const canonical = `${baseUrl}/${locale}/blog${query.toString() ? `?${query.toString()}` : ''}`;
+  const meta = await getDynamicMetadata('/blog', locale);
+  return {
+    ...meta,
+    alternates: {
+      ...(meta.alternates || {}),
+      canonical,
+    },
+  };
 }
 
 export default async function BlogPage({
@@ -43,8 +57,11 @@ export default async function BlogPage({
     { name: t('breadcrumb.blog'), url: `https://www.dreamto.app/${locale}/blog` }
   ];
 
+  // Ensure OG/Twitter fallbacks exist via metadata from getDynamicMetadata (already includes defaults)
+
   return (
     <div className="min-h-screen bg-background">
+      <link rel="alternate" type="application/rss+xml" href={`/${locale}/blog/rss.xml`} />
       <BreadcrumbSchema items={breadcrumbItems} />
 
       <div className="container mx-auto px-4 py-12">
@@ -85,4 +102,5 @@ export default async function BlogPage({
     </div>
   );
 }
+
 

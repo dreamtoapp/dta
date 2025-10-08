@@ -31,3 +31,4 @@ export default function BlogGrid({ posts, locale }: BlogGridProps) {
   );
 }
 
+

@@ -63,3 +63,4 @@ Example URLs that now work:
 
 The blog system now properly handles both Arabic and English slugs! 🎉
 
+
