@@ -17,6 +17,10 @@ import ConsultationForm from './component/ConsultationForm';
 import { PageSkeletonLoader } from './component/SkeletonLoader';
 import ClientMarquee from './component/ClientMarquee';
 import { fetchCloudinaryClientSlides } from './actions/cloudinaryActions';
+import BreadcrumbSchema from '@/components/schema/BreadcrumbSchema';
+import FAQSchema from '@/components/schema/FAQSchema';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { getFAQsForPage } from '@/lib/actions/getFAQsForPage';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -30,6 +34,14 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   // Fetch data in parallel for better performance
   const cloudinarySlides = await fetchCloudinaryClientSlides();
 
+  // Breadcrumb items for homepage
+  const breadcrumbItems = [
+    { name: t('breadcrumb.home'), url: `https://www.dreamto.app/${locale}` }
+  ];
+
+  // Get FAQ data from database
+  const faqData = await getFAQsForPage('/', locale as 'en' | 'ar');
+
   return (
     <div className="min-h-screen">
       <SchemaMarkup
@@ -37,6 +49,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         description={t('description')}
         breadcrumbHome={t('breadcrumb.home')}
       />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <FAQSchema faqs={faqData} />
 
       {/* Hero Section */}
       <section
@@ -124,6 +138,27 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <WhyChooseUs />
         </div>
       </section>
+
+      {/* FAQ Section */}
+      {faqData.length > 0 && (
+        <section className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-12">{t('faq.title')}</h2>
+            <div className="space-y-6">
+              {faqData.map((faq, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-xl">{faq.question}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* From Idea & Design */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background to-[#d7a50d]/5">

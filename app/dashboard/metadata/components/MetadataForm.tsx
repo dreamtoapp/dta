@@ -30,13 +30,12 @@ const metadataSchema = z.object({
   titleAr: z.string().min(1, 'Arabic title is required').max(70, 'Title should be under 70 characters'),
   descriptionEn: z.string().min(1, 'English description is required').max(160, 'Description should be under 160 characters'),
   descriptionAr: z.string().min(1, 'Arabic description is required').max(160, 'Description should be under 160 characters'),
-  keywordsEn: z.string().optional(),
-  keywordsAr: z.string().optional(),
+  // Keywords removed - deprecated by Google since 2009
   ogTitleEn: z.string().optional(),
   ogTitleAr: z.string().optional(),
   ogDescriptionEn: z.string().optional(),
   ogDescriptionAr: z.string().optional(),
-  ogImage: z.string().refine(
+  ogImage: z.string().optional().refine(
     (val) => {
       if (!val || val === '') return true;
       try {
@@ -54,7 +53,7 @@ const metadataSchema = z.object({
   twitterDescriptionAr: z.string().optional(),
   category: z.string().optional(),
   author: z.string().optional(),
-  canonicalUrl: z.string().refine(
+  canonicalUrl: z.string().optional().refine(
     (val) => {
       if (!val || val === '') return true;
       try {
@@ -91,8 +90,6 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
       titleAr: initialData?.titleAr ?? '',
       descriptionEn: initialData?.descriptionEn ?? '',
       descriptionAr: initialData?.descriptionAr ?? '',
-      keywordsEn: initialData?.keywordsEn ?? '',
-      keywordsAr: initialData?.keywordsAr ?? '',
       ogTitleEn: initialData?.ogTitleEn ?? '',
       ogTitleAr: initialData?.ogTitleAr ?? '',
       ogDescriptionEn: initialData?.ogDescriptionEn ?? '',
@@ -248,27 +245,6 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="keywordsEn"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm sm:text-base">Keywords (EN)</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="keyword1, keyword2, keyword3"
-                      {...field}
-                      className="min-h-[44px] text-base"
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Comma-separated keywords (optional)
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <h3 className="text-lg font-semibold mt-6">Arabic Content</h3>
             <FormField
               control={form.control}
@@ -305,28 +281,6 @@ export function MetadataForm({ initialData, isEditing = false }: MetadataFormPro
                   </FormControl>
                   <FormDescription>
                     {field.value?.length || 0}/160 characters
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="keywordsAr"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm sm:text-base">Keywords (AR)</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="كلمة مفتاحية، كلمة مفتاحية، كلمة مفتاحية"
-                      {...field}
-                      dir="rtl"
-                      className="min-h-[44px] text-base"
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Comma-separated keywords (optional)
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

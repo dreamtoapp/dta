@@ -399,8 +399,7 @@ model PageMetadata {
   titleAr            String
   descriptionEn      String
   descriptionAr      String
-  keywordsEn         String?
-  keywordsAr         String?
+  // Keywords removed - deprecated by Google since 2009, no SEO value
   
   // OpenGraph (Bilingual)
   ogTitleEn          String?
@@ -527,4 +526,32 @@ model TwitterPost {
   @@index([campaignId, scheduledAtUtc, status])
   @@index([campaignId, status])
   @@map("twitter_posts")
+}
+
+// ============================================================================
+// FAQ SCHEMA - Dynamic FAQ Management System
+// ============================================================================
+
+model FAQ {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  
+  // Page Assignment (page-specific for better targeting)
+  pagePath     String   // e.g., "/", "/services", "/influencers"
+  
+  // Bilingual Content (consistent with PageMetadata pattern)
+  questionEn   String
+  questionAr   String
+  answerEn     String
+  answerAr     String
+  
+  // Display Control
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  
+  // Timestamps
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@index([pagePath, isActive, displayOrder])
+  @@map("faqs")
 }

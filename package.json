@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "seed:faqs": "npx tsx prisma/seed-faqs.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

@@ -156,6 +156,9 @@
       "cromboDetails": "Crombo Details",
       "homepageBody": "Homepage Body"
     },
+    "faq": {
+      "title": "Frequently Asked Questions"
+    },
     "hero": {
       "tagline": "DREAM. DESIGN. DELIVER.",
       "title": "DreamToApp – Shaping Your Digital Future",
@@ -702,6 +705,9 @@
     "clientSatisfaction": "Client Satisfaction",
     "supportAvailable": "Support Available",
     "yearsExperience": "Years Experience",
+    "faq": {
+      "title": "Frequently Asked Questions"
+    },
     "atLeastOneMessage": "Please provide either a text message or a voice message.",
     "messageType": "Message Type",
     "text": "Text",

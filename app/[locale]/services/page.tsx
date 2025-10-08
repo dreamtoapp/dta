@@ -41,6 +41,9 @@ import { getTranslations, getLocale } from "next-intl/server"
 import Link from '@/components/link'
 import MotionDiv from '@/components/MotionDiv'
 import { getDynamicMetadata } from '@/app/seo/metadata'
+import FAQSchema from '@/components/schema/FAQSchema'
+import BreadcrumbSchema from '@/components/schema/BreadcrumbSchema'
+import { getFAQsForPage } from '@/lib/actions/getFAQsForPage'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -710,7 +713,18 @@ const StatsSection: React.FC<StatsSectionProps> = ({ t }) => {
 
 export default async function ServicesPage() {
   const t = await getTranslations("services")
+  const tCommon = await getTranslations("homepage")
   const locale = await getLocale()
+
+  // Get FAQ data from database
+  const faqData = await getFAQsForPage('/services', locale as 'en' | 'ar')
+
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { name: tCommon('home'), url: `https://www.dreamto.app/${locale}` },
+    { name: t('professionalServices'), url: `https://www.dreamto.app/${locale}/services` }
+  ]
+
   const services = [
     // {
     //   icon: Globe,
@@ -814,11 +828,35 @@ export default async function ServicesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getStructuredData()) }} />
+      <FAQSchema faqs={faqData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <div className="min-h-screen bg-background">
         <HeroSection t={t} locale={locale} />
         <ServicesSection t={t} services={services} />
         <WhyChooseUsSection t={t} />
         <TestimonialsSection t={t} testimonials={testimonials} />
+
+        {/* FAQ Section */}
+        {faqData.length > 0 && (
+          <section className="py-20 bg-muted/20">
+            <div className="container mx-auto px-4">
+              <h2 className="text-4xl font-bold text-center mb-12">{t('faq.title')}</h2>
+              <div className="max-w-4xl mx-auto space-y-6">
+                {faqData.map((faq, index) => (
+                  <Card key={index} className="hover:shadow-lg transition-shadow">
+                    <CardHeader>
+                      <CardTitle className="text-xl">{faq.question}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         <CTASection t={t} locale={locale} />
         <StatsSection t={t} />
       </div>

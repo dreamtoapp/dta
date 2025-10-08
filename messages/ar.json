@@ -157,6 +157,9 @@
       "cromboDetails": "تفاصيل كرومبو",
       "homepageBody": "محتوى الصفحة الرئيسية"
     },
+    "faq": {
+      "title": "الأسئلة الشائعة"
+    },
     "freeServicesTitle": "خدمات مجانية",
     "freeServicesDescription": "استشارة المشاريع الجديدة، التقييم التقني والتجاري، وتحليل المنافسين.",
     "professionalApproachTitle": "نهج احترافي",
@@ -648,6 +651,9 @@
     "clientSatisfaction": "رضا العملاء",
     "supportAvailable": "دعم متاح",
     "yearsExperience": "سنوات خبرة",
+    "faq": {
+      "title": "الأسئلة الشائعة"
+    },
     "atLeastOneMessage": "يرجى كتابة رسالة نصية أو تسجيل رسالة صوتية.",
     "messageType": "نوع الرسالة",
     "text": "نصية",

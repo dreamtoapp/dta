@@ -125,7 +125,7 @@ export async function getDynamicMetadata(
     return {
       title: safeTitle,
       description: isArabic ? dbMeta.descriptionAr : dbMeta.descriptionEn,
-      keywords: isArabic ? dbMeta.keywordsAr : dbMeta.keywordsEn,
+      // Keywords removed - deprecated by Google since 2009, no SEO value
       category: dbMeta.category || (isArabic ? 'خدمات تطوير البرمجيات' : 'Software Development Services'),
       authors: [{ name: dbMeta.author || 'DreamToApp Team' }],
       creator: 'DreamToApp',

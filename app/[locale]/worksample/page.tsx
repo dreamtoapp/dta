@@ -4,6 +4,11 @@ import { getDynamicMetadata } from '@/app/seo/metadata';
 import { getAllWorksampleFolders } from './actions/worksampleActions';
 import { AlertCircle } from 'lucide-react';
 import GalleryClient from './component/GalleryClient';
+import BreadcrumbSchema from '@/components/schema/BreadcrumbSchema';
+import FAQSchema from '@/components/schema/FAQSchema';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { getFAQsForPage } from '@/lib/actions/getFAQsForPage';
+import { getTranslations } from 'next-intl/server';
 
 // Enable ISR with 1 hour revalidation
 export const revalidate = 3600;
@@ -13,7 +18,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return await getDynamicMetadata('/worksample', locale);
 }
 
-export default async function Page() {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations('homepage');
+  const tPortfolio = await getTranslations('worksample');
+  const faqData = await getFAQsForPage('/worksample', locale as 'en' | 'ar');
+
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { name: t('home'), url: `https://www.dreamto.app/${locale}` },
+    { name: t('portfolio'), url: `https://www.dreamto.app/${locale}/worksample` }
+  ];
+
   const baseFolder = 'website/workSample';
 
   let hasCloudinaryError = false;
@@ -60,34 +76,61 @@ export default async function Page() {
     debugArray = [];
   }
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      {/* Primary page heading */}
-      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground text-center px-4 pt-8">
-        Our Portfolio – معرض أعمالنا
-      </h1>
-      {hasCloudinaryError && (
-        <div className="container mx-auto px-4 py-4">
-          <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
-            <div className="flex items-center gap-3">
-              <AlertCircle className="w-5 h-5 text-yellow-500" />
-              <div>
-                <h3 className="font-semibold text-yellow-700 dark:text-yellow-400">Cloudinary Not Configured</h3>
-                <p className="text-sm text-yellow-600 dark:text-yellow-300">Gallery may be empty until Cloudinary is configured.</p>
+    <>
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+        {/* Primary page heading */}
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground text-center px-4 pt-8">
+          Our Portfolio – معرض أعمالنا
+        </h1>
+        {hasCloudinaryError && (
+          <div className="container mx-auto px-4 py-4">
+            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-yellow-500" />
+                <div>
+                  <h3 className="font-semibold text-yellow-700 dark:text-yellow-400">Cloudinary Not Configured</h3>
+                  <p className="text-sm text-yellow-600 dark:text-yellow-300">Gallery may be empty until Cloudinary is configured.</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="container mx-auto px-4 py-12">
-        <GalleryClient
-          baseFolder={baseFolder}
-          initialItems={(debugArray || []).slice(0, 24) as any[]}
-          allItems={debugArray as any[]}
-          folders={folders}
-          pageSize={24}
-        />
+        <div className="container mx-auto px-4 py-12">
+          <GalleryClient
+            baseFolder={baseFolder}
+            initialItems={(debugArray || []).slice(0, 24) as any[]}
+            allItems={debugArray as any[]}
+            folders={folders}
+            pageSize={24}
+          />
+        </div>
+
+        {/* FAQ Section */}
+        {faqData.length > 0 && (
+          <>
+            <FAQSchema faqs={faqData} />
+            <section className="py-20 px-4 sm:px-6 lg:px-8">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-4xl font-bold text-center mb-12">{t('faq.title')}</h2>
+                <div className="space-y-6">
+                  {faqData.map((faq, index) => (
+                    <Card key={index} className="hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <CardTitle className="text-xl">{faq.question}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 }

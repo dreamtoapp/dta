@@ -8,6 +8,9 @@ import ContactForm from "./components/ContactForm";
 import { Rocket } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { CardHeader, CardTitle } from "@/components/ui/card";
+import FAQSchema from '@/components/schema/FAQSchema';
+import { getFAQsForPage } from '@/lib/actions/getFAQsForPage';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -21,6 +24,8 @@ export default async function ContactUs({
 }) {
   const locale = (await params).locale;
   const t = await getTranslations("contact");
+  const tCommon = await getTranslations('homepage');
+  const faqData = await getFAQsForPage('/contactus', locale as 'en' | 'ar');
 
   return (
     <div className="min-h-screen bg-background">
@@ -99,6 +104,28 @@ export default async function ContactUs({
           </Card>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      {faqData.length > 0 && (
+        <>
+          <FAQSchema faqs={faqData} />
+          <div className="container mx-auto px-6 pb-16">
+            <div className="max-w-4xl mx-auto space-y-6">
+              <h2 className="text-4xl font-bold text-center mb-12">{tCommon('faq.title')}</h2>
+              {faqData.map((faq, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-xl">{faq.question}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 } 

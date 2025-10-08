@@ -96,15 +96,14 @@
  *    - Must be culturally appropriate for Saudi market
  *    - Example: "شركة رائدة في تطوير المواقع في جدة. خدمات احترافية في التطبيقات والتجارة الإلكترونية. احصل على عرض مجاني!"
  * 
- * 7. keywordsEn (string, optional)
- *    - Comma-separated English keywords
- *    - Not a direct ranking factor but helps with content strategy
- *    - Include: primary keywords, secondary keywords, long-tail keywords, location keywords
- *    - Example: "web development Jeddah, mobile apps Saudi Arabia, e-commerce solutions"
+ * 7. keywordsEn (DEPRECATED - REMOVED IN 2025)
+ *    - ❌ REMOVED: Keywords meta tag deprecated by Google since 2009
+ *    - ❌ NO SEO VALUE: Google officially ignores meta keywords
+ *    - ✅ INSTEAD: Focus on title & description optimization
+ *    - ✅ BEST PRACTICE: Natural keyword integration in content
  * 
- * 8. keywordsAr (string, optional)
- *    - Comma-separated Arabic keywords (same purpose as keywordsEn)
- *    - Example: "تطوير مواقع جدة, تطبيقات جوال السعودية"
+ * 8. keywordsAr (DEPRECATED - REMOVED IN 2025)
+ *    - ❌ REMOVED: Same as keywordsEn - no longer used
  * 
  * 9. ogTitleEn (string, optional, recommended MAX: 60 characters)
  *    - English OpenGraph title for social media sharing (Facebook, LinkedIn)
@@ -354,8 +353,6 @@ export const pagesMetadata = [
     titleAr: 'دريم تو آب - شركة تطوير المواقع والتطبيقات رقم 1 في جدة | السعودية',
     descriptionEn: 'Leading web & mobile development in Jeddah, Saudi Arabia. Expert services in web apps, mobile dev, e-commerce & UI/UX. Get your free quote today!',
     descriptionAr: 'شركة رائدة في تطوير المواقع والتطبيقات في جدة. خدمات احترافية في الويب والجوال والتجارة الإلكترونية. احصل على عرض سعر مجاني اليوم!',
-    keywordsEn: 'web development Jeddah, mobile app development Saudi Arabia, software company Jeddah, website design Jeddah, digital transformation Saudi Arabia, best IT company Jeddah, e-commerce development Saudi Arabia, UI/UX design Jeddah',
-    keywordsAr: 'تطوير مواقع جدة, تطبيقات جوال السعودية, شركة برمجة جدة, تصميم مواقع جدة, التحول الرقمي السعودية, أفضل شركة تقنية جدة, تطوير متاجر إلكترونية السعودية, تصميم واجهات المستخدم جدة',
     ogTitleEn: 'DreamToApp - Transform Your Business with Expert Digital Solutions',
     ogTitleAr: 'دريم تو آب - حول عملك مع حلول رقمية احترافية',
     ogDescriptionEn: 'Partner with Jeddah\'s leading web & mobile development agency. 7+ years of excellence, 98% client satisfaction. From startups to enterprises - we deliver results.',
@@ -377,8 +374,6 @@ export const pagesMetadata = [
     titleAr: 'الخدمات الرقمية - حلول الويب، التطبيقات والتجارة الإلكترونية في جدة',
     descriptionEn: 'Full-service digital agency in Jeddah. Web development, mobile apps (iOS/Android), e-commerce, UI/UX design & digital marketing. Book free consultation!',
     descriptionAr: 'وكالة رقمية متكاملة في جدة. تطوير مواقع، تطبيقات جوال (iOS/Android)، تجارة إلكترونية، UI/UX وتسويق رقمي. احجز استشارتك المجانية!',
-    keywordsEn: 'web development services Jeddah, mobile app development Saudi Arabia, e-commerce solutions Jeddah, UI UX design services, digital marketing agency Jeddah, Next.js development, React Native apps Saudi Arabia, Shopify development Jeddah',
-    keywordsAr: 'خدمات تطوير المواقع جدة, تطوير تطبيقات الجوال السعودية, حلول التجارة الإلكترونية جدة, خدمات تصميم واجهات المستخدم, وكالة تسويق رقمي جدة, تطوير Next.js, تطبيقات React Native السعودية, تطوير Shopify جدة',
     ogTitleEn: 'Complete Digital Services in Jeddah - Web, Mobile, Marketing & More',
     ogTitleAr: 'خدمات رقمية متكاملة في جدة - الويب، التطبيقات، التسويق والمزيد',
     ogDescriptionEn: 'Your one-stop solution for all digital needs in Saudi Arabia. From responsive websites to native mobile apps and powerful e-commerce platforms. Trusted by 100+ businesses in Jeddah.',
@@ -400,8 +395,6 @@ export const pagesMetadata = [
     titleAr: 'تواصل معنا - احصل على استشارة وعرض سعر مجاني | دريم تو آب جدة',
     descriptionEn: 'Contact DreamToApp in Jeddah for expert consultation. Fast response, free quotes & 24/7 support. Start your digital transformation today!',
     descriptionAr: 'تواصل مع دريم تو آب في جدة للحصول على استشارة احترافية. استجابة سريعة، عروض مجانية ودعم 24/7. ابدأ التحول الرقمي اليوم!',
-    keywordsEn: 'contact web development Jeddah, get quote app development Saudi Arabia, free consultation Jeddah, web agency contact, DreamToApp support, project inquiry Jeddah, IT consultation Saudi Arabia',
-    keywordsAr: 'تواصل تطوير مواقع جدة, عرض سعر تطوير تطبيقات السعودية, استشارة مجانية جدة, اتصل بوكالة ويب, دعم دريم تو آب, استفسار مشروع جدة, استشارة تقنية السعودية',
     ogTitleEn: 'Get in Touch - Free Consultation & Custom Quote | DreamToApp',
     ogTitleAr: 'تواصل معنا - استشارة مجانية وعرض سعر مخصص | دريم تو آب',
     ogDescriptionEn: 'Connect with Jeddah\'s premier digital agency. Expert team ready to discuss your web, mobile, or e-commerce project. Free consultation available. Response within 24 hours guaranteed.',
@@ -423,8 +416,6 @@ export const pagesMetadata = [
     titleAr: 'سياسة الخصوصية - حماية البيانات والأمان | دريم تو آب',
     descriptionEn: 'DreamToApp Privacy Policy: How we protect your data. GDPR-compliant practices for collecting, using & securing your information in Saudi Arabia.',
     descriptionAr: 'سياسة الخصوصية لدريم تو آب: كيف نحمي بياناتك. ممارسات متوافقة مع GDPR لجمع واستخدام وتأمين معلوماتك في السعودية.',
-    keywordsEn: 'privacy policy Saudi Arabia, data protection Jeddah, GDPR compliance, personal data security, privacy statement, information protection, confidentiality policy',
-    keywordsAr: 'سياسة الخصوصية السعودية, حماية البيانات جدة, الامتثال لـ GDPR, أمان البيانات الشخصية, بيان الخصوصية, حماية المعلومات, سياسة السرية',
     ogTitleEn: 'Your Data, Your Privacy - Protected with Industry Standards',
     ogTitleAr: 'بياناتك، خصوصيتك - محمية بمعايير الصناعة',
     ogDescriptionEn: 'Transparent privacy practices at DreamToApp. We prioritize your data security with advanced encryption and compliance with international privacy standards.',
@@ -446,8 +437,6 @@ export const pagesMetadata = [
     titleAr: 'الشروط والأحكام - اتفاقية الخدمة | دريم تو آب',
     descriptionEn: 'DreamToApp Terms & Conditions. Understand our service agreements, client rights, project delivery terms & legal framework for web and mobile services.',
     descriptionAr: 'الشروط والأحكام لدريم تو آب. افهم اتفاقيات خدماتنا، حقوق العملاء، شروط تسليم المشاريع والإطار القانوني لخدمات الويب والتطبيقات.',
-    keywordsEn: 'terms of service, service agreement, client contract, legal terms, user agreement, service conditions Saudi Arabia, project terms',
-    keywordsAr: 'شروط الخدمة, اتفاقية الخدمة, عقد العميل, الشروط القانونية, اتفاقية المستخدم, شروط الخدمة السعودية, شروط المشروع',
     ogTitleEn: 'Service Terms & Client Rights - Clear, Fair, Transparent',
     ogTitleAr: 'شروط الخدمة وحقوق العميل - واضحة، عادلة، شفافة',
     ogDescriptionEn: 'Review our comprehensive terms of service. Fair agreements, clear deliverables, and client-first policies that protect both parties in every project.',
@@ -469,8 +458,6 @@ export const pagesMetadata = [
     titleAr: 'ابدأ مشروع أحلامك - عرض سعر مخصص خلال 24 ساعة | دريم تو آب',
     descriptionEn: 'Launch your digital dream! Submit project details and get a custom quote within 24 hours. Expert guidance, transparent pricing & proven delivery in Jeddah.',
     descriptionAr: 'أطلق حلمك الرقمي! قدم تفاصيل مشروعك واحصل على عرض سعر مخصص خلال 24 ساعة. إرشاد احترافي، تسعير شفاف وتسليم مثبت في جدة.',
-    keywordsEn: 'start project online, web development quote, mobile app estimate, project request form, free consultation, custom quote Jeddah, digital project Saudi Arabia',
-    keywordsAr: 'بدء مشروع أونلاين, عرض سعر تطوير موقع, تقدير تطبيق جوال, نموذج طلب مشروع, استشارة مجانية, عرض سعر مخصص جدة, مشروع رقمي السعودية',
     ogTitleEn: 'Turn Your Vision Into Digital Reality - Free Project Consultation',
     ogTitleAr: 'حول رؤيتك إلى واقع رقمي - استشارة مشروع مجانية',
     ogDescriptionEn: 'From concept to launch, we guide you every step. Share your dream project and receive expert advice, timeline estimates, and competitive pricing. No commitment required.',
@@ -492,8 +479,6 @@ export const pagesMetadata = [
     titleAr: 'أفضل المؤثرين في السعودية | نجوم إنستغرام وتيك توك ويوتيوب',
     descriptionEn: 'Connect with 500+ verified Saudi influencers on Instagram, TikTok, YouTube & Snapchat. Browse portfolios, check engagement rates & book campaigns directly.',
     descriptionAr: 'تواصل مع +500 مؤثر سعودي معتمد على إنستغرام وتيك توك ويوتيوب وسناب شات. تصفح المعارض، تحقق من التفاعل واحجز حملات مباشرة.',
-    keywordsEn: 'Saudi influencers, Instagram influencers Saudi Arabia, TikTok influencers Jeddah, YouTube creators KSA, influencer marketing Saudi Arabia, brand collaborations, social media influencers Jeddah, verified influencers platform',
-    keywordsAr: 'المؤثرين السعوديين, مؤثري إنستغرام السعودية, مؤثري تيك توك جدة, صناع محتوى يوتيوب السعودية, التسويق بالمؤثرين السعودية, تعاون العلامات التجارية, مؤثري وسائل التواصل جدة, منصة مؤثرين معتمدين',
     ogTitleEn: 'Saudi Arabia\'s Premier Influencer Marketplace - 500+ Verified Creators',
     ogTitleAr: 'سوق المؤثرين الأول في السعودية - +500 صانع محتوى معتمد',
     ogDescriptionEn: 'The largest influencer network in Saudi Arabia. Filter by platform, category, followers, and engagement. Direct booking, transparent pricing, verified profiles. Start your campaign today!',
@@ -515,8 +500,6 @@ export const pagesMetadata = [
     titleAr: 'انضم كمؤثر - استثمر حساباتك الاجتماعية | دريم تو آب',
     descriptionEn: 'Influencer with 5K+ followers? Join Saudi Arabia\'s top platform. Get brand collaborations, fair compensation & professional support. Sign up free today!',
     descriptionAr: 'مؤثر لديك +5 آلاف متابع؟ انضم لمنصة المؤثرين الأولى بالسعودية. احصل على تعاون مع العلامات، تعويض عادل ودعم احترافي. سجل مجانًا!',
-    keywordsEn: 'become influencer Saudi Arabia, influencer registration, monetize Instagram, join influencer platform, brand partnerships Saudi Arabia, influencer opportunities Jeddah',
-    keywordsAr: 'كن مؤثر السعودية, تسجيل مؤثر, استثمار إنستغرام, انضم لمنصة مؤثرين, شراكات العلامات السعودية, فرص المؤثرين جدة',
     ogTitleEn: 'Influencer Registration - Join 500+ Creators Earning with Brands',
     ogTitleAr: 'تسجيل المؤثرين - انضم لـ +500 صانع محتوى يربحون مع العلامات',
     ogDescriptionEn: 'Turn your followers into income! Register your profile, showcase your work, set your rates, and get matched with premium brands in Saudi Arabia. Free to join, easy to earn.',
@@ -538,8 +521,6 @@ export const pagesMetadata = [
     titleAr: 'اتفاقية شراكة المؤثرين - شروط عادلة | دريم تو آب',
     descriptionEn: 'Review our influencer partnership agreement. Fair compensation, clear deliverables, IP protection & transparent terms. Designed to protect influencers & brands.',
     descriptionAr: 'راجع اتفاقية شراكة المؤثرين. تعويض عادل، نتائج واضحة، حماية الملكية الفكرية وشروط شفافة. مصممة لحماية المؤثرين والعلامات.',
-    keywordsEn: 'influencer contract, partnership agreement, influencer terms, brand collaboration agreement, influencer legal protection, fair influencer contract Saudi Arabia',
-    keywordsAr: 'عقد المؤثر, اتفاقية شراكة, شروط المؤثر, اتفاقية تعاون العلامة, الحماية القانونية للمؤثر, عقد مؤثر عادل السعودية',
     ogTitleEn: 'Influencer Contract - Transparent Terms That Protect You',
     ogTitleAr: 'عقد المؤثر - شروط شفافة تحميك',
     ogDescriptionEn: 'Our influencer contract puts you first. Clear payment terms, campaign guidelines, content rights, and dispute resolution. Read the full agreement before signing up.',
@@ -561,8 +542,6 @@ export const pagesMetadata = [
     titleAr: 'معرض الأعمال - +100 مشروع ناجح | مواقع وتطبيقات في السعودية',
     descriptionEn: 'Explore 100+ successful projects in Saudi Arabia. Real websites, mobile apps & e-commerce platforms built for leading brands. See the quality before you hire!',
     descriptionAr: 'استكشف +100 مشروع ناجح في السعودية. مواقع حقيقية، تطبيقات جوال ومنصات تجارة إلكترونية بنيناها لعلامات رائدة. شاهد الجودة قبل التوظيف!',
-    keywordsEn: 'web development portfolio Jeddah, mobile app portfolio Saudi Arabia, case studies, project showcase, successful websites Saudi Arabia, app development examples, client projects Jeddah, e-commerce portfolio',
-    keywordsAr: 'معرض تطوير مواقع جدة, معرض تطبيقات جوال السعودية, دراسات الحالة, عرض المشاريع, مواقع ناجحة السعودية, أمثلة تطوير التطبيقات, مشاريع العملاء جدة, معرض التجارة الإلكترونية',
     ogTitleEn: 'Real Projects, Real Results - See What We\'ve Built',
     ogTitleAr: 'مشاريع حقيقية، نتائج حقيقية - شاهد ما بنيناه',
     ogDescriptionEn: 'From e-commerce giants to sleek mobile apps - browse our portfolio of award-winning projects. Each one a testament to innovation, quality, and client success in Saudi Arabia.',
@@ -584,8 +563,6 @@ export const pagesMetadata = [
     titleAr: 'فريقنا - مطورون ومصممون ومسوقون خبراء في جدة',
     descriptionEn: 'Meet the talented professionals behind DreamToApp. Experienced developers, creative designers & strategic marketers delivering excellence in Jeddah, KSA.',
     descriptionAr: 'تعرف على المحترفين وراء دريم تو آب. مطورون ذوو خبرة، مصممون مبدعون ومسوقون استراتيجيون يقدمون التميز في جدة، السعودية.',
-    keywordsEn: 'development team Jeddah, expert developers Saudi Arabia, UI UX designers Jeddah, digital marketing team, tech team Saudi Arabia, about our team',
-    keywordsAr: 'فريق التطوير جدة, مطورون خبراء السعودية, مصممي واجهات جدة, فريق التسويق الرقمي, فريق تقني السعودية, عن فريقنا',
     ogTitleEn: 'The Minds Behind DreamToApp - Passion Meets Expertise',
     ogTitleAr: 'العقول وراء دريم تو آب - الشغف يلتقي الخبرة',
     ogDescriptionEn: 'A diverse team of 15+ specialists combining technical excellence with creative innovation. From senior developers to award-winning designers - we\'re your success partners.',
@@ -607,8 +584,6 @@ export const pagesMetadata = [
     titleAr: 'الوظائف - انضم لدريم تو آب | وظائف مطورين ومصممين ومسوقين',
     descriptionEn: 'Join Jeddah\'s fastest-growing tech team! Hiring developers, designers & marketers. Competitive salary, growth opportunities & innovative projects. Apply now!',
     descriptionAr: 'انضم لأسرع فريق تقني نموًا في جدة! نوظف مطورين ومصممين ومسوقين. راتب تنافسي، فرص نمو ومشاريع مبتكرة. تقدم الآن!',
-    keywordsEn: 'developer jobs Jeddah, web developer careers Saudi Arabia, UI UX designer jobs Jeddah, digital marketing jobs Saudi Arabia, IT jobs Jeddah, tech careers Saudi Arabia, apply developer position',
-    keywordsAr: 'وظائف مطورين جدة, وظائف مطور ويب السعودية, وظائف مصمم واجهات جدة, وظائف تسويق رقمي السعودية, وظائف تقنية جدة, وظائف تكنولوجيا السعودية, تقدم لوظيفة مطور',
     ogTitleEn: 'Join DreamToApp - Build Your Career with the Best Team in Jeddah',
     ogTitleAr: 'انضم لدريم تو آب - ابنِ مسيرتك المهنية مع أفضل فريق في جدة',
     ogDescriptionEn: 'We\'re growing! Open positions for talented developers, creative designers, and strategic marketers. Work on exciting projects, learn cutting-edge tech, and grow your career.',
@@ -630,8 +605,6 @@ export const pagesMetadata = [
     titleAr: 'الوظائف المتاحة - مطور ومصمم ومناصب تسويق | دريم تو آب',
     descriptionEn: 'Open positions at DreamToApp Jeddah. Full-stack developers, React specialists, UI/UX designers & digital marketers wanted. See full job descriptions.',
     descriptionAr: 'المناصب المفتوحة في دريم تو آب جدة. مطورون متكاملون، متخصصو React، مصممو UI/UX ومسوقون رقميون. شاهد الأوصاف الوظيفية الكاملة.',
-    keywordsEn: 'job descriptions, open positions, developer roles, designer positions, marketing jobs, job requirements Jeddah, tech job openings Saudi Arabia',
-    keywordsAr: 'الأوصاف الوظيفية, المناصب المفتوحة, أدوار المطورين, مناصب المصممين, وظائف التسويق, متطلبات الوظائف جدة, فرص عمل تقنية السعودية',
     ogTitleEn: 'Available Positions - Find Your Role at DreamToApp',
     ogTitleAr: 'المناصب المتاحة - ابحث عن دورك في دريم تو آب',
     ogDescriptionEn: 'Current openings: Senior React Developer, UI/UX Designer, Digital Marketing Specialist, and more. Competitive salary, benefits, and growth opportunities in Jeddah.',
@@ -653,8 +626,6 @@ export const pagesMetadata = [
     titleAr: 'تم استلام الطلب - شكراً على التقديم | دريم تو آب',
     descriptionEn: 'Thank you for applying to DreamToApp! Application received successfully. Our HR team will review and contact you within 7 business days.',
     descriptionAr: 'شكراً على التقديم لدريم تو آب! تم استلام طلبك بنجاح. سيراجعه فريق الموارد البشرية ويتواصل معك خلال 7 أيام عمل.',
-    keywordsEn: 'application received, job application confirmation, career application thank you',
-    keywordsAr: 'تم استلام الطلب, تأكيد طلب الوظيفة, شكر طلب وظيفة',
     ogTitleEn: 'Application Received - We\'ll Be In Touch Soon!',
     ogTitleAr: 'تم استلام الطلب - سنتواصل معك قريبًا!',
     ogDescriptionEn: 'Your journey with DreamToApp starts here. We\'ve received your application and our team is excited to review your qualifications. Expect to hear from us soon!',
@@ -676,8 +647,6 @@ export const pagesMetadata = [
     titleAr: 'شكراً لك - تم استلام رسالتك | سنتواصل معك قريبًا',
     descriptionEn: 'Thank you for contacting DreamToApp! Message received and we\'ll respond within 24 hours. Our team is excited to discuss your project.',
     descriptionAr: 'شكراً على التواصل مع دريم تو آب! لقد استلمنا رسالتك وسنرد خلال 24 ساعة. فريقنا متحمس لمناقشة مشروعك.',
-    keywordsEn: 'message received, contact confirmation, inquiry received, thank you page',
-    keywordsAr: 'تم استلام الرسالة, تأكيد التواصل, تم استلام الاستفسار, صفحة شكر',
     ogTitleEn: 'Message Received - Your Project Journey Begins!',
     ogTitleAr: 'تم استلام الرسالة - رحلة مشروعك تبدأ!',
     ogDescriptionEn: 'We\'ve got your message! Our expert team will review your project details and get back to you with a detailed proposal within 24 hours. Exciting times ahead!',

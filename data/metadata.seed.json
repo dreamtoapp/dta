@@ -2,91 +2,73 @@
   {
     "pagePath": "/",
     "pageName": "Homepage",
-    "titleEn": "Web & App Development in Jeddah | Expert Mobile & Web Solutions Saudi Arabia – DreamToApp",
-    "titleAr": "شركة تطوير الويب والتطبيقات بجدة | حلول موبايل وويب احترافية في السعودية – دريم تو آب",
-    "descriptionEn": "Transform your vision into digital reality. We build high-performance web & mobile apps in Jeddah & across Saudi Arabia using latest tech—Flutter, React—and offer free quotes & expert planning. Trusted by startups & enterprises.",
-    "descriptionAr": "نحوّل فكرتك إلى واقع رقمي. نبني تطبيقات ومواقع بأداء عالٍ في جدة وجميع أنحاء السعودية باستخدام أحدث التقنيات مثل Flutter وReact. عرض سعر مجاني وخطة خبراء. موثوق بنا من المشاريع الناشئة والمؤسسات.",
-    "keywordsEn": "web app development Jeddah, mobile app Saudi Arabia, Flutter app development, React web apps, DreamToApp",
-    "keywordsAr": "تطوير تطبيقات جدة، تطوير مواقع السعودية، Flutter، React، دريم تو آب"
+    "titleEn": "DreamToApp - Web & App Development + Influencer Marketing | Jeddah, Riyadh, Saudi Arabia",
+    "titleAr": "دريم تو آب - تطوير الويب والتطبيقات + تسويق المؤثرين | جدة، الرياض، السعودية",
+    "descriptionEn": "Saudi Arabia's only full-service digital agency with integrated influencer marketing. Expert web & mobile development in Jeddah, Riyadh, Dammam. Flutter, React, Next.js specialists. 100+ successful projects. Free quote + influencer strategy.",
+    "descriptionAr": "الوكالة الرقمية الوحيدة في السعودية بتسويق مؤثرين متكامل. خبراء تطوير ويب وتطبيقات في جدة والرياض والدمام. متخصصون Flutter وReact وNext.js. أكثر من 100 مشروع ناجح. عرض مجاني + استراتيجية مؤثرين."
   },
   {
     "pagePath": "/services",
     "pageName": "Services",
-    "titleEn": "Comprehensive Services: Web, Mobile, eCommerce, UI/UX & Support – DreamToApp",
-    "titleAr": "خدمات شاملة: الويب، التطبيقات، التجارة الإلكترونية، UI/UX والدعم – دريم تو آب",
-    "descriptionEn": "Full-cycle digital services: mobile & web apps, eCommerce platforms, UI/UX design, cloud solutions, and end-to-end support. Delivered fast, tailored for Saudi businesses.",
-    "descriptionAr": "خدمات رقمية متكاملة: تطبيقات موبايل وويب، منصات تجارة إلكترونية، تصميم UI/UX، حلول سحابية، ودعم شامل ما بعد الإطلاق. تنفيذ سريع وتصميم مخصص للشركات السعودية.",
-    "keywordsEn": "custom web services Saudi, mobile app services, ecommerce development, UI/UX design Saudi Arabia, cloud-based solutions",
-    "keywordsAr": "خدمات الويب المخصصة، خدمات التطبيقات، تطوير التجارة الإلكترونية، تصميم واجهة المستخدم، حلول سحابية"
+    "titleEn": "Web Development, Mobile Apps, eCommerce & Influencer Marketing Services | DreamToApp Saudi Arabia",
+    "titleAr": "خدمات تطوير الويب، التطبيقات، التجارة الإلكترونية وتسويق المؤثرين | دريم تو آب السعودية",
+    "descriptionEn": "Complete digital services in Saudi Arabia: Web & mobile apps (Flutter, React Native), eCommerce platforms, UI/UX design, influencer marketing, cloud solutions. Delivered fast for Jeddah, Riyadh & Dammam businesses.",
+    "descriptionAr": "خدمات رقمية متكاملة في السعودية: تطبيقات ويب وموبايل (Flutter، React Native)، منصات تجارة إلكترونية، تصميم UI/UX، تسويق مؤثرين، حلول سحابية. تنفيذ سريع لشركات جدة والرياض والدمام."
   },
   {
     "pagePath": "/worksample",
     "pageName": "Portfolio",
-    "titleEn": "Portfolio: Web & Mobile Apps Built for Saudi Brands – Design • Performance • Growth – DreamToApp",
-    "titleAr": "معرض الأعمال: مواقع وتطبيقات لعلامات سعودية – التصميم • الأداء • النمو – دريم تو آب",
-    "descriptionEn": "See our work: high-impact websites and mobile applications for clients in Saudi Arabia. UX optimized, fast loading, measurable results. Industries: Retail, Fintech, Healthcare, E-commerce.",
-    "descriptionAr": "اعرض أعمالنا: مواقع وتطبيقات مؤثرة لعملائنا في السعودية. تصميم تجربة مستخدم مميّزة، سرعة تحميل، نتائج قابلة للقياس. مجالات: التجزئة، المالية، الصحة، التجارة الإلكترونية.",
-    "keywordsEn": "Saudi brand portfolio, mobile apps examples, web projects Saudi Arabia, UX case study, fintech apps portfolio",
-    "keywordsAr": "معرض أعمال سعودية، أمثلة تطبيقات، مشاريع ويب السعودية، دراسات حالة UX، تطبيقات مالية"
+    "titleEn": "Our Portfolio: Web & Mobile Apps Built for Saudi Brands | Success Stories & Results",
+    "titleAr": "معرض أعمالنا: مواقع وتطبيقات لعلامات سعودية | قصص نجاح ونتائج",
+    "descriptionEn": "Real results from Saudi businesses: High-performance websites, mobile apps for Retail, Fintech, Healthcare & E-commerce. Fast loading, UX optimized, measurable growth. See case studies from Jeddah, Riyadh & across KSA.",
+    "descriptionAr": "نتائج حقيقية من شركات سعودية: مواقع عالية الأداء، تطبيقات للتجزئة، المالية، الصحة والتجارة الإلكترونية. سرعة تحميل، تجربة مستخدم مميزة، نمو قابل للقياس. شاهد دراسات حالة من جدة والرياض وعبر المملكة."
   },
   {
     "pagePath": "/influencers",
     "pageName": "Influencers",
-    "titleEn": "Hire Verified Saudi Influencers – Authentic Reach & Engagement – DreamToApp",
-    "titleAr": "وظّف مؤثرين سعوديين موثوقين – وصول وتفاعل أصيل – دريم تو آب",
-    "descriptionEn": "Connect with Saudi influencers who deliver real engagement. Tailor by niche, platform & audience. Boost brand presence with creators you can trust.",
-    "descriptionAr": "تواصل مع مؤثرين سعوديين يقدمون تفاعل حقيقي. صفّ حسب المجال، المنصة والجمهور. عزّز وجود علامتك مع صناع محتوى موثوقين.",
-    "keywordsEn": "Saudi influencers, influencer marketing Saudi Arabia, hire creators, social media marketing, authentic engagement",
-    "keywordsAr": "مؤثرين سعوديين، تسويق مؤثرين السعودية، توظيف صناع محتوى، تسويق عبر وسائل التواصل، تفاعل حقيقي"
+    "titleEn": "Hire Verified Saudi Influencers | Authentic Reach & Engagement Platform",
+    "titleAr": "وظّف مؤثرين سعوديين موثوقين | منصة وصول وتفاعل أصيل",
+    "descriptionEn": "Connect with verified Saudi influencers across Instagram, TikTok, Twitter, Snapchat. Filter by niche, audience & engagement rate. Boost your brand presence with authentic content creators. Integrated with development services.",
+    "descriptionAr": "تواصل مع مؤثرين سعوديين موثوقين عبر إنستقرام، تيك توك، تويتر، سناب شات. صفّ حسب المجال، الجمهور ومعدل التفاعل. عزّز حضور علامتك مع صناع محتوى أصيل. متكامل مع خدمات التطوير."
   },
   {
     "pagePath": "/influencers/register",
     "pageName": "Influencer Register",
-    "titleEn": "Become a Verified Influencer Partner – Join DreamToApp Network",
-    "titleAr": "كن شريك مؤثر معتمد – انضم إلى شبكة دريم تو آب",
-    "descriptionEn": "Apply to join our influencer network. Collaborate with top brands, access fair rates, and gain support. Grow your reach with DreamToApp.",
-    "descriptionAr": "قدّم طلبك لتنضم لشبكة المؤثرين المعتمدين. تعاون مع علامات بارزة، احصل على أسعار عادلة ودعم قوي. نمّ تواجدك مع دريم تو آب.",
-    "keywordsEn": "influencer partner Saudi, register influencer, brand deals Saudi Arabia, DreamToApp partners",
-    "keywordsAr": "شريك مؤثر السعودية، تسجيل مؤثر، صفقات مع العلامات التجارية، شركاء دريم تو آب"
+    "titleEn": "Join DreamToApp Influencer Network | Verified Partner Registration Saudi Arabia",
+    "titleAr": "انضم لشبكة مؤثرين دريم تو آب | تسجيل شريك معتمد في السعودية",
+    "descriptionEn": "Become a verified influencer partner with DreamToApp. Collaborate with top Saudi brands, access fair rates, transparent contracts & professional support. Grow your reach across Jeddah, Riyadh & KSA.",
+    "descriptionAr": "كن شريك مؤثر معتمد مع دريم تو آب. تعاون مع أفضل العلامات السعودية، احصل على أسعار عادلة، عقود شفافة ودعم احترافي. نمّ تواجدك في جدة والرياض والسعودية."
   },
   {
     "pagePath": "/start-your-dream",
     "pageName": "Start Your Dream",
-    "titleEn": "Start Your Project Today – Free Quote & Strategic Plan – DreamToApp",
-    "titleAr": "ابدأ مشروعك اليوم – عرض مجاني وخطة استراتيجية – دريم تو آب",
-    "descriptionEn": "Share your idea, get a strategic plan and transparent cost estimate from experts. Fast turnaround, clear steps, local Saudi execution.",
-    "descriptionAr": "اخبرنا بفكرتك، احصل على خطة استراتيجية وتقدير تكلفة واضح من خبراءنا. تنفيذ سريع، خطوات واضحة، خبرة محلية سعودية.",
-    "keywordsEn": "project quote Saudi Arabia, web app cost estimation, mobile app startup plan, local development team",
-    "keywordsAr": "تقدير تكلفة مشروع، تكلفة تطبيق ويب، خطة مشروع، فريق تطوير محلي"
+    "titleEn": "Start Your Project Today | Free Quote & Strategic Plan | DreamToApp Saudi Arabia",
+    "titleAr": "ابدأ مشروعك اليوم | عرض مجاني وخطة استراتيجية | دريم تو آب السعودية",
+    "descriptionEn": "Share your idea, get a strategic development plan & transparent cost estimate from Saudi experts. Fast turnaround, clear roadmap, local execution in Jeddah, Riyadh or Dammam. Web, mobile & influencer marketing included.",
+    "descriptionAr": "شارك فكرتك، احصل على خطة تطوير استراتيجية وتقدير تكلفة شفاف من خبراء سعوديين. استجابة سريعة، خريطة طريق واضحة، تنفيذ محلي في جدة أو الرياض أو الدمام. الويب والموبايل وتسويق المؤثرين متضمن."
   },
   {
     "pagePath": "/contactus",
     "pageName": "Contact",
-    "titleEn": "Contact DreamToApp – Expert Web & App Team in Jeddah & Riyadh",
-    "titleAr": "تواصل مع دريم تو آب – فريق خبراء الويب والتطبيقات في جدة والرياض",
-    "descriptionEn": "Talk to our expert team in Jeddah or Riyadh. Fast response, transparent pricing, scalable solutions for web, apps, eCommerce. Let's bring your idea to life.",
-    "descriptionAr": "تواصل مع فريقنا الخبير في جدة أو الرياض. استجابة سريعة، تسعير شفاف، حلول قابلة للتوسع للويب والتطبيقات والتجارة الإلكترونية. لنجعل فكرتك حقيقة.",
-    "keywordsEn": "contact DreamToApp, web developer Jeddah, app development Riyadh, business enquiry Saudi Arabia",
-    "keywordsAr": "تواصل مع دريم تو آب، مبرمج ويب جدة، تطوير تطبيقات الرياض، استفسار مشروع"
+    "titleEn": "Contact DreamToApp | Expert Web & App Team in Jeddah, Riyadh & Dammam",
+    "titleAr": "تواصل مع دريم تو آب | فريق خبراء الويب والتطبيقات في جدة والرياض والدمام",
+    "descriptionEn": "Talk to our expert development team in Jeddah, Riyadh or Dammam. Fast response, transparent pricing, scalable solutions for web apps, mobile development & eCommerce across Saudi Arabia. Let's transform your idea into reality.",
+    "descriptionAr": "تواصل مع فريق التطوير الخبير في جدة أو الرياض أو الدمام. استجابة سريعة، تسعير شفاف، حلول قابلة للتوسع لتطبيقات الويب والموبايل والتجارة الإلكترونية في السعودية. لنحوّل فكرتك إلى واقع."
   },
   {
     "pagePath": "/privacy",
     "pageName": "Privacy",
-    "titleEn": "Privacy Policy – DreamToApp",
-    "titleAr": "سياسة الخصوصية – دريم تو آب",
-    "descriptionEn": "Learn how DreamToApp collects, uses, and protects your data under Saudi law. Your privacy matters to us.",
-    "descriptionAr": "تعرف على كيفية جمع بياناتك واستخدامها وحمايتها بموجب القوانين السعودية. خصوصيتك تهمنا.",
-    "keywordsEn": "privacy policy, data protection Saudi Arabia, DreamToApp privacy",
-    "keywordsAr": "سياسة الخصوصية، حماية البيانات السعودية، خصوصية دريم تو آب"
+    "titleEn": "Privacy Policy | Data Protection & Security | DreamToApp Saudi Arabia",
+    "titleAr": "سياسة الخصوصية | حماية البيانات والأمان | دريم تو آب السعودية",
+    "descriptionEn": "Learn how DreamToApp collects, uses and protects your data under Saudi Arabian law. GDPR-compliant privacy practices, secure data handling, transparent policies for clients & partners.",
+    "descriptionAr": "تعرف على كيفية جمع دريم تو آب واستخدام وحماية بياناتك وفقاً للقانون السعودي. ممارسات خصوصية متوافقة مع GDPR، معالجة آمنة للبيانات، سياسات شفافة للعملاء والشركاء."
   },
   {
     "pagePath": "/terms",
     "pageName": "Terms",
-    "titleEn": "Terms of Service – DreamToApp",
-    "titleAr": "شروط الخدمة – دريم تو آب",
-    "descriptionEn": "Review the terms and conditions governing use of DreamToApp services and projects. Clear, fair policies for clients & partners.",
-    "descriptionAr": "اطّلع على شروط وأحكام استخدام خدمات دريم تو آب ومشاريعها. سياسات واضحة وعادلة للعملاء والشركاء.",
-    "keywordsEn": "terms of service, DreamToApp terms, service agreement Saudi Arabia",
-    "keywordsAr": "شروط الخدمة، اتفاقية الخدمة دريم تو آب، سياسات الاستخدام"
+    "titleEn": "Terms of Service | Service Agreement & Policies | DreamToApp Saudi Arabia",
+    "titleAr": "شروط الخدمة | اتفاقية الخدمة والسياسات | دريم تو آب السعودية",
+    "descriptionEn": "Review DreamToApp's terms and conditions for web development, mobile apps and influencer marketing services. Clear, fair policies governing projects, intellectual property & client partnerships in Saudi Arabia.",
+    "descriptionAr": "راجع شروط وأحكام دريم تو آب لخدمات تطوير الويب والتطبيقات وتسويق المؤثرين. سياسات واضحة وعادلة تحكم المشاريع والملكية الفكرية وشراكات العملاء في السعودية."
   }
 ]

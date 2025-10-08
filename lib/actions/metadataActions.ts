@@ -11,8 +11,7 @@ export type PageMetadataInput = {
   titleAr: string;
   descriptionEn: string;
   descriptionAr: string;
-  keywordsEn?: string;
-  keywordsAr?: string;
+  // Keywords removed - deprecated by Google since 2009
   ogTitleEn?: string;
   ogTitleAr?: string;
   ogDescriptionEn?: string;
@@ -77,8 +76,6 @@ export async function upsertPageMetadata(data: PageMetadataInput) {
       ...data,
       ogImage: data.ogImage === '' ? undefined : data.ogImage,
       canonicalUrl: data.canonicalUrl === '' ? undefined : data.canonicalUrl,
-      keywordsEn: data.keywordsEn === '' ? undefined : data.keywordsEn,
-      keywordsAr: data.keywordsAr === '' ? undefined : data.keywordsAr,
       ogTitleEn: data.ogTitleEn === '' ? undefined : data.ogTitleEn,
       ogTitleAr: data.ogTitleAr === '' ? undefined : data.ogTitleAr,
       ogDescriptionEn: data.ogDescriptionEn === '' ? undefined : data.ogDescriptionEn,
