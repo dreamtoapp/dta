@@ -93,7 +93,7 @@ export default function HomepageHeroSlider({ slides, debug: _debugUnused = false
   return (
     <section
       ref={(n) => { sectionRef.current = n; }}
-      className="relative overflow-hidden rounded-2xl shadow-2xl will-change-transform"
+      className="relative overflow-hidden rounded-2xl shadow-2xl will-change-transform min-w-0"
       aria-label="Hero banner"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}

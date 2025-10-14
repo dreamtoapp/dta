@@ -27,10 +27,11 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
   const menuItems = useMemo(() => [
     { href: '/', label: t('home'), icon: misc.home, color: '#d7a50d', rippleColor: '#d7a50d', bgColor: '#d7a50d' },
     { href: '/services', label: t('services'), icon: serviceIcon.serviceMenu.icon, color: '#0d3ad7', rippleColor: '#0d3ad7', bgColor: '#0d3ad7' },
+    { href: '/blog', label: locale === 'ar' ? 'المدونة' : 'Blog', icon: misc.blog, color: '#10B981', rippleColor: '#10B981', bgColor: '#10B981' },
     { href: '/influencers', label: 'Influencers', icon: misc.influencer, color: '#8B5CF6', rippleColor: '#8B5CF6', bgColor: '#8B5CF6' },
     { href: '/worksample', label: t('portfolio'), icon: misc.portfolio, color: '#99e4ff', rippleColor: '#99e4ff', bgColor: '#99e4ff' },
     { href: '/contactus', label: t('contact'), icon: misc.emailIcon, color: '#d7a50d', rippleColor: '#d7a50d', bgColor: '#d7a50d' },
-  ], [t]);
+  ], [t, locale]);
 
   // Set mounted state to true after hydration
   useEffect(() => {
@@ -139,14 +140,14 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
 
           <div className="flex flex-col flex-1">
             <nav className="pt-4 layout-stable prevent-layout-shift" style={{ minHeight: '20rem', contain: 'layout' }}>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {menuItems.map((item, index) => {
                   const IconComponent = item.icon;
                   return (
                     <button
                       key={item.href}
                       onClick={() => handleItemClick(item.href, item.color)}
-                      className="relative flex items-center w-full px-4 py-4 text-lg font-medium rounded-xl transition-all duration-300 group hover:bg-muted/20 layout-stable"
+                      className="relative flex items-center w-full px-4 py-3 text-lg font-medium rounded-xl transition-all duration-300 group hover:bg-muted/20 layout-stable"
                       style={{
                         animationDelay: `${index * 100}ms`,
                         backgroundColor: 'transparent',
@@ -174,27 +175,6 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
                 })}
               </div>
             </nav>
-          </div>
-
-          {/* CTA Section - Fixed at bottom */}
-          <div className="mt-auto pt-6 px-4 py-4 bg-brand-accent-subtle rounded-xl border border-border/30 light-mode-depth">
-            <div className="text-center mb-3">
-              <p className="text-sm font-medium text-foreground mb-1">
-                {navbarT("readyToStart")}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {navbarT("getInTouch")}
-              </p>
-            </div>
-            <div className="flex justify-center">
-              <button
-                onClick={() => handleItemClick('/contactus', '#d7a50d')}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#d7a50d] to-[#f4c430] text-white rounded-lg text-sm font-semibold hover:from-[#f4c430] hover:to-[#d7a50d] transition-all duration-300 hover:scale-105 light-mode-depth hover:light-mode-depth-hover transform hover:-translate-y-1"
-              >
-                <span>{navbarT("startProject")}</span>
-                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-              </button>
-            </div>
           </div>
         </SheetContent>
       </Sheet>
@@ -225,7 +205,7 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
 
         <div className="flex flex-col flex-1">
           <nav className="pt-4">
-            <div className="space-y-2">
+            <div className="space-y-1">
               {menuItems.map((item, index) => {
                 const IconComponent = item.icon;
                 const isActive = activeItem === item.href;
@@ -234,7 +214,7 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
                   <button
                     key={item.href}
                     onClick={() => handleItemClick(item.href, item.color)}
-                    className="relative flex items-center w-full px-4 py-4 text-lg font-medium rounded-xl transition-all duration-300 group hover:bg-muted/20"
+                    className="relative flex items-center w-full px-4 py-3 text-lg font-medium rounded-xl transition-all duration-300 group hover:bg-muted/20"
                     style={{
                       animationDelay: `${index * 100}ms`,
                       backgroundColor: isActive ? `${item.bgColor}20` : 'transparent'
@@ -269,27 +249,6 @@ const MobileMenu: React.FC<{ locale: string }> = ({ locale }) => {
               })}
             </div>
           </nav>
-        </div>
-
-        {/* CTA Section - Fixed at bottom */}
-        <div className="mt-auto pt-6 px-4 py-4 bg-gradient-to-r from-[#d7a50d]/15 to-[#f4c430]/15 rounded-xl border border-[#d7a50d]/30 shadow-lg">
-          <div className="text-center mb-3">
-            <p className="text-sm font-medium text-foreground mb-1">
-              {navbarT("readyToStart")}
-            </p>
-            <p className="text-xs text-muted-foreground">
-              {navbarT("getInTouch")}
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <button
-              onClick={() => handleItemClick('/contactus', '#d7a50d')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#d7a50d] to-[#f4c430] text-white rounded-lg text-sm font-semibold hover:from-[#f4c430] hover:to-[#d7a50d] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-[#d7a50d]/30 transform hover:-translate-y-1"
-            >
-              <span>{navbarT("startProject")}</span>
-              <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-            </button>
-          </div>
         </div>
       </SheetContent>
     </Sheet>

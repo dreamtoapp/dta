@@ -118,7 +118,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <div className="flex flex-col min-h-screen layout-stable" dir={isRTL(locale) ? 'rtl' : 'ltr'}>
+      <div className="flex flex-col min-h-screen layout-stable min-w-0" dir={isRTL(locale) ? 'rtl' : 'ltr'}>
         {/* JSON-LD Schema for SEO */}
         <script
           type="application/ld+json"
@@ -133,7 +133,7 @@ export default async function LocaleLayout({
         <Navbar locale={locale} />
 
         {/* Main content - optimized for Next.js 15 streaming */}
-        <main className="flex-1 layout-stable prevent-layout-shift pb-20 md:pb-0">
+        <main className="flex-1 layout-stable prevent-layout-shift pb-20 md:pb-0 min-w-0">
           {children}
         </main>
 

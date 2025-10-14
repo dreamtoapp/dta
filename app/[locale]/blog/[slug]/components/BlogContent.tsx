@@ -10,10 +10,12 @@ export default function BlogContent({ content }: BlogContentProps) {
 
   return (
     <div className="prose prose-lg dark:prose-invert max-w-none">
-      <div
-        className="blog-content"
-        dangerouslySetInnerHTML={{ __html: formatContent(content) }}
-      />
+      <div className="-mx-4 md:mx-0">
+        <div
+          className="blog-content overflow-x-auto"
+          dangerouslySetInnerHTML={{ __html: formatContent(content) }}
+        />
+      </div>
     </div>
   );
 }

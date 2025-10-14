@@ -53,7 +53,7 @@ const ImageHero: React.FC<ImageHeroProps> = async ({
         alt={alt}
         fill
         priority={priority}
-        sizes={sizes}
+        sizes="100vw"
         className="object-cover object-center"
         quality={85}
       />

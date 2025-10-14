@@ -13,15 +13,15 @@ const ClientMarqueeClient = memo(function ClientMarqueeClient({ logos }: Props) 
   if (!Array.isArray(logos) || logos.length === 0) return null;
 
   return (
-    <div className="w-full">
-      <Card className="border-0 shadow-sm bg-card/30 backdrop-blur-sm">
-        <div className="p-6">
+    <div className="w-full min-w-0">
+      <Card className="border-0 shadow-sm bg-card/30 backdrop-blur-sm min-w-0">
+        <div className="p-6 min-w-0">
           <h2 className="text-center text-sm font-semibold text-muted-foreground mb-6 uppercase tracking-wider">
             Trusted by Leading Brands
           </h2>
 
-          <ScrollArea className="w-full whitespace-nowrap">
-            <div className="flex gap-8 pb-4">
+          <ScrollArea className="w-full whitespace-nowrap overflow-x-auto">
+            <div className="flex gap-8 pb-4 min-w-0">
               {logos.map((logo) => (
                 <div
                   key={logo.id}

@@ -26,7 +26,7 @@ export default function ConsultationForm({ onSubmit }: Props) {
   const ClientValidationSchema = z.object({
     name: z.string().min(2, t('validationName')),
     email: z.string().email(t('validationEmail')),
-    phone: z.string().min(10, t('validationPhone')),
+    phone: z.string().regex(/^05[0-9]{8}$/, t('validationPhone')),
     service: z.string().min(1, t('validationService')),
     message: z.string().min(10, t('validationMessage')),
   });
@@ -38,6 +38,7 @@ export default function ConsultationForm({ onSubmit }: Props) {
     t('serviceCurrentProjects'),
     t('serviceDigitalMarketing'),
     t('serviceCompetitorAnalysis'),
+    t('serviceEcommerce'),
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -192,12 +193,14 @@ export default function ConsultationForm({ onSubmit }: Props) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium">{t('phone')}</label>
+                <label className="block text-sm font-medium">{t('phone')} <span className="text-red-500">*</span></label>
                 <input
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder={t('phone')}
+                  placeholder="0501234567"
+                  maxLength={10}
+                  required
                   className={`mt-1 w-full rounded-md border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${validationErrors.phone ? 'border-red-500 focus:ring-red-500' : ''
                     }`}
                 />

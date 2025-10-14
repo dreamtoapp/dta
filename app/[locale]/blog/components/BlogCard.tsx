@@ -7,6 +7,7 @@ import { Calendar, Clock, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
 import type { BlogPostListItem } from "../helpers/types";
 import { formatDate } from "../helpers/utils";
 
@@ -17,6 +18,15 @@ interface BlogCardProps {
 
 export default function BlogCard({ post, locale }: BlogCardProps) {
   const t = useTranslations('blog');
+  const [formattedDate, setFormattedDate] = useState<string>('');
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (post.publishedAt) {
+      setFormattedDate(formatDate(post.publishedAt, locale as 'en' | 'ar'));
+    }
+  }, [post.publishedAt, locale]);
 
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col">
@@ -74,10 +84,10 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
               {post.views}
             </span>
           </div>
-          {post.publishedAt && (
+          {post.publishedAt && isMounted && (
             <span className="flex items-center gap-1">
               <Calendar className="w-3 h-3" />
-              {formatDate(post.publishedAt, locale as 'en' | 'ar')}
+              {formattedDate}
             </span>
           )}
         </div>

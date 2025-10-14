@@ -58,7 +58,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20 sm:pt-24 md:pt-20 lg:pt-24 w-full"
       >
         {/* SEO: Primary page heading overlaid on hero to avoid layout shift */}
-        <h1 className="pointer-events-none absolute top-20 md:top-24 lg:top-28 left-1/2 -translate-x-1/2 z-20 text-base md:text-lg lg:text-xl font-bold tracking-tight text-foreground/90 text-center px-4 py-2 rounded-md bg-background/50 backdrop-blur-sm shadow-sm">
+        <h1 className="hidden md:block pointer-events-none absolute top-20 md:top-24 lg:top-28 left-1/2 -translate-x-1/2 z-20 text-base md:text-lg lg:text-xl font-bold tracking-tight text-foreground/90 text-center px-4 py-2 rounded-md bg-background/50 backdrop-blur-sm shadow-sm">
           {t('hero.title')} – {t('description')}
         </h1>
         {/* <div className="absolute inset-0 bg-gradient-to-br from-[#d7a50d]/10 via-transparent to-[#0d3ad7]/10" /> */}
@@ -74,7 +74,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </div>
 
         {/* Mobile Hero - Visible only on mobile */}
-        <div className="block md:hidden w-screen h-screen">
+        <div className="block md:hidden w-full h-screen">
           <MobileImageHero
             publicIdOrUrl="v1759556765/Generated_Image_October_04_2025_-_8_44AM_a2qlt7"
             alt={`${t('organization.name')} - ${t('hero.tagline')} | ${t('hero.title')} - ${t('hero.description')}`}

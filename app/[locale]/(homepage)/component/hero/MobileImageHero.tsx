@@ -46,16 +46,16 @@ const MobileImageHero: React.FC<MobileImageHeroProps> = async ({
   };
 
   return (
-    <div className={`relative w-screen h-screen overflow-hidden ${className}`}>
+    <div className={`relative w-full h-screen overflow-hidden ${className}`}>
       {/* Mobile-Optimized Background Image */}
       <Image
         src={imageUrl}
         alt={alt}
         fill
         priority={priority}
-        sizes={sizes}
+        sizes="100vw"
         className="object-cover"
-        quality={100}
+        quality={85}
       />
       <div className="absolute inset-0 bg-black/30" />
 

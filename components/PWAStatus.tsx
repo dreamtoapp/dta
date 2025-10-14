@@ -37,7 +37,9 @@ export default function PWAStatus() {
 
           const installationStatus: boolean = isStandalone || isInApp || hasNavigatorStandalone;
           setIsInstalled(installationStatus);
-          console.log('PWA Status: Installation check:', { isStandalone, isInApp, hasNavigatorStandalone, installationStatus });
+          if (process.env.NODE_ENV === 'development') {
+            console.log('PWA Status: Installation check:', { isStandalone, isInApp, hasNavigatorStandalone, installationStatus });
+          }
         } catch (error) {
           console.warn('Error checking PWA installation status:', error);
         }
@@ -82,7 +84,9 @@ export default function PWAStatus() {
 
   // Don't show if already installed
   if (isInstalled) {
-    console.log('PWA Status: PWA is installed, hiding banner');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('PWA Status: PWA is installed, hiding banner');
+    }
     return null;
   }
 

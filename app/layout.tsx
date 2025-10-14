@@ -53,13 +53,13 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
-      <body className={`${tajawal.className} min-h-screen bg-background antialiased`}>
+      <body className={`${tajawal.className} min-h-screen bg-background antialiased min-w-0`}>
         {/* GTM Implementation */}
         <GTM />
 
         <NextTopLoader />
 
-        <main id="main-content" tabIndex={-1} role="main">
+        <main id="main-content" tabIndex={-1} role="main" className="min-w-0">
           <ThemeProvider>
             <GTMProvider locale={locale}>
               {children}

@@ -18,7 +18,7 @@ const Navbar: React.FC<{ locale: string }> = ({ locale }) => {
       role="navigation"
       aria-label={t("mainNavigation")}
     >
-      <div className="container mx-auto px-4 h-20">
+      <div className="container mx-auto px-4 h-20 min-w-0">
         <div className="flex items-center justify-between h-full">
           {/* Left Section - Brand */}
           <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
@@ -27,7 +27,9 @@ const Navbar: React.FC<{ locale: string }> = ({ locale }) => {
           </div>
 
           {/* Center Section - Desktop Menu */}
-          <DesktopMenu locale={locale} />
+          <div className="hidden md:flex flex-1 min-w-0 justify-center">
+            <DesktopMenu locale={locale} />
+          </div>
 
           {/* Right Section - Actions */}
           <div className="flex items-center gap-2 md:gap-3">

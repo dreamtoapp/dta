@@ -124,8 +124,6 @@ const MobileBottomNav: React.FC<{ locale: string }> = ({ locale }) => {
     );
   }
 
-  console.log('MobileBottomNav rendering, activeItem:', activeItem);
-
   return (
     <nav
       className="sticky bottom-0 left-0 right-0 z-50 md:hidden"
