@@ -122,6 +122,33 @@ export default async function FreeConsultationPage({
         </div>
       </section>
 
+      {/* Enhanced Form Section */}
+      <section id="consultation-form" className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Form Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              {t('startYourConsultation')}
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {t('formSubtitle')}
+            </p>
+          </div>
+
+          {/* Form Container with Enhanced Styling */}
+          <div className="relative">
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 rounded-3xl" />
+            <div className="absolute top-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
+
+            <div className="relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-3xl p-8 lg:p-12 shadow-xl">
+              <ConsultationForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Enhanced Benefits Section */}
       <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -351,32 +378,6 @@ export default async function FreeConsultationPage({
         </div>
       </section>
 
-      {/* Enhanced Form Section */}
-      <section id="consultation-form" className="py-16 lg:py-24 px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Form Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              {t('startYourConsultation')}
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('formSubtitle')}
-            </p>
-          </div>
-
-          {/* Form Container with Enhanced Styling */}
-          <div className="relative">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 rounded-3xl" />
-            <div className="absolute top-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
-
-            <div className="relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-3xl p-8 lg:p-12 shadow-xl">
-              <ConsultationForm />
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
