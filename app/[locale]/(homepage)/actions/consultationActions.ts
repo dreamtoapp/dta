@@ -104,6 +104,32 @@ export async function submitConsultationRequest(data: ConsultationData) {
     // Send email notification
     await sendEmailNotification(validatedData, consultation.id);
 
+    // Send WhatsApp notification
+    try {
+      const whatsappResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/send-whatsapp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: validatedData.name,
+          phone: validatedData.phone,
+          email: validatedData.email,
+          service: validatedData.service,
+          message: validatedData.message,
+        }),
+      });
+
+      if (whatsappResponse.ok) {
+        console.log('WhatsApp notification sent successfully');
+      } else {
+        console.error('WhatsApp notification failed:', await whatsappResponse.text());
+      }
+    } catch (whatsappError) {
+      console.error('Error sending WhatsApp notification:', whatsappError);
+      // Don't throw error to avoid breaking the form submission
+    }
+
     return {
       success: true,
       message: 'تم إرسال طلب الاستشارة بنجاح! سنتواصل معك خلال 48 ساعة عمل.',
