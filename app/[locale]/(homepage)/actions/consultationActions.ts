@@ -106,24 +106,28 @@ export async function submitConsultationRequest(data: ConsultationData) {
 
     // Send WhatsApp notification
     try {
-      const whatsappResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/send-whatsapp`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: validatedData.name,
-          phone: validatedData.phone,
-          email: validatedData.email,
-          service: validatedData.service,
-          message: validatedData.message,
-        }),
-      });
+      // Use the WhatsApp API directly instead of internal API route
+      const whatsappMessage = `
+🔔 استشارة جديدة من DreamToApp
 
-      if (whatsappResponse.ok) {
+الاسم: ${validatedData.name}
+الجوال: ${validatedData.phone}
+البريد: ${validatedData.email}
+الخدمة: ${validatedData.service}
+الرسالة: ${validatedData.message}
+
+التاريخ: ${new Date().toLocaleString('ar-SA', { timeZone: 'Asia/Riyadh' })}
+      `.trim();
+
+      const whatsappUrl = `https://api.callmebot.com/whatsapp.php?phone=966554113107&text=${encodeURIComponent(whatsappMessage)}&apikey=3675221`;
+
+      const whatsappResponse = await fetch(whatsappUrl);
+      const result = await whatsappResponse.text();
+
+      if (result.includes('Message queued') || result.includes('queued')) {
         console.log('WhatsApp notification sent successfully');
       } else {
-        console.error('WhatsApp notification failed:', await whatsappResponse.text());
+        console.error('WhatsApp API response:', result);
       }
     } catch (whatsappError) {
       console.error('Error sending WhatsApp notification:', whatsappError);
