@@ -10,6 +10,7 @@ import { getDefaultMetadata } from '@/app/seo/metadata';
 import Navbar from '@/components/naviqation/navbar';
 import MobileBottomNav from '@/components/naviqation/MobileBottomNav';
 import Footer from './(homepage)/component/Footer';
+import DynamicBreadcrumb from '@/components/navigation/DynamicBreadcrumb';
 
 type Locale = typeof locales[number];
 
@@ -131,6 +132,9 @@ export default async function LocaleLayout({
 
         {/* Optimized navbar - removed unnecessary Suspense for navbar */}
         <Navbar locale={locale} />
+
+        {/* Dynamic Breadcrumb Navigation - serves all pages */}
+        <DynamicBreadcrumb locale={locale} />
 
         {/* Main content - optimized for Next.js 15 streaming */}
         <main className="flex-1 layout-stable prevent-layout-shift pb-20 md:pb-0 min-w-0">

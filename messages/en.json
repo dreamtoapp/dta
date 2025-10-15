@@ -8,6 +8,9 @@
       "keywords": "web development Jeddah, mobile app development Saudi Arabia, software company Jeddah, website design Saudi Arabia, digital agency Jeddah, IT services Saudi Arabia, تطوير مواقع جدة, شركة برمجة جدة"
     }
   },
+  "breadcrumb": {
+    "home": "Home"
+  },
   "navigation": {
     "switchLanguage": "Switch to {language}",
     "toggleTheme": "Toggle theme",
@@ -236,7 +239,22 @@
     "chatWithUs": "Chat with Us Now",
     "whyChooseUs": "Why Choose Us",
     "ourTeam": "Our Team",
-    "joinOurTeam": "Join Our Team"
+    "joinOurTeam": "Join Our Team",
+    "clientMarquee": {
+      "badge": "Trusted Partners",
+      "title": "Trusted by Leading Brands",
+      "subtitle": "We've had the privilege of working with innovative companies and startups across various industries, helping them transform their digital presence and achieve remarkable growth.",
+      "trustIndicator1": "Innovative Solutions",
+      "trustIndicator2": "Quality Focus",
+      "trustIndicator3": "Startup Energy",
+      "logosTitle": "Our Valued Partners",
+      "stats": {
+        "projectsCompleted": "Projects Delivered",
+        "clientSatisfaction": "Client Satisfaction",
+        "yearsExperience": "Years in Business",
+        "supportAvailable": "Support Available"
+      }
+    }
   },
   "mobileAppPhases": {
     "discoveryPlanningTitle": "Planning and Discovery",

@@ -26,6 +26,7 @@ export const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
       {/* Minimal animated spinner */}
       <div className="flex justify-center">
         <div className="w-6 h-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+
       </div>
 
       {/* Skeleton lines */}

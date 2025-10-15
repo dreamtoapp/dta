@@ -3,7 +3,6 @@ import React from "react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { whyChooseUs } from "@/constant/icons";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import MotionDiv from "@/components/MotionDiv";
 
 // Define the type for the feature items
@@ -62,9 +61,9 @@ const WhyChooseUs: React.FC = async () => {
           >
             <span className="text-[#d7a50d]">{t("sectionTitle")}</span>
           </h2>
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          {/* <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             {t("whatMakesUsDifferent")}
-          </p>
+          </p> */}
         </div>
       </header>
 

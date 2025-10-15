@@ -48,19 +48,7 @@ export const cardData: CardData[] = [
 
     ],
   },
-  // {
-  //   title: "crmDevelopmentTitle",
-  //   description: "crmDevelopmentDescription",
-  //   icon: serviceIcon.crm.icon,
-  //   tags: [
-  //     { text: technology.react.name, icon: technology.react.icon },
-  //     { text: technology.nextjs.name, icon: technology.nextjs.icon },
-  //     { text: technology.sentry.name, icon: technology.sentry.icon },
-  //     { text: technology.figma.name, icon: technology.figma.icon },
-  //     { text: technology.mongodb.name, icon: technology.mongodb.icon },
-  //     { text: technology.prisma.name, icon: technology.prisma.icon },
-  //   ],
-  // },
+
   {
     title: "ecommerceDevelopmentTitle",
     description: "ecommerceDevelopmentDescription",
@@ -79,18 +67,18 @@ export const cardData: CardData[] = [
       { text: technology.firebase.name, icon: technology.firebase.icon },
     ],
   },
-  {
-    title: "uiUxDesignTitle",
-    description: "uiUxDesignDescription",
-    icon: serviceIcon.uiux.icon,
-    imagePublicId: "v1758728821/visual_identity_rqjjre.png",
-    tags: [
-      { text: technology.figma.name, icon: technology.figma.icon },
-      { text: technology.xd.name, icon: technology.xd.icon },
-      { text: technology.photoshop.name, icon: technology.photoshop.icon },
-      { text: technology.illustrator.name, icon: technology.illustrator.icon },
-    ],
-  },
+  // {
+  //   title: "uiUxDesignTitle",
+  //   description: "uiUxDesignDescription",
+  //   icon: serviceIcon.uiux.icon,
+  //   imagePublicId: "v1758728821/visual_identity_rqjjre.png",
+  //   tags: [
+  //     { text: technology.figma.name, icon: technology.figma.icon },
+  //     { text: technology.xd.name, icon: technology.xd.icon },
+  //     { text: technology.photoshop.name, icon: technology.photoshop.icon },
+  //     { text: technology.illustrator.name, icon: technology.illustrator.icon },
+  //   ],
+  // },
   {
     title: "digitalMarketingTitle",
     description: "digitalMarketingDescription",
@@ -107,14 +95,14 @@ export const cardData: CardData[] = [
       { text: technology.twitter.name, icon: technology.twitter.icon },
     ],
   },
-  {
-    title: "visualIdentityTitle",
-    description: "visualIdentityDescription",
-    icon: serviceIcon.vd.icon,
-    imagePublicId: "v1758728821/visual_identity_rqjjre.png",
-    tags: [
-      { text: technology.photoshop.name, icon: technology.photoshop.icon },
-      { text: technology.illustrator.name, icon: technology.illustrator.icon },
-    ],
-  },
+  // {
+  //   title: "visualIdentityTitle",
+  //   description: "visualIdentityDescription",
+  //   icon: serviceIcon.vd.icon,
+  //   imagePublicId: "v1758728821/visual_identity_rqjjre.png",
+  //   tags: [
+  //     { text: technology.photoshop.name, icon: technology.photoshop.icon },
+  //     { text: technology.illustrator.name, icon: technology.illustrator.icon },
+  //   ],
+  // },
 ];

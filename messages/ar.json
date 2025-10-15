@@ -8,6 +8,9 @@
       "keywords": "تطوير مواقع جدة, تطبيقات جوال جدة, شركة برمجة جدة, تصميم مواقع جدة, تطوير تطبيقات السعودية, شركة تقنية جدة, web development Jeddah, mobile app Saudi Arabia"
     }
   },
+  "breadcrumb": {
+    "home": "الرئيسية"
+  },
   "navigation": {
     "switchLanguage": "التبديل إلى {language}",
     "toggleTheme": "تبديل المظهر",
@@ -236,7 +239,22 @@
     "dreamTagline": "احلم. صمّم. أنجز.",
     "whyChooseUs": "لماذا تختارنا؟",
     "ourTeam": "فريقنا",
-    "joinOurTeam": "انضم إلى فريقنا"
+    "joinOurTeam": "انضم إلى فريقنا",
+    "clientMarquee": {
+      "badge": "شركاء موثوقون",
+      "title": "موثوق به من قبل العلامات التجارية الرائدة",
+      "subtitle": "لقد كان لنا شرف العمل مع شركات وشركات ناشعة مبتكرة عبر مختلف الصناعات، مما ساعدها على تحويل وجودها الرقمي وتحقيق نمو ملحوظ.",
+      "trustIndicator1": "حلول مبتكرة",
+      "trustIndicator2": "تركيز على الجودة",
+      "trustIndicator3": "طاقة الشركة الناشئة",
+      "logosTitle": "شركاؤنا القيمون",
+      "stats": {
+        "projectsCompleted": "المشاريع المسلمة",
+        "clientSatisfaction": "رضا العملاء",
+        "yearsExperience": "سنوات في العمل",
+        "supportAvailable": "الدعم المتاح"
+      }
+    }
   },
   "mobileAppPhases": {
     "discoveryPlanningTitle": "التخطيط والاكتشاف",
@@ -569,6 +587,18 @@
     "entireAgreement": {
       "title": "الاتفاقية الكاملة",
       "description": "تشكل هذه الشروط الاتفاقية الكاملة بينك وبين وكالة DreamToApp IT فيما يتعلق باستخدام خدماتنا."
+    },
+    "services": {
+      "title": "الخدمات",
+      "description": "تقدم وكالة DreamToApp IT الخدمات التالية:",
+      "types": {
+        "web": "تطوير المواقع الإلكترونية وتصميمها",
+        "mobile": "تطوير التطبيقات المحمولة لنظامي iOS و Android",
+        "crm": "أنظمة إدارة علاقات العملاء (CRM)",
+        "ecommerce": "حلول التجارة الإلكترونية والمتاجر الإلكترونية",
+        "consulting": "الاستشارات التقنية والاستراتيجية الرقمية",
+        "maintenance": "صيانة المواقع الإلكترونية والتطبيقات والدعم الفني"
+      }
     },
     "contactInformation": {
       "title": "معلومات الاتصال",

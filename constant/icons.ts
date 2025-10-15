@@ -1,6 +1,6 @@
 import { FaJs, FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaShopify, FaBuffer, FaWhatsapp, FaTiktok, FaSnapchatGhost, FaYoutube, FaInstagram, FaTwitter, FaLinkedin, FaStackOverflow, FaUserSecret, FaCode, FaFacebook } from 'react-icons/fa';
 import { SiNextdotjs, SiMongodb, SiFirebase, SiMysql, SiSqlite, SiTypescript, SiAdobe, SiFigma, SiSentry, SiTwilio, SiAdobephotoshop, SiAdobeillustrator, SiPrisma, SiVuedotjs } from 'react-icons/si';
-import { Rocket, Users, Paintbrush, Globe, Smartphone, Award, Shield, Smile, Mail, Phone, FileText, Home as LucideHome, CalendarClock, Youtube as LucideYoutube, Instagram as LucideInstagram, Twitter as LucideTwitter, ShoppingCart, Megaphone, Palette, Briefcase, Tag, Link, Terminal, Star, Heart, TrendingUp, FolderOpen, Image, Monitor, Grid, Layout, Hash, Square, BookOpen } from 'lucide-react';
+import { Rocket, Users, Paintbrush, Globe, Smartphone, Award, Shield, Smile, Mail, Phone, FileText, Home as LucideHome, CalendarClock, Youtube as LucideYoutube, Instagram as LucideInstagram, Twitter as LucideTwitter, ShoppingCart, Megaphone, Palette, Briefcase, Tag, Link, Terminal, Star, Heart, TrendingUp, FolderOpen, Image, Monitor, Grid, Layout, Hash, Square, BookOpen, DollarSign, Settings, Wrench } from 'lucide-react';
 import ServiceIcon from '@/components/naviqation/ServiceIcon';
 
 // If a logo is missing in react-icons, fallback to a similar or generic icon.
@@ -61,7 +61,7 @@ export const misc = {
   award: Award,
   stackoverflow: FaStackOverflow,
   smilyDollar: Smile,
-  custom: FaUserSecret,
+  custom: Settings,  // Settings icon for custom/personalized services
   code: FaCode,
   calendartime: CalendarClock,
   shield: Shield,
@@ -104,8 +104,8 @@ export const serviceIcon = {
 };
 
 export const whyChooseUs = {
-  dollar: Smile,
-  ecustom: FaUserSecret,
+  dollar: DollarSign,
+  ecustom: Settings,  // Settings icon for custom/personalized services
   expert: FaCode,
   timeFlex: CalendarClock,
   shield: Shield,

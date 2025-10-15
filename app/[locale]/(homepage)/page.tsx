@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         {/* Desktop Hero - Hidden on mobile */}
         <div className="hidden md:block w-full h-screen">
           <ImageHero
-            publicIdOrUrl="v1759560288/Generated_Image_October_04_2025_-_9_43AM_q6hc7g"
+            publicIdOrUrl="v1759083375/freepik__assistant__4830_jgvuty"
             alt={`${t('organization.name')} - ${t('hero.tagline')} | ${t('hero.title')} - ${t('description')}`}
             transform="f_auto,q_auto,w_1920,c_fill,g_auto"
             sizes="100vw"
@@ -76,7 +76,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         {/* Mobile Hero - Visible only on mobile */}
         <div className="block md:hidden w-full h-screen">
           <MobileImageHero
-            publicIdOrUrl="v1759556765/Generated_Image_October_04_2025_-_8_44AM_a2qlt7"
+            publicIdOrUrl="v1759083375/freepik__assistant__4830_jgvuty"
             alt={`${t('organization.name')} - ${t('hero.tagline')} | ${t('hero.title')} - ${t('hero.description')}`}
             transform="f_auto,q_auto,w_auto,c_scale"
             sizes="100vw"
