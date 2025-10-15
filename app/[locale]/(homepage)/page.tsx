@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       {/* Hero Section */}
       <section
         aria-label={t('sections.hero')}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20 sm:pt-24 md:pt-20 lg:pt-24 w-full"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20 sm:pt-24 md:pt-20 lg:pt-24 w-full z-10"
       >
         {/* SEO: Primary page heading overlaid on hero to avoid layout shift */}
         <h1 className="hidden md:block pointer-events-none absolute top-20 md:top-24 lg:top-28 left-1/2 -translate-x-1/2 z-20 text-base md:text-lg lg:text-xl font-bold tracking-tight text-foreground/90 text-center px-4 py-2 rounded-md bg-background/50 backdrop-blur-sm shadow-sm">
@@ -76,7 +76,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         {/* Mobile Hero - Visible only on mobile */}
         <div className="block md:hidden w-full h-screen">
           <MobileImageHero
-            publicIdOrUrl="v1759083375/freepik__assistant__4830_jgvuty"
+            publicIdOrUrl="https://res.cloudinary.com/dhjy2k0fu/image/upload/v1759556765/Generated_Image_October_04_2025_-_8_44AM_a2qlt7.png"
             alt={`${t('organization.name')} - ${t('hero.tagline')} | ${t('hero.title')} - ${t('hero.description')}`}
             transform="f_auto,q_auto,w_auto,c_scale"
             sizes="100vw"
@@ -86,7 +86,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       </section>
 
       {/* Client Logos */}
-      <section aria-label="Our clients" className="min-h-[144px] px-4 sm:px-6 lg:px-8">
+      <section aria-label="Our clients" className="relative min-h-[144px] px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12 md:mt-16 z-20">
         <ClientMarquee />
       </section>
 

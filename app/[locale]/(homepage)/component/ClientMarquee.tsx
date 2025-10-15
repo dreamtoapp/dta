@@ -33,7 +33,7 @@ export default async function ClientMarquee() {
   if (!logos.length) return null;
 
   return (
-    <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
+    <section className="relative py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
       <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/3 rounded-full blur-3xl animate-pulse" />

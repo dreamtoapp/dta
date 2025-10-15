@@ -79,48 +79,6 @@ const HeroCTA: React.FC<HeroCTAProps> = async ({ ctaPrimary, ctaSecondary, local
         ))}
       </div>
 
-      {/* Mobile: 1 card full width in second row - Enhanced */}
-      <div className="md:hidden mb-4">
-        {ctaCards.slice(2, 3).map((card, index) => (
-          <Link
-            key={index + 2}
-            href={card.href}
-            locale={locale}
-            className={`group relative flex items-center h-auto min-h-24 border-2 rounded-2xl overflow-hidden backdrop-blur-sm transition-all duration-300 ease-out ${card.className}`}
-          >
-            {/* Background Gradient Overlay */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-            {/* Image */}
-            <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-l-2xl">
-              <Image
-                src={card.imageUrl}
-                alt={`${card.title} - ${locale === 'ar' ? 'صورة توضيحية' : 'illustration'}`}
-                width={96}
-                height={96}
-                className="object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-300" />
-            </div>
-
-            {/* Text */}
-            <div className={`relative flex-1 p-4 ${locale === 'ar' ? 'text-right' : 'text-left'}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xl">{card.icon}</span>
-                <h3 className="font-bold text-base group-hover:text-gray-800 transition-colors duration-300">{card.title}</h3>
-              </div>
-              <p className="text-sm text-gray-600 line-clamp-2 group-hover:text-gray-700 transition-colors duration-300">{card.description}</p>
-            </div>
-
-            {/* Hover Arrow */}
-            <div className="absolute top-1/2 -translate-y-1/2 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </Link>
-        ))}
-      </div>
 
       {/* Desktop: 2 cards in one row - Enhanced */}
       <div className="hidden md:grid grid-cols-2 gap-8">
