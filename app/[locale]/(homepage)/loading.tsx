@@ -96,12 +96,12 @@ export default async function Loading() {
 
               {/* Premium Slogan */}
               <div className="relative max-w-3xl mx-auto">
-                <p className="text-xl md:text-2xl lg:text-3xl text-slate-300 font-light leading-relaxed tracking-wide">
+                <div className="text-xl md:text-2xl lg:text-3xl text-slate-300 font-light leading-relaxed tracking-wide">
                   <span className="relative inline-block">
                     {t('slogan')}
                     <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent animate-gradient-x"></div>
                   </span>
-                </p>
+                </div>
               </div>
 
               {/* Premium Loading Indicators */}
